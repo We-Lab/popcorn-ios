@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,6 +60,11 @@
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49A951DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49A961DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
+		52C49AAD1DEB4C3D00F47BB2 /* PCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCUtility.m */; };
+		52C49AAE1DEB4C3D00F47BB2 /* PCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCUtility.m */; };
+		52C49AAF1DEB4C3D00F47BB2 /* PCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCUtility.m */; };
+		52C49AB01DEB4CF300F47BB2 /* PCInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */; };
+		52C49AB11DEB4CF300F47BB2 /* PCInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */; };
 		943B807E419605DAC7849433 /* libPods-PopcornTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02826153364AF57B51116414 /* libPods-PopcornTests.a */; };
 		98CC32351F13E6388637A76B /* libPods-PopcornUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DEA65F478663554E72071A /* libPods-PopcornUITests.a */; };
 		B7565659535F2AD40BEAB922 /* libPods-Popcorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A430D54FE41098F8509D29A /* libPods-Popcorn.a */; };
@@ -128,6 +133,9 @@
 		52C49A921DEB0DD700F47BB2 /* PCMyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageViewController.h; sourceTree = "<group>"; };
 		52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageViewController.m; sourceTree = "<group>"; };
 		52C49A981DEB10C100F47BB2 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		52C49AAA1DEB4AC500F47BB2 /* PCCommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCommonUtility.h; sourceTree = "<group>"; };
+		52C49AAB1DEB4C3D00F47BB2 /* PCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUtility.h; sourceTree = "<group>"; };
+		52C49AAC1DEB4C3D00F47BB2 /* PCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUtility.m; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9318385C8C85A7C48AFF750E /* Pods-Popcorn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popcorn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Popcorn/Pods-Popcorn.debug.xcconfig"; sourceTree = "<group>"; };
 		BC9D111A91DC18BE1D12BC22 /* Pods-PopcornUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -321,6 +329,9 @@
 		52C49A991DEB119500F47BB2 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52C49AAA1DEB4AC500F47BB2 /* PCCommonUtility.h */,
+				52C49AAB1DEB4C3D00F47BB2 /* PCUtility.h */,
+				52C49AAC1DEB4C3D00F47BB2 /* PCUtility.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -431,7 +442,6 @@
 				TargetAttributes = {
 					52C49A131DEAE9F400F47BB2 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = NN7QXHC8A3;
 						ProvisioningStyle = Automatic;
 					};
 					52C49A2C1DEAE9F400F47BB2 = {
@@ -447,7 +457,7 @@
 				};
 			};
 			buildConfigurationList = 52C49A0F1DEAE9F400F47BB2 /* Build configuration list for PBXProject "Popcorn" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -655,6 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */,
+				52C49AAD1DEB4C3D00F47BB2 /* PCUtility.m in Sources */,
 				52C49A601DEAF34600F47BB2 /* PCRankingViewController.m in Sources */,
 				52C49A1F1DEAE9F400F47BB2 /* PCInitialViewController.m in Sources */,
 				52C49A8A1DEB0DB300F47BB2 /* PCRecommendViewController.m in Sources */,
@@ -677,10 +688,12 @@
 				52C49A5C1DEAF05100F47BB2 /* PCPreferenceGenreViewController.m in Sources */,
 				52C49A901DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				52C49A571DEAF00500F47BB2 /* PCMainViewController.m in Sources */,
+				52C49AB01DEB4CF300F47BB2 /* PCInitialViewController.m in Sources */,
 				52C49A8B1DEB0DB300F47BB2 /* PCRecommendViewController.m in Sources */,
 				52C49A771DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
 				52C49A611DEAF34600F47BB2 /* PCRankingViewController.m in Sources */,
 				52C49A321DEAE9F400F47BB2 /* PopcornTests.m in Sources */,
+				52C49AAE1DEB4C3D00F47BB2 /* PCUtility.m in Sources */,
 				52C49A521DEAEFF400F47BB2 /* PCSignUpViewController.m in Sources */,
 				52C49A4D1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
 			);
@@ -694,10 +707,12 @@
 				52C49A5D1DEAF05100F47BB2 /* PCPreferenceGenreViewController.m in Sources */,
 				52C49A911DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				52C49A581DEAF00500F47BB2 /* PCMainViewController.m in Sources */,
+				52C49AB11DEB4CF300F47BB2 /* PCInitialViewController.m in Sources */,
 				52C49A8C1DEB0DB300F47BB2 /* PCRecommendViewController.m in Sources */,
 				52C49A781DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
 				52C49A621DEAF34600F47BB2 /* PCRankingViewController.m in Sources */,
 				52C49A3D1DEAE9F400F47BB2 /* PopcornUITests.m in Sources */,
+				52C49AAF1DEB4C3D00F47BB2 /* PCUtility.m in Sources */,
 				52C49A531DEAEFF400F47BB2 /* PCSignUpViewController.m in Sources */,
 				52C49A4E1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
 			);

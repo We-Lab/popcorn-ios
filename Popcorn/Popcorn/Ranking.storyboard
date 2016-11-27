@@ -11,7 +11,7 @@
         <!--랭킹-->
         <scene sceneID="rPV-ul-ps0">
             <objects>
-                <viewController title="랭킹" id="jCx-sf-m4Y" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Ranking" title="랭킹" id="jCx-sf-m4Y" customClass="PCRankingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="01U-Pb-TiO"/>
                         <viewControllerLayoutGuide type="bottom" id="nbE-wI-BnF"/>

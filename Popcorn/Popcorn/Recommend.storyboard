@@ -11,7 +11,7 @@
         <!--추천-->
         <scene sceneID="lPe-sJ-0fN">
             <objects>
-                <viewController title="추천" id="BjZ-e6-lgh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Recommend" title="추천" id="BjZ-e6-lgh" customClass="PCRecommendViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maL-KM-VxL"/>
                         <viewControllerLayoutGuide type="bottom" id="V5L-oR-Jze"/>

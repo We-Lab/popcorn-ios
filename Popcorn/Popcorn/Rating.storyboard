@@ -11,7 +11,7 @@
         <!--평가-->
         <scene sceneID="sQy-FK-FHL">
             <objects>
-                <viewController title="평가" id="Epd-kh-VNA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Rating" title="평가" id="Epd-kh-VNA" customClass="PCRatingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hQJ-6e-TAu"/>
                         <viewControllerLayoutGuide type="bottom" id="uQc-QH-HEr"/>

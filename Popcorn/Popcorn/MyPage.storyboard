@@ -11,7 +11,7 @@
         <!--마이페이지-->
         <scene sceneID="hXl-e4-51Z">
             <objects>
-                <viewController title="마이페이지" id="7pH-rQ-QNY" customClass="PCMyPageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPage" title="마이페이지" id="7pH-rQ-QNY" customClass="PCMyPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ROa-3B-YqF"/>
                         <viewControllerLayoutGuide type="bottom" id="XMl-95-4LM"/>
