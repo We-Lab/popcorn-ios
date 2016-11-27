@@ -1,18 +1,17 @@
 //
-//  PCPreferenceGenreViewController.m
+//  PCSignUpFacebookViewController.m
 //  Popcorn
 //
-//  Created by giftbot on 2016. 11. 27..
+//  Created by giftbot on 2016. 11. 28..
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#import "PCPreferenceGenreViewController.h"
+#import "PCSignUpFacebookViewController.h"
 
-@interface PCPreferenceGenreViewController ()
-
+@interface PCSignUpFacebookViewController ()
 @end
 
-@implementation PCPreferenceGenreViewController
+@implementation PCSignUpFacebookViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +21,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - LoginManager Delegate
+- (void)didSignUpWithFacebook:(BOOL)isSuccess {
+    
 }
 
 @end

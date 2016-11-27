@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,6 +41,9 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="페이스북 가입"/>
+                                <connections>
+                                    <segue destination="rTP-KU-mbS" kind="show" id="iRk-VQ-MuP"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이미 회원이신가요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujp-DA-De8">
                                 <rect key="frame" x="65" y="473" width="244" height="66"/>
@@ -128,6 +130,14 @@
                                     <segue destination="8lZ-O7-nDp" kind="presentation" id="Ta9-8N-iaK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjK-pC-yZX">
+                                <rect key="frame" x="219" y="180" width="125" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="비밀번호 찾기"/>
+                                <connections>
+                                    <segue destination="WBW-fz-PRv" kind="show" id="yet-JD-v3q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -140,12 +150,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GA-eI-b52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2840.8000000000002" y="-367.46626686656674"/>
+            <point key="canvasLocation" x="2841" y="-532"/>
+        </scene>
+        <!--RequesPW View Controller-->
+        <scene sceneID="OoQ-Uy-Sdl">
+            <objects>
+                <viewController id="WBW-fz-PRv" customClass="PCRequesPWViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CpV-it-FRK"/>
+                        <viewControllerLayoutGuide type="bottom" id="tZL-LW-Gyn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZMi-i1-LRd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k4m-Iw-SFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3782" y="-532"/>
         </scene>
         <!--기본정보-->
         <scene sceneID="oE8-E1-ieg">
             <objects>
-                <viewController id="K7h-Rl-K2x" customClass="PCSignUpViewController" sceneMemberID="viewController">
+                <viewController id="K7h-Rl-K2x" customClass="PCSignUpEmailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oCs-dO-h3X"/>
                         <viewControllerLayoutGuide type="bottom" id="21w-xN-CqL"/>
@@ -230,7 +258,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjo-qt-GuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2840.8000000000002" y="435.83208395802103"/>
+            <point key="canvasLocation" x="2841" y="412"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cSa-c8-1rO">
+            <objects>
+                <viewController id="rTP-KU-mbS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="F6w-VY-uvj"/>
+                        <viewControllerLayoutGuide type="bottom" id="eka-Io-A4V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DJC-n6-E3h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0U-Cf-QOy">
+                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="U2J-e0-ty7"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="다음으로"/>
+                                <connections>
+                                    <segue destination="5gS-Wt-y56" kind="show" id="O8w-3Z-vwf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q0U-Cf-QOy" firstAttribute="leading" secondItem="DJC-n6-E3h" secondAttribute="leading" id="XvS-eP-aaJ"/>
+                            <constraint firstItem="eka-Io-A4V" firstAttribute="top" secondItem="Q0U-Cf-QOy" secondAttribute="bottom" id="Ymo-MS-c0q"/>
+                            <constraint firstAttribute="trailing" secondItem="Q0U-Cf-QOy" secondAttribute="trailing" id="i45-iC-nrj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcD-Sy-gE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2841" y="1247"/>
         </scene>
         <!--선호장르-->
         <scene sceneID="sDO-QM-kBM">
@@ -295,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42U-yG-yV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3783" y="436"/>
+            <point key="canvasLocation" x="3857" y="788"/>
         </scene>
         <!--Main-->
         <scene sceneID="NgP-BS-oiH">
@@ -303,7 +368,7 @@
                 <viewControllerPlaceholder storyboardName="Main" id="8lZ-O7-nDp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dB-SU-Q68" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3828" y="-80"/>
+            <point key="canvasLocation" x="4486" y="-19"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6u6-WU-SPc">
@@ -325,6 +390,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="O8w-3Z-vwf"/>
         <segue reference="YlM-PU-ssj"/>
     </inferredMetricsTieBreakers>
 </document>

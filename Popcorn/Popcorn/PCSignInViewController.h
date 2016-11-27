@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCLoginManager.h"
 
-@interface PCSignInViewController : UIViewController
+@interface PCSignInViewController : UIViewController <PCLoginManagerDelegate>
 
 @end
