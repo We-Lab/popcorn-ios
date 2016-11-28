@@ -140,7 +140,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackIMG" translatesAutoresizingMaskIntoConstraints="NO" id="DCm-eU-FaY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="632"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvS-gl-Kdb">
                                 <rect key="frame" x="46" y="144" width="283" height="35"/>
@@ -223,10 +223,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tD-hj-tmI">
-                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.99607843137254903" green="0.2196078431372549" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="KTw-Us-wiB"/>
+                                    <constraint firstAttribute="height" constant="40" id="KTw-Us-wiB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <state key="normal" title="이메일로 가입하기">
