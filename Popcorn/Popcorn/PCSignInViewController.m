@@ -7,6 +7,7 @@
 //
 
 #import "PCSignInViewController.h"
+#import "PCLoginNaviView.h"
 
 @interface PCSignInViewController ()
 
@@ -17,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // 커스텀 네비게이션바 생성
+    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
     
     // 네비게이션 바 숨김
     [self.navigationController setNavigationBarHidden:YES];
@@ -32,6 +36,12 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+// 네비게이션 Pop
+- (void)onTouchUpToNextPage:(UIButton *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
