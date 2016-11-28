@@ -10,12 +10,58 @@
 
 @implementation PCLoginNaviView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithType:(LoginNaviBarType)type ViewController:(UIViewController *)vc target:(id)target action:(SEL)action
+{
+    self = [super init];
+    if (self) {
+        
+        
+        if (vc != nil) {
+            self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 60);
+            [vc.view addSubview:self];
+        }
+        [self createNavibarWithType:type target:(id)target action:(SEL)action];
+    }
+    return self;
 }
-*/
+- (void)createNavibarWithType:(LoginNaviBarType)type target:(id)target action:(SEL)action
+{
+    //20 point is status bar
+    const NSInteger naviStartPointY = 20 + 5;
+    
+    CGSize itemSize = CGSizeMake(20, 20);
+    
+    //leftBtn
+//    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(10, naviStartPointY, itemSize.width, itemSize.height)];
+//    logo.image = [UIImage imageNamed:@"logo.png"];
+//    [self addSubview:logo];
+    
+    switch (type) {
+        case LoginNaviBarTypeNormal:
+            
+            break;
+            
+        case LoginNaviBarTypePreve:
+        {
+            
+            UIButton *preveBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, naviStartPointY , itemSize.width, itemSize.height)];
+            
+            UIImage *preveImage = [UIImage imageNamed:@"LeftDirection"];
+            
+            [preveBtn setImage:preveImage forState:UIControlStateNormal];
+            
+            [preveBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:preveBtn];
+            
+        }
+            
+            
+            
+        default:
+            break;
+    }
+    
+    //right btn
+}
 
 @end
