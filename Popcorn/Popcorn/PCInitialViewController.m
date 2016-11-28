@@ -17,6 +17,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // 네비게이션 바 숨김
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    // 스테이터스 바 스타일
+    [self preferredStatusBarStyle];
+    self.edgesForExtendedLayout=UIRectEdgeTop;
+    self.automaticallyAdjustsScrollViewInsets=NO;
+
+}
+
+// 스테이터스 바 스타일 메소드
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
