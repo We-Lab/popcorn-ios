@@ -1,17 +1,18 @@
 //
-//  PCCommonUtility.h
+//  PCUtility.h
 //  Popcorn
 //
 //  Created by giftbot on 2016. 11. 28..
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
+
 #pragma mark - Define Log Format
 // 디버그 모드와 릴리즈 모드 구분하여 로그 출력
 #ifdef DEBUG
 #   define dLog(fmt, ...) NSLog((@"%s[Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #   define sLog(fmt, ...) NSLog((@"%s[Line %d] %@"), __PRETTY_FUNCTION__, __LINE__, fmt, ##__VA_ARGS__);
-#   define alertLog(fmt, ...) [self presentViewController:[PCUtility alertControllerWithOnlyTitle:[NSString stringWithFormat:fmt, ##__VA_ARGS__]] animated:YES completion:nil];
+#   define alertLog(fmt, ...) [self presentViewController:[PCCommonUtility alertControllerWithOnlyTitle:[NSString stringWithFormat:fmt, ##__VA_ARGS__]] animated:YES completion:nil];
 #else
 #   define dLog(...)
 #   define sLog(...)
@@ -35,3 +36,12 @@
 #define IsOverOSVersion(version)    (deviceSystemVersion >= (version))
 #define IsBelowOSVersion(version)   (deviceSystemVersion <= (version))
 #define IsOverIOS9                  IsOverOSVersion(9.0f)
+
+
+#import <UIKit/UIKit.h>
+
+@interface PCCommonUtility : NSObject
+
++ (UIAlertController *)alertControllerWithOnlyTitle:(NSString *)title;
+
+@end
