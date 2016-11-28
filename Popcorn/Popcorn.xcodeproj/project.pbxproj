@@ -77,6 +77,7 @@
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
 		52C49ABF1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
 		52C49AC01DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
+		5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */; };
 		943B807E419605DAC7849433 /* libPods-PopcornTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02826153364AF57B51116414 /* libPods-PopcornTests.a */; };
 		98CC32351F13E6388637A76B /* libPods-PopcornUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DEA65F478663554E72071A /* libPods-PopcornUITests.a */; };
 		B7565659535F2AD40BEAB922 /* libPods-Popcorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A430D54FE41098F8509D29A /* libPods-Popcorn.a */; };
@@ -158,6 +159,8 @@
 		52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManager.m; sourceTree = "<group>"; };
 		52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManagerDelegate.h; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginNaviView.h; sourceTree = "<group>"; };
+		5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginNaviView.m; sourceTree = "<group>"; };
 		9318385C8C85A7C48AFF750E /* Pods-Popcorn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popcorn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Popcorn/Pods-Popcorn.debug.xcconfig"; sourceTree = "<group>"; };
 		BC9D111A91DC18BE1D12BC22 /* Pods-PopcornUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4DEA65F478663554E72071A /* libPods-PopcornUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PopcornUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +285,8 @@
 				52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */,
 				52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */,
 				52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */,
+				5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */,
+				5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -715,6 +720,7 @@
 				520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */,
 				52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */,
+				5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */,
 				52C49A561DEAF00500F47BB2 /* PCMainViewController.m in Sources */,
 				52C49A761DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
 				52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */,
