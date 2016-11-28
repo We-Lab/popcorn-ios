@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#import "PCMainViewController.h"
+#import "PCUserInformation.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +19,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
+    NSString *name = @"Login";
+    if ( isUserSignedIn )
+        name = @"Main";
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:name bundle:nil];
+    PCMainViewController *vc = [storyboard instantiateInitialViewController];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = vc;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

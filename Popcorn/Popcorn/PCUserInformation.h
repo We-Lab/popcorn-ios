@@ -10,6 +10,11 @@
 
 @interface PCUserInformation : NSObject
 
-@property (nonatomic, ) BOOL autoLogin;
++ (instancetype)userInfo;
+
+#pragma mark - User Sign In Information
++ (BOOL)isUserSignedIn;
++ (void)hasUserSignedIn;
++ (void)hasUserSignedOut;
 
 @end

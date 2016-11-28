@@ -14,6 +14,8 @@
 
 @implementation PCSignInViewController
 
+#pragma mark - Basic Method
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -28,17 +30,21 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Custom Method
+
 // 스테이터스 바 스타일 메소드
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
+
+#pragma mark - Login Delegate Method
 - (void)didSignInWithFacebook:(BOOL)isSuccess {
     
 }
@@ -47,6 +53,7 @@
     
 }
 
+#pragma mark - Segue Configure Method
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     return YES;
 }
