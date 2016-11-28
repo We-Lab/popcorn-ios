@@ -1,5 +1,5 @@
 //
-//  PCUserInformation.h
+//  PCUserInfoManager.h
 //  Popcorn
 //
 //  Created by giftbot on 2016. 11. 28..
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PCUserInformation : NSObject
+@interface PCUserInfoManager : NSObject
 
-@property (nonatomic, ) BOOL autoLogin;
+- (void)updatePreferenceGenre;
 
 @end

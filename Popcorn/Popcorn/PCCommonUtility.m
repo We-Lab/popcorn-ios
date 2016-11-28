@@ -6,9 +6,9 @@
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#import "PCUtility.h"
+#import "PCCommonUtility.h"
 
-@implementation PCUtility
+@implementation PCCommonUtility
 
 + (UIAlertController *)alertControllerWithOnlyTitle:(NSString *)title {
     UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:title

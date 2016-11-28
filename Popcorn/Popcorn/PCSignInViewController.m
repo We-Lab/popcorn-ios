@@ -47,4 +47,8 @@
     
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return YES;
+}
+
 @end

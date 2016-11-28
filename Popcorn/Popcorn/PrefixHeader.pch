@@ -1,14 +1,11 @@
 //
-//  PrefixHeader.pch
+//  Popcorn-PrefixHeader.pch
 //  Popcorn
 //
-//  Created by giftbot on 2016. 11. 27..
+//  Created by giftbot on 2016. 11. 28..
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#ifndef PrefixHeader_pch
-#define PrefixHeader_pch
-
 #import "PCCommonUtility.h"
 
-#endif /* PrefixHeader_pch */
+

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PCLoginManager.h"
+@class PCUserInfoManager;
 
 @interface PCPreferenceGenreViewController : UIViewController <PCLoginManagerDelegate>
 
