@@ -166,6 +166,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="rRx-sm-q4P" id="nXr-62-406"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EbF-xB-0Fg">
                                 <rect key="frame" x="46" y="234" width="283" height="30"/>
@@ -174,7 +177,10 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="rRx-sm-q4P" id="9q5-YW-6F5"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANf-dM-krK">
                                 <rect key="frame" x="46" y="274" width="283" height="20"/>
@@ -192,6 +198,9 @@
                                         <state key="normal" title="비밀번호 찾기">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="WBW-fz-PRv" kind="show" id="Tq1-Y6-8jk"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -221,6 +230,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="TappedSignInButton:" destination="rRx-sm-q4P" eventType="touchUpInside" id="TBf-Y8-Uvi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tD-hj-tmI">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
@@ -264,6 +276,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="로그인" id="Tz4-Av-vYD"/>
+                    <connections>
+                        <outlet property="idTextField" destination="UQB-tW-jnr" id="L62-Nc-IaQ"/>
+                        <outlet property="pwTextField" destination="EbF-xB-0Fg" id="j6Z-v9-DVY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GA-eI-b52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -321,6 +337,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="K7h-Rl-K2x" id="Yrx-rq-LNI"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Njq-Lh-uCD">
                                         <rect key="frame" x="0.0" y="155" width="283" height="30"/>
@@ -330,6 +349,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="K7h-Rl-K2x" id="8AU-Q2-2Qd"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-v3-AKo">
                                         <rect key="frame" x="0.0" y="195" width="283" height="30"/>
@@ -339,6 +361,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="K7h-Rl-K2x" id="Q8K-cu-Qb8"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="생년월일" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ixv-to-22x">
                                         <rect key="frame" x="0.0" y="275" width="213" height="30"/>
@@ -348,6 +373,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="showDatePicker" destination="K7h-Rl-K2x" eventType="touchDown" id="0XZ-gG-HkY"/>
+                                            <outlet property="delegate" destination="K7h-Rl-K2x" id="rtW-ZW-0Rv"/>
+                                        </connections>
                                     </textField>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UK7-PG-sR0">
                                         <rect key="frame" x="223" y="275" width="60" height="29"/>
@@ -390,6 +419,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="K7h-Rl-K2x" id="CPO-bA-dV6"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -418,20 +450,38 @@
                                     <constraint firstAttribute="trailing" secondItem="5q6-cQ-BxC" secondAttribute="trailing" id="xJY-rN-Cfi"/>
                                 </constraints>
                             </view>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibm-BS-gOu">
+                                <rect key="frame" x="0.0" y="518" width="375" height="149"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <date key="date" timeIntervalSinceReferenceDate="-31651199.427362025">
+                                    <!--1999-12-31 16:00:00 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-3187322872">
+                                    <!--1899-12-31 16:32:08 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ibm-BS-gOu" secondAttribute="trailing" id="0YF-5i-jTN"/>
                             <constraint firstItem="VHx-Lg-gBY" firstAttribute="centerX" secondItem="ag6-hL-343" secondAttribute="centerX" id="4Np-8i-JeH"/>
                             <constraint firstItem="KGd-H7-UYb" firstAttribute="top" secondItem="ag6-hL-343" secondAttribute="top" id="Fsu-jL-SHI"/>
+                            <constraint firstItem="ibm-BS-gOu" firstAttribute="top" secondItem="VHx-Lg-gBY" secondAttribute="bottom" constant="10" id="URP-Uy-npQ"/>
+                            <constraint firstItem="21w-xN-CqL" firstAttribute="top" secondItem="ibm-BS-gOu" secondAttribute="bottom" id="YND-ov-0TP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VHx-Lg-gBY" secondAttribute="trailing" constant="30" id="iWz-zM-vzY"/>
                             <constraint firstItem="21w-xN-CqL" firstAttribute="top" secondItem="KGd-H7-UYb" secondAttribute="bottom" id="uRw-2A-CYk"/>
                             <constraint firstAttribute="trailing" secondItem="KGd-H7-UYb" secondAttribute="trailing" id="ukR-R3-X8U"/>
                             <constraint firstItem="VHx-Lg-gBY" firstAttribute="leading" secondItem="ag6-hL-343" secondAttribute="leadingMargin" constant="30" id="ulF-UP-Fab"/>
                             <constraint firstItem="KGd-H7-UYb" firstAttribute="leading" secondItem="ag6-hL-343" secondAttribute="leading" id="x6f-VH-wmJ"/>
+                            <constraint firstItem="ibm-BS-gOu" firstAttribute="leading" secondItem="ag6-hL-343" secondAttribute="leading" id="yFv-Hl-0TC"/>
                             <constraint firstItem="VHx-Lg-gBY" firstAttribute="centerY" secondItem="ag6-hL-343" secondAttribute="centerY" id="ym0-aq-dju"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="회원가입" id="8e3-EC-DLM"/>
+                    <connections>
+                        <outlet property="birthdayTextField" destination="Ixv-to-22x" id="n9h-5R-nCI"/>
+                        <outlet property="datePicker" destination="ibm-BS-gOu" id="9He-Wy-fwR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjo-qt-GuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -563,7 +613,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yn0-f4-qHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="840.79999999999995" y="37.331334332833585"/>
+            <point key="canvasLocation" x="998" y="37"/>
         </scene>
     </scenes>
     <resources>
@@ -571,7 +621,7 @@
         <image name="Profile_placeholder" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRv-iK-IX3"/>
+        <segue reference="YlM-PU-ssj"/>
         <segue reference="h5f-IO-B4w"/>
     </inferredMetricsTieBreakers>
 </document>

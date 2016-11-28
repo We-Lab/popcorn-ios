@@ -9,19 +9,30 @@
 #import <XCTest/XCTest.h>
 
 #import "AppDelegate.h"
-#import "PCUserInformation.h"
+#import "PCInitialViewController.h"
 #import "PCMainViewController.h"
+#import "PCUserInformation.h"
 
 @interface PCInitialViewTests : XCTestCase
+@property AppDelegate *app;
+@property UIStoryboard *storyboard;
+@property PCMainViewController *main;
+@property PCInitialViewController *login;
 @end
 
 @implementation PCInitialViewTests
 
 - (void)setUp {
     [super setUp];
+    self.app = [[AppDelegate alloc] init];
 }
 
 - (void)tearDown {
+    self.app = nil;
+    self.storyboard = nil;
+    self.main = nil;
+    self.login = nil;
+    [PCUserInformation hasUserSignedOut];
     [super tearDown];
 }
 
@@ -38,17 +49,27 @@
 }
 
 - (void)testThatItShouldShowLoginViewWhenUserIsNotSignedIn {
+    [PCUserInformation hasUserSignedOut];
+    [self.app application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:nil];
+    
+    self.storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    self.login = [self.storyboard instantiateInitialViewController];
+    
+    XCTAssertEqual(self.app.window.rootViewController.navigationController,
+                   self.login.navigationController,
+                   @"로그인한 상태에서는 앱 실행 시 로그인뷰로 이동해야 함");
 }
 
 - (void)testThatItShouldShowMainViewWhenUserIsSignedIn {
     [PCUserInformation hasUserSignedIn];
-    AppDelegate *app = [[AppDelegate alloc] init];
-    [app application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:nil];
+    [self.app application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:nil];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PCMainViewController *vc = [storyboard instantiateInitialViewController];
- 
-    XCTAssertEqual(app.window.rootViewController.navigationController, vc.navigationController);
+    self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.main = [self.storyboard instantiateInitialViewController];
+    
+    XCTAssertEqual(self.app.window.rootViewController.navigationController,
+                   self.main.navigationController,
+                   @"로그인한 상태에서는 앱 실행 시 메인뷰로 이동해야 함");
 }
 
 @end

@@ -9,22 +9,31 @@
 #import "PCSignInViewController.h"
 #import "PCLoginNaviView.h"
 
-@interface PCSignInViewController ()
+@interface PCSignInViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *idTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 
 @end
 
-@implementation PCSignInViewController
+@implementation PCSignInViewController 
 
 #pragma mark - Basic Method
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    [self makeNavigationView];
+}
+
+#pragma mark - makeCustomView
+- (void)makeNavigationView {
     // 커스텀 네비게이션바 생성
     PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
     
-    // 네비게이션 바 숨김
     [self.navigationController setNavigationBarHidden:YES];
     
     // 스테이터스 바 스타일
@@ -34,21 +43,13 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark - Custom Method
-
 // 스테이터스 바 스타일 메소드
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
 // 네비게이션 Pop
 - (void)onTouchUpToNextPage:(UIButton *)sender{
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -61,8 +62,26 @@
     
 }
 
+- (IBAction)TappedSignInButton:(id)sender {
+    
+    [[PCLoginManager loginManager] signInWithID:_idTextField.text andPassword:_pwTextField.text];
+}
+
 #pragma mark - Segue Configure Method
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return YES;
+}
+
+#pragma mark - TextField Delegate Configure
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if( [textField isEqual:_idTextField] ){
+        [_idTextField endEditing:YES];
+        [_pwTextField becomeFirstResponder];
+    }
+    else {
+        [_pwTextField endEditing:YES];
+    }
+    
     return YES;
 }
 
