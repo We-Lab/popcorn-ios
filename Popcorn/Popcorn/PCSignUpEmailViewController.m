@@ -26,6 +26,7 @@
     [self enableUserInteractionToBirthdayTextField];
 }
 
+#pragma mark - makeCustomView
 - (void)makeNavigationView {
     // 커스텀 네비게이션바 생성
     PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];

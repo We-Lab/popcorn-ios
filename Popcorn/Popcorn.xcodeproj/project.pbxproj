@@ -27,7 +27,6 @@
 		52C49A1C1DEAE9F400F47BB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1B1DEAE9F400F47BB2 /* AppDelegate.m */; };
 		52C49A1F1DEAE9F400F47BB2 /* PCInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */; };
 		52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A201DEAE9F400F47BB2 /* Login.storyboard */; };
-		52C49A241DEAE9F400F47BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A231DEAE9F400F47BB2 /* Assets.xcassets */; };
 		52C49A271DEAE9F400F47BB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A251DEAE9F400F47BB2 /* LaunchScreen.storyboard */; };
 		52C49A3D1DEAE9F400F47BB2 /* PopcornUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A3C1DEAE9F400F47BB2 /* PopcornUITests.m */; };
 		52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */; };
@@ -59,6 +58,8 @@
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */; };
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
+		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
+		5F52E68C1DEDCDDE002BD19A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F52E68B1DEDCDDE002BD19A /* Assets.xcassets */; };
 		5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */; };
 		943B807E419605DAC7849433 /* libPods-PopcornTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02826153364AF57B51116414 /* libPods-PopcornTests.a */; };
 		98CC32351F13E6388637A76B /* libPods-PopcornUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DEA65F478663554E72071A /* libPods-PopcornUITests.a */; };
@@ -122,7 +123,6 @@
 		52C49A1D1DEAE9F400F47BB2 /* PCInitialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCInitialViewController.h; sourceTree = "<group>"; };
 		52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PCInitialViewController.m; sourceTree = "<group>"; };
 		52C49A211DEAE9F400F47BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
-		52C49A231DEAE9F400F47BB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52C49A261DEAE9F400F47BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52C49A281DEAE9F400F47BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C49A2D1DEAE9F400F47BB2 /* PopcornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopcornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +160,9 @@
 		52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManager.m; sourceTree = "<group>"; };
 		52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManagerDelegate.h; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRequesIDViewController.h; sourceTree = "<group>"; };
+		5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRequesIDViewController.m; sourceTree = "<group>"; };
+		5F52E68B1DEDCDDE002BD19A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Popcorn/Assets.xcassets; sourceTree = "<group>"; };
 		5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginNaviView.h; sourceTree = "<group>"; };
 		5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginNaviView.m; sourceTree = "<group>"; };
 		9318385C8C85A7C48AFF750E /* Pods-Popcorn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Popcorn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Popcorn/Pods-Popcorn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				52C49A161DEAE9F400F47BB2 /* Popcorn */,
+				5F52E68B1DEDCDDE002BD19A /* Assets.xcassets */,
 				52C49A301DEAE9F400F47BB2 /* PopcornTests */,
 				52C49A3B1DEAE9F400F47BB2 /* PopcornUITests */,
 				52C49A151DEAE9F400F47BB2 /* Products */,
@@ -252,7 +256,6 @@
 				52AE38051DED4FB50016D81E /* MovieInformation */,
 				52C49A9A1DEB119700F47BB2 /* UserInformation */,
 				52C49A991DEB119500F47BB2 /* Utility */,
-				52C49A231DEAE9F400F47BB2 /* Assets.xcassets */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
 				52C49A171DEAE9F400F47BB2 /* Supporting Files */,
 			);
@@ -297,6 +300,8 @@
 				52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */,
 				52C49A4A1DEAEE2600F47BB2 /* PCSignInViewController.h */,
 				52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */,
+				5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */,
+				5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */,
 				5203077F1DEB7DC000E2985A /* PCRequesPWViewController.h */,
 				520307801DEB7DC000E2985A /* PCRequesPWViewController.m */,
 				52C49A4F1DEAEFF400F47BB2 /* PCSignUpEmailViewController.h */,
@@ -548,8 +553,8 @@
 				52C49A711DEB07F400F47BB2 /* Ranking.storyboard in Resources */,
 				52C49A6D1DEB071B00F47BB2 /* MyPage.storyboard in Resources */,
 				52C49A821DEB0B6900F47BB2 /* Home.storyboard in Resources */,
+				5F52E68C1DEDCDDE002BD19A /* Assets.xcassets in Resources */,
 				52AE38041DED4F980016D81E /* MovieInfo.storyboard in Resources */,
-				52C49A241DEAE9F400F47BB2 /* Assets.xcassets in Resources */,
 				52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */,
 				52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
@@ -744,6 +749,7 @@
 				520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */,
 				52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
+				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
 				52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */,
 				5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */,
 				5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */,

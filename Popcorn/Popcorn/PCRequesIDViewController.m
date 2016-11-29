@@ -1,19 +1,19 @@
 //
-//  PCRequesPWViewController.m
+//  PCRequesIDViewController.m
 //  Popcorn
 //
-//  Created by giftbot on 2016. 11. 28..
+//  Created by chaving on 2016. 11. 29..
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#import "PCRequesPWViewController.h"
+#import "PCRequesIDViewController.h"
 #import "PCLoginNaviView.h"
 
-@interface PCRequesPWViewController ()
+@interface PCRequesIDViewController ()
 
 @end
 
-@implementation PCRequesPWViewController
+@implementation PCRequesIDViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,8 +48,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)didSendPasswordToEmail:(BOOL)isSuccess {
-    
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
+*/
 
 @end

@@ -14,6 +14,7 @@
                 <tabBarController title="메인" automaticallyAdjustsScrollViewInsets="NO" id="MwU-ba-nW9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5gO-SL-0hx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -33,7 +34,7 @@
         <scene sceneID="0YD-s9-klH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kVu-Fb-anq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" id="irw-UF-i3x"/>
+                    <tabBarItem key="tabBarItem" title="홈" image="Home" id="irw-UF-i3x"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Oq-6O-aAE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -72,7 +73,7 @@
         <scene sceneID="VES-Sc-6mu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TTP-pb-eWS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="추천" id="Va7-Ad-d22"/>
+                    <tabBarItem key="tabBarItem" title="추천" image="Rating" id="Va7-Ad-d22"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TEs-CT-WcW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -101,7 +102,7 @@
         <scene sceneID="suu-ON-lxq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I2G-yk-57L" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="평가" id="7Gn-WX-J8b"/>
+                    <tabBarItem key="tabBarItem" title="평가" image="Recommend" id="7Gn-WX-J8b"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ykq-IG-6CV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -130,7 +131,7 @@
         <scene sceneID="euu-8S-Sd0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8cD-EX-mFT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마이페이지" id="5QP-1K-gp6"/>
+                    <tabBarItem key="tabBarItem" title="마이페이지" image="MyPage" id="5QP-1K-gp6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ba0-5Z-STl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -159,7 +160,7 @@
         <scene sceneID="wlX-5J-EUX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hWo-pV-IOc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="랭킹" id="GAp-eC-quT"/>
+                    <tabBarItem key="tabBarItem" title="랭킹" image="Ranking" id="GAp-eC-quT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d16-MC-u5j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -175,4 +176,11 @@
             <point key="canvasLocation" x="2128.8000000000002" y="332.38380809595208"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home" width="32" height="32"/>
+        <image name="MyPage" width="32" height="32"/>
+        <image name="Ranking" width="32" height="32"/>
+        <image name="Rating" width="32" height="32"/>
+        <image name="Recommend" width="32" height="32"/>
+    </resources>
 </document>
