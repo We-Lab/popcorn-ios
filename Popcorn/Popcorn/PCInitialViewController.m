@@ -22,7 +22,7 @@
     [self preferredStatusBarStyle];
     self.edgesForExtendedLayout=UIRectEdgeTop;
     self.automaticallyAdjustsScrollViewInsets=NO;
-
+    
 }
 
 
@@ -32,7 +32,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)didSignUpWithFaceBook:(BOOL)isSuccess {

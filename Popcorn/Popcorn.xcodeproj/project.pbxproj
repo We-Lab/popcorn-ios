@@ -21,6 +21,8 @@
 		52AE38121DED68410016D81E /* PCCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38111DED68410016D81E /* PCCommentViewController.m */; };
 		52AE38151DED695C0016D81E /* PCFamousLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38141DED695C0016D81E /* PCFamousLineViewController.m */; };
 		52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE381C1DED6A2E0016D81E /* PCMovieDetailViewController.m */; };
+		52AE38211DED77620016D81E /* PCMovieInfoManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38201DED77620016D81E /* PCMovieInfoManagerTests.m */; };
+		52AE38231DED77960016D81E /* PCLoginManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38221DED77960016D81E /* PCLoginManagerTests.m */; };
 		52C49A191DEAE9F400F47BB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A181DEAE9F400F47BB2 /* main.m */; };
 		52C49A1C1DEAE9F400F47BB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1B1DEAE9F400F47BB2 /* AppDelegate.m */; };
 		52C49A1F1DEAE9F400F47BB2 /* PCInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */; };
@@ -111,6 +113,8 @@
 		52AE38141DED695C0016D81E /* PCFamousLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCFamousLineViewController.m; sourceTree = "<group>"; };
 		52AE381B1DED6A2E0016D81E /* PCMovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieDetailViewController.h; sourceTree = "<group>"; };
 		52AE381C1DED6A2E0016D81E /* PCMovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieDetailViewController.m; sourceTree = "<group>"; };
+		52AE38201DED77620016D81E /* PCMovieInfoManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieInfoManagerTests.m; sourceTree = "<group>"; };
+		52AE38221DED77960016D81E /* PCLoginManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManagerTests.m; sourceTree = "<group>"; };
 		52C49A141DEAE9F400F47BB2 /* Popcorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popcorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C49A181DEAE9F400F47BB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52C49A1A1DEAE9F400F47BB2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 			children = (
 				52AE37F71DEC41360016D81E /* PCInitialViewTests.m */,
 				52AE38011DEC6CBD0016D81E /* PCUserInfoValidationTests.m */,
+				52AE38221DED77960016D81E /* PCLoginManagerTests.m */,
+				52AE38201DED77620016D81E /* PCMovieInfoManagerTests.m */,
 				52C49A331DEAE9F400F47BB2 /* Info.plist */,
 			);
 			path = PopcornTests;
@@ -756,6 +762,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52AE38021DEC6CBD0016D81E /* PCUserInfoValidationTests.m in Sources */,
+				52AE38211DED77620016D81E /* PCMovieInfoManagerTests.m in Sources */,
+				52AE38231DED77960016D81E /* PCLoginManagerTests.m in Sources */,
 				52AE37F81DEC41360016D81E /* PCInitialViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

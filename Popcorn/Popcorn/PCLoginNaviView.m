@@ -34,9 +34,7 @@
             
         case LoginNaviBarTypePreve: {
             UIButton *preveBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, naviStartPointY , itemSize.width, itemSize.height)];
-            
             UIImage *preveImage = [UIImage imageNamed:@"LeftDirection"];
-            
             [preveBtn setImage:preveImage forState:UIControlStateNormal];
             
             [preveBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
