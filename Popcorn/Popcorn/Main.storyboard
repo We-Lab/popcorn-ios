@@ -19,11 +19,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="OLf-QD-HPk" kind="relationship" relationship="viewControllers" id="bFk-9F-Ncd"/>
+                        <segue destination="gpd-Ls-33H" kind="relationship" relationship="viewControllers" id="Oz0-aM-m76"/>
+                        <segue destination="P2r-EF-zjL" kind="relationship" relationship="viewControllers" id="rRL-M7-Isl"/>
                         <segue destination="cea-Mr-EVk" kind="relationship" relationship="viewControllers" id="Ltq-7A-dtm"/>
                         <segue destination="kS3-Op-syS" kind="relationship" relationship="viewControllers" id="kBB-yp-nBP"/>
-                        <segue destination="P2r-EF-zjL" kind="relationship" relationship="viewControllers" id="rRL-M7-Isl"/>
-                        <segue destination="gpd-Ls-33H" kind="relationship" relationship="viewControllers" id="Oz0-aM-m76"/>
+                        <segue destination="OLf-QD-HPk" kind="relationship" relationship="viewControllers" id="bFk-9F-Ncd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s07-rU-zGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -34,7 +34,7 @@
         <scene sceneID="L0N-SS-Bqy">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="gpd-Ls-33H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fB1-6h-Dmj"/>
+                    <tabBarItem key="tabBarItem" title="홈" image="Home" id="fB1-6h-Dmj"/>
                     <navigationItem key="navigationItem" id="2ko-kp-F9j"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtR-bp-3Cu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,7 +45,7 @@
         <scene sceneID="Ctp-XT-Mgz">
             <objects>
                 <viewControllerPlaceholder storyboardName="Ranking" id="P2r-EF-zjL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="S9x-Gp-VkV"/>
+                    <tabBarItem key="tabBarItem" title="랭킹" image="Ranking" id="S9x-Gp-VkV"/>
                     <navigationItem key="navigationItem" id="5jk-Xd-EaY"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JW5-pS-8xQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -56,7 +56,7 @@
         <scene sceneID="DVB-cf-8AP">
             <objects>
                 <viewControllerPlaceholder storyboardName="Recommend" id="kS3-Op-syS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ivh-0O-FEz"/>
+                    <tabBarItem key="tabBarItem" title="추천" image="Recommend" id="Ivh-0O-FEz"/>
                     <navigationItem key="navigationItem" id="dSa-eq-pRM"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phd-pq-1C4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -67,7 +67,7 @@
         <scene sceneID="iwQ-cF-QaM">
             <objects>
                 <viewControllerPlaceholder storyboardName="Rating" id="cea-Mr-EVk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="t77-LZ-L4l"/>
+                    <tabBarItem key="tabBarItem" title="평가" image="Rating" id="t77-LZ-L4l"/>
                     <navigationItem key="navigationItem" id="NHc-p6-EeG"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mk2-ih-YEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,7 +78,7 @@
         <scene sceneID="AEb-ka-vSy">
             <objects>
                 <viewControllerPlaceholder storyboardName="MyPage" id="OLf-QD-HPk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="iMu-Mx-hEi"/>
+                    <tabBarItem key="tabBarItem" title="마이페이지" image="MyPage" id="iMu-Mx-hEi"/>
                     <navigationItem key="navigationItem" id="vgX-Nz-Thw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUO-sj-CjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,4 +86,11 @@
             <point key="canvasLocation" x="2354" y="1337"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home" width="25" height="25"/>
+        <image name="MyPage" width="25" height="25"/>
+        <image name="Ranking" width="25" height="25"/>
+        <image name="Rating" width="25" height="25"/>
+        <image name="Recommend" width="25" height="25"/>
+    </resources>
 </document>

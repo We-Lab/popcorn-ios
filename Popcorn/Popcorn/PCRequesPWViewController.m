@@ -7,6 +7,7 @@
 //
 
 #import "PCRequesPWViewController.h"
+#import "PCLoginNaviView.h"
 
 @interface PCRequesPWViewController ()
 
@@ -16,7 +17,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self makeNavigationView];
+}
+
+#pragma mark - makeCustomView
+- (void)makeNavigationView {
+    // 커스텀 네비게이션바 생성
+    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
+    
+    sLog([viewNavi class]);
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    [self preferredStatusBarStyle];
+    self.edgesForExtendedLayout=UIRectEdgeTop;
+    self.automaticallyAdjustsScrollViewInsets=NO;
+}
+
+// 스테이터스 바 스타일 메소드
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+// 네비게이션 Pop
+- (void)onTouchUpToNextPage:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {

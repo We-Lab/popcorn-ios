@@ -18,12 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self makeNavigationView];
+}
+
+- (void)makeNavigationView{
+
     // 네비게이션바 관련
     [self.navigationController setNavigationBarHidden:YES];
     [self preferredStatusBarStyle];
     self.edgesForExtendedLayout=UIRectEdgeTop;
     self.automaticallyAdjustsScrollViewInsets=NO;
-    
 }
 
 
