@@ -7,6 +7,7 @@
 //
 
 #import "PCInitialViewController.h"
+#import "PCMainViewController.h"
 
 @interface PCInitialViewController ()
 
@@ -36,6 +37,16 @@
 
 - (void)didSignUpWithFaceBook:(BOOL)isSuccess {
     
+}
+
+- (void)dealloc {
+    dLog(@" ");
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"guestSegue"]) {
+    }
+    return YES;
 }
 
 @end

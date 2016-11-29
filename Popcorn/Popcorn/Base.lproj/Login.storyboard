@@ -93,7 +93,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8lZ-O7-nDp" kind="show" id="RRv-iK-IX3"/>
+                                    <segue destination="8lZ-O7-nDp" kind="presentation" identifier="guestSegue" id="RRv-iK-IX3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -621,7 +621,7 @@
         <image name="Profile_placeholder" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YlM-PU-ssj"/>
+        <segue reference="RRv-iK-IX3"/>
         <segue reference="h5f-IO-B4w"/>
     </inferredMetricsTieBreakers>
 </document>

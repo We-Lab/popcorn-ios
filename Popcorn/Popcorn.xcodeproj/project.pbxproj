@@ -291,6 +291,7 @@
 		52C49A631DEAF35600F47BB2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */,
 				52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */,
 				52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */,
 				52C49A1D1DEAE9F400F47BB2 /* PCInitialViewController.h */,
@@ -305,7 +306,6 @@
 				520307851DEB849600E2985A /* PCSignUpFacebookViewController.m */,
 				52C49A591DEAF05100F47BB2 /* PCPreferenceGenreViewController.h */,
 				52C49A5A1DEAF05100F47BB2 /* PCPreferenceGenreViewController.m */,
-				52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */,
 				5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */,
 				5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */,
 			);

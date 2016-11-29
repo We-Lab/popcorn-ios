@@ -21,6 +21,10 @@
     return manager;
 }
 
+- (void)dealloc {
+    dLog(@" ");
+}
+
 #pragma mark - Sign Up
 - (void)signUpWithFacebook {
     BOOL isSuccess = YES;

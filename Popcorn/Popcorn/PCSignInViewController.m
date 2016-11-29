@@ -24,6 +24,10 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)dealloc {
+    dLog(@" ");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self makeNavigationView];

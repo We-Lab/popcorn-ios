@@ -21,16 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
-    NSString *name = @"Login";
-    if ( isUserSignedIn )
-        name = @"Main";
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:name bundle:nil];
-    PCMainViewController *vc = [storyboard instantiateInitialViewController];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = vc;
-    [self.window makeKeyAndVisible];
+    if ( isUserSignedIn ) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateInitialViewController];
+    }
     
     return YES;
 }
