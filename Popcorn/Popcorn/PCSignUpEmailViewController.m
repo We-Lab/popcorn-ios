@@ -30,10 +30,9 @@
     // 커스텀 네비게이션바 생성
     PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
     
-    // 네비게이션 바 숨김
-    [self.navigationController setNavigationBarHidden:YES];
+    sLog([viewNavi class]);
     
-    // 스테이터스 바 스타일
+    [self.navigationController setNavigationBarHidden:YES];
     [self preferredStatusBarStyle];
     self.edgesForExtendedLayout=UIRectEdgeTop;
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -66,6 +65,7 @@
 //    myLabel.text = str;
 //    myLabel.backgroundColor = [UIColor yellowColor];
 //    [self.view addSubview:myLabel];
+//    [_datepicker removeFromSuperview];
 //}
 
 

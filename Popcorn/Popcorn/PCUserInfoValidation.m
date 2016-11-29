@@ -14,7 +14,7 @@
 + (BOOL)isValidID:(NSString *)userID {
     if ( userID.length > 10 || userID.length < 4 )
         return NO;
-    else if ([userID rangeOfString:@" "].length > 0)
+    if ([userID rangeOfString:@" "].length > 0)
         return NO;
     
     NSString *filter = @"^[A-Z0-9a-z]{4,10}$";
@@ -25,7 +25,14 @@
 }
 
 + (BOOL)isValidPW:(NSString *)userPW {
-    return YES;
+    if ( userPW.length > 15 || userPW.length < 6 )
+        return NO;
+    
+    NSString *filter = @"^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]){6,15}$";
+    NSPredicate *idRegex = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", filter];
+    BOOL result = [idRegex evaluateWithObject:userPW];
+    
+    return result;
 }
 
 + (BOOL)isValidEmail:(NSString *)emailString {
@@ -40,7 +47,8 @@
 
 + (BOOL)isValidBirthday {
     BOOL isValid = YES;
-    //8살 이상 120살 이하
+    
+    //1900년 이상 현재 날짜 이하
     return isValid;
 }
 

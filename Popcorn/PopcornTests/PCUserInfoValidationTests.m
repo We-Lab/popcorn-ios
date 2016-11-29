@@ -41,13 +41,13 @@
     
     userID = @"ID";
     isValid = [PCUserInfoValidation isValidID:userID];
-    XCTAssertFalse(isValid, @"4자리 이하 아이디는 False를 반환한다.");
+    XCTAssertFalse(isValid, @"4자리 미만 아이디는 False를 반환한다.");
 }
 
 - (void)testThatUserIDLengthBetween4and10ShouldReturnTrue {
     userID = @"GoodID";
     isValid = [PCUserInfoValidation isValidID:userID];
-    XCTAssertTrue(isValid, @"4자리 이상 10자리 이하 아이디는 True를 반환한다.");
+    XCTAssertTrue(isValid, @"아이디는 4자리 이상 10자리 이하여야 한다.");
 }
 
 - (void)testThatUserIDShouldNotBeContainAnyCharacterExceptAlphabetAndNumbers {
@@ -68,6 +68,38 @@
     userID = @"ALNUM10";
     isValid = [PCUserInfoValidation isValidID:userID];
     XCTAssertTrue(isValid, @"영어와 숫자를 조합한 ID는 가능하다.");
+}
+
+- (void)testThatUserPWLengthBetween6and15ShouldReturnTrue {
+    userPW = @"TestPassword123";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertTrue(isValid, @"아이디는 6자리 이상 15자리 이하여야 한다.");
+}
+
+- (void)testThatUserPWLengthIsNotBetween6and15ShouldReturnFalse {
+    userPW = @"TestP";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertFalse(isValid, @"5자리 이하 비밀번호는 입력할 수 없다.");
+    
+    userPW = @"TestPassword1234";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertFalse(isValid, @"15자리를 초과하는 비밀번호는 입력할 수 없다.");
+}
+
+- (void)testThat유저비번에알파벳과숫자는각각1개이상조합되어야한다 {
+    userPW = @"AlphabetONLY";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertFalse(isValid, @"숫자가 최소 1개 이상 조합되어야 한다.");
+    
+    userPW = @"NumberONLY";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertFalse(isValid, @"알파벳이 최소 1개 이상 조합되어야 한다.");
+}
+
+- (void)testThatUserPWCombinedAlphabetAndNumberShouldReturnTrue {
+    userPW = @"alphabet1234";
+    isValid = [PCUserInfoValidation isValidPW:userPW];
+    XCTAssertTrue(isValid, @"영문자+숫자가 조합된 아이디는 통과된다.");
 }
 
 - (void)testThatUserEmailShouldBeSatisfiedWithSpecificFormat {
