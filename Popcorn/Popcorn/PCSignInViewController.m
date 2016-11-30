@@ -41,7 +41,9 @@
     sLog([viewNavi class]);
     
     [self.navigationController setNavigationBarHidden:YES];
+    
     [self preferredStatusBarStyle];
+//    self.preferredStatusBarStyle = UIStatusBarStyleLightContent;
     self.edgesForExtendedLayout=UIRectEdgeTop;
     self.automaticallyAdjustsScrollViewInsets=NO;
 }
