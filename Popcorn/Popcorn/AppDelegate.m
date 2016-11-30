@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "PCMainViewController.h"
+#import "KeychainItemWrapper.h"
 #import "PCUserInformation.h"
 
 @interface AppDelegate ()
@@ -20,14 +20,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self selectInitialViewController];
+    
+    return YES;
+}
+
+- (void)selectInitialViewController {
     BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
     if ( isUserSignedIn ) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateInitialViewController];
+        [[PCUserInformation userInfo] setUserTokenFromKeyChain];
     }
-    
-    return YES;
+//    [keychainItem resetKeychainItem];
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

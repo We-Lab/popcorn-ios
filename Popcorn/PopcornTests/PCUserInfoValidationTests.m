@@ -108,7 +108,6 @@
         isValid = [PCUserInfoValidation isValidEmail:email];
         XCTAssertTrue(isValid, @"이메일 형식을 충족시켜야 한다.");
     }
-    
 }
 
 - (void)testThatUserEmailShouldNotUseDifferentFormat {
@@ -118,10 +117,5 @@
         XCTAssertFalse(isValid, @"이메일 형식을 충족시켜야 한다.");
     }
 }
-
-//- (void)testThatUserAgeShouldBeBetween8and120 {
-//    userBirthday = 
-//    XCTAssert(<#expression, ...#>)
-//}
 
 @end

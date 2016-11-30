@@ -610,7 +610,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="가입하기"/>
                                 <connections>
-                                    <segue destination="8lZ-O7-nDp" kind="presentation" id="YlM-PU-ssj"/>
+                                    <segue destination="8lZ-O7-nDp" kind="show" id="YlM-PU-ssj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장르이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDU-dY-ali">
@@ -755,6 +755,6 @@
         <image name="Profile_placeholder" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRv-iK-IX3"/>
+        <segue reference="YlM-PU-ssj"/>
     </inferredMetricsTieBreakers>
 </document>

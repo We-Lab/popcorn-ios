@@ -7,6 +7,13 @@
 //
 
 #import "PCUserInformation.h"
+#import "KeychainItemWrapper.h"
+
+@interface PCUserInformation ()
+
+@property (nonatomic, readwrite) NSString *userToken;
+
+@end
 
 @implementation PCUserInformation
 
@@ -20,6 +27,10 @@
     return userData;
 }
 
+- (void)setUserTokenFromKeyChain {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+    self.userToken = [keychainItem objectForKey:(id)kSecAttrTokenID];
+}
 
 + (BOOL)isUserSignedIn {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserSignedIn"] boolValue];
@@ -32,5 +43,7 @@
 + (void)hasUserSignedOut {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserSignedIn"];
 }
+
+
 
 @end
