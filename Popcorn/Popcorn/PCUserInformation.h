@@ -10,7 +10,12 @@
 
 @interface PCUserInformation : NSObject
 
+@property (nonatomic, readonly) NSString *userToken;
+
 + (instancetype)userInfo;
+
+#pragma mark - User Data
+- (void)setUserTokenFromKeyChain;
 
 #pragma mark - User Sign In Information
 + (BOOL)isUserSignedIn;

@@ -50,9 +50,9 @@
 }
 
 - (void)signInWithID:(NSString *)loginID andPassword:(NSString *)password {
-    BOOL isSuccess = YES;
+    NSString *token = nil;
     // 이메일로 로그인 시도 후 결과 저장
-    [self.delegate didSignInWithID:isSuccess];
+    [self.delegate didSignInWithID:token];
 }
 
 - (void)requestNewPassword {
