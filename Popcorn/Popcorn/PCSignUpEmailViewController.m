@@ -39,8 +39,7 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     [self preferredStatusBarStyle];
-    self.edgesForExtendedLayout=UIRectEdgeTop;
-    self.automaticallyAdjustsScrollViewInsets=NO;
+
 }
 
 - (void)enableUserInteractionToBirthdayTextField {
@@ -54,24 +53,29 @@
 
 -(IBAction)showDatePicker {
     self.datePicker.hidden = NO;
-//    [_datePicker addTarget:self
-//                    action:@selector(LabelTitle:)
-//          forControlEvents:UIControlEventValueChanged];
+    self.datePicker.backgroundColor = [UIColor whiteColor];
+    
+    [_datePicker addTarget:self
+                    action:@selector(LabelTitle:)
+          forControlEvents:UIControlEventValueChanged];
 }
 
-//-(void)LabelTitle:(id)sender {
-//    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-//    dateFormat.dateStyle=NSDateFormatterMediumStyle;
-//    [dateFormat setDateFormat:@"MM/dd/yyyy"];
-//    NSString *str = [NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:_datePicker.date]];
-//    
+-(void)LabelTitle:(id)sender {
+    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+    dateFormat.dateStyle=NSDateFormatterMediumStyle;
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:_datePicker.date]];
+    
+    self.birthdayTextField.text = str;
+    
 //    UILabel *myLabel = [[UILabel alloc] init];
 //    myLabel.frame = CGRectMake(50, 50, 150, 60);
 //    myLabel.text = str;
 //    myLabel.backgroundColor = [UIColor yellowColor];
 //    [self.view addSubview:myLabel];
+    
 //    [_datepicker removeFromSuperview];
-//}
+}
 
 
 // 네비게이션 Pop

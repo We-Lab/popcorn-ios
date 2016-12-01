@@ -14,10 +14,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
 
 @property (weak, nonatomic) IBOutlet UIView *moviePosterView;
+@property (weak, nonatomic) IBOutlet UITextView *movieStoryTextView;
 
 @property (weak, nonatomic) IBOutlet UIView *movieInfoButtonView;
-@property (weak, nonatomic) IBOutlet UILabel *movieStoryLabel;
+
 @property (weak, nonatomic) IBOutlet UITableView *movieVideoTableView;
+
+@property (weak, nonatomic) IBOutlet UIButton *movieStoryMoreButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
 
 @end
 
@@ -39,6 +45,8 @@
     
     self.movieInfoButtonView.layer.borderWidth = 1;
     self.movieInfoButtonView.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
+    
+    [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
     self.movieVideoTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -80,6 +88,31 @@
     return 70;
 }
 
+- (IBAction)moreStoryViewButton:(id)sender {
+    
+    [self.movieStoryMoreButton setTitle:@"닫기" forState:UIControlStateNormal];
+    
+    CGRect textViewFrame = _movieStoryTextView.frame;
+    textViewFrame.size.height = _movieStoryTextView.contentSize.height;
+    
+    NSLog(@"텍스트뷰 %lf", textViewFrame.size.height);
+    
+    if ([self.movieStoryMoreButton.titleLabel.text isEqualToString:@"더보기"]) {
+        
+        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant + (textViewFrame.size.height - 55));
+        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant + (textViewFrame.size.height - 55));
+        self.movieStoryTextViewHeight.constant = textViewFrame.size.height;
+        
+    }else{
+    
+        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant - (textViewFrame.size.height - 55));
+        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant - (textViewFrame.size.height - 55));
+        self.movieStoryTextViewHeight.constant = 55;
+        
+        [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
+    }
+    
+}
 
 
 

@@ -43,9 +43,7 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     [self preferredStatusBarStyle];
-//    self.preferredStatusBarStyle = UIStatusBarStyleLightContent;
-    self.edgesForExtendedLayout=UIRectEdgeTop;
-    self.automaticallyAdjustsScrollViewInsets=NO;
+
 }
 
 // 스테이터스 바 스타일 메소드
