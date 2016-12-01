@@ -59,6 +59,7 @@
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */; };
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
+		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
 		5F52E68C1DEDCDDE002BD19A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F52E68B1DEDCDDE002BD19A /* Assets.xcassets */; };
 		5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */; };
@@ -164,6 +165,8 @@
 		52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManager.m; sourceTree = "<group>"; };
 		52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManagerDelegate.h; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieNaviView.h; sourceTree = "<group>"; };
+		5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieNaviView.m; sourceTree = "<group>"; };
 		5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRequesIDViewController.h; sourceTree = "<group>"; };
 		5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRequesIDViewController.m; sourceTree = "<group>"; };
 		5F52E68B1DEDCDDE002BD19A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Popcorn/Assets.xcassets; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				52AE38111DED68410016D81E /* PCCommentViewController.m */,
 				52AE38131DED695C0016D81E /* PCFamousLineViewController.h */,
 				52AE38141DED695C0016D81E /* PCFamousLineViewController.m */,
+				5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */,
+				5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */,
 			);
 			name = MovieDetail;
 			sourceTree = "<group>";
@@ -753,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */,
 				52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */,
 				52AE38121DED68410016D81E /* PCCommentViewController.m in Sources */,
 				52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */,

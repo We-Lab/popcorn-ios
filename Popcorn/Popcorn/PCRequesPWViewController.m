@@ -28,9 +28,6 @@
     sLog([viewNavi class]);
     
     [self.navigationController setNavigationBarHidden:YES];
-    [self preferredStatusBarStyle];
-    self.edgesForExtendedLayout=UIRectEdgeTop;
-    self.automaticallyAdjustsScrollViewInsets=NO;
 }
 
 // 스테이터스 바 스타일 메소드
