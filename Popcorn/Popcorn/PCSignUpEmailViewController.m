@@ -10,7 +10,13 @@
 #import "PCLoginNaviView.h"
 
 @interface PCSignUpEmailViewController () <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *idTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
+@property (weak, nonatomic) IBOutlet UITextField *rePWTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *genderTextField;
+
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @end
 

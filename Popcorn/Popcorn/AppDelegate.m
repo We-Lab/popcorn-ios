@@ -32,7 +32,6 @@
         self.window.rootViewController = [storyboard instantiateInitialViewController];
         [[PCUserInformation userInfo] setUserTokenFromKeyChain];
     }
-//    [keychainItem resetKeychainItem];
 }
 
 

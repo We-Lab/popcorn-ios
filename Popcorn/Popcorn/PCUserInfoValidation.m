@@ -28,7 +28,7 @@
     if ( userPW.length > 15 || userPW.length < 6 )
         return NO;
     
-    NSString *filter = @"^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]){6,15}$";
+    NSString *filter = @"^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]){6,20}$";
     NSPredicate *idRegex = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", filter];
     BOOL result = [idRegex evaluateWithObject:userPW];
     

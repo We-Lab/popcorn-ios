@@ -8,6 +8,10 @@
 
 #import "PCLoginManager.h"
 
+#import <AFNetworking.h>
+#import "PCNetworkParamKey.h"
+
+
 @implementation PCLoginManager
 
 #pragma mark - Declare Class as Singleton 
@@ -50,9 +54,40 @@
 }
 
 - (void)signInWithID:(NSString *)loginID andPassword:(NSString *)password {
-    NSString *token = nil;
-    // 이메일로 로그인 시도 후 결과 저장
-    [self.delegate didSignInWithID:token];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSString *urlString = [baseURLString stringByAppendingString:@"login/"];
+    NSDictionary *parameters = @{ParamUserIDKey:loginID,
+                                 ParamUserPasswordKey:password};
+    
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
+                                                  URLString:urlString
+                                                 parameters:parameters
+                                                      error:nil];
+    NSURLSessionDataTask *loginTask;
+    loginTask = [manager dataTaskWithRequest:request
+                           completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                               NSString *token = nil;
+                               
+                               if (responseObject) {
+                                   token = responseObject[ParamTokenKey];
+                                   if (token) {
+                                       dLog(@"success");
+                                   } else {
+                                       dLog(@"error : %@", error);
+                                   }
+                               }
+                               else {
+                                   dLog(@"error : %@", error);
+                               }
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                   [self.delegate didSignInWithID:token];
+                               });
+                           }];
+    [loginTask resume];
 }
 
 - (void)requestNewPassword {

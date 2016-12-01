@@ -18,12 +18,7 @@
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"확인"
                                                             style:UIAlertActionStyleDefault
                                                           handler:nil];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"취소"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:nil];
     [alertControl addAction:confirmAction];
-    [alertControl addAction:cancelAction];
     return alertControl;
 }
 

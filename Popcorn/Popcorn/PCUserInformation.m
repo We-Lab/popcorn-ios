@@ -29,7 +29,7 @@
 
 - (void)setUserTokenFromKeyChain {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    self.userToken = [keychainItem objectForKey:(id)kSecAttrTokenID];
+    self.userToken = [keychainItem objectForKey:(id)kSecAttrAccount];
 }
 
 + (BOOL)isUserSignedIn {

@@ -70,20 +70,20 @@
     XCTAssertTrue(isValid, @"영어와 숫자를 조합한 ID는 가능하다.");
 }
 
-- (void)testThatUserPWLengthBetween6and15ShouldReturnTrue {
+- (void)testThatUserPWLengthBetween6and20ShouldReturnTrue {
     userPW = @"TestPassword123";
     isValid = [PCUserInfoValidation isValidPW:userPW];
-    XCTAssertTrue(isValid, @"아이디는 6자리 이상 15자리 이하여야 한다.");
+    XCTAssertTrue(isValid, @"아이디는 6자리 이상 20자리 이하여야 한다.");
 }
 
-- (void)testThatUserPWLengthIsNotBetween6and15ShouldReturnFalse {
+- (void)testThatUserPWLengthIsNotBetween6and20ShouldReturnFalse {
     userPW = @"TestP";
     isValid = [PCUserInfoValidation isValidPW:userPW];
     XCTAssertFalse(isValid, @"5자리 이하 비밀번호는 입력할 수 없다.");
     
-    userPW = @"TestPassword1234";
+    userPW = @"TestPassword123456789";
     isValid = [PCUserInfoValidation isValidPW:userPW];
-    XCTAssertFalse(isValid, @"15자리를 초과하는 비밀번호는 입력할 수 없다.");
+    XCTAssertFalse(isValid, @"20자리를 초과하는 비밀번호는 입력할 수 없다.");
 }
 
 - (void)testThat유저비번에알파벳과숫자는각각1개이상조합되어야한다 {

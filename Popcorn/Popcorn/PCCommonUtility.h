@@ -12,15 +12,14 @@
 #ifdef DEBUG
 #   define dLog(fmt, ...) NSLog((@"%s[Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #   define sLog(fmt, ...) NSLog((@"%s[Line %d] %@"), __PRETTY_FUNCTION__, __LINE__, fmt, ##__VA_ARGS__);
-#   define alertLog(fmt, ...) [self presentViewController:[PCCommonUtility alertControllerWithOnlyTitle:[NSString stringWithFormat:fmt, ##__VA_ARGS__]] animated:YES completion:nil];
 #else
 #   define dLog(...)
 #   define sLog(...)
-#   define alertLog(...)
 #endif
 
 // 디버깅 모드, 릴리즈 모드 상관없이 로그 출력
 #define aLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define alertLog(fmt, ...) [self presentViewController:[PCCommonUtility alertControllerWithOnlyTitle:[NSString stringWithFormat:fmt, ##__VA_ARGS__]] animated:YES completion:nil];
 
 
 // 아이폰, 아이패드, 시뮬레이터 구분

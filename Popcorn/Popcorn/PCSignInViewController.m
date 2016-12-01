@@ -7,32 +7,35 @@
 //
 
 #import "PCSignInViewController.h"
+
+#import "PCMainViewController.h"
 #import "PCLoginNaviView.h"
 #import "PCUserInformation.h"
+#import "PCUserInfoValidation.h"
 #import "KeychainItemWrapper.h"
 
 @interface PCSignInViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *idTextField;
-@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
+@property (nonatomic) IBOutlet UITextField *idTextField;
+@property (nonatomic) IBOutlet UITextField *pwTextField;
 
 @end
 
 @implementation PCSignInViewController 
 
-#pragma mark - Basic Method
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc {
-    dLog(@" ");
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+#ifdef DEBUG
+    [self initTestSetting];
+#endif
+    [PCLoginManager loginManager].delegate = self;
     [self makeNavigationView];
+}
+
+- (void)initTestSetting {
+    _idTextField.text = @"testuser";
+    _pwTextField.text = @"testuser1";
 }
 
 #pragma mark - makeCustomView
@@ -60,27 +63,43 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+#pragma mark - Try Login
+- (IBAction)TappedSignInButton:(id)sender {
+    BOOL isValidID = [PCUserInfoValidation isValidID:_idTextField.text];
+    BOOL isValidPW = [PCUserInfoValidation isValidPW:_pwTextField.text];
+    
+    if (!isValidID) {
+        alertLog(@"아이디가 양식에 맞지 않습니다.");
+    }
+    else if (!isValidPW) {
+        alertLog(@"비밀번호가 양식에 맞지 않습니다.");
+    }
+    
+    [[PCLoginManager loginManager] signInWithID:_idTextField.text andPassword:_pwTextField.text];
+}
+
 #pragma mark - Login Delegate Method
 - (void)didSignInWithFacebook:(BOOL)isSuccess {
     
 }
 
-- (void)didSignInWithEmail:(NSString *)token {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    [keychainItem setObject:token forKey:(id)kSecAttrTokenID];
-    [[PCUserInformation userInfo] setUserTokenFromKeyChain];
-    
-    // 성공, 실패 처리
+- (void)didSignInWithID:(NSString *)token {
+    if (token) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PCMainViewController *mainView = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:mainView animated:YES];
+        
+        // 키체인에 토큰값 저장
+        KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+        [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+        [[PCUserInformation userInfo] setUserTokenFromKeyChain];
+    }
+    else {
+        alertLog(@"유저정보가 올바르지 않습니다.");
+    }
 }
 
-- (IBAction)TappedSignInButton:(id)sender {
-    [[PCLoginManager loginManager] signInWithID:_idTextField.text andPassword:_pwTextField.text];
-}
-
-#pragma mark - Segue Configure Method
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    return YES;
-}
 
 #pragma mark - TextField Delegate Configure
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -93,6 +112,15 @@
     }
     
     return YES;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    dLog(@" ");
 }
 
 @end
