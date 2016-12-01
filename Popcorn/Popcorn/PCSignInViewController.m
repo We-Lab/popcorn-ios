@@ -8,6 +8,8 @@
 
 #import "PCSignInViewController.h"
 #import "PCLoginNaviView.h"
+#import "PCUserInformation.h"
+#import "KeychainItemWrapper.h"
 
 @interface PCSignInViewController () <UITextFieldDelegate>
 
@@ -61,12 +63,15 @@
     
 }
 
-- (void)didSignInWithEmail:(BOOL)isSuccess {
+- (void)didSignInWithEmail:(NSString *)token {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrTokenID];
+    [[PCUserInformation userInfo] setUserTokenFromKeyChain];
     
+    // 성공, 실패 처리
 }
 
 - (IBAction)TappedSignInButton:(id)sender {
-    
     [[PCLoginManager loginManager] signInWithID:_idTextField.text andPassword:_pwTextField.text];
 }
 

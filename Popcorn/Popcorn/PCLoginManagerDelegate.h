@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, PCSignUpResult) {
 
 // 로그인
 - (void)didSignInWithFacebook:(BOOL)isSuccess;
-- (void)didSignInWithID:(BOOL)isSuccess;
+- (void)didSignInWithID:(NSString *)token;
 
 // 비밀번호 찾기
 - (void)didSendPasswordToID:(BOOL)isSuccess;
