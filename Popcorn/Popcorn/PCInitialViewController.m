@@ -25,8 +25,6 @@
 
     // 네비게이션바 관련
     [self.navigationController setNavigationBarHidden:YES];
-    [self preferredStatusBarStyle];
-
 }
 
 

@@ -7,8 +7,9 @@
 //
 
 #import "PCMovieDetailViewController.h"
+#import "PCMovieNaviView.h"
 
-@interface PCMovieDetailViewController ()
+@interface PCMovieDetailViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
@@ -25,14 +26,61 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
 
+@property BOOL test;
+
 @end
 
 @implementation PCMovieDetailViewController
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.test = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setCustomViewStatus];
+}
+
+#pragma mark - Make Custom Navi View
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+    if (scrollView.contentOffset.y > 200) {
+        
+        self.test = NO;
+        
+        [self preferredStatusBarStyle];
+    }
+}
+
+
+- (void)makeNavigationView {
+    // 커스텀 네비게이션바 생성
+    PCMovieNaviView *viewNavi = [[PCMovieNaviView alloc] initWithType:MovieNaviBarTypeDetailView ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
+    
+    sLog([viewNavi class]);
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    
+}
+
+// 스테이터스 바 스타일 메소드
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    if (self.test == YES) {
+        return UIStatusBarStyleLightContent;
+    }
+    
+    return UIStatusBarStyleDefault;
+}
+
+// 네비게이션 Pop
+- (void)onTouchUpToNextPage:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Make Custem View
@@ -88,14 +136,16 @@
     return 70;
 }
 
+
+#pragma mark - MovieStory More Button Action
 - (IBAction)moreStoryViewButton:(id)sender {
+    
+    self.movieStoryTextView.scrollEnabled = YES;
     
     [self.movieStoryMoreButton setTitle:@"닫기" forState:UIControlStateNormal];
     
     CGRect textViewFrame = _movieStoryTextView.frame;
     textViewFrame.size.height = _movieStoryTextView.contentSize.height;
-    
-    NSLog(@"텍스트뷰 %lf", textViewFrame.size.height);
     
     if ([self.movieStoryMoreButton.titleLabel.text isEqualToString:@"더보기"]) {
         
@@ -108,6 +158,8 @@
         self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant - (textViewFrame.size.height - 55));
         self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant - (textViewFrame.size.height - 55));
         self.movieStoryTextViewHeight.constant = 55;
+        
+        self.movieStoryTextView.scrollEnabled = NO;
         
         [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     }

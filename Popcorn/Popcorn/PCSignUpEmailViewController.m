@@ -38,8 +38,6 @@
     sLog([viewNavi class]);
     
     [self.navigationController setNavigationBarHidden:YES];
-    [self preferredStatusBarStyle];
-
 }
 
 - (void)enableUserInteractionToBirthdayTextField {
