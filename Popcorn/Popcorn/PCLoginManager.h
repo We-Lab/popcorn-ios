@@ -13,11 +13,9 @@
 
 @property (nonatomic, weak) id<PCLoginManagerDelegate> delegate;
 
-+ (instancetype)loginManager;
-
 // 회원가입
 - (void)signUpWithFacebook;
-- (void)signUpWithID;
+- (void)signUpWithID:(NSDictionary *)form;
 
 
 // 로그인
@@ -26,3 +24,4 @@
 - (void)requestNewPassword;
 
 @end
+

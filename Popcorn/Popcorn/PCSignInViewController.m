@@ -12,12 +12,16 @@
 #import "PCLoginNaviView.h"
 #import "PCUserInformation.h"
 #import "PCUserInfoValidation.h"
-#import "KeychainItemWrapper.h"
 
 @interface PCSignInViewController () <UITextFieldDelegate>
 
-@property (nonatomic) IBOutlet UITextField *idTextField;
-@property (nonatomic) IBOutlet UITextField *pwTextField;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UITextField *idTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
+
+@property (nonatomic) PCLoginManager *loginManager;
+@property (nonatomic) BOOL isValidID;
+@property (nonatomic) BOOL isValidPW;
 
 @end
 
@@ -29,13 +33,16 @@
 #ifdef DEBUG
     [self initTestSetting];
 #endif
-    [PCLoginManager loginManager].delegate = self;
+    self.loginManager = [[PCLoginManager alloc] init];
+    self.loginManager.delegate = self;
     [self makeNavigationView];
 }
 
 - (void)initTestSetting {
-    _idTextField.text = @"testuser";
-    _pwTextField.text = @"testuser1";
+    self.idTextField.text = @"testuser";
+    self.pwTextField.text = @"testuser1";
+    self.isValidID = YES;
+    self.isValidPW = YES;
 }
 
 #pragma mark - makeCustomView
@@ -44,7 +51,6 @@
     PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
     
     sLog([viewNavi class]);
-    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -60,18 +66,10 @@
 
 
 #pragma mark - Try Login
-- (IBAction)TappedSignInButton:(id)sender {
-    BOOL isValidID = [PCUserInfoValidation isValidID:_idTextField.text];
-    BOOL isValidPW = [PCUserInfoValidation isValidPW:_pwTextField.text];
-    
-    if (!isValidID) {
-        alertLog(@"아이디가 양식에 맞지 않습니다.");
+- (IBAction)requestSignIn:(id)sender {
+    if (_isValidID && _isValidPW) {
+        [self.loginManager signInWithID:_idTextField.text andPassword:_pwTextField.text];
     }
-    else if (!isValidPW) {
-        alertLog(@"비밀번호가 양식에 맞지 않습니다.");
-    }
-    
-    [[PCLoginManager loginManager] signInWithID:_idTextField.text andPassword:_pwTextField.text];
 }
 
 #pragma mark - Login Delegate Method
@@ -85,10 +83,7 @@
         PCMainViewController *mainView = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:mainView animated:YES];
         
-        // 키체인에 토큰값 저장
-        KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-        [keychainItem setObject:token forKey:(id)kSecAttrAccount];
-        [[PCUserInformation userInfo] setUserTokenFromKeyChain];
+        [[PCUserInformation userInfo] saveUserToken:token];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");
@@ -100,12 +95,51 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if( [textField isEqual:_idTextField] ){
         [_idTextField endEditing:YES];
-        [_pwTextField becomeFirstResponder];
+        
+        if (_pwTextField.text.length == 0)
+            [_pwTextField becomeFirstResponder];
     }
-    else {
+    else if ( [textField isEqual:_pwTextField] ) {
         [_pwTextField endEditing:YES];
     }
     
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSString *text;
+    if (range.length == 0) {
+        text = [textField.text stringByAppendingString:string];
+    }
+    else if (range.length == 1) {
+        text = [textField.text substringToIndex:range.location];
+    }
+    else {
+        return YES;
+    }
+    
+    NSInteger textLength = text.length;
+    if (textField == _idTextField) {
+        self.isValidID = NO;
+        if (textLength >= 4 && textLength <= 10) {
+            self.isValidID = [PCUserInfoValidation isValidID:text];
+        }
+    }
+    else if (textField == _pwTextField) {
+        self.isValidPW = NO;
+        if (textLength >= 6) {
+            self.isValidPW = [PCUserInfoValidation isValidPW:text];
+        }
+    }
+    
+    if (_isValidID && _isValidPW) {
+        // 로그인 버튼 활성화
+    }
+    else {
+        // 로그인 버튼 비활성화
+    }
+
     return YES;
 }
 

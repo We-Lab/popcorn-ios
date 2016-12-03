@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PCLoginManager.h"
 
-@interface PCSignUpEmailViewController : UIViewController <PCLoginManagerDelegate>
+@interface PCSignUpIDViewController : UIViewController <PCLoginManagerDelegate>
 
 @end

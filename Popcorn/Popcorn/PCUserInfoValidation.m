@@ -35,21 +35,30 @@
     return result;
 }
 
-+ (BOOL)isValidEmail:(NSString *)emailString {
++ (BOOL)isValidEmail:(NSString *)email {
     BOOL stricterFilter = YES;
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
     NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    BOOL result = [emailTest evaluateWithObject:email];
     
-    return [emailTest evaluateWithObject:emailString];
+    return result;
 }
 
-+ (BOOL)isValidBirthday {
-    BOOL isValid = YES;
++ (BOOL)isValidBirthday:(NSString *)birthday {
+    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
+    [dateFormmater setDateFormat:@"yyyy-MM-dd"];
     
-    //1900년 이상 현재 날짜 이하
-    return isValid;
+    NSDate *minDate = [dateFormmater dateFromString:@"1900-01-01"];
+    NSDate *inputDate = [dateFormmater dateFromString:birthday];
+    NSDate *maxDate = [[NSDate date] dateByAddingTimeInterval:(60*60*9)];
+    
+    BOOL isLaterThanMinDate = [[minDate earlierDate:inputDate] isEqualToDate:minDate];
+    BOOL isEarlierThanMaxDate = [[maxDate laterDate:inputDate] isEqualToDate:maxDate];
+    BOOL result = (isLaterThanMinDate && isEarlierThanMaxDate);
+
+    return result;
 }
 
 @end

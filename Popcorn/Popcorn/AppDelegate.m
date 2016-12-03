@@ -19,12 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     [self selectInitialViewController];
     
     return YES;
 }
 
+// 기본값은 Login Storyboard, 로그인 상태면 Main Storyboard
 - (void)selectInitialViewController {
     BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
     if ( isUserSignedIn ) {

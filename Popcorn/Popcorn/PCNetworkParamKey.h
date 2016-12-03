@@ -12,11 +12,19 @@
 
 @end
 
+// 공통
 extern NSString *const baseURLString;
+extern NSString *const TokenKey;
 
-extern NSString *ParamUserIDKey;
-extern NSString *ParamUserPasswordKey;
-extern NSString *ParamTokenKey;
+// Sign In
+extern NSString *const SignInIDKey;
+extern NSString *const SignInPasswordKey;
 
-extern NSString *JSONResultKey;
-extern NSString *JSONSuccessValue;
+// Sign Up
+extern NSString *const SignUpIDKey;
+extern NSString *const SignUpPasswordKey;
+extern NSString *const SignUpConfirmPWKey;
+extern NSString *const SignUpEmailKey;
+extern NSString *const SignUpBirthdayKey;
+extern NSString *const SignUpGenderKey;
+extern NSString *const SignUpPhoneNumberKey;
