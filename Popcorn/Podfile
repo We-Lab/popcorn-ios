@@ -11,7 +11,7 @@ target 'Popcorn' do
   pod 'FBSDKCoreKit', '~> 4.18'
   pod 'FBSDKShareKit', '~> 4.18'
   pod 'FBSDKLoginKit', '~> 4.18'
-#  pod 'GoogleAnalytics', '~> 3.17'
+  pod 'GoogleAnalytics', '~> 3.17'
 
   target 'PopcornTests' do
     inherit! :search_paths
