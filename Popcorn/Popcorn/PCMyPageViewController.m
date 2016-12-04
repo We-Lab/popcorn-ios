@@ -7,6 +7,7 @@
 //
 
 #import "PCMyPageViewController.h"
+#import "PCUserInformation.h"
 
 @interface PCMyPageViewController ()
 
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)requestSignOut:(id)sender {
+    [PCUserInformation hasUserSignedOut];
 }
 
 - (void)dealloc {

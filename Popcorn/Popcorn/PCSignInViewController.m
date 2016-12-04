@@ -8,6 +8,9 @@
 
 #import "PCSignInViewController.h"
 
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 #import "PCMainViewController.h"
 #import "PCLoginNaviView.h"
 #import "PCUserInformation.h"
@@ -68,8 +71,31 @@
 #pragma mark - Try Login
 - (IBAction)requestSignIn:(id)sender {
     if (_isValidID && _isValidPW) {
+        [FBSDKAppEvents logEvent:@"requestSuccessSignIn"];
         [self.loginManager signInWithID:_idTextField.text andPassword:_pwTextField.text];
     }
+    else {
+        [FBSDKAppEvents logEvent:@"requestFailureSignIn"];
+    }
+}
+
+- (IBAction)requestSignInWithFacebook:(id)sender {
+    [[FBSDKLoginManager alloc] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
+                                     fromViewController:self
+                                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+//                                                    sLog(result);
+//                                                    sLog(error);
+                                                    if (error) {
+                                                        sLog(@"에러 발생");
+                                                        aLog(@"error : %@", error);
+                                                    }
+                                                    if (result.isCancelled) {
+                                                        sLog(@"로그인 취소");
+                                                    }
+                                                    else {
+                                                        sLog(@"로그인 성공");
+                                                    }
+    }];
 }
 
 #pragma mark - Login Delegate Method
@@ -84,6 +110,7 @@
         [self.navigationController pushViewController:mainView animated:YES];
         
         [[PCUserInformation userInfo] saveUserToken:token];
+        [PCUserInformation hasUserSignedIn];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");

@@ -36,6 +36,15 @@
                                     <segue destination="fhi-gb-DxH" kind="show" id="ubG-FJ-iEM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PI4-Qb-3yz">
+                                <rect key="frame" x="175" y="173" width="108" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="LogOut"/>
+                                <connections>
+                                    <action selector="requestSignOut:" destination="7pH-rQ-QNY" eventType="touchUpInside" id="jUs-0Z-Gsl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -43,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru3-Pd-tku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="888.5" y="26.5"/>
+            <point key="canvasLocation" x="887.20000000000005" y="25.637181409295355"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vu0-T4-A6h">

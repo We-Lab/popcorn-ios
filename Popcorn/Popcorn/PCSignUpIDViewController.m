@@ -186,6 +186,7 @@
         
         // 키체인에 토큰값 저장
         [[PCUserInformation userInfo] saveUserToken:token];
+        [PCUserInformation hasUserSignedIn];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");

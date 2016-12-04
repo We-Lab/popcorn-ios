@@ -10,7 +10,6 @@
 		520307811DEB7DC000E2985A /* PCRequesPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520307801DEB7DC000E2985A /* PCRequesPWViewController.m */; };
 		520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520307851DEB849600E2985A /* PCSignUpFacebookViewController.m */; };
 		5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5203078A1DEB85ED00E2985A /* PCUserInformation.m */; };
-		52AE37EA1DEC18E10016D81E /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37E91DEC18E10016D81E /* PCUserInfoManager.m */; };
 		52AE37F81DEC41360016D81E /* PCInitialViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37F71DEC41360016D81E /* PCInitialViewTests.m */; };
 		52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */; };
 		52AE38021DEC6CBD0016D81E /* PCUserInfoValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38011DEC6CBD0016D81E /* PCUserInfoValidationTests.m */; };
@@ -97,8 +96,6 @@
 		520307891DEB85ED00E2985A /* PCUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInformation.h; sourceTree = "<group>"; };
 		5203078A1DEB85ED00E2985A /* PCUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInformation.m; sourceTree = "<group>"; };
 		5203078E1DEC0CBD00E2985A /* Popcorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Popcorn-Prefix.pch"; sourceTree = "<group>"; };
-		52AE37E81DEC18E10016D81E /* PCUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoManager.h; sourceTree = "<group>"; };
-		52AE37E91DEC18E10016D81E /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
 		52AE37F71DEC41360016D81E /* PCInitialViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCInitialViewTests.m; sourceTree = "<group>"; };
 		52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoValidation.h; sourceTree = "<group>"; };
 		52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoValidation.m; sourceTree = "<group>"; };
@@ -425,8 +422,6 @@
 				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
 				52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */,
 				52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */,
-				52AE37E81DEC18E10016D81E /* PCUserInfoManager.h */,
-				52AE37E91DEC18E10016D81E /* PCUserInfoManager.m */,
 			);
 			name = UserInformation;
 			sourceTree = "<group>";
@@ -784,7 +779,6 @@
 				52C49A561DEAF00500F47BB2 /* PCMainViewController.m in Sources */,
 				52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */,
 				52C49A761DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
-				52AE37EA1DEC18E10016D81E /* PCUserInfoManager.m in Sources */,
 				52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */,
 				52C49A191DEAE9F400F47BB2 /* main.m in Sources */,
 			);
@@ -977,6 +971,7 @@
 			baseConfigurationReference = 15EF2011DBDB6E712E122FB7 /* Pods-PopcornTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PopcornTests/Info.plist;
@@ -992,6 +987,7 @@
 			baseConfigurationReference = D80DA546C9745D5DFF9CF45F /* Pods-PopcornTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = PopcornTests/Info.plist;
@@ -1006,6 +1002,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BC9D111A91DC18BE1D12BC22 /* Pods-PopcornUITests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = PopcornUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1019,6 +1016,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = PopcornUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
