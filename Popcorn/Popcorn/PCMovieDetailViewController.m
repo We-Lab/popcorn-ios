@@ -26,6 +26,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
 
+@property (weak, nonatomic) IBOutlet UITableView *commentTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentTableViewHeight;
+@property (weak, nonatomic) IBOutlet UITableView *famousLineTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *famousLineTableViewHeight;
+
 @property BOOL test;
 
 @end

@@ -34,9 +34,7 @@
         <scene sceneID="L0N-SS-Bqy">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="gpd-Ls-33H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" image="Home" selectedImage="Home" id="fB1-6h-Dmj">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="홈" image="Home" selectedImage="Home" id="fB1-6h-Dmj"/>
                     <navigationItem key="navigationItem" id="2ko-kp-F9j"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtR-bp-3Cu" userLabel="First Responder" sceneMemberID="firstResponder"/>
