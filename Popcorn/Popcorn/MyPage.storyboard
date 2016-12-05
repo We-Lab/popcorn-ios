@@ -94,7 +94,9 @@
         <scene sceneID="PWd-11-OXT">
             <objects>
                 <navigationController title="마이페이지" automaticallyAdjustsScrollViewInsets="NO" id="bkC-we-X1K" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="마이페이지" image="MyPage" id="Ggx-39-c1g"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hUv-Xf-W0X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -109,4 +111,7 @@
             <point key="canvasLocation" x="-50.399999999999999" y="26.53673163418291"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MyPage" width="20" height="20"/>
+    </resources>
 </document>

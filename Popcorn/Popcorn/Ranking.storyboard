@@ -59,7 +59,9 @@
         <scene sceneID="y2n-iM-weQ">
             <objects>
                 <navigationController title="랭킹" automaticallyAdjustsScrollViewInsets="NO" id="m5a-Fa-quQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="랭킹" image="Ranking" id="uh2-tE-omx"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9a6-MF-Xxs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -74,4 +76,7 @@
             <point key="canvasLocation" x="903.20000000000005" y="113.79310344827587"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Ranking" width="20" height="20"/>
+    </resources>
 </document>

@@ -17,6 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="gpd-Ls-33H" kind="relationship" relationship="viewControllers" id="Oz0-aM-m76"/>
@@ -34,9 +35,7 @@
         <scene sceneID="L0N-SS-Bqy">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="gpd-Ls-33H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" image="Home" selectedImage="Home" id="fB1-6h-Dmj">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="홈" image="Home" selectedImage="Home" id="fB1-6h-Dmj"/>
                     <navigationItem key="navigationItem" id="2ko-kp-F9j"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtR-bp-3Cu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,10 +88,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="25" height="25"/>
-        <image name="MyPage" width="25" height="25"/>
-        <image name="Ranking" width="25" height="25"/>
-        <image name="Rating" width="25" height="25"/>
-        <image name="Recommend" width="25" height="25"/>
+        <image name="Home" width="20" height="20"/>
+        <image name="MyPage" width="20" height="20"/>
+        <image name="Ranking" width="20" height="20"/>
+        <image name="Rating" width="20" height="20"/>
+        <image name="Recommend" width="20" height="20"/>
     </resources>
 </document>

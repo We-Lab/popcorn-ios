@@ -59,7 +59,9 @@
         <scene sceneID="2kb-rE-nxY">
             <objects>
                 <navigationController title="추천" automaticallyAdjustsScrollViewInsets="NO" id="lnX-BR-FOE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="추천" image="Rating" id="SRx-yI-beq"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FTF-Eo-gSF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -74,4 +76,7 @@
             <point key="canvasLocation" x="37.600000000000001" y="-91.304347826086968"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Rating" width="20" height="20"/>
+    </resources>
 </document>

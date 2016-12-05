@@ -59,7 +59,9 @@
         <scene sceneID="MAn-UK-nie">
             <objects>
                 <navigationController title="평가" automaticallyAdjustsScrollViewInsets="NO" id="cp7-YX-RCd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="평가" image="Recommend" id="J6X-5M-Bvn"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F2V-BD-4UP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -74,4 +76,7 @@
             <point key="canvasLocation" x="-159.19999999999999" y="-36.431784107946029"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Recommend" width="20" height="20"/>
+    </resources>
 </document>
