@@ -562,10 +562,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="25" height="25"/>
+        <image name="Home" width="20" height="20"/>
         <image name="LikeHeart" width="6" height="6"/>
-        <image name="Ranking" width="25" height="25"/>
-        <image name="Rating" width="25" height="25"/>
-        <image name="Recommend" width="25" height="25"/>
+        <image name="Ranking" width="20" height="20"/>
+        <image name="Rating" width="20" height="20"/>
+        <image name="Recommend" width="20" height="20"/>
     </resources>
 </document>

@@ -754,17 +754,6 @@
                                                                     <constraint firstAttribute="bottom" secondItem="HJ9-Sz-SUz" secondAttribute="bottom" id="mEK-Z3-aaQ"/>
                                                                 </constraints>
                                                             </view>
-                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XSS-Al-Ce9">
-                                                                <rect key="frame" x="0.0" y="35" width="351" height="130"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="130" id="ga0-eE-neY"/>
-                                                                </constraints>
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="dbp-ES-yMs" id="dMI-OS-BBh"/>
-                                                                    <outlet property="delegate" destination="dbp-ES-yMs" id="jhY-X7-DWO"/>
-                                                                </connections>
-                                                            </tableView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -773,10 +762,7 @@
                                                             <constraint firstItem="lEi-Sr-rP0" firstAttribute="leading" secondItem="44D-LX-6mR" secondAttribute="leading" id="8yd-qh-kSf"/>
                                                             <constraint firstAttribute="trailing" secondItem="o97-oN-Eqb" secondAttribute="trailing" id="FF0-Ay-eRB"/>
                                                             <constraint firstItem="o97-oN-Eqb" firstAttribute="leading" secondItem="44D-LX-6mR" secondAttribute="leading" id="c9E-rN-QXS"/>
-                                                            <constraint firstItem="XSS-Al-Ce9" firstAttribute="leading" secondItem="44D-LX-6mR" secondAttribute="leading" id="fhu-Eh-rQ5"/>
-                                                            <constraint firstItem="XSS-Al-Ce9" firstAttribute="top" secondItem="o97-oN-Eqb" secondAttribute="bottom" constant="15" id="gQS-p5-2pQ"/>
                                                             <constraint firstAttribute="bottom" secondItem="lEi-Sr-rP0" secondAttribute="bottom" id="rDq-64-yEu"/>
-                                                            <constraint firstAttribute="trailing" secondItem="XSS-Al-Ce9" secondAttribute="trailing" id="tTN-zx-Q1X"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -825,25 +811,15 @@
                                                                     <constraint firstAttribute="trailing" secondItem="pee-RC-FVi" secondAttribute="trailing" id="drC-0r-ODc"/>
                                                                 </constraints>
                                                             </view>
-                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PpP-A9-agZ">
-                                                                <rect key="frame" x="0.0" y="35" width="351" height="130"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="130" id="LVv-Xy-FLT"/>
-                                                                </constraints>
-                                                            </tableView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="PpP-A9-agZ" firstAttribute="top" secondItem="0YO-st-UFI" secondAttribute="bottom" constant="15" id="D8t-9f-f5a"/>
                                                             <constraint firstItem="iAM-gZ-T8S" firstAttribute="leading" secondItem="Lz8-Qp-fWI" secondAttribute="leading" id="EHj-Dv-7FF"/>
                                                             <constraint firstAttribute="trailing" secondItem="0YO-st-UFI" secondAttribute="trailing" id="IH0-qo-sFL"/>
                                                             <constraint firstAttribute="bottom" secondItem="iAM-gZ-T8S" secondAttribute="bottom" id="LgH-CU-E6k"/>
                                                             <constraint firstItem="0YO-st-UFI" firstAttribute="top" secondItem="Lz8-Qp-fWI" secondAttribute="top" id="ME9-ra-lhM"/>
                                                             <constraint firstItem="0YO-st-UFI" firstAttribute="leading" secondItem="Lz8-Qp-fWI" secondAttribute="leading" id="Rpb-XC-4dP"/>
                                                             <constraint firstAttribute="trailing" secondItem="iAM-gZ-T8S" secondAttribute="trailing" id="Tky-EC-Khj"/>
-                                                            <constraint firstItem="PpP-A9-agZ" firstAttribute="leading" secondItem="Lz8-Qp-fWI" secondAttribute="leading" id="bWm-3P-U2o"/>
-                                                            <constraint firstAttribute="trailing" secondItem="PpP-A9-agZ" secondAttribute="trailing" id="tKh-MH-Riv"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -907,10 +883,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1526"/>
                     <connections>
-                        <outlet property="commentTableView" destination="XSS-Al-Ce9" id="Iqa-Ff-hE0"/>
-                        <outlet property="commentTableViewHeight" destination="ga0-eE-neY" id="g7W-kQ-nho"/>
-                        <outlet property="famousLineTableView" destination="PpP-A9-agZ" id="VAr-A7-9rh"/>
-                        <outlet property="famousLineTableViewHeight" destination="LVv-Xy-FLT" id="kof-TK-WqF"/>
                         <outlet property="movieInfoButtonView" destination="VDT-uW-C0d" id="bph-JQ-vic"/>
                         <outlet property="movieMainImage" destination="kGT-bv-z0T" id="uct-0x-5G4"/>
                         <outlet property="moviePosterImage" destination="s6j-W1-VGH" id="vTk-tH-uSp"/>
