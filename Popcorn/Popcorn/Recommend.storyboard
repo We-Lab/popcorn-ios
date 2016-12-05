@@ -31,7 +31,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3Ks-eN-d7d"/>
+                    <navigationItem key="navigationItem" title="추천" id="3Ks-eN-d7d"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EW4-Fl-jp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

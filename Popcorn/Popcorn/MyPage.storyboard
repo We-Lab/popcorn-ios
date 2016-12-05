@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Page View Controller-->
+        <!--마이 페이지-->
         <scene sceneID="hXl-e4-51Z">
             <objects>
                 <viewController storyboardIdentifier="MyPage" id="7pH-rQ-QNY" customClass="PCMyPageViewController" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rw3-zh-U6F"/>
+                    <navigationItem key="navigationItem" title="마이 페이지" id="rw3-zh-U6F"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru3-Pd-tku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

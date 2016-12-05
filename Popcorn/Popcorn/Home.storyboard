@@ -517,7 +517,14 @@
                             <constraint firstItem="dOk-ol-GwV" firstAttribute="width" secondItem="3TI-5R-0xf" secondAttribute="width" id="zWa-Vj-CmH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aVc-O6-2Ab"/>
+                    <navigationItem key="navigationItem" title="메인" id="aVc-O6-2Ab">
+                        <barButtonItem key="rightBarButtonItem" image="Search" id="AMP-yp-8T0">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="titleView" destination="3u3-EZ-fps" id="lYb-fE-tkm"/>
+                        </connections>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1493"/>
                     <connections>
@@ -537,6 +544,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFJ-h3-xgX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titlelogo" id="3u3-EZ-fps">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
             <point key="canvasLocation" x="388" y="-361.16941529235385"/>
         </scene>
@@ -567,5 +578,7 @@
         <image name="Ranking" width="20" height="20"/>
         <image name="Rating" width="20" height="20"/>
         <image name="Recommend" width="20" height="20"/>
+        <image name="Search" width="25" height="25"/>
+        <image name="titlelogo" width="108" height="20"/>
     </resources>
 </document>

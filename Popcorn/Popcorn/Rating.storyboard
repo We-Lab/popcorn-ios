@@ -31,7 +31,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="z39-zj-pbb"/>
+                    <navigationItem key="navigationItem" title="평가" id="z39-zj-pbb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giR-Na-x84" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
