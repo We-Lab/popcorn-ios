@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, PCSignUpResult) {
-    PCSignUpSuccess = 0,
-    PCSignUpFailedWithID,        // 2자부터 10자, 영어및 숫자
-    PCSignUpFailedWithPassword,  // 백엔드가 확인하고 알려주기로
-    PCSignUpFailedWithEmail,     // 이메일 인증 -> 추가 기능
+    PCSignUpSuccess = 1,
+    PCSignUpFailedWithID,
+    PCSignUpFailedWithPassword,
+    PCSignUpFailedWithEmail,
     PCSignUpFailedWithPhoneNumber,
     PCSignUpFailed,
 };

@@ -157,8 +157,11 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="requestSignInWithFacebook:" destination="rRx-sm-q4P" eventType="touchUpInside" id="fR8-NJ-bVO"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UQB-tW-jnr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디 (4 ~10 자, 영문+숫자)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UQB-tW-jnr">
                                 <rect key="frame" x="46" y="194" width="283" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fLp-DM-GmO"/>
@@ -170,7 +173,7 @@
                                     <outlet property="delegate" destination="rRx-sm-q4P" id="nXr-62-406"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EbF-xB-0Fg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 (6자 이상, 영문 + 숫자 조합)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EbF-xB-0Fg">
                                 <rect key="frame" x="46" y="234" width="283" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="u2J-yI-7VU"/>
@@ -220,7 +223,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fuj-kM-f43">
                                 <rect key="frame" x="45.5" y="304" width="283" height="35"/>
-                                <color key="backgroundColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.114300437271595" green="0.62794417142868042" blue="0.98097354173660278" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="MHK-Ku-uzf"/>
                                 </constraints>
@@ -234,7 +237,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="TappedSignInButton:" destination="rRx-sm-q4P" eventType="touchUpInside" id="TBf-Y8-Uvi"/>
+                                    <action selector="requestSignIn:" destination="rRx-sm-q4P" eventType="touchUpInside" id="h50-I0-PVF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -265,6 +268,7 @@
                     <connections>
                         <outlet property="idTextField" destination="UQB-tW-jnr" id="L62-Nc-IaQ"/>
                         <outlet property="pwTextField" destination="EbF-xB-0Fg" id="j6Z-v9-DVY"/>
+                        <outlet property="signInButton" destination="Fuj-kM-f43" id="Gi0-3z-aQL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GA-eI-b52" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -357,7 +361,7 @@
         <!--회원가입-->
         <scene sceneID="oE8-E1-ieg">
             <objects>
-                <viewController id="K7h-Rl-K2x" customClass="PCSignUpEmailViewController" sceneMemberID="viewController">
+                <viewController id="K7h-Rl-K2x" customClass="PCSignUpIDViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oCs-dO-h3X"/>
                         <viewControllerLayoutGuide type="bottom" id="21w-xN-CqL"/>
@@ -380,38 +384,38 @@
                                         </constraints>
                                         <state key="normal" backgroundImage="Profile_placeholder"/>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5q6-cQ-BxC">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디 (4 ~ 10 자리)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5q6-cQ-BxC">
                                         <rect key="frame" x="0.0" y="115" width="283" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="rAJ-d7-tML"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="K7h-Rl-K2x" id="Yrx-rq-LNI"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Njq-Lh-uCD">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 (6 자리 이상, 영문 + 숫자 혼합)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Njq-Lh-uCD">
                                         <rect key="frame" x="0.0" y="155" width="283" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Rae-y4-D3Q"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="K7h-Rl-K2x" id="8AU-Q2-2Qd"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-v3-AKo">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-v3-AKo">
                                         <rect key="frame" x="0.0" y="195" width="283" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="EGa-mf-hHH"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="K7h-Rl-K2x" id="Q8K-cu-Qb8"/>
                                         </connections>
@@ -448,7 +452,7 @@
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdG-e1-2wf">
                                         <rect key="frame" x="0.0" y="315" width="283" height="35"/>
-                                        <color key="backgroundColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.114300437271595" green="0.62794417142868042" blue="0.98097354173660278" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Z83-G0-FmB"/>
                                         </constraints>
@@ -461,15 +465,18 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="requestSignUp:" destination="K7h-Rl-K2x" eventType="touchUpInside" id="l3H-pZ-YDv"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="이메일" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9c-Pl-BuB">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="이메일 주소" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c9c-Pl-BuB">
                                         <rect key="frame" x="0.0" y="235" width="283" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="xat-3x-gXl"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <connections>
                                             <outlet property="delegate" destination="K7h-Rl-K2x" id="CPO-bA-dV6"/>
                                         </connections>
@@ -532,7 +539,8 @@
                     <connections>
                         <outlet property="birthdayTextField" destination="Ixv-to-22x" id="n9h-5R-nCI"/>
                         <outlet property="datePicker" destination="ibm-BS-gOu" id="9He-Wy-fwR"/>
-                        <outlet property="genderTextField" destination="UK7-PG-sR0" id="dEy-t1-1e6"/>
+                        <outlet property="emailTextField" destination="c9c-Pl-BuB" id="8Ob-q5-onP"/>
+                        <outlet property="genderSegment" destination="UK7-PG-sR0" id="wOz-jh-5fb"/>
                         <outlet property="idTextField" destination="5q6-cQ-BxC" id="wDi-UQ-kWg"/>
                         <outlet property="pwTextField" destination="Njq-Lh-uCD" id="xy4-Dm-E67"/>
                         <outlet property="rePWTextField" destination="1Kd-v3-AKo" id="tiw-Ux-En5"/>
@@ -759,6 +767,6 @@
         <image name="Profile_placeholder" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YlM-PU-ssj"/>
+        <segue reference="RRv-iK-IX3"/>
     </inferredMetricsTieBreakers>
 </document>

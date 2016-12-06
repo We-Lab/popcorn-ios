@@ -12,13 +12,19 @@
 
 @end
 
-
+// 공통
 NSString *const baseURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/rest-auth/";
+NSString *const TokenKey = @"key";
 
-NSString *ParamUserIDKey = @"username";
-NSString *ParamUserPasswordKey = @"password";
+// SignIn
+NSString *const SignInIDKey = @"username";
+NSString *const SignInPasswordKey = @"password";
 
-NSString *ParamTokenKey = @"key";
-
-NSString *JSONResultKey = @"result";
-NSString *JSONSuccessValue = @"success";
+// SignUp
+NSString *const SignUpIDKey = @"username";
+NSString *const SignUpPasswordKey = @"password1";
+NSString *const SignUpConfirmPWKey = @"password2";
+NSString *const SignUpEmailKey = @"email";
+NSString *const SignUpBirthdayKey = @"date_of_birth";
+NSString *const SignUpGenderKey = @"gender";
+NSString *const SignUpPhoneNumberKey = @"phone_number";

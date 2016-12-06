@@ -80,7 +80,8 @@
         
         CFMutableDictionaryRef outDictionary = NULL;
         
-        if (!SecItemCopyMatching((__bridge CFDictionaryRef)tempQuery, (CFTypeRef *)&outDictionary) == noErr) {
+        NSInteger matchingResult = !SecItemCopyMatching((__bridge CFDictionaryRef)tempQuery, (CFTypeRef *)&outDictionary);
+        if (matchingResult == noErr) {
             // Stick these default values into keychain item if nothing found.
             [self resetKeychainItem];
             

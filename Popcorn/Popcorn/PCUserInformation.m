@@ -27,6 +27,12 @@
     return userData;
 }
 
+- (void)saveUserToken:(NSString *)token {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+    self.userToken = token;
+}
+
 - (void)setUserTokenFromKeyChain {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
     self.userToken = [keychainItem objectForKey:(id)kSecAttrAccount];

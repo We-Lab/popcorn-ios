@@ -118,4 +118,44 @@
     }
 }
 
+- (void)testThat유저의생년월일은1900년도이후어야한다 {
+    NSString *input = @"1890-05-03";
+    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
+    [dateFormmater setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *minDate = [dateFormmater dateFromString:@"1900-01-01"];
+    NSDate *inputDate = [dateFormmater dateFromString:input];
+    
+    BOOL isLaterThanMinDate = [[minDate earlierDate:inputDate] isEqualToDate:minDate];
+    XCTAssertFalse(isLaterThanMinDate);
+}
+
+- (void)testThat유저의생년월일은오늘날짜이전이어야한다 {
+    NSString *input = @"2020-09-07";
+    
+    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
+    [dateFormmater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [dateFormmater dateFromString:input];
+    NSDate *maxDate = [[NSDate date] dateByAddingTimeInterval:(60*60*9)];
+    
+    BOOL isEarlierThanMaxDate = [[maxDate laterDate:inputDate] isEqualToDate:maxDate];
+    XCTAssertFalse(isEarlierThanMaxDate);
+}
+
+- (void)testThat유저의생년월일은1900년이후이고오늘날짜이전이어야한다 {
+    NSString *input = @"2000-05-31";
+    
+    NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
+    [dateFormmater setDateFormat:@"yyyy-MM-dd"];
+    NSDate *minDate = [dateFormmater dateFromString:@"1900-01-01"];
+    NSDate *inputDate = [dateFormmater dateFromString:input];
+    NSDate *maxDate = [[NSDate date] dateByAddingTimeInterval:(60*60*9)];
+    
+    BOOL isLaterThanMinDate = [[minDate earlierDate:inputDate] isEqualToDate:minDate];
+    BOOL isEarlierThanMaxDate = [[maxDate laterDate:inputDate] isEqualToDate:maxDate];
+    XCTAssertTrue(isLaterThanMinDate && isEarlierThanMaxDate);
+}
+
+
+
 @end
