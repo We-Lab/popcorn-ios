@@ -31,7 +31,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dR0-lr-6gA"/>
+                    <navigationItem key="navigationItem" title="랭킹" id="dR0-lr-6gA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SoG-fY-cxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
