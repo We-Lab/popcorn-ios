@@ -19,7 +19,7 @@
 
 
 // 로그인
-- (void)signInWithFacebook;
+- (void)signInWithFacebookID:(NSString *)facebookID andToken:(NSString *)token;
 - (void)signInWithID:(NSString *)loginID andPassword:(NSString *)password;
 - (void)requestNewPassword;
 

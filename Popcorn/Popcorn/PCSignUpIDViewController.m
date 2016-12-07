@@ -7,11 +7,17 @@
 //
 
 #import "PCSignUpIDViewController.h"
+
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 #import "PCLoginNaviView.h"
 #import "PCMainViewController.h"
 #import "PCUserInformation.h"
 #import "PCUserInfoValidation.h"
 #import "PCNetworkParamKey.h"
+
+
 
 
 @interface PCSignUpIDViewController () <UITextFieldDelegate>
@@ -50,6 +56,15 @@
     [self enableUserInteractionToBirthdayTextField];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#ifndef DEBUG
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"PCSignUpIDViewController"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+#endif
+}
 
 - (void)initTestSetting {
     self.idTextField.text = @"testuser";
@@ -109,7 +124,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)requestSignUp:(id)sender {
+- (IBAction)requestSignUp:(UIButton *)button {
     // 수정필요 : 가입 조건 미충족 시 바로 화면에 보여줄 수 있도록 처리 필요
     
     if (_isValidID && _isValidPW && _isValidEmail && _isValidBirth) {
@@ -127,6 +142,31 @@
         sLog(form);
         [self.loginManager signUpWithID:form];
     }
+}
+
+- (IBAction)requestSignUpWithFacebook:(UIButton *)button {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"/me"
+                                  parameters:@{ @"fields": @"id,name,email,birthday,gender,location,picture",}
+                                  HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            //
+        }
+        else {
+            sLog(result);
+            if ([result objectForKey:@"id"]) {
+                NSLog(@"User id : %@",[result objectForKey:@"id"]);
+            }
+            if ([result objectForKey:@"email"]) {
+                NSLog(@"Email: %@",[result objectForKey:@"email"]);
+            }
+            if ([result objectForKey:@"name"]) {
+                NSLog(@"First Name : %@",[result objectForKey:@"name"]);
+            }
+        }
+    }];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -185,8 +225,7 @@
         [self.navigationController pushViewController:mainView animated:YES];
         
         // 키체인에 토큰값 저장
-        [[PCUserInformation userInfo] saveUserToken:token];
-        [PCUserInformation hasUserSignedIn];
+        [[PCUserInformation userInfo] hasUserSignedIn:token];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");

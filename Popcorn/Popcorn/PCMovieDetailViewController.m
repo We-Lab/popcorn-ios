@@ -51,6 +51,16 @@
     [self setCustomViewStatus];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#ifndef DEBUG
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+#endif
+}
+
 #pragma mark - Make Custom Navi View
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 

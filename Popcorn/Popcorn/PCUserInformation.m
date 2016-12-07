@@ -27,12 +27,6 @@
     return userData;
 }
 
-- (void)saveUserToken:(NSString *)token {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
-    self.userToken = token;
-}
-
 - (void)setUserTokenFromKeyChain {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
     self.userToken = [keychainItem objectForKey:(id)kSecAttrAccount];
@@ -42,11 +36,17 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserSignedIn"] boolValue];
 }
 
-+ (void)hasUserSignedIn {
+- (void)hasUserSignedIn:(NSString *)token {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
+    self.userToken = token;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserSignedIn"];
 }
 
-+ (void)hasUserSignedOut {
+- (void)hasUserSignedOut {
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+    [keychainItem setObject:nil forKey:(id)kSecAttrAccount];
+    self.userToken = nil;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserSignedIn"];
 }
 

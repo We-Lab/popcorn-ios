@@ -21,6 +21,17 @@
     [self makeNavigationView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#ifndef DEBUG
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"PCInitialViewController"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+#endif
+}
+
+#pragma makr - Custom
 - (void)makeNavigationView{
 
     // 네비게이션바 관련

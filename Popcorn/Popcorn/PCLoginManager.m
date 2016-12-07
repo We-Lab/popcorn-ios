@@ -53,7 +53,7 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 }
 
 #pragma mark - Sign In
-- (void)signInWithFacebook {
+- (void)signInWithFacebookID:(NSString *)facebookID andToken:(NSString *)token {
     BOOL isSuccess = YES;
     // 페이스북으로 로그인 시도 후 결과 저장
     [self.delegate didSignInWithFacebook:isSuccess];
@@ -79,19 +79,19 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     self.completionHandler = ^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
         NSString *token = nil;
         
-        if (responseObject) {
+        if (error) {
+            dLog(@"error : %@", error);
+        }
+        else {
             token = responseObject[TokenKey];
             if (token) {
                 dLog(@"success token : %@", token);
-            } else {
-                dLog(@"error : %@", error);
             }
         }
-        else {
-            dLog(@"error : %@", error);
-        }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.delegate didSignInWithID:token];
+            if ([weakSelf.delegate respondsToSelector:@selector(didSignInWithID:)]) {
+                [weakSelf.delegate didSignInWithID:token];
+            }
         });
     };
 }

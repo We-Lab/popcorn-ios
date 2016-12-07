@@ -551,11 +551,29 @@
             </objects>
             <point key="canvasLocation" x="388" y="-361.16941529235385"/>
         </scene>
+        <!--Main View Controller-->
+        <scene sceneID="DQB-zg-qKn">
+            <objects>
+                <viewController id="LAZ-CG-GJd" customClass="PCMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Go5-K9-ZD7"/>
+                        <viewControllerLayoutGuide type="bottom" id="OWv-lz-7py"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mIc-Lp-yHi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pSx-3P-MJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1626" y="-377"/>
+        </scene>
         <!--홈-->
         <scene sceneID="aOa-GF-hbm">
             <objects>
                 <navigationController title="홈" automaticallyAdjustsScrollViewInsets="NO" id="k9O-PL-miN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="메인" image="Home" id="7Wc-8P-Yoj"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="7Wc-8P-Yoj"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Vd-Fs-hsR">
@@ -573,7 +591,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="20" height="20"/>
         <image name="LikeHeart" width="6" height="6"/>
         <image name="Ranking" width="20" height="20"/>
         <image name="Rating" width="20" height="20"/>

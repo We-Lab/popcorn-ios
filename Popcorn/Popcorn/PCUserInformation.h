@@ -16,11 +16,10 @@
 
 #pragma mark - User Data
 - (void)setUserTokenFromKeyChain;
-- (void)saveUserToken:(NSString *)token;
 
 #pragma mark - User Sign In Information
 + (BOOL)isUserSignedIn;
-+ (void)hasUserSignedIn;
-+ (void)hasUserSignedOut;
+- (void)hasUserSignedIn:(NSString *)token;
+- (void)hasUserSignedOut;
 
 @end
