@@ -55,12 +55,13 @@
     
     sLog([viewNavi class]);
     [self.navigationController setNavigationBarHidden:YES];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 }
 
 // 스테이터스 바 스타일 메소드
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
 
 // 네비게이션 Pop
 - (void)onTouchUpToNextPage:(UIButton *)sender{
