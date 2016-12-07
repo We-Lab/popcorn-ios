@@ -9,42 +9,30 @@
 #import "PCHomeViewController.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
-
-//@property (weak, nonatomic) IBOutlet UIScrollView *mainMovieRankingScrollView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankingScrollHeight;
-@property (nonatomic) UIScrollView *boxOfficeScrollView;
-@property (nonatomic) UIScrollView *dDayMovieScrollView;
-@property (nonatomic) UIView *movieSlidingContentView;
-
-@property (weak, nonatomic) IBOutlet UIButton *boxOfficeButton;
-@property (weak, nonatomic) IBOutlet UIView *boxOfficeButtonBorder;
-@property (weak, nonatomic) IBOutlet UIButton *dDayMovieButton;
-@property (weak, nonatomic) IBOutlet UIView *dDayMovieButtonBorder;
-@property (weak, nonatomic) IBOutlet UIView *movieLayoutButtonView;
-
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
-
-@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
-@property BOOL likeReview;
 @property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
-
-@property NSArray *testArray;
+@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewControllHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
 
+@property (nonatomic) UIScrollView *boxOfficeScrollView;
+@property (nonatomic) UIView *movieSlidingContentView;
+
+@property BOOL likeReview;
+@property NSArray *testArray;
+
 @end
 
 @implementation PCHomeViewController
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.likeReview = YES;
-        
     }
     return self;
 }
@@ -69,30 +57,17 @@
 
 #pragma mark - Make Custom View
 - (void)setCustomViewStatus{
-
-    CGFloat DEVICE_WIDTH = self.view.frame.size.width;
-    
-//    self.mainMovieRankingScrollView.contentSize = CGSizeMake(DEVICE_WIDTH * 2, self.rankingScrollHeight.constant);
-    
-    self.movieLayoutButtonView.layer.masksToBounds = NO;
-    self.movieLayoutButtonView.layer.shadowOffset = CGSizeMake(0, 1);
-    self.movieLayoutButtonView.layer.shadowRadius = 2;
-    self.movieLayoutButtonView.layer.shadowOpacity = 0.3;
-    
     [self creatMainBoxOffice];
-    [self creatMovieDdayScrollView];
     
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.testArray.count;
     
     self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
     self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
-    
 }
 
 #pragma mark - BoxOffice Movie Scroll View
 - (void)creatMainBoxOffice{
-
     self.boxOfficeScrollView = [[UIScrollView alloc] init];
     
     self.boxOfficeScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
@@ -112,46 +87,15 @@
     [self.boxOfficeScrollView addSubview:self.movieSlidingContentView];
     
     [self creatMovieRankScroll];
-   
-}
-
-#pragma mark - D-Day Movie Scroll View
-- (void)creatMovieDdayScrollView{
-    
-    CGFloat DEVICE_WIDTH = self.view.frame.size.width;
-    
-    self.dDayMovieScrollView = [[UIScrollView alloc] init];
-    
-//    self.dDayMovieScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.dDayMovieScrollView.frame = CGRectMake(DEVICE_WIDTH + [self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.dDayMovieScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainBoxOfficeView.frame.size.height);
-    self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-    self.dDayMovieScrollView.pagingEnabled = YES;
-    self.dDayMovieScrollView.showsHorizontalScrollIndicator = NO;
-    self.dDayMovieScrollView.delegate = self;
-    self.dDayMovieScrollView.clipsToBounds = YES;
-    self.dDayMovieScrollView.showsHorizontalScrollIndicator = NO;
-    self.dDayMovieScrollView.showsVerticalScrollIndicator = NO;
-//    self.dDayMovieScrollView.scroll
-    
-    [self.mainBoxOfficeView addSubview:self.dDayMovieScrollView];
-
-    self.movieSlidingContentView = [[UIView alloc] init];
-    self.movieSlidingContentView.frame = CGRectMake(0, [self ratioHeight:15], [self ratioWidth:3540], [self ratioHeight:507]);
-    [self.dDayMovieScrollView addSubview:self.movieSlidingContentView];
-    
-    [self creatMovieRankScroll];
 }
 
 #pragma mark - Main Movie Scroll Layout
 - (void)creatMovieRankScroll{
     
     for(NSInteger i = 0; i < 12; i++){
-        
         CGFloat baseContentMargin = [self ratioWidth:10];
         CGFloat baseMovieContentWidth = [self ratioWidth:295];
         CGFloat baseMovieContentHeight = [self ratioHeight:507];
-        
         
         UIView *movieContentView = [[UIView alloc] init];
         
@@ -162,26 +106,19 @@
         
         [self.movieSlidingContentView addSubview:movieContentView];
         
-        
         UIImageView *moviePosterIMG = [[UIImageView alloc] init];
-        
         moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
-        
         [movieContentView addSubview:moviePosterIMG];
         
-        
         UILabel *movieRankingNumber = [[UILabel alloc] init];
-        
         movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-85, moviePosterIMG.frame.size.height-85, 85, 85);
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
         
         [moviePosterIMG addSubview:movieRankingNumber];
-
         
         UILabel *movieTitle = [[UILabel alloc] init];
-        
         movieTitle.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:399], [self ratioWidth:255], [self ratioHeight:35]);
         movieTitle.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
         movieTitle.textAlignment = NSTextAlignmentCenter;
@@ -190,25 +127,19 @@
         
         [movieContentView addSubview:movieTitle];
         
-        
         CALayer *movieTitleBorder = [CALayer layer];
-        
         movieTitleBorder.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
         movieTitleBorder.borderWidth = 1;
         movieTitleBorder.frame = CGRectMake(-1, -1, movieTitle.frame.size.width+2, movieTitle.frame.size.height);
         
         [movieTitle.layer addSublayer:movieTitleBorder];
         
-        
         UIView *movieRankSubView = [[UIView alloc] init];
-        
         movieRankSubView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:434], [self ratioWidth:255], [self ratioHeight:20]);
         
         [movieContentView addSubview:movieRankSubView];
         
-        
         UILabel *movieAge = [[UILabel alloc] init];
-        
         movieAge.frame = CGRectMake(0, 0, movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieAge.textAlignment = NSTextAlignmentCenter;
         movieAge.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
@@ -216,17 +147,13 @@
         
         [movieRankSubView addSubview:movieAge];
         
-        
         UIView *movieRankLine = [[UIView alloc] init];
-        
         movieRankLine.frame = CGRectMake(movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], [self ratioHeight:2.5], [self ratioWidth:1], [self ratioHeight:15]);
         movieRankLine.backgroundColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1];
         
         [movieRankSubView addSubview:movieRankLine];
         
-        
         UILabel *movieTicketingPercent = [[UILabel alloc] init];
-        
         movieTicketingPercent.frame = CGRectMake(movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], 0, movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieTicketingPercent.textAlignment = NSTextAlignmentCenter;
         movieTicketingPercent.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
@@ -234,9 +161,7 @@
         
         [movieRankSubView addSubview:movieTicketingPercent];
         
-        
         UIView *movieStarScoreView = [[UIView alloc] init];
-        
         movieStarScoreView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:460], [self ratioWidth:255], [self ratioHeight:25]);
         movieStarScoreView.backgroundColor = [UIColor grayColor];
         
@@ -265,25 +190,6 @@
     }
 }
 
-#pragma mark - Main Movie Rank Layout Button Action
-//- (IBAction)setBoxOffice:(UIButton *)button {
-//    if (button == self.boxOfficeButton) {
-//        self.boxOfficeScrollView.clipsToBounds = NO;
-//        self.dDayMovieScrollView.clipsToBounds = YES;
-//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(0, 0);
-//        self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-//        self.boxOfficeButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-//        self.dDayMovieButtonBorder.backgroundColor = [UIColor whiteColor];
-//    }
-//    else if (button == self.dDayMovieButton){
-//        self.boxOfficeScrollView.clipsToBounds = YES;
-//        self.dDayMovieScrollView.clipsToBounds = NO;
-//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
-//        self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-//        self.boxOfficeButtonBorder.backgroundColor = [UIColor whiteColor];
-//        self.dDayMovieButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-//    }
-//}
 
 #pragma mark - CollectionView Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -313,7 +219,6 @@
 
 #pragma mark - TableView Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return self.testArray.count;
 }
 

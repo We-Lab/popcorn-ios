@@ -38,10 +38,11 @@
 
 
 #import <UIKit/UIKit.h>
-#import <Google/Analytics.h>
+//#import <Google/Analytics.h>
 
 @interface PCCommonUtility : NSObject
 
 + (UIAlertController *)alertControllerWithOnlyTitle:(NSString *)title;
++ (UIImage *)resizeImage:(UIImage *)image scaledToSize:(CGSize)newSize andAlpha:(CGFloat)alpha;
 
 @end
