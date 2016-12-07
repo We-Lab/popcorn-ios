@@ -39,6 +39,17 @@
     self.loginManager = [[PCLoginManager alloc] init];
     self.loginManager.delegate = self;
     [self makeNavigationView];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#ifndef DEBUG
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"PCSignInViewController"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+#endif
 }
 
 - (void)initTestSetting {
@@ -70,7 +81,7 @@
 
 
 #pragma mark - Try Login
-- (IBAction)requestSignIn:(id)sender {
+- (IBAction)requestSignIn:(UIButton *)button {
     if (_isValidID && _isValidPW) {
         [FBSDKAppEvents logEvent:@"requestSuccessSignIn"];
         [self.loginManager signInWithID:_idTextField.text andPassword:_pwTextField.text];
@@ -80,24 +91,47 @@
     }
 }
 
-- (IBAction)requestSignInWithFacebook:(id)sender {
-    [[FBSDKLoginManager alloc] logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends"]
-                                     fromViewController:self
-                                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//                                                    sLog(result);
-//                                                    sLog(error);
-                                                    if (error) {
-                                                        sLog(@"에러 발생");
-                                                        aLog(@"error : %@", error);
-                                                    }
-                                                    if (result.isCancelled) {
-                                                        sLog(@"로그인 취소");
-                                                    }
-                                                    else {
-                                                        sLog(@"로그인 성공");
-                                                    }
+- (IBAction)requestSignInWithFacebook:(UIButton *)button {
+    FBSDKLoginManager *fbLoginManager = [[FBSDKLoginManager alloc] init];
+    [fbLoginManager logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends", @"user_birthday", @"user_location"]
+                          fromViewController:self
+                                     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                         if (error) {
+                                             [FBSDKAppEvents logEvent:@"requestFailureSignInWithFacebook"];
+                                             aLog(@"error : %@", error);
+                                             [PCCommonUtility alertControllerWithOnlyTitle:@"로그인에 실패하였습니다."];
+                                         }
+                                         if (result.isCancelled) {
+                                             [FBSDKAppEvents logEvent:@"requestCancelSignInWithFacebook"];
+                                             sLog(@"로그인 취소");
+                                         }
+                                         else {
+                                             [FBSDKAppEvents logEvent:@"requestSuccessSignInWithFacebook"];
+                                             sLog(@"로그인 성공");
+                                             
+//                                             NSString *token = [result token].tokenString;
+//                                             [_loginManager signInWithFacebookID:userID withToken:token];
+                                         }
+                                     }];
+}
+
+
+-(void)fetchUserInfo {
+    sLog([FBSDKAccessToken currentAccessToken].tokenString);
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"/me"
+                                  parameters:@{ @"fields": @"id,name,email,birthday,gender,location,picture",}
+                                  HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            //
+        }
+        else {
+        }
     }];
 }
+
 
 #pragma mark - Login Delegate Method
 - (void)didSignInWithFacebook:(BOOL)isSuccess {
@@ -110,8 +144,7 @@
         PCMainViewController *mainView = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:mainView animated:YES];
         
-        [[PCUserInformation userInfo] saveUserToken:token];
-        [PCUserInformation hasUserSignedIn];
+        [[PCUserInformation userInfo] hasUserSignedIn:token];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");

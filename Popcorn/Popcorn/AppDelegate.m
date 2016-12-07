@@ -15,15 +15,51 @@
 
 @end
 
+typedef NS_ENUM(NSUInteger, MainInterfaceView) {
+    APPMainInterfaceViewRelease = 1,
+    APPMainInterfaceViewMain,
+    APPMainInterfaceViewMovieInfo,
+};
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    [self configureGA];
     
-    [self selectInitialViewController];
     
+    MainInterfaceView initialView = APPMainInterfaceViewRelease;
+    switch (initialView) {
+        case APPMainInterfaceViewRelease:
+            [self selectInitialViewController];
+            break;
+        case APPMainInterfaceViewMain:
+            [self selectInitialViewByForce:@"Main"];
+            break;
+        case APPMainInterfaceViewMovieInfo:
+            [self selectInitialViewByForce:@"MovieInfo"];
+            break;
+        default:
+            [self selectInitialViewByForce:@"Login"];
+    }
+
     return YES;
+}
+
+- (void)configureGA {
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    GAI *gai = [GAI sharedInstance];
+    [gai trackerWithTrackingId:@"UA-88607624-1"];
+    gai.trackUncaughtExceptions = YES;
+    gai.dispatchInterval = 20;
+    
+    // remove before app release  
+    gai.logger.logLevel = kGAILogLevelVerbose;
 }
 
 // 기본값은 Login Storyboard, 로그인 상태면 Main Storyboard
@@ -34,6 +70,11 @@
         self.window.rootViewController = [storyboard instantiateInitialViewController];
         [[PCUserInformation userInfo] setUserTokenFromKeyChain];
     }
+}
+
+- (void)selectInitialViewByForce:(NSString *)storyboardName{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    self.window.rootViewController = [storyboard instantiateInitialViewController];
 }
 
 

@@ -10,6 +10,7 @@
 		520307811DEB7DC000E2985A /* PCRequesPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520307801DEB7DC000E2985A /* PCRequesPWViewController.m */; };
 		520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520307851DEB849600E2985A /* PCSignUpFacebookViewController.m */; };
 		5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5203078A1DEB85ED00E2985A /* PCUserInformation.m */; };
+		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		52AE37F81DEC41360016D81E /* PCInitialViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37F71DEC41360016D81E /* PCInitialViewTests.m */; };
 		52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */; };
 		52AE38021DEC6CBD0016D81E /* PCUserInfoValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38011DEC6CBD0016D81E /* PCUserInfoValidationTests.m */; };
@@ -96,6 +97,7 @@
 		520307891DEB85ED00E2985A /* PCUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInformation.h; sourceTree = "<group>"; };
 		5203078A1DEB85ED00E2985A /* PCUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInformation.m; sourceTree = "<group>"; };
 		5203078E1DEC0CBD00E2985A /* Popcorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Popcorn-Prefix.pch"; sourceTree = "<group>"; };
+		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52AE37F71DEC41360016D81E /* PCInitialViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCInitialViewTests.m; sourceTree = "<group>"; };
 		52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoValidation.h; sourceTree = "<group>"; };
 		52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoValidation.m; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				52C49A9A1DEB119700F47BB2 /* UserInformation */,
 				52C49A991DEB119500F47BB2 /* Utility */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
+				525923841DF6E4A600BE1506 /* GoogleService-Info.plist */,
 				52C49A171DEAE9F400F47BB2 /* Supporting Files */,
 			);
 			path = Popcorn;
@@ -577,6 +580,7 @@
 				52AE38041DED4F980016D81E /* MovieInfo.storyboard in Resources */,
 				52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */,
 				52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
+				525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
 				52C49A691DEB00CB00F47BB2 /* Main.storyboard in Resources */,
 			);

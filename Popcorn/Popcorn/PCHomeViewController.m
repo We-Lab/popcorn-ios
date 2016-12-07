@@ -9,8 +9,9 @@
 #import "PCHomeViewController.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *mainMovieRankingScrollView;
+//@property (weak, nonatomic) IBOutlet UIScrollView *mainMovieRankingScrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankingScrollHeight;
 @property (nonatomic) UIScrollView *boxOfficeScrollView;
 @property (nonatomic) UIScrollView *dDayMovieScrollView;
@@ -56,12 +57,22 @@
     [self setCustomViewStatus];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#ifndef DEBUG
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+#endif
+}
+
 #pragma mark - Make Custom View
 - (void)setCustomViewStatus{
 
     CGFloat DEVICE_WIDTH = self.view.frame.size.width;
     
-    self.mainMovieRankingScrollView.contentSize = CGSizeMake(DEVICE_WIDTH * 2, self.rankingScrollHeight.constant);
+//    self.mainMovieRankingScrollView.contentSize = CGSizeMake(DEVICE_WIDTH * 2, self.rankingScrollHeight.constant);
     
     self.movieLayoutButtonView.layer.masksToBounds = NO;
     self.movieLayoutButtonView.layer.shadowOffset = CGSizeMake(0, 1);
@@ -72,8 +83,8 @@
     [self creatMovieDdayScrollView];
     
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.testArray.count;
+    
     self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
     self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
     
@@ -85,7 +96,7 @@
     self.boxOfficeScrollView = [[UIScrollView alloc] init];
     
     self.boxOfficeScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.boxOfficeScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainMovieRankingScrollView.frame.size.height);
+    self.boxOfficeScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainBoxOfficeView.frame.size.height);
     self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
     self.boxOfficeScrollView.pagingEnabled = YES;
     self.boxOfficeScrollView.showsHorizontalScrollIndicator = NO;
@@ -94,7 +105,7 @@
     self.boxOfficeScrollView.showsVerticalScrollIndicator = NO;
     self.boxOfficeScrollView.showsHorizontalScrollIndicator = NO;
     
-    [self.mainMovieRankingScrollView addSubview:self.boxOfficeScrollView];
+    [self.mainBoxOfficeView addSubview:self.boxOfficeScrollView];
     
     self.movieSlidingContentView = [[UIView alloc] init];
     self.movieSlidingContentView.frame = CGRectMake(0, [self ratioHeight:15], [self ratioWidth:3540], [self ratioHeight:507]);
@@ -106,13 +117,14 @@
 
 #pragma mark - D-Day Movie Scroll View
 - (void)creatMovieDdayScrollView{
-
+    
     CGFloat DEVICE_WIDTH = self.view.frame.size.width;
     
     self.dDayMovieScrollView = [[UIScrollView alloc] init];
     
+//    self.dDayMovieScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
     self.dDayMovieScrollView.frame = CGRectMake(DEVICE_WIDTH + [self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.dDayMovieScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainMovieRankingScrollView.frame.size.height);
+    self.dDayMovieScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainBoxOfficeView.frame.size.height);
     self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
     self.dDayMovieScrollView.pagingEnabled = YES;
     self.dDayMovieScrollView.showsHorizontalScrollIndicator = NO;
@@ -122,7 +134,7 @@
     self.dDayMovieScrollView.showsVerticalScrollIndicator = NO;
 //    self.dDayMovieScrollView.scroll
     
-    [self.mainMovieRankingScrollView addSubview:self.dDayMovieScrollView];
+    [self.mainBoxOfficeView addSubview:self.dDayMovieScrollView];
 
     self.movieSlidingContentView = [[UIView alloc] init];
     self.movieSlidingContentView.frame = CGRectMake(0, [self ratioHeight:15], [self ratioWidth:3540], [self ratioHeight:507]);
@@ -242,43 +254,36 @@
 
 #pragma mark - Infinite Scroll
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     if (scrollView == self.movieMagazineCollectionView || scrollView == self.todayRecommendMovieTableView) {
-        
         return;
-        
-    }else if (scrollView.contentOffset.x < scrollView.frame.size.width) {
-        
+    }
+    else if (scrollView.contentOffset.x < scrollView.frame.size.width) {
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width*11-5, 0);
-        
-    }else if (scrollView.contentOffset.x > scrollView.frame.size.width*11-5){
-        
+    }
+    else if (scrollView.contentOffset.x > scrollView.frame.size.width*11-5){
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     }
 }
 
 #pragma mark - Main Movie Rank Layout Button Action
-- (IBAction)setBoxOffice:(UIButton *)sender {
-    
-    if (sender == self.boxOfficeButton) {
-        
-        self.boxOfficeScrollView.clipsToBounds = NO;
-        self.dDayMovieScrollView.clipsToBounds = YES;
-        self.mainMovieRankingScrollView.contentOffset = CGPointMake(0, 0);
-        self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-        self.boxOfficeButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-        self.dDayMovieButtonBorder.backgroundColor = [UIColor whiteColor];
-        
-    }else if (sender == self.dDayMovieButton){
-    
-        self.dDayMovieScrollView.clipsToBounds = NO;
-        self.boxOfficeScrollView.clipsToBounds = YES;
-        self.mainMovieRankingScrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
-        self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-        self.boxOfficeButtonBorder.backgroundColor = [UIColor whiteColor];
-        self.dDayMovieButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-    }
-}
+//- (IBAction)setBoxOffice:(UIButton *)button {
+//    if (button == self.boxOfficeButton) {
+//        self.boxOfficeScrollView.clipsToBounds = NO;
+//        self.dDayMovieScrollView.clipsToBounds = YES;
+//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(0, 0);
+//        self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
+//        self.boxOfficeButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+//        self.dDayMovieButtonBorder.backgroundColor = [UIColor whiteColor];
+//    }
+//    else if (button == self.dDayMovieButton){
+//        self.boxOfficeScrollView.clipsToBounds = YES;
+//        self.dDayMovieScrollView.clipsToBounds = NO;
+//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
+//        self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
+//        self.boxOfficeButtonBorder.backgroundColor = [UIColor whiteColor];
+//        self.dDayMovieButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+//    }
+//}
 
 #pragma mark - CollectionView Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -296,19 +301,14 @@
 
 #pragma mark - Best Review Button Action
 - (IBAction)likeBestReviewAction:(UIButton *)sender {
-    
     if (self.likeReview == YES) {
-        
         self.likeHeartView.backgroundColor = [UIColor colorWithRed:255.f/255.f green:102.f/255.f blue:102.f/255.f alpha:1];
         self.likeReview = NO;
-        
-    }else{
-    
+    }
+    else{
         self.likeHeartView.backgroundColor = [UIColor colorWithRed:128.f/255.f green:128.f/255.f blue:128.f/255.f alpha:1];
         self.likeReview = YES;
     }
-    
-    
 }
 
 #pragma mark - TableView Required
@@ -318,11 +318,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     UITableViewCell *recommendMovieCell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell" forIndexPath:indexPath];
     
     if (recommendMovieCell != nil) {
-        
         recommendMovieCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RecommendMovieCell"];
     }
     
@@ -330,19 +328,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     return 210;
 }
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
-    
 //    return (num * self.view.frame.size.width) / [[UIScreen mainScreen] bounds].size.width;
     return (num * self.view.frame.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-    
 //    return (num * self.view.frame.size.height) / [[UIScreen mainScreen] bounds].size.height;
     return (num * self.view.frame.size.height) / 667;
 }
