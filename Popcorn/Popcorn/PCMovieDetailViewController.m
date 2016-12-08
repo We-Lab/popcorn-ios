@@ -9,8 +9,9 @@
 #import "PCMovieDetailViewController.h"
 #import "PCMovieNaviView.h"
 #import <HCSStarRatingView.h>
+#import <BEMSimpleLineGraphView.h>
 
-@interface PCMovieDetailViewController () <UIScrollViewDelegate>
+@interface PCMovieDetailViewController () <UIScrollViewDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
@@ -37,19 +38,13 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentContentHeight;
 @property (weak, nonatomic) IBOutlet UIView *famousLineContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *famousLineContentHeight;
-@property BOOL test;
+@property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
+
+@property NSArray *testArray;
 
 @end
 
 @implementation PCMovieDetailViewController
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.test = YES;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,6 +55,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
+    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
     
     [self setCustomViewStatus];
 }
@@ -77,12 +74,6 @@
 #pragma mark - Make Custom Navi View
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-    if (scrollView.contentOffset.y > 200) {
-        
-        self.test = NO;
-        
-        [self preferredStatusBarStyle];
-    }
 }
 
 
@@ -99,11 +90,7 @@
 // 스테이터스 바 스타일 메소드
 - (UIStatusBarStyle)preferredStatusBarStyle {
     
-    if (self.test == YES) {
-        return UIStatusBarStyleLightContent;
-    }
-    
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 // 네비게이션 Pop
@@ -138,6 +125,16 @@
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
     self.movieVideoTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    BEMSimpleLineGraphView *movieScoreGraph = [[BEMSimpleLineGraphView alloc] init];
+    movieScoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    movieScoreGraph.dataSource = self;
+    movieScoreGraph.delegate = self;
+    movieScoreGraph.enableBezierCurve = YES;
+//    movieScoreGraph.colorTop = [UIColor whiteColor];
+//    movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+    movieScoreGraph.displayDotsWhileAnimating = NO;       
+    [self.movieScoreGraphView addSubview:movieScoreGraph];
 
 }
 
@@ -156,6 +153,17 @@
     UICollectionViewCell *moviePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePhotoCell" forIndexPath:indexPath];
     
     return moviePhotoCell;
+}
+
+#pragma mark - Graph OpenSource Required
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph{
+    
+    return self.testArray.count;
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
+    
+    return [[self.testArray objectAtIndex:index] doubleValue];;
 }
 
 #pragma mark - MovieStory More Button Action

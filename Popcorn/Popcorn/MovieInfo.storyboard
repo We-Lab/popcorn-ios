@@ -347,16 +347,38 @@
                                                             <constraint firstAttribute="bottom" secondItem="AKx-iE-ZX0" secondAttribute="bottom" constant="5" id="xTk-z0-huv"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEp-y8-9O8">
+                                                        <rect key="frame" x="0.0" y="42" width="375" height="108"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkx-Wn-dLM">
+                                                                <rect key="frame" x="0.0" y="83" width="375" height="25"/>
+                                                                <color key="backgroundColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="25" id="w4v-ev-s6g"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="qkx-Wn-dLM" secondAttribute="trailing" id="GbM-Sz-LQX"/>
+                                                            <constraint firstAttribute="bottom" secondItem="qkx-Wn-dLM" secondAttribute="bottom" id="QXp-dr-4eB"/>
+                                                            <constraint firstItem="qkx-Wn-dLM" firstAttribute="leading" secondItem="NEp-y8-9O8" secondAttribute="leading" id="ZBz-WQ-Ec7"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="Rkh-O4-Tqt" secondAttribute="bottom" id="9st-W4-7z9"/>
+                                                    <constraint firstItem="NEp-y8-9O8" firstAttribute="top" secondItem="qOo-5G-BuX" secondAttribute="bottom" constant="10" id="Cg2-bK-yUT"/>
                                                     <constraint firstAttribute="height" constant="200" id="Nnk-dZ-Aba"/>
+                                                    <constraint firstItem="NEp-y8-9O8" firstAttribute="leading" secondItem="zJJ-gC-tm0" secondAttribute="leading" id="RW1-pL-MfT"/>
                                                     <constraint firstAttribute="trailing" secondItem="Rkh-O4-Tqt" secondAttribute="trailing" id="TVb-dW-EQW"/>
                                                     <constraint firstItem="qOo-5G-BuX" firstAttribute="leading" secondItem="zJJ-gC-tm0" secondAttribute="leading" constant="12" id="Tex-Ys-VDR"/>
                                                     <constraint firstAttribute="trailing" secondItem="qOo-5G-BuX" secondAttribute="trailing" constant="12" id="Uyb-Ph-Vov"/>
                                                     <constraint firstItem="qOo-5G-BuX" firstAttribute="top" secondItem="zJJ-gC-tm0" secondAttribute="top" constant="12" id="VLb-hh-V20"/>
+                                                    <constraint firstAttribute="trailing" secondItem="NEp-y8-9O8" secondAttribute="trailing" id="kx6-8c-eIz"/>
                                                     <constraint firstItem="Rkh-O4-Tqt" firstAttribute="leading" secondItem="zJJ-gC-tm0" secondAttribute="leading" id="nbg-SG-FKh"/>
+                                                    <constraint firstItem="Rkh-O4-Tqt" firstAttribute="top" secondItem="NEp-y8-9O8" secondAttribute="bottom" id="qNi-kc-4Ar"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnP-Q6-mVU">
@@ -883,6 +905,7 @@
                         <outlet property="movieMainImage" destination="kGT-bv-z0T" id="uct-0x-5G4"/>
                         <outlet property="moviePosterImage" destination="s6j-W1-VGH" id="vTk-tH-uSp"/>
                         <outlet property="moviePosterView" destination="8Dz-WT-hBJ" id="eVT-sE-j89"/>
+                        <outlet property="movieScoreGraphView" destination="NEp-y8-9O8" id="ccJ-hA-RXo"/>
                         <outlet property="movieStoryLayerHeight" destination="bhM-NR-bTo" id="E2K-Vg-cxO"/>
                         <outlet property="movieStoryMoreButton" destination="MFy-wU-DLM" id="AJv-hq-eZ2"/>
                         <outlet property="movieStoryTextView" destination="wGm-9C-caj" id="9tD-Be-ab9"/>
