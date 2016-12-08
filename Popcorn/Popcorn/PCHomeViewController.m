@@ -111,6 +111,8 @@
         
         UIImageView *moviePosterIMG = [[UIImageView alloc] init];
         moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
+        moviePosterIMG.contentMode = UIViewContentModeScaleAspectFill;
+        moviePosterIMG.clipsToBounds = YES;
         [movieContentView addSubview:moviePosterIMG];
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
@@ -119,12 +121,17 @@
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
+        movieRankingNumber.layer.masksToBounds = NO;
+        movieRankingNumber.layer.shadowOffset = CGSizeMake(0, 1);
+        movieRankingNumber.layer.shadowRadius = 2;
+        movieRankingNumber.layer.shadowOpacity = 0.8;
         
         [moviePosterIMG addSubview:movieRankingNumber];
         
         UIView *movieNumberScoreView = [[UIView alloc] init];
         
         movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], moviePosterIMG.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
+        
         
         [moviePosterIMG addSubview:movieNumberScoreView];
         
@@ -134,6 +141,10 @@
         scoreLabel.text = @"평점";
         scoreLabel.textColor = [UIColor whiteColor];
         scoreLabel.font = [UIFont systemFontOfSize:17];
+        scoreLabel.layer.masksToBounds = NO;
+        scoreLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        scoreLabel.layer.shadowRadius = 2;
+        scoreLabel.layer.shadowOpacity = 0.8;
         
         [movieNumberScoreView addSubview:scoreLabel];
         
@@ -144,7 +155,7 @@
         scoreNumber.layer.masksToBounds = NO;
         scoreNumber.layer.shadowOffset = CGSizeMake(0, 1);
         scoreNumber.layer.shadowRadius = 2;
-        scoreNumber.layer.shadowOpacity = 0.3;
+        scoreNumber.layer.shadowOpacity = 0.8;
 
         scoreNumber.font = [UIFont systemFontOfSize:40 weight:UIFontWeightLight];
         
@@ -207,7 +218,13 @@
         [movieContentView addSubview:starRatingView];
         
         // 무비랭킹 컨텐츠
-        moviePosterIMG.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+        
+        if (i == 1) {
+            moviePosterIMG.image = [UIImage imageNamed:@"test3.jpg"];
+        }else{
+            moviePosterIMG.image = [UIImage imageNamed:@"test1.jpg"];
+        }
+        
         movieRankingNumber.text = [NSString stringWithFormat:@"%ld", i];
         movieTitle.text = [NSString stringWithFormat:@"영화제목 %ld", i];
         movieAge.text = [NSString stringWithFormat:@"%ld 관람가", i];
