@@ -130,6 +130,7 @@
     starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
     starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
     starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+    starRatingView.userInteractionEnabled = NO;
     [self.starScoreView addSubview:starRatingView];
     
     self.movieInfoButtonView.layer.borderWidth = 1;

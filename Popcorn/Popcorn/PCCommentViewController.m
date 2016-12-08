@@ -7,8 +7,11 @@
 //
 
 #import "PCCommentViewController.h"
+#import "PCCommentCustomCell.h"
+#import <HCSStarRatingView.h>
 
 @interface PCCommentViewController () <UITableViewDelegate, UITableViewDataSource>
+
 
 @end
 
@@ -17,8 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self setCustomViewStatus];
 
+}
+
+#pragma mark - Make Custem View
+- (void)setCustomViewStatus{
+    
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -37,6 +46,13 @@
     
     return  commentCell;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+////    CGFloat  [tableView cellForRowAtIndexPath:indexPath].text.hei;
+//    
+//    return nil;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

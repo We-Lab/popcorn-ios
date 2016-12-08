@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.testArray = @[@"1",@"1",@"1"];
+    self.testArray = @[@"1",@"1",@"1",@"1",@"1"];
 
     [self setCustomViewStatus];
 }
