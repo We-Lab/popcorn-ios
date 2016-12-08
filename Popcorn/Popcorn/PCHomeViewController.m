@@ -294,12 +294,10 @@
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
-//    return (num * self.view.frame.size.width) / [[UIScreen mainScreen] bounds].size.width;
     return (num * self.view.frame.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-//    return (num * self.view.frame.size.height) / [[UIScreen mainScreen] bounds].size.height;
     return (num * self.view.frame.size.height) / 667;
 }
 

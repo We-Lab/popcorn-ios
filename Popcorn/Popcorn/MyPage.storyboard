@@ -20,35 +20,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBS-XG-dqX">
-                                <rect key="frame" x="211" y="337" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k4H-hj-pT0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyPageCell" id="0zC-84-UP1">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zC-84-UP1" id="8re-8q-OCW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="FyE-OT-fjM" kind="show" id="EiP-iY-hzd"/>
+                                    <outlet property="dataSource" destination="7pH-rQ-QNY" id="Ru0-c7-ppG"/>
+                                    <outlet property="delegate" destination="7pH-rQ-QNY" id="tEm-sj-w0t"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IR-DM-DhJ">
-                                <rect key="frame" x="211" y="419" width="101" height="141"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="fhi-gb-DxH" kind="show" id="ubG-FJ-iEM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PI4-Qb-3yz">
-                                <rect key="frame" x="175" y="173" width="108" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="LogOut"/>
-                                <connections>
-                                    <action selector="requestSignOut:" destination="7pH-rQ-QNY" eventType="touchUpInside" id="jUs-0Z-Gsl"/>
-                                </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="k4H-hj-pT0" firstAttribute="leading" secondItem="X7I-gi-mBX" secondAttribute="leading" id="RtJ-n7-xUu"/>
+                            <constraint firstAttribute="trailing" secondItem="k4H-hj-pT0" secondAttribute="trailing" id="aXa-Nm-sdk"/>
+                            <constraint firstItem="XMl-95-4LM" firstAttribute="top" secondItem="k4H-hj-pT0" secondAttribute="bottom" id="rrC-im-c5I"/>
+                            <constraint firstItem="k4H-hj-pT0" firstAttribute="top" secondItem="X7I-gi-mBX" secondAttribute="top" id="x8b-T6-qmN"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="마이 페이지" id="rw3-zh-U6F"/>
+                    <navigationItem key="navigationItem" title="마이 페이지" id="rw3-zh-U6F">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="1Ta-eo-Ts3">
+                            <connections>
+                                <action selector="requestSignOut:" destination="7pH-rQ-QNY" id="NBB-1i-yeC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="myPageMainTableView" destination="k4H-hj-pT0" id="ZSU-tR-C2t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru3-Pd-tku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
