@@ -10,9 +10,6 @@
 
 @interface PCCommentCustomCell ()
 
-@property (weak, nonatomic) IBOutlet UIView *baseContentView;
-@property (weak, nonatomic) IBOutlet UITextView *userContentTextView;
-
 @end
 
 @implementation PCCommentCustomCell

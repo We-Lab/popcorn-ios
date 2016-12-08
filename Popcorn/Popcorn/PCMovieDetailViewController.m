@@ -62,7 +62,6 @@
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     
     [self setCustomViewStatus];
-    [self setCustomMovieCommentView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -142,56 +141,6 @@
 
 }
 
-#pragma mark - Custom Comment View
-- (void)setCustomMovieCommentView{
-
-//    for (NSInteger i = 0; i < 3; i += 1) {
-//        
-//    }
-    
-    UIView *userWriteContentView = [[UIView alloc] init];
-    
-    userWriteContentView.frame = CGRectMake(0, 0, self.commentContentView.frame.size.width, self.commentContentView.frame.size.height);
-    
-    [self.commentContentView addSubview:userWriteContentView];
-    
-    UIImageView *userImage = [[UIImageView alloc] init];
-    
-    userImage.frame = CGRectMake(0, 0, [self ratioWidth:40], [self ratioHeight:40]);
-    userImage.backgroundColor = [UIColor redColor];
-    userImage.layer.cornerRadius = 20;
-    
-    [userWriteContentView addSubview:userImage];
-    
-    UIView *commentContent = [[UIView alloc] init];
-    
-    commentContent.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:5], userWriteContentView.frame.size.width - [self ratioWidth:55], userWriteContentView.frame.size.height - [self ratioHeight:5]);
-    
-    [userWriteContentView addSubview:commentContent];
-    
-    UILabel *commentUserID = [[UILabel alloc] init];
-    
-    commentUserID.frame = CGRectMake(0, 0, commentContent.frame.size.width, [self ratioHeight:15]);
-    commentUserID.text = @"유저 아이디";
-    commentUserID.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-    
-    [commentContent addSubview:commentUserID];
-    
-    
-    
-    UITextView *commentContentText = [[UITextView alloc] init];
-    
-    CGRect textViewFrame = commentContentText.frame;
-    textViewFrame.size.height = commentContentText.contentSize.height;
-    
-//    NSLog(@"야야야 -%lf", textViewFrame.size.height);
-    
-    commentContentText.frame = CGRectMake(0, [self ratioHeight:15], commentContent.frame.size.width, textViewFrame.size.height);
-    commentContentText.text = @"asdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf";
-    
-    [commentUserID addSubview:commentContentText];
-    
-}
 
 #pragma mark - Custom FamousLine View
 - (void)setCustomMovieFamousLineView{
@@ -240,12 +189,10 @@
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
-    //    return (num * self.view.frame.size.width) / [[UIScreen mainScreen] bounds].size.width;
     return (num * self.view.frame.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-    //    return (num * self.view.frame.size.height) / [[UIScreen mainScreen] bounds].size.height;
     return (num * self.view.frame.size.height) / 667;
 }
 
