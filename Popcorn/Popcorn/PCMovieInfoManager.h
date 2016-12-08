@@ -10,6 +10,9 @@
 
 @interface PCMovieInfoManager : NSObject
 
++ (instancetype)movieManager;
+
+- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(void (^)(BOOL isSuccess, NSArray *movieListData))completionHandler;
 + (NSDictionary *)requestMovieDetail:(NSString *)movieID;
 + (NSDictionary *)requestActorDetail:(NSString *)actorID;
 + (NSDictionary *)requestAllComments:(NSString *)movieID;

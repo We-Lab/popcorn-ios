@@ -13,7 +13,8 @@
 @end
 
 // 공통
-extern NSString *const baseURLString;
+extern NSString *const memberURLString;
+extern NSString *const movieURLString;
 extern NSString *const TokenKey;
 
 // Sign In

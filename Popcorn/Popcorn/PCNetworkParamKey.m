@@ -13,7 +13,8 @@
 @end
 
 // 공통
-NSString *const baseURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/rest-auth/";
+NSString *const memberURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/member/";
+NSString *const movieURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/movie/";
 NSString *const TokenKey = @"key";
 
 // SignIn
@@ -28,3 +29,4 @@ NSString *const SignUpEmailKey = @"email";
 NSString *const SignUpBirthdayKey = @"date_of_birth";
 NSString *const SignUpGenderKey = @"gender";
 NSString *const SignUpPhoneNumberKey = @"phone_number";
+

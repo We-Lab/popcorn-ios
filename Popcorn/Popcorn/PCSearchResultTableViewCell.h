@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PCSearchResultTableViewCell : UITableViewCell
-@property (nonatomic) UILabel *countryLabel;
+@property (nonatomic) UILabel *additionalInfoLabel;
 @end

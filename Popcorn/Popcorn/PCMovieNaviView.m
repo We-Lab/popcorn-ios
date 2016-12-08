@@ -11,7 +11,6 @@
 @implementation PCMovieNaviView
 
 - (instancetype)initWithType:(MovieNaviBarType)type ViewController:(UIViewController *)vc target:(id)target action:(SEL)action {
-    
     self = [super init];
     if (self) {
         if (vc != nil) {
