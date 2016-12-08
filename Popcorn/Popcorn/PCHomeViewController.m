@@ -10,34 +10,31 @@
 #import <HCSStarRatingView.h>
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
 
-@property (nonatomic) UIScrollView *boxOfficeScrollView;
-@property (nonatomic) UIScrollView *dDayMovieScrollView;
-@property (nonatomic) UIView *movieSlidingContentView;
-
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
-
-@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
-@property BOOL likeReview;
 @property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
-
-@property NSArray *testArray;
+@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewControllHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
 
+@property (nonatomic) UIScrollView *boxOfficeScrollView;
+@property (nonatomic) UIView *movieSlidingContentView;
+
+@property BOOL likeReview;
+@property NSArray *testArray;
+
 @end
 
 @implementation PCHomeViewController
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.likeReview = YES;
-        
     }
     return self;
 }
@@ -62,7 +59,7 @@
 
 #pragma mark - Make Custom View
 - (void)setCustomViewStatus{
-    
+
     [self creatMainBoxOffice];
     
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -70,12 +67,10 @@
     
     self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
     self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
-    
 }
 
 #pragma mark - BoxOffice Movie Scroll View
 - (void)creatMainBoxOffice{
-
     self.boxOfficeScrollView = [[UIScrollView alloc] init];
     
     self.boxOfficeScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
@@ -95,19 +90,15 @@
     [self.boxOfficeScrollView addSubview:self.movieSlidingContentView];
     
     [self creatMovieRankScroll];
-   
 }
-
 
 #pragma mark - Main Movie Scroll Layout
 - (void)creatMovieRankScroll{
     
     for(NSInteger i = 0; i < 12; i++){
-        
         CGFloat baseContentMargin = [self ratioWidth:10];
         CGFloat baseMovieContentWidth = [self ratioWidth:295];
         CGFloat baseMovieContentHeight = [self ratioHeight:507];
-        
         
         UIView *movieContentView = [[UIView alloc] init];
         
@@ -118,13 +109,9 @@
         
         [self.movieSlidingContentView addSubview:movieContentView];
         
-        
         UIImageView *moviePosterIMG = [[UIImageView alloc] init];
-        
         moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
-        
         [movieContentView addSubview:moviePosterIMG];
-        
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
         
@@ -165,7 +152,6 @@
 
         
         UILabel *movieTitle = [[UILabel alloc] init];
-        
         movieTitle.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:399], [self ratioWidth:255], [self ratioHeight:35]);
         movieTitle.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
         movieTitle.textAlignment = NSTextAlignmentCenter;
@@ -174,25 +160,19 @@
         
         [movieContentView addSubview:movieTitle];
         
-        
         CALayer *movieTitleBorder = [CALayer layer];
-        
         movieTitleBorder.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
         movieTitleBorder.borderWidth = 1;
         movieTitleBorder.frame = CGRectMake(-1, -1, movieTitle.frame.size.width+2, movieTitle.frame.size.height);
         
         [movieTitle.layer addSublayer:movieTitleBorder];
         
-        
         UIView *movieRankSubView = [[UIView alloc] init];
-        
         movieRankSubView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:434], [self ratioWidth:255], [self ratioHeight:20]);
         
         [movieContentView addSubview:movieRankSubView];
         
-        
         UILabel *movieAge = [[UILabel alloc] init];
-        
         movieAge.frame = CGRectMake(0, 0, movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieAge.textAlignment = NSTextAlignmentCenter;
         movieAge.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
@@ -200,17 +180,13 @@
         
         [movieRankSubView addSubview:movieAge];
         
-        
         UIView *movieRankLine = [[UIView alloc] init];
-        
         movieRankLine.frame = CGRectMake(movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], [self ratioHeight:2.5], [self ratioWidth:1], [self ratioHeight:15]);
         movieRankLine.backgroundColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1];
         
         [movieRankSubView addSubview:movieRankLine];
         
-        
         UILabel *movieTicketingPercent = [[UILabel alloc] init];
-        
         movieTicketingPercent.frame = CGRectMake(movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], 0, movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieTicketingPercent.textAlignment = NSTextAlignmentCenter;
         movieTicketingPercent.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
@@ -282,7 +258,6 @@
 
 #pragma mark - TableView Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return self.testArray.count;
 }
 

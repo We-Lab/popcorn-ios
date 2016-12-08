@@ -42,11 +42,11 @@
             </objects>
             <point key="canvasLocation" x="2353" y="663"/>
         </scene>
-        <!--Ranking-->
+        <!--Search-->
         <scene sceneID="Ctp-XT-Mgz">
             <objects>
-                <viewControllerPlaceholder storyboardName="Ranking" id="P2r-EF-zjL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="랭킹" image="Ranking" id="S9x-Gp-VkV"/>
+                <viewControllerPlaceholder storyboardName="Search" id="P2r-EF-zjL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="검색" image="Search" id="S9x-Gp-VkV"/>
                     <navigationItem key="navigationItem" id="5jk-Xd-EaY"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JW5-pS-8xQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -90,8 +90,8 @@
     <resources>
         <image name="Home" width="20" height="20"/>
         <image name="MyPage" width="20" height="20"/>
-        <image name="Ranking" width="20" height="20"/>
         <image name="Rating" width="20" height="20"/>
         <image name="Recommend" width="20" height="20"/>
+        <image name="Search" width="25" height="25"/>
     </resources>
 </document>

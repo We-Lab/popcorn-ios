@@ -82,11 +82,11 @@
 #pragma mark - Try Login
 - (IBAction)requestSignIn:(UIButton *)button {
     if (_isValidID && _isValidPW) {
-        [FBSDKAppEvents logEvent:@"requestSuccessSignIn"];
+//        [FBSDKAppEvents logEvent:@"requestSuccessSignIn"];
         [self.loginManager signInWithID:_idTextField.text andPassword:_pwTextField.text];
     }
     else {
-        [FBSDKAppEvents logEvent:@"requestFailureSignIn"];
+//        [FBSDKAppEvents logEvent:@"requestFailureSignIn"];
     }
 }
 

@@ -155,6 +155,9 @@
                                                                         </constraints>
                                                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                                                         <size key="customSize" width="290" height="175"/>
+                                                                        <connections>
+                                                                            <segue destination="LAZ-CG-GJd" kind="show" id="zua-T9-wCc"/>
+                                                                        </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
                                                                 <connections>
@@ -469,9 +472,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="메인" id="aVc-O6-2Ab">
-                        <barButtonItem key="rightBarButtonItem" image="Search" id="AMP-yp-8T0">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
                         <connections>
                             <outlet property="titleView" destination="3u3-EZ-fps" id="lYb-fE-tkm"/>
                         </connections>
@@ -509,6 +509,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSx-3P-MJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -518,7 +520,7 @@
         <scene sceneID="aOa-GF-hbm">
             <objects>
                 <navigationController title="홈" automaticallyAdjustsScrollViewInsets="NO" id="k9O-PL-miN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="7Wc-8P-Yoj"/>
+                    <tabBarItem key="tabBarItem" title="메인" image="Home" id="7Wc-8P-Yoj"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Vd-Fs-hsR">
@@ -536,11 +538,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home" width="20" height="20"/>
         <image name="LikeHeart" width="6" height="6"/>
         <image name="Ranking" width="20" height="20"/>
         <image name="Rating" width="20" height="20"/>
         <image name="Recommend" width="20" height="20"/>
-        <image name="Search" width="25" height="25"/>
         <image name="titlelogo" width="108" height="20"/>
     </resources>
 </document>

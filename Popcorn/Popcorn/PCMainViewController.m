@@ -24,8 +24,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self removeLoginViewControllers];
+    
+    // inititalView as Search
+//    self.selectedIndex = 1;
 }
 
 - (void)removeLoginViewControllers {

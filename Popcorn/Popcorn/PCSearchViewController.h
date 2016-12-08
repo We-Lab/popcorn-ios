@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  PCRankingViewController.h
 //  Popcorn
 //
 //  Created by giftbot on 2016. 11. 27..
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface PCSearchViewController : UIViewController
 
 @end
-
