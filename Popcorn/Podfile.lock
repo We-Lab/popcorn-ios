@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BEMSimpleLineGraph (4.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -55,6 +56,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1)
+  - BEMSimpleLineGraph (~> 4.1)
   - FBSDKCoreKit (~> 4.18)
   - FBSDKLoginKit (~> 4.18)
   - FBSDKShareKit (~> 4.18)
@@ -64,6 +66,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BEMSimpleLineGraph: 44fd451f27f8e9cf96f2da5bea27603093576dd1
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
   FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
@@ -79,6 +82,6 @@ SPEC CHECKSUMS:
   HCSStarRatingView: bff3f89314d3b5013ce826ea11897d3129ff6b8c
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: f24f7c8385bd7a61b4b38c63ac9ff0c8a78bcc21
+PODFILE CHECKSUM: acf9d95b79bfa02055445885d6b6ed9c7716968d
 
 COCOAPODS: 1.1.1
