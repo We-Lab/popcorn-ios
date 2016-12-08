@@ -209,7 +209,6 @@
         starRatingView.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:465], [self ratioWidth:165], [self ratioHeight:25]);
         starRatingView.maximumValue = 5;
         starRatingView.minimumValue = 0;
-        starRatingView.value = 3.5;
         starRatingView.allowsHalfStars = YES;
         starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
         starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
@@ -230,6 +229,7 @@
         movieAge.text = [NSString stringWithFormat:@"%ld 관람가", i];
         movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %ld", i];
         scoreNumber.text = @"3.5";
+        starRatingView.value = 3.5;
     }
 }
 
