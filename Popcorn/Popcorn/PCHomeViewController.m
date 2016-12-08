@@ -7,21 +7,14 @@
 //
 
 #import "PCHomeViewController.h"
+#import <HCSStarRatingView.h>
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
 
-//@property (weak, nonatomic) IBOutlet UIScrollView *mainMovieRankingScrollView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankingScrollHeight;
 @property (nonatomic) UIScrollView *boxOfficeScrollView;
 @property (nonatomic) UIScrollView *dDayMovieScrollView;
 @property (nonatomic) UIView *movieSlidingContentView;
-
-@property (weak, nonatomic) IBOutlet UIButton *boxOfficeButton;
-@property (weak, nonatomic) IBOutlet UIView *boxOfficeButtonBorder;
-@property (weak, nonatomic) IBOutlet UIButton *dDayMovieButton;
-@property (weak, nonatomic) IBOutlet UIView *dDayMovieButtonBorder;
-@property (weak, nonatomic) IBOutlet UIView *movieLayoutButtonView;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
 
@@ -69,18 +62,8 @@
 
 #pragma mark - Make Custom View
 - (void)setCustomViewStatus{
-
-    CGFloat DEVICE_WIDTH = self.view.frame.size.width;
-    
-//    self.mainMovieRankingScrollView.contentSize = CGSizeMake(DEVICE_WIDTH * 2, self.rankingScrollHeight.constant);
-    
-    self.movieLayoutButtonView.layer.masksToBounds = NO;
-    self.movieLayoutButtonView.layer.shadowOffset = CGSizeMake(0, 1);
-    self.movieLayoutButtonView.layer.shadowRadius = 2;
-    self.movieLayoutButtonView.layer.shadowOpacity = 0.3;
     
     [self creatMainBoxOffice];
-    [self creatMovieDdayScrollView];
     
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.testArray.count;
@@ -115,33 +98,6 @@
    
 }
 
-#pragma mark - D-Day Movie Scroll View
-- (void)creatMovieDdayScrollView{
-    
-    CGFloat DEVICE_WIDTH = self.view.frame.size.width;
-    
-    self.dDayMovieScrollView = [[UIScrollView alloc] init];
-    
-//    self.dDayMovieScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.dDayMovieScrollView.frame = CGRectMake(DEVICE_WIDTH + [self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.dDayMovieScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainBoxOfficeView.frame.size.height);
-    self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-    self.dDayMovieScrollView.pagingEnabled = YES;
-    self.dDayMovieScrollView.showsHorizontalScrollIndicator = NO;
-    self.dDayMovieScrollView.delegate = self;
-    self.dDayMovieScrollView.clipsToBounds = YES;
-    self.dDayMovieScrollView.showsHorizontalScrollIndicator = NO;
-    self.dDayMovieScrollView.showsVerticalScrollIndicator = NO;
-//    self.dDayMovieScrollView.scroll
-    
-    [self.mainBoxOfficeView addSubview:self.dDayMovieScrollView];
-
-    self.movieSlidingContentView = [[UIView alloc] init];
-    self.movieSlidingContentView.frame = CGRectMake(0, [self ratioHeight:15], [self ratioWidth:3540], [self ratioHeight:507]);
-    [self.dDayMovieScrollView addSubview:self.movieSlidingContentView];
-    
-    [self creatMovieRankScroll];
-}
 
 #pragma mark - Main Movie Scroll Layout
 - (void)creatMovieRankScroll{
@@ -172,12 +128,40 @@
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
         
-        movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-85, moviePosterIMG.frame.size.height-85, 85, 85);
+        movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-[self ratioWidth:85], moviePosterIMG.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
         
         [moviePosterIMG addSubview:movieRankingNumber];
+        
+        UIView *movieNumberScoreView = [[UIView alloc] init];
+        
+        movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], moviePosterIMG.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
+        
+        [moviePosterIMG addSubview:movieNumberScoreView];
+        
+        UILabel *scoreLabel = [[UILabel alloc] init];
+        
+        scoreLabel.frame = CGRectMake(0, [self ratioHeight:15], movieNumberScoreView.frame.size.width, [self ratioHeight:20]);
+        scoreLabel.text = @"평점";
+        scoreLabel.textColor = [UIColor whiteColor];
+        scoreLabel.font = [UIFont systemFontOfSize:17];
+        
+        [movieNumberScoreView addSubview:scoreLabel];
+        
+        UILabel *scoreNumber = [[UILabel alloc] init];
+        
+        scoreNumber.frame = CGRectMake(0, [self ratioHeight:35], movieNumberScoreView.frame.size.width, [self ratioHeight:50]);
+        scoreNumber.textColor = [UIColor whiteColor];
+        scoreNumber.layer.masksToBounds = NO;
+        scoreNumber.layer.shadowOffset = CGSizeMake(0, 1);
+        scoreNumber.layer.shadowRadius = 2;
+        scoreNumber.layer.shadowOpacity = 0.3;
+
+        scoreNumber.font = [UIFont systemFontOfSize:40 weight:UIFontWeightLight];
+        
+        [movieNumberScoreView addSubview:scoreNumber];
 
         
         UILabel *movieTitle = [[UILabel alloc] init];
@@ -234,13 +218,17 @@
         
         [movieRankSubView addSubview:movieTicketingPercent];
         
-        
-        UIView *movieStarScoreView = [[UIView alloc] init];
-        
-        movieStarScoreView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:460], [self ratioWidth:255], [self ratioHeight:25]);
-        movieStarScoreView.backgroundColor = [UIColor grayColor];
-        
-        [movieContentView addSubview:movieStarScoreView];
+        HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+        starRatingView.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:465], [self ratioWidth:165], [self ratioHeight:25]);
+        starRatingView.maximumValue = 5;
+        starRatingView.minimumValue = 0;
+        starRatingView.value = 3.5;
+        starRatingView.allowsHalfStars = YES;
+        starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+        starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
+        starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+        starRatingView.userInteractionEnabled = NO;
+        [movieContentView addSubview:starRatingView];
         
         // 무비랭킹 컨텐츠
         moviePosterIMG.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
@@ -248,6 +236,7 @@
         movieTitle.text = [NSString stringWithFormat:@"영화제목 %ld", i];
         movieAge.text = [NSString stringWithFormat:@"%ld 관람가", i];
         movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %ld", i];
+        scoreNumber.text = @"3.5";
     }
 }
 
@@ -264,26 +253,6 @@
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     }
 }
-
-#pragma mark - Main Movie Rank Layout Button Action
-//- (IBAction)setBoxOffice:(UIButton *)button {
-//    if (button == self.boxOfficeButton) {
-//        self.boxOfficeScrollView.clipsToBounds = NO;
-//        self.dDayMovieScrollView.clipsToBounds = YES;
-//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(0, 0);
-//        self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-//        self.boxOfficeButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-//        self.dDayMovieButtonBorder.backgroundColor = [UIColor whiteColor];
-//    }
-//    else if (button == self.dDayMovieButton){
-//        self.boxOfficeScrollView.clipsToBounds = YES;
-//        self.dDayMovieScrollView.clipsToBounds = NO;
-//        self.mainMovieRankingScrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
-//        self.dDayMovieScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-//        self.boxOfficeButtonBorder.backgroundColor = [UIColor whiteColor];
-//        self.dDayMovieButtonBorder.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-//    }
-//}
 
 #pragma mark - CollectionView Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

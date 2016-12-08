@@ -8,7 +8,7 @@
 
 #import "PCCommentViewController.h"
 
-@interface PCCommentViewController ()
+@interface PCCommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -16,7 +16,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *commentCell = [tableView dequeueReusableCellWithIdentifier:@"CommnetCell" forIndexPath:indexPath];
+    
+    if (commentCell != nil) {
+        
+        commentCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommnetCell"];
+    }
+    
+    return  commentCell;
 }
 
 - (void)didReceiveMemoryWarning {
