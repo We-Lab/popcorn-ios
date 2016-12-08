@@ -7,10 +7,12 @@
 //
 
 #import "PCHomeViewController.h"
+#import <HCSStarRatingView.h>
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
 @property (weak, nonatomic) IBOutlet UIView *likeHeartView;
@@ -40,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.testArray = @[@"1",@"1",@"1"];
+    self.testArray = @[@"1",@"1",@"1",@"1",@"1"];
 
     [self setCustomViewStatus];
 }
@@ -57,6 +59,7 @@
 
 #pragma mark - Make Custom View
 - (void)setCustomViewStatus{
+
     [self creatMainBoxOffice];
     
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -108,15 +111,56 @@
         
         UIImageView *moviePosterIMG = [[UIImageView alloc] init];
         moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
+        moviePosterIMG.contentMode = UIViewContentModeScaleAspectFill;
+        moviePosterIMG.clipsToBounds = YES;
         [movieContentView addSubview:moviePosterIMG];
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
-        movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-85, moviePosterIMG.frame.size.height-85, 85, 85);
+        
+        movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-[self ratioWidth:85], moviePosterIMG.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
+        movieRankingNumber.layer.masksToBounds = NO;
+        movieRankingNumber.layer.shadowOffset = CGSizeMake(0, 1);
+        movieRankingNumber.layer.shadowRadius = 2;
+        movieRankingNumber.layer.shadowOpacity = 0.8;
         
         [moviePosterIMG addSubview:movieRankingNumber];
+        
+        UIView *movieNumberScoreView = [[UIView alloc] init];
+        
+        movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], moviePosterIMG.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
+        
+        
+        [moviePosterIMG addSubview:movieNumberScoreView];
+        
+        UILabel *scoreLabel = [[UILabel alloc] init];
+        
+        scoreLabel.frame = CGRectMake(0, [self ratioHeight:15], movieNumberScoreView.frame.size.width, [self ratioHeight:20]);
+        scoreLabel.text = @"평점";
+        scoreLabel.textColor = [UIColor whiteColor];
+        scoreLabel.font = [UIFont systemFontOfSize:17];
+        scoreLabel.layer.masksToBounds = NO;
+        scoreLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        scoreLabel.layer.shadowRadius = 2;
+        scoreLabel.layer.shadowOpacity = 0.8;
+        
+        [movieNumberScoreView addSubview:scoreLabel];
+        
+        UILabel *scoreNumber = [[UILabel alloc] init];
+        
+        scoreNumber.frame = CGRectMake(0, [self ratioHeight:35], movieNumberScoreView.frame.size.width, [self ratioHeight:50]);
+        scoreNumber.textColor = [UIColor whiteColor];
+        scoreNumber.layer.masksToBounds = NO;
+        scoreNumber.layer.shadowOffset = CGSizeMake(0, 1);
+        scoreNumber.layer.shadowRadius = 2;
+        scoreNumber.layer.shadowOpacity = 0.8;
+
+        scoreNumber.font = [UIFont systemFontOfSize:40 weight:UIFontWeightLight];
+        
+        [movieNumberScoreView addSubview:scoreNumber];
+
         
         UILabel *movieTitle = [[UILabel alloc] init];
         movieTitle.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:399], [self ratioWidth:255], [self ratioHeight:35]);
@@ -161,18 +205,31 @@
         
         [movieRankSubView addSubview:movieTicketingPercent];
         
-        UIView *movieStarScoreView = [[UIView alloc] init];
-        movieStarScoreView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:460], [self ratioWidth:255], [self ratioHeight:25]);
-        movieStarScoreView.backgroundColor = [UIColor grayColor];
-        
-        [movieContentView addSubview:movieStarScoreView];
+        HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+        starRatingView.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:465], [self ratioWidth:165], [self ratioHeight:25]);
+        starRatingView.maximumValue = 5;
+        starRatingView.minimumValue = 0;
+        starRatingView.allowsHalfStars = YES;
+        starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+        starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
+        starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+        starRatingView.userInteractionEnabled = NO;
+        [movieContentView addSubview:starRatingView];
         
         // 무비랭킹 컨텐츠
-        moviePosterIMG.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+        
+        if (i == 1) {
+            moviePosterIMG.image = [UIImage imageNamed:@"test3.jpg"];
+        }else{
+            moviePosterIMG.image = [UIImage imageNamed:@"test1.jpg"];
+        }
+        
         movieRankingNumber.text = [NSString stringWithFormat:@"%ld", i];
         movieTitle.text = [NSString stringWithFormat:@"영화제목 %ld", i];
         movieAge.text = [NSString stringWithFormat:@"%ld 관람가", i];
         movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %ld", i];
+        scoreNumber.text = @"3.5";
+        starRatingView.value = 3.5;
     }
 }
 
@@ -189,7 +246,6 @@
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     }
 }
-
 
 #pragma mark - CollectionView Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -238,12 +294,10 @@
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
-//    return (num * self.view.frame.size.width) / [[UIScreen mainScreen] bounds].size.width;
     return (num * self.view.frame.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-//    return (num * self.view.frame.size.height) / [[UIScreen mainScreen] bounds].size.height;
     return (num * self.view.frame.size.height) / 667;
 }
 

@@ -48,6 +48,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.0)
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
+  - HCSStarRatingView (1.4.5)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.18)
   - FBSDKShareKit (~> 4.18)
   - Google/Analytics
+  - HCSStarRatingView (~> 1.4)
   - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
@@ -74,8 +76,9 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  HCSStarRatingView: bff3f89314d3b5013ce826ea11897d3129ff6b8c
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 3219f79f26f611273b3d765b23c6fd8e028db75e
+PODFILE CHECKSUM: f24f7c8385bd7a61b4b38c63ac9ff0c8a78bcc21
 
 COCOAPODS: 1.1.1
