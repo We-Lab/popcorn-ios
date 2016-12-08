@@ -19,6 +19,7 @@
 		525923971DF87BBC00BE1506 /* test0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923941DF87BBC00BE1506 /* test0.jpg */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
 		525923A21DF8A55500BE1506 /* test3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923A11DF8A55500BE1506 /* test3.jpg */; };
+		528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 528D7A191DF98EE5007A9D15 /* Assets.xcassets */; };
 		52AE37F81DEC41360016D81E /* PCInitialViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37F71DEC41360016D81E /* PCInitialViewTests.m */; };
 		52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */; };
 		52AE38021DEC6CBD0016D81E /* PCUserInfoValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE38011DEC6CBD0016D81E /* PCUserInfoValidationTests.m */; };
@@ -68,7 +69,6 @@
 		52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */; };
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
 		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
-		5F43BCCC1DF96C200057BA8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F43BCCB1DF96C200057BA8D /* Assets.xcassets */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
 		5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */; };
 		5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */; };
@@ -119,6 +119,7 @@
 		5259239E1DF895DE00BE1506 /* PCSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSearchResultTableViewCell.h; sourceTree = "<group>"; };
 		5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSearchResultTableViewCell.m; sourceTree = "<group>"; };
 		525923A11DF8A55500BE1506 /* test3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test3.jpg; sourceTree = "<group>"; };
+		528D7A191DF98EE5007A9D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52AE37F71DEC41360016D81E /* PCInitialViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCInitialViewTests.m; sourceTree = "<group>"; };
 		52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoValidation.h; sourceTree = "<group>"; };
 		52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoValidation.m; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieNaviView.h; sourceTree = "<group>"; };
 		5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieNaviView.m; sourceTree = "<group>"; };
-		5F43BCCB1DF96C200057BA8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../popcorn-ios-develop/popcorn-ios-develop/Popcorn/Popcorn/Assets.xcassets"; sourceTree = "<group>"; };
 		5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRequesIDViewController.h; sourceTree = "<group>"; };
 		5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRequesIDViewController.m; sourceTree = "<group>"; };
 		5FAA696C1DF9535800528550 /* PCCommentCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCommentCustomCell.h; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 				52AE38241DEE95430016D81E /* MovieDetail */,
 				52AE38051DED4FB50016D81E /* MovieInformation */,
 				52C49A9A1DEB119700F47BB2 /* UserInformation */,
-				5F43BCCB1DF96C200057BA8D /* Assets.xcassets */,
+				528D7A191DF98EE5007A9D15 /* Assets.xcassets */,
 				52C49A991DEB119500F47BB2 /* Utility */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
 				525923841DF6E4A600BE1506 /* GoogleService-Info.plist */,
@@ -613,7 +613,6 @@
 				52C49A711DEB07F400F47BB2 /* Search.storyboard in Resources */,
 				525923961DF87BBC00BE1506 /* test2.jpg in Resources */,
 				52C49A6D1DEB071B00F47BB2 /* MyPage.storyboard in Resources */,
-				5F43BCCC1DF96C200057BA8D /* Assets.xcassets in Resources */,
 				52C49A821DEB0B6900F47BB2 /* Home.storyboard in Resources */,
 				525923951DF87BBC00BE1506 /* test1.jpg in Resources */,
 				525923971DF87BBC00BE1506 /* test0.jpg in Resources */,
@@ -623,6 +622,7 @@
 				525923A21DF8A55500BE1506 /* test3.jpg in Resources */,
 				525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
+				528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */,
 				52C49A691DEB00CB00F47BB2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
