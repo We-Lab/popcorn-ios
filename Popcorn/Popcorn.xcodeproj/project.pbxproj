@@ -226,12 +226,12 @@
 		52AE38051DED4FB50016D81E /* MovieInformation */ = {
 			isa = PBXGroup;
 			children = (
+				52AE38061DED4FF40016D81E /* PCMovieInfoManager.h */,
+				52AE38071DED4FF40016D81E /* PCMovieInfoManager.m */,
 				525923861DF83BBA00BE1506 /* PCBoxOfficeData.h */,
 				525923871DF83BBA00BE1506 /* PCBoxOfficeData.m */,
 				525923891DF83C2700BE1506 /* PCMagazineData.h */,
 				5259238A1DF83C2700BE1506 /* PCMagazineData.m */,
-				52AE38061DED4FF40016D81E /* PCMovieInfoManager.h */,
-				52AE38071DED4FF40016D81E /* PCMovieInfoManager.m */,
 			);
 			name = MovieInformation;
 			sourceTree = "<group>";

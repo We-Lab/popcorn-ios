@@ -40,7 +40,7 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 }
 
 - (void)signUpWithID:(NSDictionary *)form {
-    NSString *urlString = [baseURLString stringByAppendingString:@"registration/"];
+    NSString *urlString = [memberURLString stringByAppendingString:@"registration/"];
     
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     NSURLRequest *request = [serializer requestWithMethod:@"POST"
@@ -60,7 +60,7 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 }
 
 - (void)signInWithID:(NSString *)loginID andPassword:(NSString *)password {
-    NSString *urlString = [baseURLString stringByAppendingString:@"login/"];
+    NSString *urlString = [memberURLString stringByAppendingString:@"login/"];
     NSDictionary *parameters = @{SignInIDKey:loginID,
                                  SignInPasswordKey:password};
     

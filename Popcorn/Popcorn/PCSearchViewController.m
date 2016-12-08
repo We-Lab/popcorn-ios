@@ -7,6 +7,8 @@
 //
 
 #import "PCSearchViewController.h"
+
+#import "PCMovieInfoManager.h"
 #import "PCSearchResultTableViewCell.h"
 
 @interface PCSearchViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
@@ -16,16 +18,22 @@
 @property (weak, nonatomic) IBOutlet UITableView *switchingTableView;
 
 @property (nonatomic) BOOL hasSearched;
-@property (nonatomic) NSArray *rankingTypeArray;
+@property (nonatomic) NSArray *movieListData;
+@property (nonatomic) NSUInteger searchResultCount;
 
 @end
 
+static NSArray const *rankingTypeArray;
+
 @implementation PCSearchViewController
+
++ (void)initialize {
+    rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹", @"장르별 랭킹"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createCustomPlaceholder];
-    self.rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹", @"장르별 랭킹"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,10 +53,35 @@
 }
 
 #pragma mark - Search Result
+- (void)searchMovie:(NSString *)inputText {
+    void (^completionHandler)(BOOL isSuccess, NSArray *movieListData) = ^(BOOL isSuccess, NSArray *movieListData){
+        if (isSuccess) {
+            [self didReceiveMovieData:movieListData];
+        }
+        else {
+            alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
+        }
+    };
+    
+    [[PCMovieInfoManager movieManager] requestMovieList:inputText withCompletionHandler:completionHandler];
+}
 
+- (void)didReceiveMovieData:(NSArray *)movieListData {
+    sLog(movieListData);
+    self.movieListData = movieListData;
+    self.searchResultCount = movieListData.count;
+    
+    if (_searchResultCount == 0) {
+        self.viewTitleLabel.text = @"검색 결과 없음";
+    }
+    else {
+        self.viewTitleLabel.text = [NSString stringWithFormat:@"검색 결과 : %lu", _searchResultCount];
+        [self.switchingTableView reloadData];
+    }
+    
+}
 
-
-#pragma mark - Textfield Configure
+#pragma mark - Configure Textfield
 - (void)createCustomPlaceholder {
     NSTextAttachment *placeholderImageTextAttachment = [[NSTextAttachment alloc] init];
     UIImage *searchImage = [UIImage imageNamed:@"Search"];
@@ -88,9 +121,10 @@
         [self createCustomPlaceholder];
     }
     else {
+        self.hasSearched = YES;
         self.searchTextField.clearButtonMode = UITextFieldViewModeAlways;
         self.viewTitleLabel.text = @"검색 결과";
-        self.hasSearched = YES;
+        [self searchMovie:textField.text];
     }
     
     [self.switchingTableView reloadData];
@@ -108,13 +142,14 @@
         [_searchTextField endEditing:YES];
 }
 
+
 # pragma mark - Configure TableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_hasSearched) {
-        return 8;
+        return _searchResultCount;
     }
     else {
-        return _rankingTypeArray.count;
+        return rankingTypeArray.count;
     }
 }
 
@@ -138,7 +173,7 @@
         NSString *imageName = [@"test" stringByAppendingString:[NSString stringWithFormat:@"%ld.jpg", indexPath.row % 4]];
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         
-        cell.textLabel.text = _rankingTypeArray[indexPath.row];
+        cell.textLabel.text = rankingTypeArray[indexPath.row];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:26];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -146,11 +181,26 @@
     }
     else {
         PCSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell"];
-        if (cell == nil){
+        if (cell == nil)
             cell = [[PCSearchResultTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"SearchResultCell"];
-        }
-        cell.textLabel.text = @"테스트";
-        cell.countryLabel.text = @"한국";
+        
+        NSString *titleString = _movieListData[indexPath.row][@"title_kor"];
+        NSString *yearString = _movieListData[indexPath.row][@"created_year"];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, yearString];
+        
+        NSArray *genreArray= _movieListData[indexPath.row][@"genre"];
+        __block NSString *genreLabelString;
+        [genreArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (genreLabelString == nil) {
+                genreLabelString = obj;
+            }
+            else {
+                NSString *appendString = [NSString stringWithFormat:@"  %@", obj];
+                genreLabelString = [genreLabelString stringByAppendingString:appendString];
+            }
+        }];
+        cell.additionalInfoLabel.text = genreLabelString;
+        
         cell.imageView.image = [UIImage imageNamed:@"test1.jpg"];
         
         return cell;
