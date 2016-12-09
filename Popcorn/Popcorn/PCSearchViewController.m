@@ -10,16 +10,19 @@
 
 #import "PCMovieInfoManager.h"
 #import "PCSearchResultTableViewCell.h"
+#import "PCRankingDetailViewController.h"
 
 @interface PCSearchViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UILabel *viewTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *switchingTableView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 
 @property (nonatomic) BOOL hasSearched;
 @property (nonatomic) NSArray *movieListData;
 @property (nonatomic) NSUInteger searchResultCount;
+@property (nonatomic) NSUInteger selectedRow;
 
 @end
 
@@ -28,12 +31,14 @@ static NSArray const *rankingTypeArray;
 @implementation PCSearchViewController
 
 + (void)initialize {
-    rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹", @"장르별 랭킹"];
+//    rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹", @"장르별 랭킹"];
+    rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createCustomPlaceholder];
+    self.tapGesture.cancelsTouchesInView = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,9 +57,9 @@ static NSArray const *rankingTypeArray;
     [super viewWillDisappear:animated];
 }
 
-#pragma mark - Search Result
+#pragma mark - Search Movie
 - (void)searchMovie:(NSString *)inputText {
-    void (^completionHandler)(BOOL isSuccess, NSArray *movieListData) = ^(BOOL isSuccess, NSArray *movieListData){
+    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
         if (isSuccess) {
             [self didReceiveMovieData:movieListData];
         }
@@ -78,7 +83,6 @@ static NSArray const *rankingTypeArray;
         self.viewTitleLabel.text = [NSString stringWithFormat:@"검색 결과 : %lu", _searchResultCount];
         [self.switchingTableView reloadData];
     }
-    
 }
 
 #pragma mark - Configure Textfield
@@ -200,7 +204,6 @@ static NSArray const *rankingTypeArray;
             }
         }];
         cell.additionalInfoLabel.text = genreLabelString;
-        
         cell.imageView.image = [UIImage imageNamed:@"test1.jpg"];
         
         return cell;
@@ -209,6 +212,16 @@ static NSArray const *rankingTypeArray;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedRow = indexPath.row;
+    return indexPath;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    PCRankingDetailViewController *rankingDetailVC = segue.destinationViewController;
+    rankingDetailVC.titleString = rankingTypeArray[_selectedRow];
 }
 
 

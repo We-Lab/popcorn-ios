@@ -7,7 +7,10 @@
 //
 
 #import "PCHomeViewController.h"
+
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <HCSStarRatingView.h>
+#import "PCMovieInfoManager.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -21,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
 
+@property (nonatomic) NSArray *boxOfficeList;
 @property (nonatomic) UIScrollView *boxOfficeScrollView;
 @property (nonatomic) UIView *movieSlidingContentView;
 
@@ -44,8 +48,24 @@
     
     self.testArray = @[@"1",@"1",@"1",@"1",@"1"];
 
+    [self requestBoxOfficeList];
+}
+
+- (void)requestBoxOfficeList {
+    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+        if (isSuccess)
+            [self didReceiveBoxOfficeList:movieListData];
+    };
+    
+    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:completionHandler];
+}
+
+- (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
+    self.boxOfficeList = [NSArray array];
+    self.boxOfficeList = boxOfficeList;
     [self setCustomViewStatus];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -92,6 +112,7 @@
     [self creatMovieRankScroll];
 }
 
+
 #pragma mark - Main Movie Scroll Layout
 - (void)creatMovieRankScroll{
     
@@ -100,23 +121,41 @@
         CGFloat baseMovieContentWidth = [self ratioWidth:295];
         CGFloat baseMovieContentHeight = [self ratioHeight:507];
         
-        UIView *movieContentView = [[UIView alloc] init];
+        NSDictionary *movieInfo = [NSDictionary dictionary];
+        if (i == 0) {
+            movieInfo = _boxOfficeList[9];
+        }
+        else if (i == 11) {
+            movieInfo = _boxOfficeList[0];
+        }
+        else {
+            movieInfo = _boxOfficeList[i-1];
+        }
         
+        UIView *movieContentView = [[UIView alloc] init];
         movieContentView.tag = i;
         NSInteger row = movieContentView.tag;
         movieContentView.frame = CGRectMake(baseMovieContentWidth * row,0,
                                             baseMovieContentWidth,baseMovieContentHeight);
-        
         [self.movieSlidingContentView addSubview:movieContentView];
+        
         
         UIImageView *moviePosterIMG = [[UIImageView alloc] init];
         moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
         moviePosterIMG.contentMode = UIViewContentModeScaleAspectFill;
         moviePosterIMG.clipsToBounds = YES;
+        moviePosterIMG.tag = i;
+        
+        
+        NSString *testURL = @"http://t1.search.daumcdn.net/thumb/R438x0.q85/?fname=http%3A%2F%2Fcfile89.uf.daum.net%2Fimage%2F12110210A83A198852BAED";
+//        NSURL *imageURL = [NSURL URLWithString:_boxOfficeList[i][@"img_url"]];
+        NSURL *imageURL = [NSURL URLWithString:testURL];
+        [moviePosterIMG sd_setImageWithURL:imageURL
+                          placeholderImage:nil
+                                   options:SDWebImageHighPriority | SDWebImageRetryFailed | SDWebImageCacheMemoryOnly];
         [movieContentView addSubview:moviePosterIMG];
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
-        
         movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-[self ratioWidth:85], moviePosterIMG.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
@@ -125,18 +164,15 @@
         movieRankingNumber.layer.shadowOffset = CGSizeMake(0, 1);
         movieRankingNumber.layer.shadowRadius = 2;
         movieRankingNumber.layer.shadowOpacity = 0.8;
-        
         [moviePosterIMG addSubview:movieRankingNumber];
         
+        
         UIView *movieNumberScoreView = [[UIView alloc] init];
-        
         movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], moviePosterIMG.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
-        
-        
         [moviePosterIMG addSubview:movieNumberScoreView];
         
-        UILabel *scoreLabel = [[UILabel alloc] init];
         
+        UILabel *scoreLabel = [[UILabel alloc] init];
         scoreLabel.frame = CGRectMake(0, [self ratioHeight:15], movieNumberScoreView.frame.size.width, [self ratioHeight:20]);
         scoreLabel.text = @"평점";
         scoreLabel.textColor = [UIColor whiteColor];
@@ -145,20 +181,17 @@
         scoreLabel.layer.shadowOffset = CGSizeMake(0, 1);
         scoreLabel.layer.shadowRadius = 2;
         scoreLabel.layer.shadowOpacity = 0.8;
-        
         [movieNumberScoreView addSubview:scoreLabel];
         
-        UILabel *scoreNumber = [[UILabel alloc] init];
         
+        UILabel *scoreNumber = [[UILabel alloc] init];
         scoreNumber.frame = CGRectMake(0, [self ratioHeight:35], movieNumberScoreView.frame.size.width, [self ratioHeight:50]);
         scoreNumber.textColor = [UIColor whiteColor];
         scoreNumber.layer.masksToBounds = NO;
         scoreNumber.layer.shadowOffset = CGSizeMake(0, 1);
         scoreNumber.layer.shadowRadius = 2;
         scoreNumber.layer.shadowOpacity = 0.8;
-
         scoreNumber.font = [UIFont systemFontOfSize:40 weight:UIFontWeightLight];
-        
         [movieNumberScoreView addSubview:scoreNumber];
 
         
@@ -168,19 +201,17 @@
         movieTitle.textAlignment = NSTextAlignmentCenter;
         movieTitle.clipsToBounds = YES;
         movieTitle.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
-        
         [movieContentView addSubview:movieTitle];
         
         CALayer *movieTitleBorder = [CALayer layer];
         movieTitleBorder.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
         movieTitleBorder.borderWidth = 1;
         movieTitleBorder.frame = CGRectMake(-1, -1, movieTitle.frame.size.width+2, movieTitle.frame.size.height);
-        
         [movieTitle.layer addSublayer:movieTitleBorder];
+        
         
         UIView *movieRankSubView = [[UIView alloc] init];
         movieRankSubView.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:434], [self ratioWidth:255], [self ratioHeight:20]);
-        
         [movieContentView addSubview:movieRankSubView];
         
         UILabel *movieAge = [[UILabel alloc] init];
@@ -188,48 +219,42 @@
         movieAge.textAlignment = NSTextAlignmentCenter;
         movieAge.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
         movieAge.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
-        
         [movieRankSubView addSubview:movieAge];
+        
         
         UIView *movieRankLine = [[UIView alloc] init];
         movieRankLine.frame = CGRectMake(movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], [self ratioHeight:2.5], [self ratioWidth:1], [self ratioHeight:15]);
         movieRankLine.backgroundColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1];
-        
         [movieRankSubView addSubview:movieRankLine];
+        
         
         UILabel *movieTicketingPercent = [[UILabel alloc] init];
         movieTicketingPercent.frame = CGRectMake(movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], 0, movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieTicketingPercent.textAlignment = NSTextAlignmentCenter;
         movieTicketingPercent.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
         movieTicketingPercent.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
-        
         [movieRankSubView addSubview:movieTicketingPercent];
+        
         
         HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
         starRatingView.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:465], [self ratioWidth:165], [self ratioHeight:25]);
         starRatingView.maximumValue = 5;
         starRatingView.minimumValue = 0;
         starRatingView.allowsHalfStars = YES;
+        starRatingView.accurateHalfStars = YES;
         starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
         starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
         starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
         starRatingView.userInteractionEnabled = NO;
         [movieContentView addSubview:starRatingView];
         
-        // 무비랭킹 컨텐츠
-        
-        if (i == 1) {
-            moviePosterIMG.image = [UIImage imageNamed:@"test3.jpg"];
-        }else{
-            moviePosterIMG.image = [UIImage imageNamed:@"test1.jpg"];
-        }
         
         movieRankingNumber.text = [NSString stringWithFormat:@"%ld", i];
-        movieTitle.text = [NSString stringWithFormat:@"영화제목 %ld", i];
-        movieAge.text = [NSString stringWithFormat:@"%ld 관람가", i];
-        movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %ld", i];
-        scoreNumber.text = @"3.5";
-        starRatingView.value = 3.5;
+        movieTitle.text = movieInfo[@"movie_title"];
+        movieAge.text = movieInfo[@"movie"][@"grade"][@"grade"];
+        movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %.2lf%%", [movieInfo[@"ticketing_rate"] floatValue]];
+        scoreNumber.text = movieInfo[@"movie"][@"star_average"];
+        starRatingView.value = [movieInfo[@"movie"][@"star_average"] floatValue];
     }
 }
 

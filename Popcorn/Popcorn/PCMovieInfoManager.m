@@ -39,23 +39,39 @@
     return self;
 }
 
-+ (NSDictionary *)requestMovieDetail:(NSString *)movieID {
-    return nil;
+- (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(MovieNetworkingHandler)completionHandler {
+    NSString *urlString;
+    
+    switch (rankingType) {
+        case BoxOfficeRankingDetailList:
+//            urlString = [movieURLString stringByAppendingString:@"main/BoxOfficeRanking"];
+            break;
+        case RatingRankingDetailList:
+//            urlString =
+            break;
+        case LikeRankingDetailList:
+//            urlString =
+            break;
+    }
+    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    _dataTask = [_sessionManager dataTaskWithRequest:request
+                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                       if (error) {
+                                           aLog(@"에러 발생. %@", error);
+                                           completionHandler(NO, responseObject);
+                                       }
+                                       else {
+                                           completionHandler(YES, responseObject);
+                                       }
+                                   }];
+    [_dataTask resume];
 }
 
-+ (NSDictionary *)requestActorDetail:(NSString *)actorID {
-    return nil;
-}
-
-+ (NSDictionary *)requestAllComments:(NSString *)movieID {
-    return nil;
-}
-
-+ (NSDictionary *)requestAllFamousLines:(NSString *)movieID {
-    return nil;
-}
-
-- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(void (^)(BOOL isSuccess, NSArray *movieListData))completionHandler {
+- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(MovieNetworkingHandler)completionHandler {
     NSCharacterSet *allowedCharacterSet = [NSCharacterSet URLQueryAllowedCharacterSet];
     NSString *urlString = [movieURLString stringByAppendingString:@"search/?keyword="];
     urlString = [[urlString stringByAppendingString:inputText] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
@@ -78,5 +94,27 @@
     [_dataTask resume];
 }
 
+- (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
+    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    _dataTask = [_sessionManager dataTaskWithRequest:request
+                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                       BOOL result = NO;
+                                       if (error) {
+                                           aLog(@"에러 발생. %@", error);
+                                       }
+                                       else {
+                                           result = YES;
+                                       }
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            completionHandler(result, responseObject);
+                                        });
+                                   }];
+    [_dataTask resume];
+}
 
 @end

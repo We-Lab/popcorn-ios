@@ -26,7 +26,7 @@
     [super viewDidAppear:animated];
     [self removeLoginViewControllers];
     
-    // inititalView as Search
+//    initial View
 //    self.selectedIndex = 1;
 }
 

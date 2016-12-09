@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PCRankingDetailViewController : UIViewController
+@property (nonatomic) NSString *titleString;
 @end

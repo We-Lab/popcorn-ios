@@ -19,16 +19,6 @@
                     <view key="view" contentMode="scaleToFill" id="FpG-e4-Flg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vy-aD-I70">
-                                <rect key="frame" x="213" y="301" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="LxG-yc-ql4" kind="show" id="dsf-Az-RW7"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="추천" id="3Ks-eN-d7d"/>
@@ -36,24 +26,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EW4-Fl-jp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="976.79999999999995" y="-91.304347826086968"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ps1-5B-xPX">
-            <objects>
-                <viewController id="LxG-yc-ql4" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5U2-M0-92P"/>
-                        <viewControllerLayoutGuide type="bottom" id="lcE-U0-cEq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TdX-Uy-E8j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HDu-eg-mhH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1815.2" y="-91.304347826086968"/>
         </scene>
         <!--추천-->
         <scene sceneID="2kb-rE-nxY">

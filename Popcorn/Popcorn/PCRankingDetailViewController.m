@@ -7,31 +7,72 @@
 //
 
 #import "PCRankingDetailViewController.h"
+#import "PCMovieInfoManager.h"
 
-@interface PCRankingDetailViewController ()
-
+@interface PCRankingDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *rankingTableView;
+@property (nonatomic) NSArray *movieRankingList;
 @end
+
 
 @implementation PCRankingDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+        if (isSuccess)
+            [self didReceiveRankingList:movieListData];
+        else
+            alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
+    };
+    
+    [[PCMovieInfoManager movieManager] requestRankingList:BoxOfficeRankingDetailList withCompletionHandler:completionHandler];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationItem.title = self.titleString;
+}
+
+- (void)didReceiveRankingList:(NSArray *)rankingList {
+    sLog(rankingList);
+    self.movieRankingList = rankingList;
+    [self.rankingTableView reloadData];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _movieRankingList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 120;
+//}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RankingDetailCell" forIndexPath:indexPath];
+    
+//    cell.textLabel.text = _movieRankingList[indexPath.row][@"movie_title"];
+//    cell.imageView.image = _movieRankingList[0][@"photo1"];
+    
+    return cell;
+}
+
+- (void)dealloc {
+    dLog(@" ");
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

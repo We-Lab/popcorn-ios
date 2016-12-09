@@ -15,6 +15,7 @@
 // 공통
 NSString *const memberURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/member/";
 NSString *const movieURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/movie/";
+NSString *const mainURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/main/";
 NSString *const TokenKey = @"key";
 
 // SignIn

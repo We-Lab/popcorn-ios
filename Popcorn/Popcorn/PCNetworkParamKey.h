@@ -15,6 +15,7 @@
 // 공통
 extern NSString *const memberURLString;
 extern NSString *const movieURLString;
+extern NSString *const mainURLString;
 extern NSString *const TokenKey;
 
 // Sign In
