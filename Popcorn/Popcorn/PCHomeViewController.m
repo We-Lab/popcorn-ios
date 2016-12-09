@@ -8,6 +8,7 @@
 
 #import "PCHomeViewController.h"
 #import <HCSStarRatingView.h>
+#import "PCMovieDetailViewController.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -116,6 +117,16 @@
         [movieContentView addSubview:moviePosterIMG];
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
+        
+        //임시영역
+//        UIButton *movieMainToDetableBTN = [[UIButton alloc] init];
+//        
+//        movieMainToDetableBTN.frame = moviePosterIMG.frame;
+//        [movieMainToDetableBTN addTarget:self action:@selector(moveToMovieDetail) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        [movieContentView addSubview:movieMainToDetableBTN];
+        
+        
         
         movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-[self ratioWidth:85], moviePosterIMG.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
@@ -310,5 +321,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+//- (void)moveToMovieDetail{
+//    
+//    [self performSegueWithIdentifier:@"movieMagazineSegue" sender:self];
+//    
+//    
+////    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 @end

@@ -45,6 +45,14 @@
                                                             <constraint firstAttribute="height" constant="522" id="1cM-WG-8Bf"/>
                                                         </constraints>
                                                     </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-ck-YLC">
+                                                        <rect key="frame" x="317" y="12" width="46" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <segue destination="VA5-Yi-qXC" kind="show" identifier="" id="MlB-wl-2Id"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -128,6 +136,13 @@
                                                                                             <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-ar-6uG">
+                                                                                            <rect key="frame" x="0.0" y="10" width="290" height="30"/>
+                                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                            <connections>
+                                                                                                <segue destination="LAZ-CG-GJd" kind="show" identifier="movieMagazineSegue" id="FRX-5E-QLY"/>
+                                                                                            </connections>
+                                                                                        </button>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <constraints>
@@ -155,9 +170,6 @@
                                                                         </constraints>
                                                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                                                         <size key="customSize" width="290" height="175"/>
-                                                                        <connections>
-                                                                            <segue destination="LAZ-CG-GJd" kind="show" id="zua-T9-wCc"/>
-                                                                        </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
                                                                 <connections>
@@ -496,10 +508,18 @@
             </objects>
             <point key="canvasLocation" x="388" y="-361.61919040479762"/>
         </scene>
-        <!--Main View Controller-->
+        <!--MovieInfo-->
+        <scene sceneID="xaP-vQ-fS8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MovieInfo" id="VA5-Yi-qXC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvg-2M-Kog" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1373" y="-1021"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="DQB-zg-qKn">
             <objects>
-                <viewController id="LAZ-CG-GJd" customClass="PCMainViewController" sceneMemberID="viewController">
+                <viewController id="LAZ-CG-GJd" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Go5-K9-ZD7"/>
                         <viewControllerLayoutGuide type="bottom" id="OWv-lz-7py"/>
@@ -514,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSx-3P-MJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="-362"/>
+            <point key="canvasLocation" x="1953" y="-361"/>
         </scene>
         <!--홈-->
         <scene sceneID="aOa-GF-hbm">

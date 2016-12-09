@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QwY-58-uqz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dbp-ES-yMs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1526"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URi-a3-6Ng">
-                                        <rect key="frame" x="0.0" y="-64" width="375" height="1526"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1526"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5w0-eJ-GwE">
                                                 <rect key="frame" x="0.0" y="355" width="375" height="150"/>
@@ -874,7 +874,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="URi-a3-6Ng" firstAttribute="top" secondItem="QH4-mq-71O" secondAttribute="top" constant="-64" id="801-8E-ka4"/>
+                                    <constraint firstItem="URi-a3-6Ng" firstAttribute="top" secondItem="QH4-mq-71O" secondAttribute="top" id="801-8E-ka4"/>
                                     <constraint firstItem="URi-a3-6Ng" firstAttribute="leading" secondItem="QH4-mq-71O" secondAttribute="leading" id="Gry-Ge-gDe"/>
                                     <constraint firstAttribute="trailing" secondItem="URi-a3-6Ng" secondAttribute="trailing" id="ZKn-rn-tJn"/>
                                     <constraint firstAttribute="bottom" secondItem="URi-a3-6Ng" secondAttribute="bottom" id="qxN-wG-VVe"/>
@@ -1118,24 +1118,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gI9-GI-oP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2191" y="-177"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="F22-xs-iPo">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QwY-58-uqz" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wuy-AS-IEt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dbp-ES-yMs" kind="relationship" relationship="rootViewController" id="ZQb-8U-S2I"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Yu-S2-Wp2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="144.80000000000001" y="-177.66116941529236"/>
         </scene>
     </scenes>
     <resources>
