@@ -9,8 +9,10 @@
 #import "PCMyPageViewController.h"
 #import "PCUserInformation.h"
 
-@interface PCMyPageViewController ()
+@interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *myPageMainTableView;
+@property UIButton *myPageButton;
 
 @end
 
@@ -39,12 +41,14 @@
     UIView *myPageTableHeaderView = [[UIView alloc] init];
     
     myPageTableHeaderView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self ratioHeight:245]);
+    myPageTableHeaderView.backgroundColor = [UIColor whiteColor];
     
     self.myPageMainTableView.tableHeaderView = myPageTableHeaderView;
     
     UIImageView *userImageView = [[UIImageView alloc] init];
     
     userImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self ratioHeight:200]);
+    userImageView.backgroundColor = [UIColor grayColor];
     
     [myPageTableHeaderView addSubview:userImageView];
     
@@ -54,13 +58,23 @@
     
     [myPageTableHeaderView addSubview:myPageButtonView];
     
+    
+    UILabel *userName = [[UILabel alloc] init];
+    
+    userName.frame = CGRectMake(12, userImageView.frame.size.height - [self ratioHeight:32], userImageView.frame.size.width -24, [self ratioHeight:20]);
+    userName.text = @"유저 아이디?";
+    userName.textColor = [UIColor whiteColor];
+    userName.font = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
+    
+    [userImageView addSubview:userName];
+    
     for (NSInteger i = 0; i < 3; i += 1) {
         
         CGFloat baseMovieContentWidth = myPageButtonView.frame.size.width/3;
         CGFloat baseMovieContentHeight = myPageButtonView.frame.size.height;
         
         UIView *myPageButtonLine = [[UIView alloc] init];
-        
+
         myPageButtonLine.tag = i;
         NSInteger row = myPageButtonLine.tag;
         myPageButtonLine.frame = CGRectMake(baseMovieContentWidth * row,0,
@@ -68,28 +82,39 @@
         
         [myPageButtonView addSubview:myPageButtonLine];
         
-        UIButton *myPageButton = [[UIButton alloc] init];
+        self.myPageButton = [[UIButton alloc] init];
         
-        myPageButton.frame = CGRectMake(0, 0, myPageButtonLine.frame.size.width, [self ratioHeight:42]);
+        self.myPageButton.frame = CGRectMake(0, 0, myPageButtonLine.frame.size.width, [self ratioHeight:42]);
+        self.myPageButton.backgroundColor = [UIColor whiteColor];
+        self.myPageButton.tag = i;
         
         if (i == 0) {
-            myPageButton.titleLabel.text = @"평가영화";
+            myPageButtonLine.backgroundColor = [UIColor  colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
+            [self.myPageButton setTitle:@"평가영화" forState:UIControlStateNormal];
         }else if (i == 1){
             
-            myPageButton.titleLabel.text = @"명대사";
+            [self.myPageButton setTitle:@"명대사" forState:UIControlStateNormal];
+            
         }else if (i == 2){
             
-            myPageButton.titleLabel.text = @"좋아요";
+            [self.myPageButton setTitle:@"좋아요" forState:UIControlStateNormal];
         }
         
-        myPageButton.titleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-        myPageButton.titleLabel.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
+        self.myPageButton.titleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+        [self.myPageButton setTitleColor:[UIColor  colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1] forState:UIControlStateNormal];
         
-        [myPageButtonLine addSubview:myPageButton];
+        [self.myPageButton addTarget:self action:@selector(setReloadSection:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [myPageButtonLine addSubview:self.myPageButton];
     }
 }
 
 #pragma mark - TableView Required
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return 3;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
@@ -102,6 +127,11 @@
     }
     
     return myPageCell;
+}
+
+- (void)setReloadSection:(UIButton *)sender{
+
+    [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 

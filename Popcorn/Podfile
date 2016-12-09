@@ -14,6 +14,7 @@ target 'Popcorn' do
   #pod 'GoogleAnalytics', '~> 3.17'
   pod 'Google/Analytics'
   pod 'HCSStarRatingView', '~> 1.4'
+  pod 'BEMSimpleLineGraph', '~> 4.1'
 
   target 'PopcornTests' do
     inherit! :search_paths

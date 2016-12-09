@@ -9,8 +9,9 @@
 #import "PCMovieDetailViewController.h"
 #import "PCMovieNaviView.h"
 #import <HCSStarRatingView.h>
+#import <BEMSimpleLineGraphView.h>
 
-@interface PCMovieDetailViewController () <UIScrollViewDelegate>
+@interface PCMovieDetailViewController () <UIScrollViewDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
@@ -37,19 +38,13 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentContentHeight;
 @property (weak, nonatomic) IBOutlet UIView *famousLineContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *famousLineContentHeight;
-@property BOOL test;
+@property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
+
+@property NSArray *testArray;
 
 @end
 
 @implementation PCMovieDetailViewController
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.test = YES;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,8 +56,9 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     
+    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
+    
     [self setCustomViewStatus];
-    [self setCustomMovieCommentView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,12 +74,6 @@
 #pragma mark - Make Custom Navi View
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-    if (scrollView.contentOffset.y > 200) {
-        
-        self.test = NO;
-        
-        [self preferredStatusBarStyle];
-    }
 }
 
 
@@ -100,11 +90,7 @@
 // 스테이터스 바 스타일 메소드
 - (UIStatusBarStyle)preferredStatusBarStyle {
     
-    if (self.test == YES) {
-        return UIStatusBarStyleLightContent;
-    }
-    
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 // 네비게이션 Pop
@@ -139,59 +125,19 @@
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
     self.movieVideoTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    BEMSimpleLineGraphView *movieScoreGraph = [[BEMSimpleLineGraphView alloc] init];
+    movieScoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    movieScoreGraph.dataSource = self;
+    movieScoreGraph.delegate = self;
+    movieScoreGraph.enableBezierCurve = YES;
+//    movieScoreGraph.colorTop = [UIColor whiteColor];
+//    movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+    movieScoreGraph.displayDotsWhileAnimating = NO;       
+    [self.movieScoreGraphView addSubview:movieScoreGraph];
 
 }
 
-#pragma mark - Custom Comment View
-- (void)setCustomMovieCommentView{
-
-//    for (NSInteger i = 0; i < 3; i += 1) {
-//        
-//    }
-    
-    UIView *userWriteContentView = [[UIView alloc] init];
-    
-    userWriteContentView.frame = CGRectMake(0, 0, self.commentContentView.frame.size.width, self.commentContentView.frame.size.height);
-    
-    [self.commentContentView addSubview:userWriteContentView];
-    
-    UIImageView *userImage = [[UIImageView alloc] init];
-    
-    userImage.frame = CGRectMake(0, 0, [self ratioWidth:40], [self ratioHeight:40]);
-    userImage.backgroundColor = [UIColor redColor];
-    userImage.layer.cornerRadius = 20;
-    
-    [userWriteContentView addSubview:userImage];
-    
-    UIView *commentContent = [[UIView alloc] init];
-    
-    commentContent.frame = CGRectMake([self ratioWidth:55], [self ratioHeight:5], userWriteContentView.frame.size.width - [self ratioWidth:55], userWriteContentView.frame.size.height - [self ratioHeight:5]);
-    
-    [userWriteContentView addSubview:commentContent];
-    
-    UILabel *commentUserID = [[UILabel alloc] init];
-    
-    commentUserID.frame = CGRectMake(0, 0, commentContent.frame.size.width, [self ratioHeight:15]);
-    commentUserID.text = @"유저 아이디";
-    commentUserID.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-    
-    [commentContent addSubview:commentUserID];
-    
-    
-    
-    UITextView *commentContentText = [[UITextView alloc] init];
-    
-    CGRect textViewFrame = commentContentText.frame;
-    textViewFrame.size.height = commentContentText.contentSize.height;
-    
-//    NSLog(@"야야야 -%lf", textViewFrame.size.height);
-    
-    commentContentText.frame = CGRectMake(0, [self ratioHeight:15], commentContent.frame.size.width, textViewFrame.size.height);
-    commentContentText.text = @"asdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf";
-    
-    [commentUserID addSubview:commentContentText];
-    
-}
 
 #pragma mark - Custom FamousLine View
 - (void)setCustomMovieFamousLineView{
@@ -207,6 +153,17 @@
     UICollectionViewCell *moviePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePhotoCell" forIndexPath:indexPath];
     
     return moviePhotoCell;
+}
+
+#pragma mark - Graph OpenSource Required
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph{
+    
+    return self.testArray.count;
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
+    
+    return [[self.testArray objectAtIndex:index] doubleValue];;
 }
 
 #pragma mark - MovieStory More Button Action
@@ -240,12 +197,10 @@
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
-    //    return (num * self.view.frame.size.width) / [[UIScreen mainScreen] bounds].size.width;
     return (num * self.view.frame.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-    //    return (num * self.view.frame.size.height) / [[UIScreen mainScreen] bounds].size.height;
     return (num * self.view.frame.size.height) / 667;
 }
 

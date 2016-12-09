@@ -12,6 +12,7 @@
 
 @interface PCCommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *commentListTableView;
 
 @end
 
@@ -21,15 +22,19 @@
     [super viewDidLoad];
     
     [self setCustomViewStatus];
+    
+    self.commentListTableView.rowHeight = UITableViewAutomaticDimension;
+    self.commentListTableView.estimatedRowHeight = 200;
 
 }
 
 #pragma mark - Make Custem View
 - (void)setCustomViewStatus{
     
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];  
 }
 
+#pragma mark - TableView Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return 10;
@@ -37,22 +42,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *commentCell = [tableView dequeueReusableCellWithIdentifier:@"CommnetCell" forIndexPath:indexPath];
+    PCCommentCustomCell *commentCell = [tableView dequeueReusableCellWithIdentifier:@"CommnetCell" forIndexPath:indexPath];
     
-    if (commentCell != nil) {
+    if (!commentCell) {
         
-        commentCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommnetCell"];
+        commentCell = [[PCCommentCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommnetCell"];
     }
     
+    if (indexPath.row == 2) {
+        commentCell.commentText.text = @"우아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아END";
+    }
+    
+    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+    starRatingView.frame = CGRectMake(0, 0, 120, commentCell.commentStarRatingView.frame.size.height);
+    starRatingView.maximumValue = 5;
+    starRatingView.minimumValue = 0;
+    starRatingView.value = 3.5;
+    starRatingView.backgroundColor = [UIColor clearColor];
+    starRatingView.allowsHalfStars = YES;
+    starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+    starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
+    starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+    starRatingView.userInteractionEnabled = NO;
+    [commentCell.commentStarRatingView addSubview:starRatingView];
+
     return  commentCell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-////    CGFloat  [tableView cellForRowAtIndexPath:indexPath].text.hei;
-//    
-//    return nil;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

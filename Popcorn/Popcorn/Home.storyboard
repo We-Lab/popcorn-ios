@@ -128,6 +128,10 @@
                                                                                             <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-ar-6uG">
+                                                                                            <rect key="frame" x="0.0" y="10" width="290" height="30"/>
+                                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                        </button>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <constraints>
@@ -155,9 +159,6 @@
                                                                         </constraints>
                                                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                                                         <size key="customSize" width="290" height="175"/>
-                                                                        <connections>
-                                                                            <segue destination="LAZ-CG-GJd" kind="show" id="zua-T9-wCc"/>
-                                                                        </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
                                                                 <connections>
@@ -495,26 +496,6 @@
                 </imageView>
             </objects>
             <point key="canvasLocation" x="388" y="-361.61919040479762"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="DQB-zg-qKn">
-            <objects>
-                <viewController id="LAZ-CG-GJd" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Go5-K9-ZD7"/>
-                        <viewControllerLayoutGuide type="bottom" id="OWv-lz-7py"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mIc-Lp-yHi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pSx-3P-MJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1374" y="-361"/>
         </scene>
         <!--홈-->
         <scene sceneID="aOa-GF-hbm">
