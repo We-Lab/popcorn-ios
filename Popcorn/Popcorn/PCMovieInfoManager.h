@@ -26,6 +26,9 @@ typedef NS_ENUM(NSUInteger, RankingListType) {
 // Main
 - (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler;
 
+//Recommend
+- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(MovieNetworkingHandler)completionHandler;
+
 //+ (NSDictionary *)requestMovieDetail:(NSString *)movieID;
 //+ (NSDictionary *)requestActorDetail:(NSString *)actorID;
 //+ (NSDictionary *)requestAllComments:(NSString *)movieID;

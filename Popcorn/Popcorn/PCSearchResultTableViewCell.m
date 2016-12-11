@@ -13,6 +13,7 @@
 
 @implementation PCSearchResultTableViewCell
 
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -30,12 +31,6 @@
     self.imageView.frame = CGRectMake(12, 8, 46, 44);
     self.textLabel.frame = CGRectMake(66, 8, self.frame.size.width - 66, 25);
     self.additionalInfoLabel.frame = CGRectMake(66, 36, self.frame.size.width - 66, 15);
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

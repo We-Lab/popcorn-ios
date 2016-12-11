@@ -68,6 +68,8 @@
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */; };
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
+		52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */; };
+		52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */; };
 		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
 		5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */; };
@@ -185,6 +187,10 @@
 		52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManager.h; sourceTree = "<group>"; };
 		52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManager.m; sourceTree = "<group>"; };
 		52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManagerDelegate.h; sourceTree = "<group>"; };
+		52FFA92E1DFC374100507936 /* PCRecommendTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTagViewController.h; sourceTree = "<group>"; };
+		52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTagViewController.m; sourceTree = "<group>"; };
+		52FFA9311DFC3A9500507936 /* PCRecommendTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTagButton.h; sourceTree = "<group>"; };
+		52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTagButton.m; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieNaviView.h; sourceTree = "<group>"; };
 		5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieNaviView.m; sourceTree = "<group>"; };
@@ -420,6 +426,10 @@
 			children = (
 				52C49A881DEB0DB300F47BB2 /* PCRecommendViewController.h */,
 				52C49A891DEB0DB300F47BB2 /* PCRecommendViewController.m */,
+				52FFA92E1DFC374100507936 /* PCRecommendTagViewController.h */,
+				52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */,
+				52FFA9311DFC3A9500507936 /* PCRecommendTagButton.h */,
+				52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */,
 			);
 			name = Recommend;
 			sourceTree = "<group>";
@@ -819,6 +829,8 @@
 				520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */,
 				52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
+				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
+				52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */,
 				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
 				52AE383A1DEF3EBD0016D81E /* KeychainItemWrapper.m in Sources */,
 				52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */,

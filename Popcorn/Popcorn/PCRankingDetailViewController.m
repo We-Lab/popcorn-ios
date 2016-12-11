@@ -17,6 +17,8 @@
 
 @implementation PCRankingDetailViewController
 
+
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -34,6 +36,7 @@
     self.navigationItem.title = self.titleString;
 }
 
+
 - (void)didReceiveRankingList:(NSArray *)rankingList {
     sLog(rankingList);
     self.movieRankingList = rankingList;
@@ -41,6 +44,7 @@
 }
 
 
+#pragma mark - Configure TableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -53,10 +57,6 @@
     return 0;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 120;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RankingDetailCell" forIndexPath:indexPath];
     
@@ -66,6 +66,9 @@
     return cell;
 }
 
+
+
+#pragma mark - 
 - (void)dealloc {
     dLog(@" ");
 }

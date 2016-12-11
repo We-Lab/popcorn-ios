@@ -253,7 +253,7 @@
         movieTitle.text = movieInfo[@"movie_title"];
         movieAge.text = movieInfo[@"movie"][@"grade"][@"grade"];
         movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %.2lf%%", [movieInfo[@"ticketing_rate"] floatValue]];
-        scoreNumber.text = movieInfo[@"movie"][@"star_average"];
+        scoreNumber.text = [NSString stringWithFormat:@"%.1lf", [movieInfo[@"movie"][@"star_average"] floatValue]];
         starRatingView.value = [movieInfo[@"movie"][@"star_average"] floatValue];
     }
 }

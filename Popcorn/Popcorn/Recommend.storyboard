@@ -19,13 +19,85 @@
                     <view key="view" contentMode="scaleToFill" id="FpG-e4-Flg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-L8-ygl">
+                                <rect key="frame" x="0.0" y="102" width="375" height="2"/>
+                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="RDH-LR-WkP"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="35" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="mI1-Hu-lXm">
+                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecommendCell" id="AcJ-px-bEK">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AcJ-px-bEK" id="Nmi-LB-tll">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BjZ-e6-lgh" id="Iyl-mE-SOg"/>
+                                    <outlet property="delegate" destination="BjZ-e6-lgh" id="dDC-nv-t5c"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXD-m3-JxZ">
+                                <rect key="frame" x="0.0" y="69" width="375" height="30"/>
+                                <state key="normal" title="태그 설정하기">
+                                    <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Xs9-AS-UGp" kind="show" identifier="ToRecommendTagSegue" id="BZv-MZ-wS9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mI1-Hu-lXm" firstAttribute="leading" secondItem="FpG-e4-Flg" secondAttribute="leading" id="85s-5h-0fX"/>
+                            <constraint firstItem="fJl-L8-ygl" firstAttribute="leading" secondItem="FpG-e4-Flg" secondAttribute="leading" id="LFc-Vp-8ni"/>
+                            <constraint firstItem="kXD-m3-JxZ" firstAttribute="leading" secondItem="FpG-e4-Flg" secondAttribute="leading" id="Shu-9R-Xzu"/>
+                            <constraint firstItem="mI1-Hu-lXm" firstAttribute="top" secondItem="kXD-m3-JxZ" secondAttribute="bottom" constant="5" id="SwP-dT-Be6"/>
+                            <constraint firstItem="mI1-Hu-lXm" firstAttribute="top" secondItem="fJl-L8-ygl" secondAttribute="bottom" id="W5U-XP-hBS"/>
+                            <constraint firstItem="V5L-oR-Jze" firstAttribute="top" secondItem="mI1-Hu-lXm" secondAttribute="bottom" id="mky-gK-41X"/>
+                            <constraint firstAttribute="trailing" secondItem="mI1-Hu-lXm" secondAttribute="trailing" id="onf-fO-iHI"/>
+                            <constraint firstItem="kXD-m3-JxZ" firstAttribute="top" secondItem="maL-KM-VxL" secondAttribute="bottom" constant="5" id="q6J-E5-kI7"/>
+                            <constraint firstAttribute="trailing" secondItem="kXD-m3-JxZ" secondAttribute="trailing" id="tWT-xF-wHd"/>
+                            <constraint firstAttribute="trailing" secondItem="fJl-L8-ygl" secondAttribute="trailing" id="uTU-wh-Uxm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="추천" id="3Ks-eN-d7d"/>
+                    <connections>
+                        <outlet property="recommendTableView" destination="mI1-Hu-lXm" id="XNb-W0-Tis"/>
+                        <outlet property="toTagViewButton" destination="kXD-m3-JxZ" id="5tr-Qa-GOg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EW4-Fl-jp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="976.79999999999995" y="-91.304347826086968"/>
+        </scene>
+        <!--태그 설정-->
+        <scene sceneID="MaT-2R-1UG">
+            <objects>
+                <viewController title="태그 설정" hidesBottomBarWhenPushed="YES" id="Xs9-AS-UGp" customClass="PCRecommendTagViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WO5-f9-qRI"/>
+                        <viewControllerLayoutGuide type="bottom" id="UHH-bc-muB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e9X-LA-rcK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UoH-Rd-wf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800.8" y="-93.553223388305852"/>
         </scene>
         <!--추천-->
         <scene sceneID="2kb-rE-nxY">
