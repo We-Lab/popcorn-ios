@@ -27,7 +27,7 @@
     [self removeLoginViewControllers];
     
 //    initial View
-    self.selectedIndex = 2;
+//    self.selectedIndex = 2;
 }
 
 - (void)removeLoginViewControllers {

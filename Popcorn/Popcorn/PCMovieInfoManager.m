@@ -104,7 +104,7 @@
     _dataTask = [_sessionManager dataTaskWithRequest:request
                                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                        BOOL result = NO;
-                                       if (error) {
+                                       if (error || [responseObject firstObject] == nil) {
                                            aLog(@"에러 발생. %@", error);
                                        }
                                        else {

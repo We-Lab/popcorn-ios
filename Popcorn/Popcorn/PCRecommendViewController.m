@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+//    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
