@@ -46,6 +46,19 @@
     return result;
 }
 
++ (BOOL)isValidNick:(NSString *)userNick {
+    if ( userNick.length > 10 || userNick.length < 4 )
+        return NO;
+    if ([userNick rangeOfString:@" "].length > 0)
+        return NO;
+    
+    NSString *filter = @"^[A-Z0-9a-z]{4,10}$";
+    NSPredicate *idRegex = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", filter];
+    BOOL result = [idRegex evaluateWithObject:userNick];
+    
+    return result;
+}
+
 + (BOOL)isValidBirthday:(NSString *)birthday {
     NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
     [dateFormmater setDateFormat:@"yyyy-MM-dd"];
