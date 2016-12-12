@@ -30,8 +30,9 @@ static NSArray const *rankingTypeArray;
 
 @implementation PCSearchViewController
 
+
+# pragma mark - Init
 + (void)initialize {
-//    rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹", @"장르별 랭킹"];
     rankingTypeArray = @[@"박스오피스 랭킹", @"평점순 랭킹", @"좋아요순 랭킹"];
 }
 
@@ -56,6 +57,7 @@ static NSArray const *rankingTypeArray;
     self.navigationController.navigationBarHidden = NO;
     [super viewWillDisappear:animated];
 }
+
 
 #pragma mark - Search Movie
 - (void)searchMovie:(NSString *)inputText {
@@ -84,6 +86,7 @@ static NSArray const *rankingTypeArray;
         [self.switchingTableView reloadData];
     }
 }
+
 
 #pragma mark - Configure Textfield
 - (void)createCustomPlaceholder {
@@ -147,6 +150,7 @@ static NSArray const *rankingTypeArray;
 }
 
 
+
 # pragma mark - Configure TableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_hasSearched) {
@@ -166,7 +170,7 @@ static NSArray const *rankingTypeArray;
         return 60;
     }
     else {
-        return 115;
+        return 130;
     }
 }
 
@@ -219,6 +223,8 @@ static NSArray const *rankingTypeArray;
     return indexPath;
 }
 
+
+# pragma mark - Configure Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     PCRankingDetailViewController *rankingDetailVC = segue.destinationViewController;
     rankingDetailVC.titleString = rankingTypeArray[_selectedRow];

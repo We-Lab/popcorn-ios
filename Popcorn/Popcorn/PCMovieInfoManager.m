@@ -104,7 +104,7 @@
     _dataTask = [_sessionManager dataTaskWithRequest:request
                                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                        BOOL result = NO;
-                                       if (error) {
+                                       if (error || [responseObject firstObject] == nil) {
                                            aLog(@"에러 발생. %@", error);
                                        }
                                        else {
@@ -115,6 +115,30 @@
                                         });
                                    }];
     [_dataTask resume];
+}
+
+
+- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(MovieNetworkingHandler)completionHandler {
+//    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
+//    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+//                                                 URLString:urlString
+//                                                parameters:nil
+//                                                     error:nil];
+//    
+//    _dataTask = [_sessionManager dataTaskWithRequest:request
+//                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//                                       BOOL result = NO;
+//                                       if (error) {
+//                                           aLog(@"에러 발생. %@", error);
+//                                       }
+//                                       else {
+//                                           result = YES;
+//                                       }
+//                                       dispatch_async(dispatch_get_main_queue(), ^{
+//                                           completionHandler(result, responseObject);
+//                                       });
+//                                   }];
+//    [_dataTask resume];
 }
 
 @end
