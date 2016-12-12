@@ -29,7 +29,7 @@
 #pragma mark - Actor List View
 - (void)creatActorList {
 
-    for (NSInteger i = 0; i < 13; i += 1) {
+    for (NSInteger i = 0; i < 22; i += 1) {
         
         CGFloat baseMargin = [self ratioHeight:25];
         CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
@@ -73,7 +73,7 @@
         [actorView addSubview:actorMovieName];
         
         
-        self.actorContentsViewHeight.constant = [self ratioHeight:47] + (baseMovieContentHeight+baseMargin)*(13/3+1);
+        self.actorContentsViewHeight.constant = [self ratioHeight:47] + (baseMovieContentHeight+baseMargin)*(22/3+1);
         self.scrollContentsViewHeight.constant = self.directorViewHeight.constant + self.viewMargin.constant + self.actorContentsViewHeight.constant;
     }
 }

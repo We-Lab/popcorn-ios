@@ -389,8 +389,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WvL-CG-aVB">
                                         <rect key="frame" x="97" y="0.0" width="90" height="90"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IAh-m1-53N">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IAh-m1-53N">
                                                 <rect key="frame" x="4" y="4" width="82" height="82"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="41"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_plus" translatesAutoresizingMaskIntoConstraints="NO" id="dCV-03-dxm">
                                                 <rect key="frame" x="63" y="63" width="27" height="27"/>
@@ -401,6 +406,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iat-1P-LS6">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                <connections>
+                                                    <action selector="profileImageSelect:" destination="K7h-Rl-K2x" eventType="touchUpInside" id="4Jg-nj-Pal"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -588,6 +596,7 @@
                         <outlet property="genderSegment" destination="UK7-PG-sR0" id="wOz-jh-5fb"/>
                         <outlet property="idTextField" destination="5q6-cQ-BxC" id="wDi-UQ-kWg"/>
                         <outlet property="nickTextField" destination="4xm-sI-0dK" id="Xcn-vr-LnZ"/>
+                        <outlet property="profileImageView" destination="IAh-m1-53N" id="7jD-hs-XfA"/>
                         <outlet property="pwTextField" destination="Njq-Lh-uCD" id="xy4-Dm-E67"/>
                         <outlet property="rePWTextField" destination="1Kd-v3-AKo" id="tiw-Ux-En5"/>
                     </connections>

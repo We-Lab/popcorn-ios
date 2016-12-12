@@ -20,7 +20,7 @@
 
 
 
-@interface PCSignUpIDViewController () <UITextFieldDelegate>
+@interface PCSignUpIDViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property PCLoginManager *loginManager;
 @property (weak, nonatomic) IBOutlet UIView *fieldLayoutView;
@@ -35,8 +35,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegment;
 @property (nonatomic) UIDatePicker *datePicker;
 
-@property NSArray *textFieldArray;
 @property UITextField *activeField;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 // 회원가입폼에 대한 유효성 검사값 저장 변수
 @property (nonatomic) BOOL isValidID;
@@ -342,6 +342,55 @@
 
     [self.activeField resignFirstResponder];
 }
+
+#pragma mark - Profile Image Picker
+- (IBAction)profileImageSelect:(id)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    picker.sourceType = sourceType;
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    UIImage *pickedImage = info[UIImagePickerControllerEditedImage];
+    
+    if (pickedImage == nil) {
+        pickedImage = info[UIImagePickerControllerOriginalImage];
+    }
+    
+    if (pickedImage == nil) {
+        NSLog(@"사진이 없습니다.");
+        return;
+    }
+    
+    
+    //Binary data -------------------------------
+    
+    NSData *imageData = UIImageJPEGRepresentation(pickedImage, 1.0);
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [userDefault setObject:imageData forKey:@"ImageData"];
+    
+    [userDefault synchronize];
+    
+    // Data save End ---------------------------
+    
+    
+    self.profileImageView.image = pickedImage;
+    self.profileImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {
