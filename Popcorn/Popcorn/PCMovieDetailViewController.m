@@ -110,13 +110,13 @@
     starRatingView.frame = CGRectMake(0, 0, self.starScoreView.frame.size.width, self.starScoreView.frame.size.height);
     starRatingView.maximumValue = 5;
     starRatingView.minimumValue = 0;
-    starRatingView.value = 3.5;
+    starRatingView.value = 3.3;
     starRatingView.backgroundColor = [UIColor clearColor];
     starRatingView.allowsHalfStars = YES;
+    starRatingView.accurateHalfStars = YES;
     starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
-    starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
     starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
-    starRatingView.userInteractionEnabled = NO;
+//    starRatingView.userInteractionEnabled = NO;
     [self.starScoreView addSubview:starRatingView];
     
     self.movieInfoButtonView.layer.borderWidth = 1;

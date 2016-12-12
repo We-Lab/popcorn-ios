@@ -23,19 +23,25 @@
 @interface PCSignUpIDViewController () <UITextFieldDelegate>
 
 @property PCLoginManager *loginManager;
+@property (weak, nonatomic) IBOutlet UIView *fieldLayoutView;
 
 // 회원가입폼 변수
 @property (weak, nonatomic) IBOutlet UITextField *idTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 @property (weak, nonatomic) IBOutlet UITextField *rePWTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nickTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegment;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic) UIDatePicker *datePicker;
+
+@property NSArray *textFieldArray;
+@property UITextField *activeField;
 
 // 회원가입폼에 대한 유효성 검사값 저장 변수
 @property (nonatomic) BOOL isValidID;
 @property (nonatomic) BOOL isValidPW;
+@property (nonatomic) BOOL isValidNick;
 @property (nonatomic) BOOL isValidEmail;
 @property (nonatomic) BOOL isValidBirth;
 
@@ -47,7 +53,7 @@
     [super viewDidLoad];
     
 #ifdef DEBUG
-    [self initTestSetting];
+//    [self initTestSetting];
 #endif
     self.loginManager = [[PCLoginManager alloc] init];
     self.loginManager.delegate = self;
@@ -58,12 +64,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self registNotification];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"PCSignUpIDViewController"];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 #endif
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self unregistNotification];
 }
 
 - (void)initTestSetting {
@@ -96,18 +109,38 @@
     return UIStatusBarStyleLightContent;
 }
 
+// 네비게이션 Pop
+- (void)onTouchUpToNextPage:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark - DatePicker for userBirthday
 -(IBAction)showDatePicker {
-    self.datePicker.hidden = NO;
-    self.datePicker.backgroundColor = [UIColor whiteColor];
     
-    [_datePicker addTarget:self
-                    action:@selector(LabelTitle:)
-          forControlEvents:UIControlEventValueChanged];
+    self.birthdayTextField.text = nil;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIView *dateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, alert.view.frame.size.width, 250)];
+    [dateView setBackgroundColor:[UIColor clearColor]];
+    [alert.view addSubview:dateView];
+    
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, alert.view.frame.size.width, 200)];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.datePicker addTarget:self action:@selector(LabelTitle:) forControlEvents:UIControlEventValueChanged];
+    [dateView addSubview:self.datePicker];
+    
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+
 }
 
 -(void)LabelTitle:(id)sender {
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     dateFormat.dateStyle = NSDateFormatterMediumStyle;
     dateFormat.dateFormat = @"yyyy-MM-dd";
@@ -115,13 +148,6 @@
                      [dateFormat stringFromDate:_datePicker.date]];
     
     self.birthdayTextField.text = dateString;
-    self.datePicker.hidden = YES;
-}
-
-
-// 네비게이션 Pop
-- (void)onTouchUpToNextPage:(UIButton *)sender{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)requestSignUp:(UIButton *)button {
@@ -188,6 +214,7 @@
         self.isValidID = NO;
         if (textLength >= 4 && textLength <= 10)
             self.isValidID = [PCUserInfoValidation isValidID:text];
+        NSLog(@"아이디 유효성 검사 : %d", _isValidID);
     }
     else if (textField == _rePWTextField) {
         self.isValidPW = NO;
@@ -202,12 +229,18 @@
             self.isValidEmail = [PCUserInfoValidation isValidEmail:text];
         }
     }
+    else if (textField == _nickTextField){
+        self.isValidNick = NO;
+        if (textLength >= 4 && textLength <= 10) {
+            self.isValidNick = [PCUserInfoValidation isValidNick:text];
+        }
+    }
     else if (textField == _birthdayTextField){
         self.isValidBirth = NO;
         self.isValidBirth = [PCUserInfoValidation isValidBirthday:_birthdayTextField.text];
     }
     
-    if (_isValidID && _isValidPW && _isValidEmail && _isValidBirth) {
+    if (_isValidID && _isValidPW && _isValidNick && _isValidEmail && _isValidBirth) {
         // 로그인 버튼 활성화
     }
     else {
@@ -246,6 +279,70 @@
     }
     return YES;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+
+    self.activeField = textField;
+    self.activeField.delegate = self;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    self.activeField = nil;
+}
+
+
+#pragma mark - KeyBoard Notification
+-(void) registNotification{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+-(void) unregistNotification{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)keyboardNotification{
+    
+    NSDictionary* info = [keyboardNotification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect mainViewRect = self.view.frame;
+    CGFloat otherHeight = mainViewRect.size.height - keyboardSize.height;
+    
+    mainViewRect.origin.y = (otherHeight/3)*2 - (self.fieldLayoutView.frame.origin.y + self.activeField.frame.origin.y);
+    
+    if ((otherHeight/3)*2 < (self.fieldLayoutView.frame.origin.y + self.activeField.frame.origin.y)) {
+        
+        self.view.frame = mainViewRect;
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)keyboardNotification{
+
+    CGRect mainViewRect = self.view.frame;
+    mainViewRect.origin.y = 0;
+    self.view.frame = mainViewRect;
+}
+
+- (IBAction)resignOnTap:(id)sender {
+
+    [self.activeField resignFirstResponder];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

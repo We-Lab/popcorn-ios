@@ -13,6 +13,7 @@
 + (BOOL)isValidID:(NSString *)userID;
 + (BOOL)isValidPW:(NSString *)userPW;
 + (BOOL)isValidEmail:(NSString *)email;
++ (BOOL)isValidNick:(NSString *)userNick;
 + (BOOL)isValidBirthday:(NSString *)birthday;
 
 @end

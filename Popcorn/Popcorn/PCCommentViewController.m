@@ -31,7 +31,9 @@
 #pragma mark - Make Custem View
 - (void)setCustomViewStatus{
     
-    self.navigationController.view.backgroundColor = [UIColor whiteColor];  
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 #pragma mark - TableView Required
@@ -61,7 +63,6 @@
     starRatingView.backgroundColor = [UIColor clearColor];
     starRatingView.allowsHalfStars = YES;
     starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
-    starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
     starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
     starRatingView.userInteractionEnabled = NO;
     [commentCell.commentStarRatingView addSubview:starRatingView];
