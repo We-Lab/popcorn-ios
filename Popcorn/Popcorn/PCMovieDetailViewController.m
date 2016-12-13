@@ -102,10 +102,10 @@
     self.movieInfoButtonView.layer.borderWidth = 1;
     self.movieInfoButtonView.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
     
-    [PCMovieDetailViewController makeCustomButtom:self.likeButton title:@"좋아요" imageName:[UIImage imageNamed:@"Rating"]];
-    [PCMovieDetailViewController makeCustomButtom:self.ratingButton title:@"평가하기" imageName:[UIImage imageNamed:@"Ranking"]];
-    [PCMovieDetailViewController makeCustomButtom:self.commentButton title:@"코멘트" imageName:[UIImage imageNamed:@"Recommend"]];
-    [PCMovieDetailViewController makeCustomButtom:self.moreInfoButton title:@"더보기" imageName:[UIImage imageNamed:@"More"]];
+    [self makeCustomButtom:self.likeButton title:@"좋아요" imageName:[UIImage imageNamed:@"Rating"]];
+    [self makeCustomButtom:self.ratingButton title:@"평가하기" imageName:[UIImage imageNamed:@"Ranking"]];
+    [self makeCustomButtom:self.commentButton title:@"코멘트" imageName:[UIImage imageNamed:@"Recommend"]];
+    [self makeCustomButtom:self.moreInfoButton title:@"더보기" imageName:[UIImage imageNamed:@"More"]];
     
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
@@ -122,7 +122,7 @@
 }
 
 #pragma mark - Make Custom button
-+ (void)makeCustomButtom:(UIButton *)button title:(NSString *)title imageName:(UIImage *)imageName{
+- (void)makeCustomButtom:(UIButton *)button title:(NSString *)title imageName:(UIImage *)imageName{
 
     [button setImage:imageName forState:UIControlStateNormal];
     
