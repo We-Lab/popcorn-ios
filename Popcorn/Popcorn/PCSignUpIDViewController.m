@@ -37,6 +37,7 @@
 
 @property UITextField *activeField;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *addImageView;
 
 // 회원가입폼에 대한 유효성 검사값 저장 변수
 @property (nonatomic) BOOL isValidID;
@@ -388,6 +389,8 @@
     self.profileImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     [picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    [self.addImageView setHidden:YES];
     
 }
 

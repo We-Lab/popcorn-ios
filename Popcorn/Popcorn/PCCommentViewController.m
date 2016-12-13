@@ -21,19 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setCustomViewStatus];
-    
     self.commentListTableView.rowHeight = UITableViewAutomaticDimension;
     self.commentListTableView.estimatedRowHeight = 200;
 
-}
-
-#pragma mark - Make Custem View
-- (void)setCustomViewStatus{
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
 }
 
 #pragma mark - TableView Required

@@ -590,6 +590,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="회원가입" id="8e3-EC-DLM"/>
                     <connections>
+                        <outlet property="addImageView" destination="dCV-03-dxm" id="OyW-PK-GmC"/>
                         <outlet property="birthdayTextField" destination="Ixv-to-22x" id="n9h-5R-nCI"/>
                         <outlet property="emailTextField" destination="c9c-Pl-BuB" id="8Ob-q5-onP"/>
                         <outlet property="fieldLayoutView" destination="VHx-Lg-gBY" id="QwT-R5-MdQ"/>
