@@ -14,7 +14,7 @@
 
 // 공통
 NSString *const memberURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/member/";
-NSString *const movieURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/movie/";
+NSString *const movieURLString = @"https://django-test.com/movie/";
 NSString *const mainURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/main/";
 NSString *const TokenKey = @"key";
 
@@ -30,4 +30,18 @@ NSString *const SignUpEmailKey = @"email";
 NSString *const SignUpBirthdayKey = @"date_of_birth";
 NSString *const SignUpGenderKey = @"gender";
 NSString *const SignUpPhoneNumberKey = @"phone_number";
+
+// Movie
+NSString *const MovieDetailMainImageKey = @"main_image_url";
+NSString *const MovieDetailPosterImageKey = @"img_url";
+NSString *const MovieDetailTitleKey = @"title_kor";
+NSString *const MovieDetailNationKey = @"making_country";
+NSString *const MovieDetailGenreKey = @"genre";
+NSString *const MovieDetailDateKey = @"created_year";
+NSString *const MovieDetailRunningTimeKey = @"run_time";
+NSString *const MovieDetailGradeKey = @"grade";
+NSString *const MovieDetailStoryKey = @"synopsis";
+NSString *const MovieDetailDirecterKey = @"director";
+NSString *const MovieDetailActorsKey = @"actors";
+
 

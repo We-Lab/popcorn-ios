@@ -11,14 +11,18 @@
 #import <HCSStarRatingView.h>
 #import <BEMSimpleLineGraphView.h>
 
+#import "PCNetworkParamKey.h"
+#import "PCMovieDetailManager.h"
+#import "PCMovieDetailDataCenter.h"
+#import <UIImageView+WebCache.h>
+
 @interface PCMovieDetailViewController () <UIScrollViewDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
-@property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
-@property (weak, nonatomic) IBOutlet UIView *starScoreView;
+@property PCMovieDetailManager *movieDetailManager;
+@property PCMovieDetailDataCenter *movieDataCenter;
 
+@property (weak, nonatomic) IBOutlet UIView *starScoreView;
 @property (weak, nonatomic) IBOutlet UIView *moviePosterView;
-@property (weak, nonatomic) IBOutlet UITextView *movieStoryTextView;
 
 @property (weak, nonatomic) IBOutlet UIView *movieInfoButtonView;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
@@ -30,12 +34,24 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
+@property (weak, nonatomic) IBOutlet UIView *movieActorListView;
+@property NSMutableArray *actorArray;
 
 @property (weak, nonatomic) IBOutlet UIView *commentContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentContentHeight;
 @property (weak, nonatomic) IBOutlet UIView *famousLineContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *famousLineContentHeight;
 @property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
+
+// Movie Content Property
+@property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
+@property (weak, nonatomic) IBOutlet UIImageView *moviePosterImage;
+@property (weak, nonatomic) IBOutlet UILabel *movieTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieRuningTimeGenreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieDateNationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieGradeLabel;
+@property (weak, nonatomic) IBOutlet UITextView *movieStoryTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *movieThumnailImage;
 
 @property NSArray *testArray;
 
@@ -46,8 +62,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
+    self.movieDetailManager = [[PCMovieDetailManager alloc] init];
+    self.movieDataCenter = [[PCMovieDetailDataCenter alloc] init];
     
+    [self.movieDetailManager requestMovieDetailData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(makeMovieContents)
+                                                 name:movieDataRequestNotification
+                                               object:nil];
+    
+    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
+    [self preferredStatusBarStyle];
     [self setCustomViewStatus];
 }
 
@@ -59,6 +85,11 @@
     [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 #endif
+}
+
+// 스테이터스 바 스타일 메소드
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Make Custom Navi View
@@ -109,6 +140,54 @@
     
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
+    self.actorArray = [[NSMutableArray alloc] init];
+    
+    for (NSInteger i = 0; i < 3; i += 1) {
+        
+        CGFloat baseMovieContentWidth = self.movieActorListView.frame.size.width/3;
+        CGFloat baseMovieContentHeight = [self ratioHeight:125];
+        
+        UIView *actorView = [[UIView alloc] init];
+        actorView.tag = i;
+        NSInteger row = actorView.tag%3;
+        actorView.frame = CGRectMake(baseMovieContentWidth * row,0,
+                                     baseMovieContentWidth,baseMovieContentHeight);
+        
+        [self.movieActorListView addSubview:actorView];
+        
+        UIImageView *actorImage = [[UIImageView alloc] init];
+        
+        actorImage.frame = CGRectMake(actorView.frame.size.width/2 - [self ratioWidth:35], 0, [self ratioWidth:70], [self ratioHeight:70]);
+        actorImage.layer.cornerRadius = [self ratioWidth:35];
+        actorImage.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+        
+        [actorView addSubview:actorImage];
+        
+        UILabel *actorName = [[UILabel alloc] init];
+        
+        actorName.frame = CGRectMake(0, [self ratioHeight:85], actorView.frame.size.width, [self ratioHeight:20]);
+        actorName.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+        actorName.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
+        actorName.textAlignment = NSTextAlignmentCenter;
+        
+        [self.actorArray addObject:actorName];
+        
+        [actorView addSubview:actorName];
+
+        if (i == 0) {
+        
+            UILabel *actorMovieName = [[UILabel alloc] init];
+            
+            actorMovieName.frame = CGRectMake(0, [self ratioHeight:105], actorView.frame.size.width, [self ratioHeight:20]);
+            actorMovieName.text = @"감독";
+            actorMovieName.font = [UIFont systemFontOfSize:13];
+            actorMovieName.textColor = [UIColor colorWithRed:128.f/255.f green:128.f/255.f blue:128.f/255.f alpha:1];
+            actorMovieName.textAlignment = NSTextAlignmentCenter;
+            
+            [actorView addSubview:actorMovieName];
+        }
+    }
+    
     BEMSimpleLineGraphView *movieScoreGraph = [[BEMSimpleLineGraphView alloc] init];
     movieScoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
     movieScoreGraph.dataSource = self;
@@ -118,7 +197,26 @@
     movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
     movieScoreGraph.displayDotsWhileAnimating = NO;
     [self.movieScoreGraphView addSubview:movieScoreGraph];
+}
 
+- (void)makeMovieContents {
+    
+    PCMovieDetailDataCenter *dataCenter = [[PCMovieDetailDataCenter alloc] init];
+    
+    self.movieTitleLabel.text = [dataCenter creatMovieTitle];
+    self.movieRuningTimeGenreLabel.text = [NSString stringWithFormat:@"%@ | %@",[dataCenter creatMovieRunningTime],[dataCenter creatMovieGenre]];
+    self.movieDateNationLabel.text = [NSString stringWithFormat:@"%@ | %@",[dataCenter creatMovieDate],[dataCenter creatMovieNation]];
+    self.movieGradeLabel.text = [dataCenter creatMovieGrade];
+    self.movieStoryTextView.text = [dataCenter creatMovieStory];
+    [self.movieMainImage sd_setImageWithURL:[dataCenter creatMovieMainImage]];
+    [self.moviePosterImage sd_setImageWithURL:[dataCenter creatMoviePosterImage]];
+
+    UILabel *directorLabel = self.actorArray[0];
+    directorLabel.text = [dataCenter creatMovieDirectorName];
+    UILabel *actor01Label = self.actorArray[1];
+    actor01Label.text = [dataCenter creatMovieActorName][0];
+    UILabel *actor02Label = self.actorArray[2];
+    actor02Label.text = [dataCenter creatMovieActorName][1];
 }
 
 #pragma mark - Make Custom button

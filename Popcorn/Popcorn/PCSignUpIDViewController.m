@@ -365,25 +365,13 @@
     if (pickedImage == nil) {
         pickedImage = info[UIImagePickerControllerOriginalImage];
     }
-    
-    if (pickedImage == nil) {
-        NSLog(@"사진이 없습니다.");
-        return;
-    }
-    
-    
-    //Binary data -------------------------------
+
     
     NSData *imageData = UIImageJPEGRepresentation(pickedImage, 1.0);
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     [userDefault setObject:imageData forKey:@"ImageData"];
-    
-    [userDefault synchronize];
-    
-    // Data save End ---------------------------
-    
     
     self.profileImageView.image = pickedImage;
     self.profileImageView.contentMode = UIViewContentModeScaleAspectFit;
