@@ -19,6 +19,8 @@
 
 @implementation PCMovieInfoManager
 
+
+#pragma mark - Init
 + (instancetype)movieManager {
     static PCMovieInfoManager *manager = nil;
     static dispatch_once_t onceToken;
@@ -39,6 +41,27 @@
     return self;
 }
 
+
+#pragma mark - Execute DataTask and CompletionHandler
+- (void)resumeDataTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(MovieNetworkingHandler)completionHandler {
+    _dataTask = [_sessionManager dataTaskWithRequest:request
+                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                       BOOL result = NO;
+                                       if (error || [responseObject firstObject] == nil) {
+                                           aLog(@"에러 발생. %@", error);
+                                       }
+                                       else {
+                                           result = YES;
+                                       }
+                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                            completionHandler(result, responseObject);
+                                        });
+                                   }];
+    [_dataTask resume];
+}
+
+
+#pragma mark - Configure Request
 - (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(MovieNetworkingHandler)completionHandler {
     NSString *urlString;
     
@@ -58,17 +81,7 @@
                                                 parameters:nil
                                                      error:nil];
     
-    _dataTask = [_sessionManager dataTaskWithRequest:request
-                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                       if (error) {
-                                           aLog(@"에러 발생. %@", error);
-                                           completionHandler(NO, responseObject);
-                                       }
-                                       else {
-                                           completionHandler(YES, responseObject);
-                                       }
-                                   }];
-    [_dataTask resume];
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 - (void)requestMovieList:(NSString *)inputText withCompletionHandler:(MovieNetworkingHandler)completionHandler {
@@ -81,17 +94,7 @@
                                                 parameters:nil
                                                      error:nil];
 
-    _dataTask = [_sessionManager dataTaskWithRequest:request
-                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                       if (error) {
-                                           aLog(@"에러 발생. %@", error);
-                                           completionHandler(NO, responseObject);
-                                       }
-                                       else {
-                                           completionHandler(YES, responseObject);
-                                       }
-                                   }];
-    [_dataTask resume];
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 - (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler {
@@ -101,21 +104,10 @@
                                                 parameters:nil
                                                      error:nil];
     
-    _dataTask = [_sessionManager dataTaskWithRequest:request
-                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                       BOOL result = NO;
-                                       if (error || [responseObject firstObject] == nil) {
-                                           aLog(@"에러 발생. %@", error);
-                                       }
-                                       else {
-                                           result = YES;
-                                       }
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            completionHandler(result, responseObject);
-                                        });
-                                   }];
-    [_dataTask resume];
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
+
+
 
 
 - (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(MovieNetworkingHandler)completionHandler {
@@ -124,21 +116,8 @@
 //                                                 URLString:urlString
 //                                                parameters:nil
 //                                                     error:nil];
-//    
-//    _dataTask = [_sessionManager dataTaskWithRequest:request
-//                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//                                       BOOL result = NO;
-//                                       if (error) {
-//                                           aLog(@"에러 발생. %@", error);
-//                                       }
-//                                       else {
-//                                           result = YES;
-//                                       }
-//                                       dispatch_async(dispatch_get_main_queue(), ^{
-//                                           completionHandler(result, responseObject);
-//                                       });
-//                                   }];
-//    [_dataTask resume];
+    
+//    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 @end

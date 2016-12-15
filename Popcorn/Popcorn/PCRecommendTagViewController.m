@@ -8,6 +8,7 @@
 
 #import "PCRecommendTagViewController.h"
 
+#import "PCMovieInfoManager.h"
 #import "PCRecommendTagButton.h"
 
 @interface PCRecommendTagViewController ()
