@@ -93,13 +93,39 @@
     
     return [dataArray componentsJoinedByString: @", "];
 }
-- (NSString *)creatMovieDirectorName{
+- (NSArray *)creatMovieDirectorName{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     
     NSArray *dataList = [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailDirecterKey];
     
-    NSDictionary *dataDic = dataList[0];
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:@"name_kor"];
+        
+        [dataArray addObject:dataText];
+    }
     
-    return [dataDic objectForKey:@"name_kor"];
+    return dataArray;
+}
+- (NSArray *)creatMovieDirectorImage{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSArray *dataList = [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailDirecterKey];
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSURL *dataURL = [NSURL URLWithString:[dataDic objectForKey:@"profile_url"]];
+        
+        [dataArray addObject:dataURL];
+    }
+    
+    return dataArray;
 }
 - (NSArray *)creatMovieActorName{
     
@@ -135,7 +161,30 @@
     
     return dataArray;
 }
+- (NSArray *)creatMoviePhoto{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSArray *dataList = [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailPhotosKey];
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSURL *dataURL = [NSURL URLWithString:[dataDic objectForKey:@"url"]];
+        
+        [dataArray addObject:dataURL];
+    }
+    
+    return dataArray;
+}
+- (NSString *)creatStarAverage{
 
+    return [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailStarAvergeKey];
+}
+- (NSURL *)creatMovieTrailer{
+    return [NSURL URLWithString:[[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailTrailerKey]];
+}
 
 
 @end

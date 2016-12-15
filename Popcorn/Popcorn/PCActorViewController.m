@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewMargin;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actorContentsViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *actorListView;
+@property (weak, nonatomic) IBOutlet UIView *directerListView;
 
 @end
 
@@ -33,12 +34,46 @@
 
 #pragma mark - Actor List View
 - (void)creatActorList {
+    
+    for (NSInteger j = 0; j < [_movieDataCenter creatMovieDirectorName].count; j += 1) {
+        
+        CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
+        CGFloat baseMovieContentHeight = [self ratioHeight:105];
+        
+        UIView *directerView = [[UIView alloc] init];
+        directerView.tag = j;
+        NSInteger row = directerView.tag%3;
+        directerView.frame = CGRectMake(baseMovieContentWidth * row,0,
+                                     baseMovieContentWidth,baseMovieContentHeight);
+        
+        [self.directerListView addSubview:directerView];
+        
+        UIImageView *directerImage = [[UIImageView alloc] init];
+        
+        directerImage.frame = CGRectMake(directerView.frame.size.width/2 - [self ratioWidth:35], 0, [self ratioWidth:70], [self ratioHeight:70]);
+        directerImage.layer.cornerRadius = [self ratioWidth:35];
+        [directerImage sd_setImageWithURL:[_movieDataCenter creatMovieDirectorImage][j]];
+        directerImage.contentMode = UIViewContentModeScaleAspectFill;
+        directerImage.clipsToBounds = YES;
+        
+        [directerView addSubview:directerImage];
+        
+        UILabel *directerName = [[UILabel alloc] init];
+        
+        directerName.frame = CGRectMake(0, [self ratioHeight:80], directerView.frame.size.width, [self ratioHeight:20]);
+        directerName.text = [_movieDataCenter creatMovieDirectorName][j];
+        directerName.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+        directerName.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
+        directerName.textAlignment = NSTextAlignmentCenter;
+        
+        [directerView addSubview:directerName];
+    }
 
     for (NSInteger i = 0; i < [_movieDataCenter creatMovieActorName].count; i += 1) {
         
         CGFloat baseMargin = [self ratioHeight:15];
         CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = [self ratioHeight:125];
+        CGFloat baseMovieContentHeight = [self ratioHeight:105];
         
         UIView *actorView = [[UIView alloc] init];
         actorView.tag = i;
@@ -61,7 +96,7 @@
         
         UILabel *actorName = [[UILabel alloc] init];
         
-        actorName.frame = CGRectMake(0, [self ratioHeight:85], actorView.frame.size.width, [self ratioHeight:20]);
+        actorName.frame = CGRectMake(0, [self ratioHeight:80], actorView.frame.size.width, [self ratioHeight:20]);
         actorName.text = [_movieDataCenter creatMovieActorName][i];
         actorName.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
         actorName.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];

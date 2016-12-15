@@ -43,5 +43,8 @@ NSString *const MovieDetailGradeKey = @"grade";
 NSString *const MovieDetailStoryKey = @"synopsis";
 NSString *const MovieDetailDirecterKey = @"director";
 NSString *const MovieDetailActorsKey = @"actors";
+NSString *const MovieDetailPhotosKey = @"image_set";
+NSString *const MovieDetailStarAvergeKey = @"star_average";
+NSString *const MovieDetailTrailerKey = @"main_trailer";
 
 

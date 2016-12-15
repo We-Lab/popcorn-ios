@@ -39,7 +39,7 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 
     NSLog(@"Request");
     
-    NSString *movieID = @"70";
+    NSString *movieID = @"50";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
