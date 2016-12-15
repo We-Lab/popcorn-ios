@@ -280,7 +280,7 @@
 - (void)didSelectAPoster {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCMovieDetailViewController *movieDetailVC = [storyboard instantiateInitialViewController];
-    //[self.navigationController pushViewController:movieDetailVC animated:YES];
+    [self.navigationController pushViewController:movieDetailVC animated:YES];
 }
 
 
