@@ -13,9 +13,9 @@
 @end
 
 // 공통
-NSString *const memberURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/member/";
+NSString *const memberURLString = @"https://django-test.com/member/";
 NSString *const movieURLString = @"https://django-test.com/movie/";
-NSString *const mainURLString = @"http://popcorn-backend2-dev.ap-northeast-2.elasticbeanstalk.com/main/";
+NSString *const mainURLString = @"https://django-test.com/main/";
 NSString *const TokenKey = @"key";
 
 // SignIn
