@@ -99,22 +99,22 @@
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - Make Custom Navi View
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
-    if (scrollView.contentOffset.y < 50) {
-        
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                      forBarMetrics:UIBarMetricsDefault];
-        self.navigationController.navigationBar.shadowImage = [UIImage new];
-        
-    }else if (scrollView.contentOffset.y >= 50){
-    
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage alloc]
-                                                      forBarMetrics:UIBarMetricsDefault];
-        self.navigationController.navigationBar.shadowImage = [UIImage alloc];
-    }
-}
+//#pragma mark - Make Custom Navi View
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    if (scrollView.contentOffset.y < 50) {
+//        
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                      forBarMetrics:UIBarMetricsDefault];
+//        self.navigationController.navigationBar.shadowImage = [UIImage new];
+//        
+//    }else if (scrollView.contentOffset.y >= 50){
+//    
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage alloc]
+//                                                      forBarMetrics:UIBarMetricsDefault];
+//        self.navigationController.navigationBar.shadowImage = [UIImage alloc];
+//    }
+//}
 
 #pragma mark - Make Custem View
 - (void)setCustomViewStatus{
