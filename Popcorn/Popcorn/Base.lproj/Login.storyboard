@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PgR-nJ-vhP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PgR-nJ-vhP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -389,8 +389,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WvL-CG-aVB">
                                         <rect key="frame" x="97" y="0.0" width="90" height="90"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IAh-m1-53N">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="IAh-m1-53N">
                                                 <rect key="frame" x="4" y="4" width="82" height="82"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="41"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_plus" translatesAutoresizingMaskIntoConstraints="NO" id="dCV-03-dxm">
                                                 <rect key="frame" x="63" y="63" width="27" height="27"/>
@@ -401,6 +406,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iat-1P-LS6">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                <connections>
+                                                    <action selector="profileImageSelect:" destination="K7h-Rl-K2x" eventType="touchUpInside" id="4Jg-nj-Pal"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -582,12 +590,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="회원가입" id="8e3-EC-DLM"/>
                     <connections>
+                        <outlet property="addImageView" destination="dCV-03-dxm" id="OyW-PK-GmC"/>
                         <outlet property="birthdayTextField" destination="Ixv-to-22x" id="n9h-5R-nCI"/>
                         <outlet property="emailTextField" destination="c9c-Pl-BuB" id="8Ob-q5-onP"/>
                         <outlet property="fieldLayoutView" destination="VHx-Lg-gBY" id="QwT-R5-MdQ"/>
                         <outlet property="genderSegment" destination="UK7-PG-sR0" id="wOz-jh-5fb"/>
                         <outlet property="idTextField" destination="5q6-cQ-BxC" id="wDi-UQ-kWg"/>
                         <outlet property="nickTextField" destination="4xm-sI-0dK" id="Xcn-vr-LnZ"/>
+                        <outlet property="profileImageView" destination="IAh-m1-53N" id="7jD-hs-XfA"/>
                         <outlet property="pwTextField" destination="Njq-Lh-uCD" id="xy4-Dm-E67"/>
                         <outlet property="rePWTextField" destination="1Kd-v3-AKo" id="tiw-Ux-En5"/>
                     </connections>

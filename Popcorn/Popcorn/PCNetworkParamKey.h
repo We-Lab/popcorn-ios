@@ -30,3 +30,16 @@ extern NSString *const SignUpEmailKey;
 extern NSString *const SignUpBirthdayKey;
 extern NSString *const SignUpGenderKey;
 extern NSString *const SignUpPhoneNumberKey;
+
+// Movie
+extern NSString *const MovieDetailMainImageKey;
+extern NSString *const MovieDetailPosterImageKey;
+extern NSString *const MovieDetailTitleKey;
+extern NSString *const MovieDetailNationKey;
+extern NSString *const MovieDetailGenreKey;
+extern NSString *const MovieDetailDateKey;
+extern NSString *const MovieDetailRunningTimeKey;
+extern NSString *const MovieDetailGradeKey;
+extern NSString *const MovieDetailStoryKey;
+extern NSString *const MovieDetailDirecterKey;
+extern NSString *const MovieDetailActorsKey;

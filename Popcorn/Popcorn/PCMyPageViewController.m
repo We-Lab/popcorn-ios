@@ -112,7 +112,7 @@
 #pragma mark - TableView Required
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -120,13 +120,42 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *myPageCell = [tableView dequeueReusableCellWithIdentifier:@"MyPageCell" forIndexPath:indexPath];
     
-    if (myPageCell != nil) {
-        myPageCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyPageCell"];
+    if (indexPath.section == 0) {
+        
+        UITableViewCell *myCommentCell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
+        
+        if (!myCommentCell) {
+            
+            myCommentCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCommentCell"];
+        }
+        
+        return myCommentCell;
+        
+    }else if (indexPath.section == 1) {
+        
+        UITableViewCell *myFamousLineCell = [tableView dequeueReusableCellWithIdentifier:@"MyFamousLineCell" forIndexPath:indexPath];
+        
+        if (!myFamousLineCell) {
+            
+            myFamousLineCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyFamousLineCell"];
+        }
+        
+        return myFamousLineCell;
+    
+    }else if (indexPath.section == 2) {
+        
+        UITableViewCell *myLikeMovieCell = [tableView dequeueReusableCellWithIdentifier:@"MyLikeMovieCell" forIndexPath:indexPath];
+        
+        if (!myLikeMovieCell) {
+            
+            myLikeMovieCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyLikeMovieCell"];
+        }
+        
+        return myLikeMovieCell;
     }
     
-    return myPageCell;
+    return nil;
 }
 
 - (void)setReloadSection:(UIButton *)sender{

@@ -7,8 +7,10 @@
 //
 
 #import "PCRatingViewController.h"
+#import "PCRatingCustomCell.h"
+#import <HCSStarRatingView.h>
 
-@interface PCRatingViewController ()
+@interface PCRatingViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -27,6 +29,37 @@
     [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 #endif
+}
+
+#pragma mark - Table View Delegate Required
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+    return 5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    PCRatingCustomCell *ratingCell = [tableView dequeueReusableCellWithIdentifier:@"RatingCell" forIndexPath:indexPath];
+    
+    if (!ratingCell) {
+        
+        ratingCell = [[PCRatingCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RatingCell"];
+    }
+    
+    HCSStarRatingView *starRating = [[HCSStarRatingView alloc] init];
+    starRating.frame = CGRectMake(0, 0, 150, 35);
+    starRating.maximumValue = 5;
+    starRating.minimumValue = 0;
+    starRating.value = 0;
+    starRating.backgroundColor = [UIColor clearColor];
+    starRating.allowsHalfStars = YES;
+    starRating.accurateHalfStars = YES;
+    starRating.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+    starRating.filledStarImage = [UIImage imageNamed:@"FullStar"];
+    [ratingCell.ratingMovieStarLayoutView addSubview:starRating];
+    
+    return ratingCell;
 }
 
 - (void)dealloc {
