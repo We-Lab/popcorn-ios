@@ -37,8 +37,6 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 
 - (void)requestMovieDetailData {
 
-    NSLog(@"Request");
-    
     NSString *movieID = @"50";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@", movieID]];
@@ -57,14 +55,13 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
             
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary = responseObject;
         }
+    
+            
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:movieDataRequestNotification
-                                                                object:nil];
-        });
+        [[NSNotificationCenter defaultCenter] postNotificationName:movieDataRequestNotification
+                                                            object:nil];
+        
     };
     
     self.dataTask = [_manager dataTaskWithRequest:request completionHandler:taskHandler];

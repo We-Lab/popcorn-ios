@@ -70,7 +70,7 @@
     [super viewDidLoad];
     
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
-    self.movieDataCenter = [[PCMovieDetailDataCenter alloc] init];
+    self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
     
     [self.movieDetailManager requestMovieDetailData];
     
@@ -119,11 +119,13 @@
 #pragma mark - Make Custem View
 - (void)setCustomViewStatus{
 
+    // 포스터
     self.moviePosterView.layer.masksToBounds = NO;
     self.moviePosterView.layer.shadowOffset = CGSizeMake(0, 1);
     self.moviePosterView.layer.shadowRadius = 2;
     self.moviePosterView.layer.shadowOpacity = 0.3;
     
+    // 영화 별점 이미지
     self.movieStarScore = [[HCSStarRatingView alloc] init];
     self.movieStarScore.frame = CGRectMake(0, 0, self.starScoreView.frame.size.width, self.starScoreView.frame.size.height);
     self.movieStarScore.maximumValue = 5;
@@ -137,16 +139,18 @@
     self.movieStarScore.userInteractionEnabled = NO;
     [self.starScoreView addSubview:self.movieStarScore];
     
-    self.movieInfoButtonView.layer.borderWidth = 1;
-    self.movieInfoButtonView.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
-    
+    // 커스텀 버튼
     [self makeCustomButtom:self.likeButton title:@"좋아요" imageName:[UIImage imageNamed:@"Rating"]];
     [self makeCustomButtom:self.ratingButton title:@"평가하기" imageName:[UIImage imageNamed:@"Ranking"]];
     [self makeCustomButtom:self.commentButton title:@"코멘트" imageName:[UIImage imageNamed:@"Recommend"]];
     [self makeCustomButtom:self.moreInfoButton title:@"더보기" imageName:[UIImage imageNamed:@"More"]];
     
+    // 줄거리 더보기
+    self.movieInfoButtonView.layer.borderWidth = 1;
+    self.movieInfoButtonView.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
+    // 영화 상단 흰글자 쉐도우
     self.movieTitleLabel.layer.masksToBounds = NO;
     self.movieTitleLabel.layer.shadowOffset = CGSizeMake(0, 1);
     self.movieTitleLabel.layer.shadowRadius = 2;
