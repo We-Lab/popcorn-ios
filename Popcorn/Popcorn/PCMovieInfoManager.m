@@ -53,7 +53,7 @@
                                        else {
                                            result = YES;
                                        }
-                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                       dispatch_async(dispatch_get_main_queue(), ^{
                                             completionHandler(result, responseObject);
                                         });
                                    }];
@@ -98,7 +98,7 @@
 }
 
 - (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler {
-    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
+    NSString *urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
     NSURLRequest *request = [_serializer requestWithMethod:@"GET"
                                                  URLString:urlString
                                                 parameters:nil
@@ -107,6 +107,16 @@
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
+
+- (void)requestMagazineListWithCompletionHandler:(MovieNetworkingHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"magazines/"];
+    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
 
 
 

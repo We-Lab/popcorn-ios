@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+//#import "PCBoxOfficeData.h"
+//#import "PCMovieInfoManager.h"
 #import "PCUserInformation.h"
 
 @interface AppDelegate ()
@@ -29,6 +32,14 @@ typedef NS_ENUM(NSUInteger, MainInterfaceView) {
 //                             didFinishLaunchingWithOptions:launchOptions];
 //    [self configureGA];
     
+//    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+//        if (isSuccess){
+//            [PCBoxOfficeData sharedBoxOffice].boxOfficeList = movieListData;
+//            aLog(@"다운완료");
+//        }
+//    };
+//                                          
+//    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:completionHandler];
     
     MainInterfaceView initialView = APPMainInterfaceViewMain;
     switch (initialView) {

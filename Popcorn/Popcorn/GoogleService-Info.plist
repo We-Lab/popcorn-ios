@@ -22,5 +22,7 @@
 	<false/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:174110724770:ios:3c7cdd0aa84bfa3c</string>
+	<key>FirebaseAutomaticScreenReportingEnabled</key>
+	<string>NO</string>
 </dict>
 </plist>

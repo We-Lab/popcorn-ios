@@ -10,7 +10,11 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <HCSStarRatingView.h>
+
+#import "PCBoxOfficeData.h"
+#import "PCMovieDetailViewController.h"
 #import "PCMovieInfoManager.h"
+#import "PCMagazineCollectionViewCell.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -24,40 +28,51 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
 
-@property (nonatomic) NSArray *boxOfficeList;
 @property (nonatomic) UIScrollView *boxOfficeScrollView;
 @property (nonatomic) UIView *movieSlidingContentView;
 
-@property BOOL likeReview;
-@property NSArray *testArray;
+@property (nonatomic) MovieNetworkingHandler completionHandler;
+@property (nonatomic) NSArray *boxOfficeList;
+@property (nonatomic) NSArray *magazineList;
+
+@property (nonatomic) BOOL likeReview;
 
 @end
 
 @implementation PCHomeViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.likeReview = YES;
-    }
-    return self;
-}
-
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.testArray = @[@"1",@"1",@"1",@"1",@"1"];
+    self.likeReview = YES;
 
     [self requestBoxOfficeList];
+    [self requestMagazineList];
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    #ifndef DEBUG
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    #endif
+}
+
+
+#pragma mark -
+#pragma mark Setting BoxOffice
 - (void)requestBoxOfficeList {
-    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    __weak PCHomeViewController *weakSelf = self;
+    self.completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
         if (isSuccess)
-            [self didReceiveBoxOfficeList:movieListData];
+            [weakSelf didReceiveBoxOfficeList:movieListData];
     };
     
-    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:completionHandler];
+    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:_completionHandler];
 }
 
 - (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
@@ -67,23 +82,12 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#ifndef DEBUG
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-#endif
-}
 
-#pragma mark - Make Custom View
+#pragma mark - Configure Base View
 - (void)setCustomViewStatus{
-
     [self creatMainBoxOffice];
-    
     self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.testArray.count;
+    self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
     
     self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
     self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
@@ -110,6 +114,19 @@
     [self.boxOfficeScrollView addSubview:self.movieSlidingContentView];
     
     [self creatMovieRankScroll];
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.movieMagazineCollectionView || scrollView == self.todayRecommendMovieTableView) {
+        return;
+    }
+    else if (scrollView.contentOffset.x < scrollView.frame.size.width) {
+        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width*11-5, 0);
+    }
+    else if (scrollView.contentOffset.x > scrollView.frame.size.width*11-5){
+        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
+    }
 }
 
 
@@ -140,23 +157,24 @@
         [self.movieSlidingContentView addSubview:movieContentView];
         
         
-        UIImageView *moviePosterIMG = [[UIImageView alloc] init];
-        moviePosterIMG.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
-        moviePosterIMG.contentMode = UIViewContentModeScaleAspectFill;
-        moviePosterIMG.clipsToBounds = YES;
-        moviePosterIMG.tag = i;
+        UIImageView *posterImageView = [[UIImageView alloc] init];
+        posterImageView.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
+        posterImageView.contentMode = UIViewContentModeScaleAspectFill;
+        posterImageView.clipsToBounds = YES;
+        posterImageView.tag = i;
+        posterImageView.userInteractionEnabled = YES;
         
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectAPoster)];
+        [posterImageView addGestureRecognizer:tapGesture];
         
-        NSString *testURL = @"http://t1.search.daumcdn.net/thumb/R438x0.q85/?fname=http%3A%2F%2Fcfile89.uf.daum.net%2Fimage%2F12110210A83A198852BAED";
-//        NSURL *imageURL = [NSURL URLWithString:_boxOfficeList[i][@"img_url"]];
-        NSURL *imageURL = [NSURL URLWithString:testURL];
-        [moviePosterIMG sd_setImageWithURL:imageURL
-                          placeholderImage:nil
-                                   options:SDWebImageHighPriority | SDWebImageRetryFailed | SDWebImageCacheMemoryOnly];
-        [movieContentView addSubview:moviePosterIMG];
+        NSURL *imageURL = [NSURL URLWithString:movieInfo[@"movie"][@"img_url"]];
+        [posterImageView sd_setImageWithURL:imageURL
+                          placeholderImage:[UIImage imageNamed:@"test2.jpg"]
+                                   options:SDWebImageHighPriority | SDWebImageRetryFailed ];
+        [movieContentView addSubview:posterImageView];
         
         UILabel *movieRankingNumber = [[UILabel alloc] init];
-        movieRankingNumber.frame = CGRectMake(moviePosterIMG.frame.size.width-[self ratioWidth:85], moviePosterIMG.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
+        movieRankingNumber.frame = CGRectMake(posterImageView.frame.size.width-[self ratioWidth:85], posterImageView.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
@@ -164,12 +182,12 @@
         movieRankingNumber.layer.shadowOffset = CGSizeMake(0, 1);
         movieRankingNumber.layer.shadowRadius = 2;
         movieRankingNumber.layer.shadowOpacity = 0.8;
-        [moviePosterIMG addSubview:movieRankingNumber];
+        [posterImageView addSubview:movieRankingNumber];
         
         
         UIView *movieNumberScoreView = [[UIView alloc] init];
-        movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], moviePosterIMG.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
-        [moviePosterIMG addSubview:movieNumberScoreView];
+        movieNumberScoreView.frame = CGRectMake([self ratioWidth:10], posterImageView.frame.size.height-[self ratioHeight:85], [self ratioHeight:85], [self ratioHeight:85]);
+        [posterImageView addSubview:movieNumberScoreView];
         
         
         UILabel *scoreLabel = [[UILabel alloc] init];
@@ -249,42 +267,61 @@
         [movieContentView addSubview:starRatingView];
         
         
-        movieRankingNumber.text = [NSString stringWithFormat:@"%ld", i];
+        // print movie data
+        movieRankingNumber.text = [NSString stringWithFormat:@"%@", movieInfo[@"rank"]];
         movieTitle.text = movieInfo[@"movie_title"];
-        movieAge.text = movieInfo[@"movie"][@"grade"][@"grade"];
+        movieAge.text = movieInfo[@"movie"][@"grade"][@"content"];
         movieTicketingPercent.text = [NSString stringWithFormat:@"예매율 %.2lf%%", [movieInfo[@"ticketing_rate"] floatValue]];
         scoreNumber.text = [NSString stringWithFormat:@"%.1lf", [movieInfo[@"movie"][@"star_average"] floatValue]];
         starRatingView.value = [movieInfo[@"movie"][@"star_average"] floatValue];
     }
 }
 
-
-#pragma mark - Infinite Scroll
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.movieMagazineCollectionView || scrollView == self.todayRecommendMovieTableView) {
-        return;
-    }
-    else if (scrollView.contentOffset.x < scrollView.frame.size.width) {
-        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width*11-5, 0);
-    }
-    else if (scrollView.contentOffset.x > scrollView.frame.size.width*11-5){
-        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
-    }
+- (void)didSelectAPoster {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
+    PCMovieDetailViewController *movieDetailVC = [storyboard instantiateInitialViewController];
+    //[self.navigationController pushViewController:movieDetailVC animated:YES];
 }
 
-#pragma mark - CollectionView Required
+
+
+#pragma mark - Setting Magazine View As A Collection View
+- (void)requestMagazineList {
+    __weak PCHomeViewController *weakSelf = self;
+    self.completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+        if (isSuccess)
+            [weakSelf didReceiveMagazineList:movieListData];
+    };
+    
+    [[PCMovieInfoManager movieManager] requestMagazineListWithCompletionHandler:_completionHandler];
+}
+
+- (void)didReceiveMagazineList:(NSArray *)magazineList {
+    self.magazineList = [NSArray array];
+    self.magazineList = magazineList;
+    
+    [_movieMagazineCollectionView reloadData];
+}
+
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.testArray.count;
+    return self.magazineList.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *movieMagazineCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieMagazineCell" forIndexPath:indexPath];
+    PCMagazineCollectionViewCell *magazineCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieMagazineCell" forIndexPath:indexPath];
     
-    movieMagazineCell.layer.borderWidth = 1;
-    movieMagazineCell.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
+    magazineCell.layer.borderWidth = 1;
+    magazineCell.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
     
-    return movieMagazineCell;
+    NSURL *urlString = [NSURL URLWithString:_magazineList[indexPath.row][@"img_url"]];
+    [magazineCell.magazineImageView sd_setImageWithURL:urlString placeholderImage:nil options:SDWebImageRetryFailed | SDWebImageCacheMemoryOnly];
+    magazineCell.magazineTitleLabel.text = _magazineList[indexPath.row][@"title"];
+    
+    return magazineCell;
 }
+
+
 
 #pragma mark - Best Review Button Action
 - (IBAction)likeBestReviewAction:(UIButton *)sender {
@@ -298,9 +335,8 @@
     }
 }
 
-#pragma mark - TableView Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.testArray.count;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
