@@ -15,11 +15,13 @@
 #import "PCMovieDetailManager.h"
 #import "PCMovieDetailDataCenter.h"
 #import <UIImageView+WebCache.h>
+#import "PCMoviePhotoCell.h"
 
 @interface PCMovieDetailViewController () <UIScrollViewDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property PCMovieDetailManager *movieDetailManager;
 @property PCMovieDetailDataCenter *movieDataCenter;
+@property HCSStarRatingView *movieStarScore;
 
 @property (weak, nonatomic) IBOutlet UIView *starScoreView;
 @property (weak, nonatomic) IBOutlet UIView *moviePosterView;
@@ -35,7 +37,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
 @property (weak, nonatomic) IBOutlet UIView *movieActorListView;
-@property NSMutableArray *actorArray;
+@property NSMutableArray *actorNameArray;
+@property NSMutableArray *actorImageArray;
+@property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
 
 @property (weak, nonatomic) IBOutlet UIView *commentContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentContentHeight;
@@ -51,7 +55,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieDateNationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *movieGradeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *movieStoryTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *movieThumnailImage;
+@property (weak, nonatomic) IBOutlet UIImageView *movieTrailerImage;
+@property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
+
 
 @property NSArray *testArray;
 
@@ -117,18 +124,18 @@
     self.moviePosterView.layer.shadowRadius = 2;
     self.moviePosterView.layer.shadowOpacity = 0.3;
     
-    HCSStarRatingView *movieStarScore = [[HCSStarRatingView alloc] init];
-    movieStarScore.frame = CGRectMake(0, 0, self.starScoreView.frame.size.width, self.starScoreView.frame.size.height);
-    movieStarScore.maximumValue = 5;
-    movieStarScore.minimumValue = 0;
-    movieStarScore.value = 3.3;
-    movieStarScore.backgroundColor = [UIColor clearColor];
-    movieStarScore.allowsHalfStars = YES;
-    movieStarScore.accurateHalfStars = YES;
-    movieStarScore.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
-    movieStarScore.filledStarImage = [UIImage imageNamed:@"FullStar"];
-    movieStarScore.userInteractionEnabled = NO;
-    [self.starScoreView addSubview:movieStarScore];
+    self.movieStarScore = [[HCSStarRatingView alloc] init];
+    self.movieStarScore.frame = CGRectMake(0, 0, self.starScoreView.frame.size.width, self.starScoreView.frame.size.height);
+    self.movieStarScore.maximumValue = 5;
+    self.movieStarScore.minimumValue = 0;
+    self.movieStarScore.value = 3.3;
+    self.movieStarScore.backgroundColor = [UIColor clearColor];
+    self.movieStarScore.allowsHalfStars = YES;
+    self.movieStarScore.accurateHalfStars = YES;
+    self.movieStarScore.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+    self.movieStarScore.filledStarImage = [UIImage imageNamed:@"FullStar"];
+    self.movieStarScore.userInteractionEnabled = NO;
+    [self.starScoreView addSubview:self.movieStarScore];
     
     self.movieInfoButtonView.layer.borderWidth = 1;
     self.movieInfoButtonView.layer.borderColor = [UIColor colorWithRed:225.f/255.f green:225.f/255.f blue:225.f/255.f alpha:1].CGColor;
@@ -140,7 +147,18 @@
     
     [self.movieStoryMoreButton setTitle:@"더보기" forState:UIControlStateNormal];
     
-    self.actorArray = [[NSMutableArray alloc] init];
+    self.movieTitleLabel.layer.masksToBounds = NO;
+    self.movieTitleLabel.layer.shadowOffset = CGSizeMake(0, 1);
+    self.movieTitleLabel.layer.shadowRadius = 2;
+    self.movieTitleLabel.layer.shadowOpacity = 0.8;
+    
+    self.movieStarAvergeLabel.layer.masksToBounds = NO;
+    self.movieStarAvergeLabel.layer.shadowOffset = CGSizeMake(0, 1);
+    self.movieStarAvergeLabel.layer.shadowRadius = 2;
+    self.movieStarAvergeLabel.layer.shadowOpacity = 0.8;
+    
+    self.actorNameArray = [[NSMutableArray alloc] init];
+    self.actorImageArray = [[NSMutableArray alloc] init];
     
     for (NSInteger i = 0; i < 3; i += 1) {
         
@@ -157,9 +175,13 @@
         
         UIImageView *actorImage = [[UIImageView alloc] init];
         
+        actorImage.tag = i;
         actorImage.frame = CGRectMake(actorView.frame.size.width/2 - [self ratioWidth:35], 0, [self ratioWidth:70], [self ratioHeight:70]);
         actorImage.layer.cornerRadius = [self ratioWidth:35];
-        actorImage.backgroundColor = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
+        actorImage.contentMode = UIViewContentModeScaleAspectFill;
+        actorImage.clipsToBounds = YES;
+        
+        [self.actorImageArray addObject:actorImage];
         
         [actorView addSubview:actorImage];
         
@@ -170,23 +192,12 @@
         actorName.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
         actorName.textAlignment = NSTextAlignmentCenter;
         
-        [self.actorArray addObject:actorName];
+        [self.actorNameArray addObject:actorName];
         
         [actorView addSubview:actorName];
-
-        if (i == 0) {
-        
-            UILabel *actorMovieName = [[UILabel alloc] init];
-            
-            actorMovieName.frame = CGRectMake(0, [self ratioHeight:105], actorView.frame.size.width, [self ratioHeight:20]);
-            actorMovieName.text = @"감독";
-            actorMovieName.font = [UIFont systemFontOfSize:13];
-            actorMovieName.textColor = [UIColor colorWithRed:128.f/255.f green:128.f/255.f blue:128.f/255.f alpha:1];
-            actorMovieName.textAlignment = NSTextAlignmentCenter;
-            
-            [actorView addSubview:actorMovieName];
-        }
     }
+    
+    self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
     
     BEMSimpleLineGraphView *movieScoreGraph = [[BEMSimpleLineGraphView alloc] init];
     movieScoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
@@ -197,6 +208,7 @@
     movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
     movieScoreGraph.displayDotsWhileAnimating = NO;
     [self.movieScoreGraphView addSubview:movieScoreGraph];
+    
 }
 
 - (void)makeMovieContents {
@@ -210,13 +222,22 @@
     self.movieStoryTextView.text = [dataCenter creatMovieStory];
     [self.movieMainImage sd_setImageWithURL:[dataCenter creatMovieMainImage]];
     [self.moviePosterImage sd_setImageWithURL:[dataCenter creatMoviePosterImage]];
-
-    UILabel *directorLabel = self.actorArray[0];
-    directorLabel.text = [dataCenter creatMovieDirectorName];
-    UILabel *actor01Label = self.actorArray[1];
-    actor01Label.text = [dataCenter creatMovieActorName][0];
-    UILabel *actor02Label = self.actorArray[2];
-    actor02Label.text = [dataCenter creatMovieActorName][1];
+    
+    [self.moviePhotoCollectionView reloadData];
+    
+    for (NSInteger j = 0; j < 3; j += 1) {
+        
+        UILabel *actorName = self.actorNameArray[j];
+        actorName.text = [dataCenter creatMovieActorName][j];
+    
+        UIImageView *actorImage = self.actorImageArray[j];
+        [actorImage sd_setImageWithURL:[dataCenter creatMovieActorImage][j]];
+    }
+    
+    self.movieStarAvergeLabel.text = [NSString stringWithFormat:@"평균 %@",[dataCenter creatStarAverage]];
+    self.movieStarScore.value = [[dataCenter creatStarAverage] floatValue];
+    
+    [self.movieTrailerImage sd_setImageWithURL:[dataCenter creatMovieMainImage]];
 }
 
 #pragma mark - Make Custom button
@@ -246,11 +267,15 @@
 
 #pragma mark - CollectionView Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 7;
+    return [_movieDataCenter creatMoviePhoto].count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *moviePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePhotoCell" forIndexPath:indexPath];
+    PCMoviePhotoCell *moviePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePhotoCell" forIndexPath:indexPath];
+    
+    [moviePhotoCell.moviePhotoImageView sd_setImageWithURL:[_movieDataCenter creatMoviePhoto][indexPath.row] ];
+    moviePhotoCell.moviePhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    moviePhotoCell.moviePhotoImageView.clipsToBounds = YES;
     
     return moviePhotoCell;
 }

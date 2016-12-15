@@ -23,8 +23,12 @@
 - (NSURL *)creatMoviePosterImage;
 - (NSArray *)creatMovieGenre;
 - (NSString *)creatMovieNation;
-- (NSString *)creatMovieDirectorName;
+- (NSArray *)creatMovieDirectorName;
+- (NSArray *)creatMovieDirectorImage;
 - (NSArray *)creatMovieActorName;
 - (NSArray *)creatMovieActorImage;
+- (NSArray *)creatMoviePhoto;
+- (NSString *)creatStarAverage;
+- (NSURL *)creatMovieTrailer;
 
 @end

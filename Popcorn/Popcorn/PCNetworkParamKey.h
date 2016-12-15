@@ -43,3 +43,20 @@ extern NSString *const MovieDetailGradeKey;
 extern NSString *const MovieDetailStoryKey;
 extern NSString *const MovieDetailDirecterKey;
 extern NSString *const MovieDetailActorsKey;
+extern NSString *const MovieDetailPhotosKey;
+extern NSString *const MovieDetailStarAvergeKey;
+extern NSString *const MovieDetailTrailerKey;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

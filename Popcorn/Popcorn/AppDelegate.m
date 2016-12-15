@@ -30,7 +30,8 @@ typedef NS_ENUM(NSUInteger, MainInterfaceView) {
 //    [self configureGA];
     
     
-    MainInterfaceView initialView = APPMainInterfaceViewMovieInfo;
+    MainInterfaceView initialView = APPMainInterfaceViewMovieInfo
+    ;
     switch (initialView) {
         case APPMainInterfaceViewRelease:
             [self selectInitialViewController];

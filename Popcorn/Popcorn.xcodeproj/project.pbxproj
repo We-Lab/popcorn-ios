@@ -70,6 +70,8 @@
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
 		52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */; };
 		52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */; };
+		5F04B8191E02A20B0012F50D /* PCMoviePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */; };
+		5F04B81C1E02AFA10012F50D /* PCMovieTrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */; };
 		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
 		5F37984E1E0056D300DCA40B /* PCCommentWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
@@ -197,6 +199,10 @@
 		52FFA9311DFC3A9500507936 /* PCRecommendTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTagButton.h; sourceTree = "<group>"; };
 		52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTagButton.m; sourceTree = "<group>"; };
 		5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopcornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5F04B8171E02A20B0012F50D /* PCMoviePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMoviePhotoCell.h; sourceTree = "<group>"; };
+		5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMoviePhotoCell.m; sourceTree = "<group>"; };
+		5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieTrailerViewController.h; sourceTree = "<group>"; };
+		5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieTrailerViewController.m; sourceTree = "<group>"; };
 		5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieNaviView.h; sourceTree = "<group>"; };
 		5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieNaviView.m; sourceTree = "<group>"; };
 		5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCommentWriteViewController.h; sourceTree = "<group>"; };
@@ -269,6 +275,10 @@
 				5FEDA6F31E011EA100D4BC14 /* PCMovieDetailDataCenter.m */,
 				52AE381B1DED6A2E0016D81E /* PCMovieDetailViewController.h */,
 				52AE381C1DED6A2E0016D81E /* PCMovieDetailViewController.m */,
+				5F04B8171E02A20B0012F50D /* PCMoviePhotoCell.h */,
+				5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */,
+				5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */,
+				5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */,
 				52AE380D1DED682D0016D81E /* PCActorViewController.h */,
 				52AE380E1DED682D0016D81E /* PCActorViewController.m */,
 				52AE38101DED68410016D81E /* PCCommentViewController.h */,
@@ -851,11 +861,13 @@
 				52AE383D1DF00AFF0016D81E /* PCNetworkParamKey.m in Sources */,
 				5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */,
 				52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
+				5F04B8191E02A20B0012F50D /* PCMoviePhotoCell.m in Sources */,
 				52C49A511DEAEFF400F47BB2 /* PCSignUpIDViewController.m in Sources */,
 				52C49A1C1DEAE9F400F47BB2 /* AppDelegate.m in Sources */,
 				52C49A5B1DEAF05100F47BB2 /* PCPreferenceGenreViewController.m in Sources */,
 				520307861DEB849600E2985A /* PCSignUpFacebookViewController.m in Sources */,
 				52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
+				5F04B81C1E02AFA10012F50D /* PCMovieTrailerViewController.m in Sources */,
 				5F37984E1E0056D300DCA40B /* PCCommentWriteViewController.m in Sources */,
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
 				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
