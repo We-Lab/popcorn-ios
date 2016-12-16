@@ -15,27 +15,38 @@
 #import "PCMovieDetailViewController.h"
 #import "PCMovieInfoManager.h"
 #import "PCMagazineCollectionViewCell.h"
+#import "PCTodayRecommendTableViewCell.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
+// Base Scroll View
+@property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
+
+// Box Office
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
+@property (nonatomic) UIView *movieSlidingContentView;
+@property (nonatomic) UIScrollView *boxOfficeScrollView;
+@property (nonatomic) NSArray *boxOfficeList;
 
+// Magazine
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
-@property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
-@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
+@property (nonatomic) NSArray *magazineList;
 
+// Best Comment
+@property (weak, nonatomic) IBOutlet UILabel *bestCommentUsernameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *bestCommentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *bestCommentMovieTitleLabel;
+@property (weak, nonatomic) IBOutlet UIView *likeHeartView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bestCommentTextViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bestCommentBaseViewHeight;
+@property (nonatomic) BOOL likeReview;
+
+// Today Recommend Movie
+@property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewControllHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
-
-@property (nonatomic) UIScrollView *boxOfficeScrollView;
-@property (nonatomic) UIView *movieSlidingContentView;
-
-@property (nonatomic) MovieNetworkingHandler completionHandler;
-@property (nonatomic) NSArray *boxOfficeList;
-@property (nonatomic) NSArray *magazineList;
-
-@property (nonatomic) BOOL likeReview;
+@property (nonatomic) NSArray *todayRecommendList;
 
 @end
 
@@ -44,12 +55,21 @@
 #pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createViews];
     
-    self.likeReview = YES;
+    //UIRefreshControl *refreshControl = [UIRefreshControl new];
+    //[refreshControl addTarget:self action:@selector(testRefresh:) forControlEvents:UIControlEventValueChanged];
+    //[self.baseScrollView addSubview:refreshControl];
+    //[refreshControl.superview sendSubviewToBack:refreshControl];
+}
 
-    [self requestBoxOfficeList];
-    [self requestMagazineList];
-    
+//- (void)testRefresh:(UIRefreshControl *)refreshControl {
+    //sLog(@"테스트성공");
+    //[refreshControl endRefreshing];
+//}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,22 +82,28 @@
     #endif
 }
 
+- (void)createViews {
+    [self requestBoxOfficeList];
+    [self requestMagazineList];
+    [self requestBestCommentAmongBoxOffice];
+    [self requestTodayRecommendMovie];
+}
 
 #pragma mark -
 #pragma mark Setting BoxOffice
 - (void)requestBoxOfficeList {
-    __weak PCHomeViewController *weakSelf = self;
-    self.completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess)
-            [weakSelf didReceiveBoxOfficeList:movieListData];
+            [self didReceiveBoxOfficeList:resultArray];
     };
     
-    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:_completionHandler];
+    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:completionHandler];
 }
 
 - (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
     self.boxOfficeList = [NSArray array];
     self.boxOfficeList = boxOfficeList;
+    [self creatMainBoxOffice];
     [self setCustomViewStatus];
 }
 
@@ -85,12 +111,9 @@
 
 #pragma mark - Configure Base View
 - (void)setCustomViewStatus{
-    [self creatMainBoxOffice];
-    self.todayRecommendMovieTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
-    
-    self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
-    self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
+    //self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
+    //self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
+    //self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
 }
 
 #pragma mark - BoxOffice Movie Scroll View
@@ -139,15 +162,12 @@
         CGFloat baseMovieContentHeight = [self ratioHeight:507];
         
         NSDictionary *movieInfo = [NSDictionary dictionary];
-        if (i == 0) {
+        if (i == 0)
             movieInfo = _boxOfficeList[9];
-        }
-        else if (i == 11) {
+        else if (i == 11)
             movieInfo = _boxOfficeList[0];
-        }
-        else {
+        else
             movieInfo = _boxOfficeList[i-1];
-        }
         
         UIView *movieContentView = [[UIView alloc] init];
         movieContentView.tag = i;
@@ -266,7 +286,6 @@
         starRatingView.userInteractionEnabled = NO;
         [movieContentView addSubview:starRatingView];
         
-        
         // print movie data
         movieRankingNumber.text = [NSString stringWithFormat:@"%@", movieInfo[@"rank"]];
         movieTitle.text = movieInfo[@"movie_title"];
@@ -280,20 +299,18 @@
 - (void)didSelectAPoster {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCMovieDetailViewController *movieDetailVC = [storyboard instantiateInitialViewController];
-    [self.navigationController pushViewController:movieDetailVC animated:YES];
+    
+    [self.navigationController showViewController:movieDetailVC sender:self];
 }
 
-
-
-#pragma mark - Setting Magazine View As A Collection View
+#pragma mark - Configure Magazine View As A Collection View
 - (void)requestMagazineList {
-    __weak PCHomeViewController *weakSelf = self;
-    self.completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess)
-            [weakSelf didReceiveMagazineList:movieListData];
+            [self didReceiveMagazineList:resultArray];
     };
     
-    [[PCMovieInfoManager movieManager] requestMagazineListWithCompletionHandler:_completionHandler];
+    [[PCMovieInfoManager movieManager] requestMagazineListWithCompletionHandler:completionHandler];
 }
 
 - (void)didReceiveMagazineList:(NSArray *)magazineList {
@@ -323,7 +340,28 @@
 
 
 
-#pragma mark - Best Review Button Action
+#pragma mark - Configure Best Comment View
+- (void)requestBestCommentAmongBoxOffice {
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
+        if (isSuccess)
+            [self didReceiveBestComment:resultArray];
+    };
+    
+    [[PCMovieInfoManager movieManager] requestBestCommentWithCompletionHandler:completionHandler];
+}
+
+- (void)didReceiveBestComment:(NSArray *)resultArray {
+    NSDictionary *bestComment = resultArray[0];
+    
+    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
+    self.bestCommentTextView.text = bestComment[@"content"];
+    self.bestCommentTextViewHeight.constant = _bestCommentTextView.contentSize.height + 10;
+    self.bestCommentBaseViewHeight.constant = 200 - 50 + _bestCommentTextViewHeight.constant;
+    
+    NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", bestComment[@"movie_title"]];
+    self.bestCommentMovieTitleLabel.text = movieTitle;
+}
+
 - (IBAction)likeBestReviewAction:(UIButton *)sender {
     if (self.likeReview == YES) {
         self.likeHeartView.backgroundColor = [UIColor colorWithRed:255.f/255.f green:102.f/255.f blue:102.f/255.f alpha:1];
@@ -335,25 +373,51 @@
     }
 }
 
+#pragma mark - Configure Today Recommend Movie TableView
+- (void)requestTodayRecommendMovie {
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray) {
+        if (isSuccess)
+            [self didReceiveTodayRecommendMovieList:resultArray];
+    };
+    
+    [[PCMovieInfoManager movieManager] requestTodayRecommendMovieWithCompletionHandler:completionHandler];
+}
+
+- (void)didReceiveTodayRecommendMovieList:(NSArray *)resultArray {
+    self.todayRecommendList = resultArray;
+    [self.todayRecommendMovieTableView reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return _todayRecommendList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *recommendMovieCell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell" forIndexPath:indexPath];
+    PCTodayRecommendTableViewCell *recommendMovieCell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell" forIndexPath:indexPath];
     
-    if (recommendMovieCell != nil) {
-        recommendMovieCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RecommendMovieCell"];
-    }
+    NSDictionary *movieData = _todayRecommendList[indexPath.row];
+    [recommendMovieCell.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    recommendMovieCell.movieTitleLabel.text = movieData[@"title_kor"];
+    recommendMovieCell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
+    
+    recommendMovieCell.likeButton.tag = indexPath.row;
     
     return recommendMovieCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 210;
+- (IBAction)clickLikeButton:(UIButton *)button {
+    dLog(@"%@", button);
 }
 
-#pragma mark - Custom Method
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 215;
+}
+
+
+
+
+#pragma mark - Ratio
 - (CGFloat)ratioWidth:(NSInteger)num{
     return (num * self.view.frame.size.width) / 375;
 }

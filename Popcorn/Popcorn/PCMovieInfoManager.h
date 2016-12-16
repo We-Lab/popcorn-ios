@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^MovieNetworkingHandler)(BOOL isSuccess, NSArray *movieListData);
+typedef void (^NetworkTaskHandler)(BOOL isSuccess, NSArray *resultArray);
 
 typedef NS_ENUM(NSUInteger, RankingListType) {
     BoxOfficeRankingDetailList,
@@ -20,15 +20,17 @@ typedef NS_ENUM(NSUInteger, RankingListType) {
 
 + (instancetype)movieManager;
 
-- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(MovieNetworkingHandler)completionHandler;
-- (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(MovieNetworkingHandler)completionHandler;
+- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(NetworkTaskHandler)completionHandler;
+- (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(NetworkTaskHandler)completionHandler;
 
 // Main
-- (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler;
-- (void)requestMagazineListWithCompletionHandler:(MovieNetworkingHandler)completionHandler;
+- (void)requestBoxOfficeListwithCompletionHandler:(NetworkTaskHandler)completionHandler;
+- (void)requestMagazineListWithCompletionHandler:(NetworkTaskHandler)completionHandler;
+- (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler;
+- (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler;
 
 //Recommend
-- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(MovieNetworkingHandler)completionHandler;
+- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(NetworkTaskHandler)completionHandler;
 
 
 @end

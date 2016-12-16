@@ -106,12 +106,12 @@
                                                         <rect key="frame" x="-1" y="285" width="377" height="55"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ6-al-m9h">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="55"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="55"/>
                                                                 <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Button"/>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eM-dl-ndC">
-                                                                <rect key="frame" x="94.5" y="0.0" width="94" height="55"/>
+                                                                <rect key="frame" x="94" y="0.0" width="95" height="55"/>
                                                                 <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <connections>
@@ -119,7 +119,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAb-Kx-QdW">
-                                                                <rect key="frame" x="188.5" y="0.0" width="94.5" height="55"/>
+                                                                <rect key="frame" x="189" y="0.0" width="94" height="55"/>
                                                                 <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <connections>
@@ -1067,9 +1067,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="203"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4j-FD-xAH" id="Ymy-nc-mNU">
-
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="202"/>
-
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="amv-gX-dFq">
@@ -1104,13 +1102,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저 명대사" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deV-e0-8g5">
-                                                    <rect key="frame" x="67" y="87" width="296" height="74.5"/>
+                                                    <rect key="frame" x="67" y="87" width="296" height="74"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ga9-IK-dIV">
-                                                    <rect key="frame" x="67" y="176.5" width="296" height="16"/>
+                                                    <rect key="frame" x="67" y="176" width="296" height="16"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgr-f3-pd2">
                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -1217,9 +1215,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="255"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJA-y5-JDT" id="9VD-qy-6Y3">
-
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
-
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5T-BV-air">
@@ -1239,7 +1235,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEW-hV-TMy">
-                                                    <rect key="frame" x="12" y="228.5" width="351" height="16"/>
+                                                    <rect key="frame" x="12" y="228" width="351" height="16"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQu-Cs-xce">
                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -1282,7 +1278,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저코멘트" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqW-tR-PZT">
-                                                    <rect key="frame" x="12" y="87" width="351" height="126.5"/>
+                                                    <rect key="frame" x="12" y="87" width="351" height="126"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1350,7 +1346,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ux6-eO-KAr">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -1386,7 +1382,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vmt-vw-6yG">
-                                <rect key="frame" x="12" y="64" width="351" height="40"/>
+                                <rect key="frame" x="12" y="20" width="351" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8c-CA-z6I">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -1426,7 +1422,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="이 작품에 대한 생각을 표현해주세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-Rj-hEU">
-                                <rect key="frame" x="12" y="114" width="351" height="553"/>
+                                <rect key="frame" x="12" y="70" width="351" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>

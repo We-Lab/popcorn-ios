@@ -59,10 +59,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
 
-
 @property NSArray *testArray;
 
 @end
+
 
 @implementation PCMovieDetailViewController
 

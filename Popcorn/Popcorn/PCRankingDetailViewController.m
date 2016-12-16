@@ -22,9 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess)
-            [self didReceiveRankingList:movieListData];
+            [self didReceiveRankingList:resultArray];
         else
             alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
     };
