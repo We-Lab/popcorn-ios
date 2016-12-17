@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PCRankingDetailTableViewCell : UITableViewCell
-@property (nonatomic) UILabel *additionalInfoLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *movieImageView;
+@property (weak, nonatomic) IBOutlet UILabel *movieTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieInfoLabel;
 @end

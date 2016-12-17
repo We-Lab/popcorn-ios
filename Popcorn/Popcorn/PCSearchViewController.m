@@ -61,9 +61,9 @@ static NSArray const *rankingTypeArray;
 
 #pragma mark - Search Movie
 - (void)searchMovie:(NSString *)inputText {
-    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess) {
-            [self didReceiveMovieData:movieListData];
+            [self didReceiveMovieData:resultArray];
         }
         else {
             alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
@@ -73,10 +73,10 @@ static NSArray const *rankingTypeArray;
     [[PCMovieInfoManager movieManager] requestMovieList:inputText withCompletionHandler:completionHandler];
 }
 
-- (void)didReceiveMovieData:(NSArray *)movieListData {
-    sLog(movieListData);
-    self.movieListData = movieListData;
-    self.searchResultCount = movieListData.count;
+- (void)didReceiveMovieData:(NSArray *)resultArray {
+    sLog(resultArray);
+    self.movieListData = resultArray;
+    self.searchResultCount = resultArray.count;
     
     if (_searchResultCount == 0) {
         self.viewTitleLabel.text = @"검색 결과 없음";
@@ -227,7 +227,7 @@ static NSArray const *rankingTypeArray;
 # pragma mark - Configure Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     PCRankingDetailViewController *rankingDetailVC = segue.destinationViewController;
-    rankingDetailVC.titleString = rankingTypeArray[_selectedRow];
+    rankingDetailVC.rankingType = _selectedRow;
 }
 
 

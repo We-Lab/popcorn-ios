@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m5a-Fa-quQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m5a-Fa-quQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -122,27 +124,50 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3x5-9i-Amk">
-                                                    <rect key="frame" x="8" y="-4" width="84" height="96"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.57764697220233163" green="1" blue="0.6723988916336906" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62X-5Y-13m">
-                                                    <rect key="frame" x="100" y="71" width="267" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화정보" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62X-5Y-13m">
+                                                    <rect key="frame" x="91" y="57" width="281" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-bG-8ok">
+                                                    <rect key="frame" x="91" y="13" width="271" height="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2U-rR-1F4">
-                                                    <rect key="frame" x="100" y="42" width="267" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화평점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2U-rR-1F4">
+                                                    <rect key="frame" x="91" y="36" width="281" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cHK-wR-Yar">
+                                                    <rect key="frame" x="5" y="5" width="79" height="90"/>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rnc-bG-8ok" firstAttribute="top" secondItem="HTW-JZ-iGo" secondAttribute="topMargin" constant="5" id="B2r-8Y-Ihc"/>
+                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="width" secondItem="HTW-JZ-iGo" secondAttribute="width" multiplier="0.21" id="EVm-wi-3Vh"/>
+                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="leading" secondItem="HTW-JZ-iGo" secondAttribute="leading" constant="5" id="JZB-bX-YOY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Rnc-bG-8ok" secondAttribute="trailing" constant="5" id="JpW-Tx-etk"/>
+                                                <constraint firstItem="T2U-rR-1F4" firstAttribute="top" secondItem="Rnc-bG-8ok" secondAttribute="bottom" constant="5" id="OoP-ah-qiL"/>
+                                                <constraint firstItem="Rnc-bG-8ok" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="S5V-Sd-3lG"/>
+                                                <constraint firstItem="62X-5Y-13m" firstAttribute="trailing" secondItem="HTW-JZ-iGo" secondAttribute="trailingMargin" constant="5" id="Uf5-Fw-c0g"/>
+                                                <constraint firstItem="62X-5Y-13m" firstAttribute="top" secondItem="T2U-rR-1F4" secondAttribute="bottom" constant="5" id="W2f-hV-x0Y"/>
+                                                <constraint firstAttribute="bottom" secondItem="cHK-wR-Yar" secondAttribute="bottom" constant="5" id="b2C-Bi-4v1"/>
+                                                <constraint firstItem="T2U-rR-1F4" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="hPo-K6-fjz"/>
+                                                <constraint firstItem="T2U-rR-1F4" firstAttribute="trailing" secondItem="HTW-JZ-iGo" secondAttribute="trailingMargin" constant="5" id="iVD-e5-pWc"/>
+                                                <constraint firstItem="62X-5Y-13m" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="nQI-hT-bXJ"/>
+                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="top" secondItem="HTW-JZ-iGo" secondAttribute="top" constant="5" id="zgo-Mw-kDN"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="movieImageView" destination="cHK-wR-Yar" id="eso-uV-lXZ"/>
+                                            <outlet property="movieInfoLabel" destination="62X-5Y-13m" id="sOC-bT-ac1"/>
+                                            <outlet property="movieRatingLabel" destination="T2U-rR-1F4" id="XSq-6E-v8r"/>
+                                            <outlet property="movieTitleLabel" destination="Rnc-bG-8ok" id="D9L-8P-oBc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

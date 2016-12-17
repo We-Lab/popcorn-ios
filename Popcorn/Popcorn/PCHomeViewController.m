@@ -17,7 +17,7 @@
 #import "PCMagazineCollectionViewCell.h"
 #import "PCTodayRecommendTableViewCell.h"
 
-@interface PCHomeViewController () <UIScrollViewDelegate>
+@interface PCHomeViewController () <UIScrollViewDelegate, UITableViewDelegate>
 
 // Base Scroll View
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
@@ -56,20 +56,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createViews];
-    
-    //UIRefreshControl *refreshControl = [UIRefreshControl new];
-    //[refreshControl addTarget:self action:@selector(testRefresh:) forControlEvents:UIControlEventValueChanged];
-    //[self.baseScrollView addSubview:refreshControl];
-    //[refreshControl.superview sendSubviewToBack:refreshControl];
-}
-
-//- (void)testRefresh:(UIRefreshControl *)refreshControl {
-    //sLog(@"테스트성공");
-    //[refreshControl endRefreshing];
-//}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -393,37 +379,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PCTodayRecommendTableViewCell *recommendMovieCell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell" forIndexPath:indexPath];
+    PCTodayRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell"];
+    if (cell == nil)
+        cell = [[PCTodayRecommendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RecommendMovieCell"];
     
     NSDictionary *movieData = _todayRecommendList[indexPath.row];
-    [recommendMovieCell.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
-    recommendMovieCell.movieTitleLabel.text = movieData[@"title_kor"];
-    recommendMovieCell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
     
-    recommendMovieCell.likeButton.tag = indexPath.row;
+    [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    [cell.likeButton addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    return recommendMovieCell;
+    return cell;
+//    recommendMovieCell.movieTitleLabel.text = movieData[@"title_kor"];
+//    recommendMovieCell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
 }
-
-- (IBAction)clickLikeButton:(UIButton *)button {
-    dLog(@"%@", button);
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 215;
 }
 
-
+- (void)testAction:(UIButton *)button {
+    sLog(button);
+}
 
 
 #pragma mark - Ratio
 - (CGFloat)ratioWidth:(NSInteger)num{
-    return (num * self.view.frame.size.width) / 375;
+    return (num * self.view.frame.size.width) / [UIScreen mainScreen].bounds.size.width;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-    return (num * self.view.frame.size.height) / 667;
+    return (num * self.view.frame.size.height) / [UIScreen mainScreen].bounds.size.height;
 }
 
 

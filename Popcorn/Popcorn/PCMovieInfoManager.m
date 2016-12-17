@@ -67,13 +67,13 @@
     
     switch (rankingType) {
         case BoxOfficeRankingDetailList:
-//            urlString = [movieURLString stringByAppendingString:@"main/BoxOfficeRanking"];
+            urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
             break;
         case RatingRankingDetailList:
-//            urlString =
+            urlString = [movieURLString stringByAppendingString:@"like-rank/"];
             break;
         case LikeRankingDetailList:
-//            urlString =
+            urlString = [movieURLString stringByAppendingString:@"star-rank/"];
             break;
     }
     NSURLRequest *request = [_serializer requestWithMethod:@"GET"

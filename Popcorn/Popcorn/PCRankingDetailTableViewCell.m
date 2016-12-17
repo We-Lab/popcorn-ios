@@ -10,10 +10,6 @@
 
 @implementation PCRankingDetailTableViewCell
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }

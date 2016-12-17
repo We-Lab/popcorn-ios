@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PCMovieInfoManager.h"
 
 @interface PCRankingDetailViewController : UIViewController
-@property (nonatomic) NSString *titleString;
+@property (nonatomic) RankingListType rankingType;
 @end
