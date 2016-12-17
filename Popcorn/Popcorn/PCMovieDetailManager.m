@@ -12,13 +12,9 @@
 #import "PCNetworkParamKey.h"
 #import "PCMovieDetailDataCenter.h"
 
-typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
-
-
 @interface PCMovieDetailManager ()
 @property (nonatomic) AFURLSessionManager *manager;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
-@property DataTaskHandler completionHandler;
 @end
 
 @implementation PCMovieDetailManager
@@ -28,16 +24,14 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     if (self) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        [self createDataTaskHandler];
     }
     return self;
 }
 
+#pragma mark - MovieDetail Request
+- (NSURLSessionDataTask *)requestMovieDetailData:(DataTaskHandler)handler {
 
-
-- (void)requestMovieDetailData {
-
-    NSString *movieID = @"50";
+    NSString *movieID = @"72";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
@@ -47,42 +41,72 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setURL:movieDetailRequestURL];
 
-    id taskHandler = ^(NSURLResponse *response, id responseObject, NSError *error){
-        
-        if (error) {
-            NSLog(@"error : %@",error);
-        }else if (responseObject) {
-            
-            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary = responseObject;
-        }
-    
-            
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:movieDataRequestNotification
-                                                            object:nil];
-        
-    };
-    
-    self.dataTask = [_manager dataTaskWithRequest:request completionHandler:taskHandler];
-    
-    [_dataTask resume];
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
 }
 
-- (void)createDataTaskHandler {
+#pragma mark - MovieDetail BEST Commnet Request
+- (NSURLSessionDataTask *)requestMovieDetailBestCommentData:(DataTaskHandler)handler {
     
-    self.completionHandler = ^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
-        
-        if (error) {
-            dLog(@"error : %@", error);
-        }
-        else {
-            
-            if (responseObject) {
-                dLog(@"success data : %@", responseObject);
-            }
-        }
-    };
+    NSString *movieID = @"72";
+    
+    NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/comment/top", movieID]];
+    NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:movieDetailRequestURL];
+    
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
 }
+
+#pragma mark - MovieDetail BEST FamousLine Request
+- (NSURLSessionDataTask *)requestMovieDetailBestFamousLineData:(DataTaskHandler)handler {
+    
+    NSString *movieID = @"72";
+    
+    NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/famous/top", movieID]];
+    NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:movieDetailRequestURL];
+    
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
+}
+
+#pragma mark - MovieDetail Commnet Request
+- (NSURLSessionDataTask *)requestMovieDetailCommentData:(DataTaskHandler)handler {
+    
+    NSString *movieID = @"72";
+    
+    NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/comment", movieID]];
+    NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:movieDetailRequestURL];
+    
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
+}
+
+#pragma mark - MovieDetail FamousLine Request
+- (NSURLSessionDataTask *)requestMovieDetailFamousLineData:(DataTaskHandler)handler {
+    
+    NSString *movieID = @"72";
+    
+    NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/famous", movieID]];
+    NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:movieDetailRequestURL];
+    
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
+}
+
 
 @end

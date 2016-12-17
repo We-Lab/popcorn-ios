@@ -7,14 +7,15 @@
 //
 
 #import "PCMovieDetailViewController.h"
-#import "PCMovieNaviView.h"
 #import <HCSStarRatingView.h>
 #import <BEMSimpleLineGraphView.h>
+#import <UIImageView+WebCache.h>
 
 #import "PCNetworkParamKey.h"
 #import "PCMovieDetailManager.h"
 #import "PCMovieDetailDataCenter.h"
-#import <UIImageView+WebCache.h>
+#import "PCBestCommentCustomCell.h"
+#import "PCBestFamousLineCustomCell.h"
 #import "PCMoviePhotoCell.h"
 
 @interface PCMovieDetailViewController () <UIScrollViewDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
@@ -40,12 +41,9 @@
 @property NSMutableArray *actorNameArray;
 @property NSMutableArray *actorImageArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
-
-@property (weak, nonatomic) IBOutlet UIView *commentContentView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentContentHeight;
-@property (weak, nonatomic) IBOutlet UIView *famousLineContentView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *famousLineContentHeight;
 @property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
+@property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userReactionTableViewHeight;
 
 // Movie Content Property
 @property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
@@ -59,8 +57,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
 
-
 @property NSArray *testArray;
+@property NSURLSessionDataTask *detailHandler;
+@property NSURLSessionDataTask *commentHandler;
+@property NSURLSessionDataTask *bestCommentHandler;
+@property NSURLSessionDataTask *famousLineHandler;
+@property NSURLSessionDataTask *bestFamousLineHandler;
 
 @end
 
@@ -71,19 +73,21 @@
     
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
-    
-    [self.movieDetailManager requestMovieDetailData];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(makeMovieContents)
-                                                 name:movieDataRequestNotification
-                                               object:nil];
-    
+
     self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
-    [self preferredStatusBarStyle];
+    
+    self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
+    self.userReactionTableView.estimatedRowHeight = 150;
+    
+    [self infoRequest];
+    
     [self setCustomViewStatus];
 }
 
+-(void)viewDidLayoutSubviews{
+
+    NSLog(@"dmdkdk : %lf", _userReactionTableView.contentSize.height);
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -94,31 +98,75 @@
 #endif
 }
 
-// 스테이터스 바 스타일 메소드
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-//#pragma mark - Make Custom Navi View
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//
-//    if (scrollView.contentOffset.y < 50) {
+- (void)infoRequest{
+    
+    self.detailHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
+        
+        if (!error) {
+            
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary = data;
+            [self makeMovieDetailContents];
+        }
+    }];
+    
+    [self.detailHandler resume];
+    
+//    self.commentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
 //        
-//        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-//                                                      forBarMetrics:UIBarMetricsDefault];
-//        self.navigationController.navigationBar.shadowImage = [UIImage new];
-//        
-//    }else if (scrollView.contentOffset.y >= 50){
+//        if (!error) {
+//            
+//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data;
+//        }
+//    }];
 //    
-//        [self.navigationController.navigationBar setBackgroundImage:[UIImage alloc]
-//                                                      forBarMetrics:UIBarMetricsDefault];
-//        self.navigationController.navigationBar.shadowImage = [UIImage alloc];
-//    }
-//}
+//    [self.commentHandler resume];
+//    
+//    self.bestCommentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
+//        
+//        if (!error) {
+//            
+//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
+//            
+//        }
+//    }];
+//    
+//    [self.bestCommentHandler resume];
+//    
+//    self.famousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
+//        
+//        if (!error) {
+//            
+//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data;
+//            [self makeMovieContents];
+//        }
+//    }];
+//    
+//    [self.famousLineHandler resume];
+//    
+//    self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
+//        
+//        if (!error) {
+//            
+//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
+//            [self makeMovieContents];
+//        }
+//    }];
+//    
+//    [self.bestFamousLineHandler resume];
+}
 
 #pragma mark - Make Custem View
 - (void)setCustomViewStatus{
-
+    
+    
+//    CGRect reactionTableViewHeight = _userReactionTableView.frame;
+//    reactionTableViewHeight.size.height = _userReactionTableView.contentSize.height;
+//
+//    self.userReactionTableViewHeight.constant = reactionTableViewHeight.size.height;
+//    
+////    self.scrollContentViewHeight.constant = _scrollContentViewHeight.constant + self.userReactionTableViewHeight.constant;
+    NSLog(@"%lf", _userReactionTableView.contentSize.height);
+    
     // 포스터
     self.moviePosterView.layer.masksToBounds = NO;
     self.moviePosterView.layer.shadowOffset = CGSizeMake(0, 1);
@@ -130,7 +178,6 @@
     self.movieStarScore.frame = CGRectMake(0, 0, self.starScoreView.frame.size.width, self.starScoreView.frame.size.height);
     self.movieStarScore.maximumValue = 5;
     self.movieStarScore.minimumValue = 0;
-    self.movieStarScore.value = 3.3;
     self.movieStarScore.backgroundColor = [UIColor clearColor];
     self.movieStarScore.allowsHalfStars = YES;
     self.movieStarScore.accurateHalfStars = YES;
@@ -212,36 +259,36 @@
     movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
     movieScoreGraph.displayDotsWhileAnimating = NO;
     [self.movieScoreGraphView addSubview:movieScoreGraph];
-    
+
 }
 
-- (void)makeMovieContents {
+- (void)makeMovieDetailContents {
     
-    PCMovieDetailDataCenter *dataCenter = [[PCMovieDetailDataCenter alloc] init];
+    [self.navigationItem setTitle:[self.movieDataCenter creatMovieTitle]];
     
-    self.movieTitleLabel.text = [dataCenter creatMovieTitle];
-    self.movieRuningTimeGenreLabel.text = [NSString stringWithFormat:@"%@ | %@",[dataCenter creatMovieRunningTime],[dataCenter creatMovieGenre]];
-    self.movieDateNationLabel.text = [NSString stringWithFormat:@"%@ | %@",[dataCenter creatMovieDate],[dataCenter creatMovieNation]];
-    self.movieGradeLabel.text = [dataCenter creatMovieGrade];
-    self.movieStoryTextView.text = [dataCenter creatMovieStory];
-    [self.movieMainImage sd_setImageWithURL:[dataCenter creatMovieMainImage]];
-    [self.moviePosterImage sd_setImageWithURL:[dataCenter creatMoviePosterImage]];
+    self.movieTitleLabel.text = [self.movieDataCenter creatMovieTitle];
+    self.movieRuningTimeGenreLabel.text = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatMovieRunningTime],[self.movieDataCenter creatMovieGenre]];
+    self.movieDateNationLabel.text = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatMovieDate],[self.movieDataCenter creatMovieNation]];
+    self.movieGradeLabel.text = [self.movieDataCenter creatMovieGrade];
+    self.movieStoryTextView.text = [self.movieDataCenter creatMovieStory];
+    [self.movieMainImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
+    [self.moviePosterImage sd_setImageWithURL:[self.movieDataCenter creatMoviePosterImage]];
     
     [self.moviePhotoCollectionView reloadData];
     
     for (NSInteger j = 0; j < 3; j += 1) {
         
         UILabel *actorName = self.actorNameArray[j];
-        actorName.text = [dataCenter creatMovieActorName][j];
+        actorName.text = [self.movieDataCenter creatMovieActorName][j];
     
         UIImageView *actorImage = self.actorImageArray[j];
-        [actorImage sd_setImageWithURL:[dataCenter creatMovieActorImage][j]];
+        [actorImage sd_setImageWithURL:[self.movieDataCenter creatMovieActorImage][j]];
     }
     
-    self.movieStarAvergeLabel.text = [NSString stringWithFormat:@"평균 %@",[dataCenter creatStarAverage]];
-    self.movieStarScore.value = [[dataCenter creatStarAverage] floatValue];
+    self.movieStarAvergeLabel.text = [NSString stringWithFormat:@"평균 %@",[self.movieDataCenter creatStarAverage]];
+    self.movieStarScore.value = [[self.movieDataCenter creatStarAverage] floatValue];
     
-    [self.movieTrailerImage sd_setImageWithURL:[dataCenter creatMovieMainImage]];
+    [self.movieTrailerImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
 }
 
 #pragma mark - Make Custom button
@@ -264,12 +311,7 @@
     button.contentEdgeInsets = UIEdgeInsetsMake(edgeOffset, 0.0, edgeOffset, 0.0);
 }
 
-#pragma mark - Custom FamousLine View
-- (void)setCustomMovieFamousLineView{
-    
-}
-
-#pragma mark - CollectionView Required
+#pragma mark - CollectionView Delegate Required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [_movieDataCenter creatMoviePhoto].count;
 }
@@ -282,6 +324,35 @@
     moviePhotoCell.moviePhotoImageView.clipsToBounds = YES;
     
     return moviePhotoCell;
+}
+
+#pragma mark - TableView Delegate Required
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (indexPath.section == 0) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestCommentCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    }else if (indexPath.section == 1) {
+    
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestFamousLineCell" forIndexPath:indexPath];
+        
+        return cell;
+    }
+    
+    return nil;
 }
 
 #pragma mark - Graph OpenSource Required

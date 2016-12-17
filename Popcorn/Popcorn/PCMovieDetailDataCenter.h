@@ -11,6 +11,10 @@
 @interface PCMovieDetailDataCenter : NSObject
 
 @property NSMutableDictionary *movieDetailDictionary;
+@property NSMutableDictionary *movieDetailBestCommentList;
+@property NSMutableDictionary *movieDetailBestFamousLineList;
+@property NSMutableDictionary *movieDetailCommentList;
+@property NSMutableDictionary *movieDetailFamousLineList;
 
 + (instancetype)sharedMovieDetailData;
 

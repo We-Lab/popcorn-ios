@@ -31,10 +31,15 @@
     if (self) {
         
         self.movieDetailDictionary = [[NSMutableDictionary alloc]init];
+        self.movieDetailBestCommentList = [[NSMutableDictionary alloc]init];
+        self.movieDetailBestFamousLineList = [[NSMutableDictionary alloc]init];
+        self.movieDetailCommentList = [[NSMutableDictionary alloc]init];
+        self.movieDetailFamousLineList= [[NSMutableDictionary alloc]init];
     }
     return self;
 }
 
+#pragma mark - Movie Detail
 - (NSString *)creatMovieTitle{
     return [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailTitleKey];
 }

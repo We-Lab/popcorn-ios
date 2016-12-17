@@ -41,10 +41,6 @@
         commentCell = [[PCCommentCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommnetCell"];
     }
     
-    if (indexPath.row == 2) {
-        commentCell.commentText.text = @"우아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아아아아아아아아아아아앙아END";
-    }
-    
     HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
     starRatingView.frame = CGRectMake(0, 0, 120, commentCell.commentStarRatingView.frame.size.height);
     starRatingView.maximumValue = 5;
