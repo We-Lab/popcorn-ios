@@ -10,4 +10,10 @@
 
 @interface PCBestFamousLineCustomCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *bestFamousLineUserID;
+@property (weak, nonatomic) IBOutlet UILabel *bestFamousLineMovieName;
+@property (weak, nonatomic) IBOutlet UILabel *bestFamousLineText;
+@property (weak, nonatomic) IBOutlet UILabel *bestFamousLineLikeText;
+@property (weak, nonatomic) IBOutlet UILabel *bestFamousLineWriteDate;
+
 @end

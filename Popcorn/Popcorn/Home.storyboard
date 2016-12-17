@@ -470,7 +470,6 @@
                         <outlet property="todayRecommendMovieTableView" destination="xMv-xW-2zQ" id="aj7-cG-Yew"/>
                         <outlet property="todayRecommendViewHeight" destination="E9k-C9-3RP" id="jTZ-Oo-iBv"/>
                         <outlet property="viewControllHeight" destination="CO9-Dk-1kz" id="KvG-PG-m9A"/>
-                        <segue destination="rst-a4-x98" kind="show" identifier="id1" id="9nn-dc-836"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFJ-h3-xgX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,14 +479,6 @@
                 </imageView>
             </objects>
             <point key="canvasLocation" x="388" y="-361.61919040479762"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="GOj-cc-Cdz">
-            <objects>
-                <viewControllerPlaceholder id="rst-a4-x98" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SeV-Td-Gig" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1468" y="-719"/>
         </scene>
         <!--홈-->
         <scene sceneID="aOa-GF-hbm">

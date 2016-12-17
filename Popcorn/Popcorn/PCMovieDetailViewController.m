@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIView *movieActorListView;
 @property NSMutableArray *actorNameArray;
 @property NSMutableArray *actorImageArray;
+@property NSMutableArray *actorMovieNmaeArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
 @property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
@@ -94,7 +95,7 @@
     
     self.userReactionTableViewHeight.constant = reactionTableViewHeight.size.height;
     
-    self.scrollContentViewHeight.constant = 1352 + self.userReactionTableViewHeight.constant;
+    self.scrollContentViewHeight.constant = 1252 + self.userReactionTableViewHeight.constant;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -117,6 +118,29 @@
     }];
     [self.detailHandler resume];
     
+    self.bestCommentHandler = [self.movieDetailManager requestMovieDetailBestCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
+            
+            if (self.movieDataCenter.movieDetailBestCommentList.count != 0) {
+                [self.userReactionTableView reloadData];
+            }
+        }
+    }];
+    [self.bestCommentHandler resume];
+    
+    self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailBestFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
+        
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
+            
+            if (self.movieDataCenter.movieDetailBestFamousLineList.count != 0) {
+                [self.userReactionTableView reloadData];
+            }
+        }
+    }];
+    [self.bestFamousLineHandler resume];
+    
 //    self.commentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
 //        
 //        if (!error) {
@@ -126,14 +150,7 @@
 //    }];
 //    
 //    [self.commentHandler resume];
-//    
-    self.bestCommentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-        if (!error) {
-            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
-        }
-    }];
-    [self.bestCommentHandler resume];
-//
+
 //    self.famousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
 //        
 //        if (!error) {
@@ -145,13 +162,7 @@
 //    
 //    [self.famousLineHandler resume];
 //    
-    self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-        
-        if (!error) {
-            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
-        }
-    }];
-    [self.bestFamousLineHandler resume];
+
 }
 
 #pragma mark - Make Custem View
@@ -191,12 +202,13 @@
     [PCCommonUtility makeTextShadow:self.movieStarAvergeLabel opacity:0.8];
     
     self.actorImageArray = [[NSMutableArray alloc] init];
+    self.actorMovieNmaeArray = [[NSMutableArray alloc] init];
     self.actorNameArray = [[NSMutableArray alloc] init];
-    
+
     for (NSInteger i = 0; i < 3; i += 1) {
         
         CGFloat baseMovieContentWidth = self.movieActorListView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = [self ratioHeight:125];
+        CGFloat baseMovieContentHeight = [self ratioHeight:130];
         
         UIView *actorView = [[UIView alloc] init];
         actorView.tag = i;
@@ -221,15 +233,27 @@
         
         UILabel *actorName = [[UILabel alloc] init];
         
-        actorName.frame = CGRectMake(0, [self ratioHeight:85], actorView.frame.size.width, [self ratioHeight:20]);
+        actorName.frame = CGRectMake(0, [self ratioHeight:80], actorView.frame.size.width, [self ratioHeight:20]);
         actorName.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
         actorName.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
         actorName.textAlignment = NSTextAlignmentCenter;
-        actorName.text = @"q";
+        actorName.text = @"배우이름";
         
         [self.actorNameArray addObject:actorName];
         
         [actorView addSubview:actorName];
+        
+        UILabel *actorMovieName = [[UILabel alloc] init];
+        
+        actorMovieName.frame = CGRectMake(0, [self ratioHeight:100], actorView.frame.size.width, [self ratioHeight:20]);
+        actorMovieName.font = [UIFont systemFontOfSize:12];
+        actorMovieName.textColor = [UIColor colorWithRed:102.f/255.f green:102.f/255.f blue:102.f/255.f alpha:1];
+        actorMovieName.textAlignment = NSTextAlignmentCenter;
+        actorMovieName.text = @"배역이름";
+        
+        [self.actorMovieNmaeArray addObject:actorMovieName];
+        
+        [actorView addSubview:actorMovieName];
     }
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
@@ -260,11 +284,15 @@
     [self.moviePosterImage sd_setImageWithURL:[self.movieDataCenter creatMoviePosterImage]];
     
     [self.moviePhotoCollectionView reloadData];
+    [self.userReactionTableView reloadData];
     
     for (NSInteger j = 0; j < 3; j += 1) {
         
         UILabel *actorName = self.actorNameArray[j];
         actorName.text = [self.movieDataCenter creatMovieActorName][j];
+        
+        UILabel *actorMovieName = self.actorMovieNmaeArray[j];
+        actorMovieName.text = [self.movieDataCenter creatMovieActorMovieName][j];
     
         UIImageView *actorImage = self.actorImageArray[j];
         [actorImage sd_setImageWithURL:[self.movieDataCenter creatMovieActorImage][j]];
@@ -308,7 +336,7 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PCMoviePhotoCell *moviePhotoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePhotoCell" forIndexPath:indexPath];
     
-    [moviePhotoCell.moviePhotoImageView sd_setImageWithURL:[_movieDataCenter creatMoviePhoto][indexPath.row] ];
+    [moviePhotoCell.moviePhotoImageView sd_setImageWithURL:[_movieDataCenter creatMoviePhoto][indexPath.row]];
     moviePhotoCell.moviePhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
     moviePhotoCell.moviePhotoImageView.clipsToBounds = YES;
     
@@ -323,18 +351,88 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    if (section == 0) {
+        
+        if (self.movieDataCenter.movieDetailBestCommentList.count == 0) {
+            return 1;
+        }else{
+            return self.movieDataCenter.movieDetailBestCommentList.count;
+        }
+
+    }else if (section == 1){
+    
+        if (self.movieDataCenter.movieDetailBestFamousLineList.count == 0) {
+            return 1;
+        }else{
+            return self.movieDataCenter.movieDetailBestFamousLineList.count;
+        }
+    }
+    
     return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     if (indexPath.section == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestCommentCell" forIndexPath:indexPath];
-        return cell;
-    }else if (indexPath.section == 1) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestFamousLineCell" forIndexPath:indexPath];
-        return cell;
+        
+        if (self.movieDataCenter.movieDetailBestCommentList.count == 0) {
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCommnetCell" forIndexPath:indexPath];
+            
+            return cell;
+        }else{
+            
+            PCBestCommentCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestCommentCell" forIndexPath:indexPath];
+            
+            HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+            starRatingView.frame = CGRectMake(0, 0, 120, cell.bestCommentStarScoreView.frame.size.height);
+            starRatingView.maximumValue = 5;
+            starRatingView.minimumValue = 0;
+            starRatingView.backgroundColor = [UIColor clearColor];
+            starRatingView.allowsHalfStars = YES;
+            starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+            starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+            starRatingView.userInteractionEnabled = NO;
+            [cell.bestCommentStarScoreView addSubview:starRatingView];
+            
+            cell.bestCommentUserID.text = [self.movieDataCenter creatBestCommentUserID][indexPath.row];
+            starRatingView.value = [[self.movieDataCenter creatBestCommentUserStar][indexPath.row] floatValue];
+            cell.bestCommentText.text = [self.movieDataCenter creatBestCommentUserText][indexPath.row];
+            cell.bestCommentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatBestCommentLikeCount][indexPath.row]];
+            NSString *commentDate =[[self.movieDataCenter creatBestCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
+            cell.bestCommentWriteDate.text = commentDate;
+            
+            
+            return cell;
+        }
+        
     }
+    
+    else if (indexPath.section == 1) {
+        
+        if (self.movieDataCenter.movieDetailBestFamousLineList.count == 0) {
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCommnetCell" forIndexPath:indexPath];
+            
+            return cell;
+        }else{
+            
+            PCBestFamousLineCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BestFamousLineCell" forIndexPath:indexPath];
+            
+            cell.bestFamousLineUserID.text = [self.movieDataCenter creatBestFamousLineUserID][indexPath.row];
+            cell.bestFamousLineMovieName.text
+            = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineMovieName][indexPath.row],
+               [self.movieDataCenter creatBestFamousLineActorName][indexPath.row]];
+            cell.bestFamousLineLikeText.text = [self.movieDataCenter creatBestFamousLineUserText][indexPath.row];
+            cell.bestFamousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.",[self.movieDataCenter creatBestFamousLineLikeCount][indexPath.row]];
+            NSString *commentDate =[[self.movieDataCenter creatBestFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
+            cell.bestFamousLineWriteDate.text = commentDate;
+            
+            return cell;
+            
+        }
+    }
+    
     return nil;
 }
 
@@ -362,6 +460,7 @@
         sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:47]);
         headerTitle.frame = CGRectMake([self ratioWidth:12], [self ratioHeight:12], tableView.frame.size.width - [self ratioWidth:12], [self ratioHeight:20]);
         headerTitle.text = @"코멘트";
+        
     }else if(section == 1){
         sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:62]);
         
@@ -400,7 +499,6 @@
     if (section == 0) {
         [moreButton addTarget:self action:@selector(moveToCommentList) forControlEvents:UIControlEventTouchUpInside];
     }else if (section == 1){
-        moreButton.backgroundColor = [UIColor redColor];
         [moreButton addTarget:self action:@selector(moveToFamousLineList) forControlEvents:UIControlEventTouchUpInside];
     }
     

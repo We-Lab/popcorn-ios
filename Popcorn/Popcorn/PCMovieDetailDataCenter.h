@@ -11,8 +11,8 @@
 @interface PCMovieDetailDataCenter : NSObject
 
 @property NSMutableDictionary *movieDetailDictionary;
-@property NSMutableDictionary *movieDetailBestCommentList;
-@property NSMutableDictionary *movieDetailBestFamousLineList;
+@property NSMutableArray *movieDetailBestCommentList;
+@property NSMutableArray *movieDetailBestFamousLineList;
 @property NSMutableDictionary *movieDetailCommentList;
 @property NSMutableDictionary *movieDetailFamousLineList;
 
@@ -30,9 +30,23 @@
 - (NSArray *)creatMovieDirectorName;
 - (NSArray *)creatMovieDirectorImage;
 - (NSArray *)creatMovieActorName;
+- (NSArray *)creatMovieActorMovieName;
 - (NSArray *)creatMovieActorImage;
 - (NSArray *)creatMoviePhoto;
 - (NSString *)creatStarAverage;
 - (NSURL *)creatMovieTrailer;
+
+- (NSArray *)creatBestCommentUserID;
+- (NSArray *)creatBestCommentUserStar;
+- (NSArray *)creatBestCommentUserText;
+- (NSArray *)creatBestCommentLikeCount;
+- (NSArray *)creatBestCommentWriteDate;
+
+- (NSArray *)creatBestFamousLineUserID;
+- (NSArray *)creatBestFamousLineActorName;
+- (NSArray *)creatBestFamousLineMovieName;
+- (NSArray *)creatBestFamousLineUserText;
+- (NSArray *)creatBestFamousLineLikeCount;
+- (NSArray *)creatBestFamousLineWriteDate;
 
 @end
