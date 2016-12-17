@@ -53,8 +53,8 @@
 }
 
 - (void)initTestSetting {
-    self.idTextField.text = @"testuser";
-    self.pwTextField.text = @"testuser1";
+    self.idTextField.text = @"giftbott";
+    self.pwTextField.text = @"giftbott1";
     self.isValidID = YES;
     self.isValidPW = YES;
 }

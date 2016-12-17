@@ -11,12 +11,12 @@
 #import <AFNetworking.h>
 #import "PCNetworkParamKey.h"
 
-typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
-
 @interface PCLoginManager ()
-@property (nonatomic) AFURLSessionManager *manager;
+
 @property (nonatomic) NSURLSessionDataTask *dataTask;
-@property DataTaskHandler completionHandler;
+@property (nonatomic) AFHTTPRequestSerializer *serializer;
+@property (nonatomic) AFHTTPSessionManager *manager;
+
 @end
 
 
@@ -26,8 +26,8 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     self = [super init];
     if (self) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        [self createDataTaskHandler];
+        _manager = [[AFHTTPSessionManager manager] initWithSessionConfiguration:configuration];
+        _serializer = [AFHTTPRequestSerializer serializer];
     }
     return self;
 }
@@ -41,16 +41,33 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 
 - (void)signUpWithID:(NSDictionary *)form {
     NSString *urlString = [memberURLString stringByAppendingString:@"registration/"];
-    
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    NSURLRequest *request = [serializer requestWithMethod:@"POST"
+    NSURLRequest *request = [_serializer requestWithMethod:@"POST"
                                                 URLString:urlString
                                                parameters:form
                                                     error:nil];
     
-    self.dataTask = [_manager dataTaskWithRequest:request completionHandler:_completionHandler];
+    PCLoginManager *weakSelf = self;
+    self.dataTask = [_manager dataTaskWithRequest:request
+                                completionHandler:^(NSURLResponse * _Nonnull response, NSDictionary * _Nullable responseObject, NSError * _Nullable error) {
+                                    
+                                    NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+                                    dLog(@"status code : %ld", statusCode);
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        if ([weakSelf.delegate respondsToSelector:@selector(didSignUpWithID:andResponseObject:)]) {
+                                            if (statusCode == PCSignUpFailed) {
+                                                [weakSelf.delegate didSignUpWithID:statusCode andResponseObject:responseObject];
+                                            }
+                                            else {
+                                                [weakSelf.delegate didSignUpWithID:statusCode andResponseObject:nil];
+                                            }
+                                        }
+                                    });
+                                }];
     [_dataTask resume];
 }
+
+
 
 #pragma mark - Sign In
 - (void)signInWithFacebookID:(NSString *)facebookID andToken:(NSString *)token {
@@ -64,37 +81,34 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     NSDictionary *parameters = @{SignInIDKey:loginID,
                                  SignInPasswordKey:password};
     
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    NSURLRequest *request = [serializer requestWithMethod:@"POST"
-                                                URLString:urlString
-                                               parameters:parameters
-                                                    error:nil];
+    NSURLRequest *request = [_serializer requestWithMethod:@"POST"
+                                                 URLString:urlString
+                                                parameters:parameters
+                                                     error:nil];
     
-    self.dataTask = [_manager dataTaskWithRequest:request completionHandler:_completionHandler];
+    PCLoginManager *weakSelf = self;
+    self.dataTask = [_manager dataTaskWithRequest:request
+                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                    NSString *token = nil;
+                                    if (error) {
+                                        dLog(@"Error Domain : %@", error.domain);
+                                        dLog(@"Error UserInfo : %@", error.userInfo);
+                                    }
+                                    else {
+                                        token = responseObject[TokenKey];
+                                        if (token) {
+                                            dLog(@"success token : %@", token);
+                                        }
+                                    }
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        if ([weakSelf.delegate respondsToSelector:@selector(didSignInWithID:)]) {
+                                            [weakSelf.delegate didSignInWithID:token];
+                                        }
+                                    });
+    }];
     [_dataTask resume];
 }
 
-- (void)createDataTaskHandler {
-    __weak PCLoginManager *weakSelf = self;
-    self.completionHandler = ^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
-        NSString *token = nil;
-        
-        if (error) {
-            dLog(@"error : %@", error);
-        }
-        else {
-            token = responseObject[TokenKey];
-            if (token) {
-                dLog(@"success token : %@", token);
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([weakSelf.delegate respondsToSelector:@selector(didSignInWithID:)]) {
-                [weakSelf.delegate didSignInWithID:token];
-            }
-        });
-    };
-}
 
 - (void)requestNewPassword {
     BOOL isSuccess = YES;
@@ -102,6 +116,8 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
     [self.delegate didSendPasswordToID:isSuccess];
 }
 
+
+#pragma mark -
 - (void)dealloc {
     dLog(@" ");
 }

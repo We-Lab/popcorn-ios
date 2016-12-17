@@ -50,6 +50,4 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserSignedIn"];
 }
 
-
-
 @end

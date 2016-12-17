@@ -46,7 +46,7 @@
         self.hasToken = YES;
         self.token = token;
         
-        [_userInfo saveUserToken:token];
+        [_userInfo setUserTokenFromKeyChain];
     }
 }
 
@@ -69,11 +69,11 @@
     XCTAssertNil(_token);
 }
 
-// 테스트 성공 확인. 반복적인 회원가입이 발생하게 되므로 필요할 때만 테스트 요함.
-- (void)Disable_testThat회원가입에성공하면토큰값을반환받아야한다 {
-    NSDictionary *form = @{SignUpIDKey:@"testuser10",
-                           SignUpPasswordKey:@"testuser10",
-                           SignUpConfirmPWKey:@"testuser10",
+// 이메일 인증 절차가 추가되어 테스트 제거
+- (void)DISABLE_testThat회원가입에성공하면토큰값을반환받아야한다 {
+    NSDictionary *form = @{SignUpIDKey:@"testuser",
+                           SignUpPasswordKey:@"testuser1",
+                           SignUpConfirmPWKey:@"testuser1",
                            SignUpEmailKey:@"test1@test.co.kr",
                            SignUpBirthdayKey:@"2000-01-01",
                            SignUpPhoneNumberKey:@"000-0000-0000",

@@ -27,6 +27,7 @@ NSString *const SignUpIDKey = @"username";
 NSString *const SignUpPasswordKey = @"password1";
 NSString *const SignUpConfirmPWKey = @"password2";
 NSString *const SignUpEmailKey = @"email";
+NSString *const SignUpNicknameKey = @"nickname";
 NSString *const SignUpBirthdayKey = @"date_of_birth";
 NSString *const SignUpGenderKey = @"gender";
 NSString *const SignUpPhoneNumberKey = @"phone_number";

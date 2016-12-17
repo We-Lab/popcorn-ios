@@ -28,6 +28,7 @@ extern NSString *const SignUpIDKey;
 extern NSString *const SignUpPasswordKey;
 extern NSString *const SignUpConfirmPWKey;
 extern NSString *const SignUpEmailKey;
+extern NSString *const SignUpNicknameKey;
 extern NSString *const SignUpBirthdayKey;
 extern NSString *const SignUpGenderKey;
 extern NSString *const SignUpPhoneNumberKey;

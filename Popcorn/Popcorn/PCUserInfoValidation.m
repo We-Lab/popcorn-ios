@@ -12,12 +12,12 @@
 
 #pragma mark - Validate UserInfo
 + (BOOL)isValidID:(NSString *)userID {
-    if ( userID.length > 10 || userID.length < 4 )
+    if ( userID.length > 20 || userID.length < 4 )
         return NO;
     if ([userID rangeOfString:@" "].length > 0)
         return NO;
     
-    NSString *filter = @"^[A-Z0-9a-z]{4,10}$";
+    NSString *filter = @"^[A-Z0-9a-z]{4,20}$";
     NSPredicate *idRegex = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", filter];
     BOOL result = [idRegex evaluateWithObject:userID];
     
@@ -25,10 +25,10 @@
 }
 
 + (BOOL)isValidPW:(NSString *)userPW {
-    if ( userPW.length > 15 || userPW.length < 6 )
+    if ( userPW.length > 20 || userPW.length < 8 )
         return NO;
     
-    NSString *filter = @"^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]){6,20}$";
+    NSString *filter = @"^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]){8,20}$";
     NSPredicate *idRegex = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", filter];
     BOOL result = [idRegex evaluateWithObject:userPW];
     
