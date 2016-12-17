@@ -18,6 +18,7 @@
 @property UIStoryboard *storyboard;
 @property PCMainViewController *main;
 @property PCInitialViewController *login;
+@property PCUserInformation *userInfo;
 @end
 
 @implementation PCInitialViewTests
@@ -25,6 +26,7 @@
 - (void)setUp {
     [super setUp];
     self.app = [[AppDelegate alloc] init];
+    self.userInfo = [[PCUserInformation alloc] init];
 }
 
 - (void)tearDown {
@@ -32,24 +34,24 @@
     self.storyboard = nil;
     self.main = nil;
     self.login = nil;
-    [PCUserInformation hasUserSignedOut];
+    [self.userInfo hasUserSignedOut];
     [super tearDown];
 }
 
 - (void)testThatItShouldReturnNOWhenUserhasSignedIn {
-    [PCUserInformation hasUserSignedIn];
+    [self.userInfo hasUserSignedIn:@"1283719237281"];
     BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
     XCTAssertTrue(isUserSignedIn, @"로그인 이후에는 YES를 반환해야 함");
 }
 
 - (void)testThatItShouldReturnNOWhenUserhasSignedOut {
-    [PCUserInformation hasUserSignedOut];
+    [self.userInfo hasUserSignedOut];
     BOOL isUserSignedIn = [PCUserInformation isUserSignedIn];
     XCTAssertFalse(isUserSignedIn, @"로그아웃 이후에는 NO를 반환해야 함");
 }
 
 - (void)testThatItShouldShowLoginViewWhenUserIsNotSignedIn {
-    [PCUserInformation hasUserSignedOut];
+    [self.userInfo hasUserSignedOut];
     [self.app application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:nil];
     
     self.storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
@@ -61,7 +63,7 @@
 }
 
 - (void)testThatItShouldShowMainViewWhenUserIsSignedIn {
-    [PCUserInformation hasUserSignedIn];
+    [self.userInfo hasUserSignedIn:@"123891739"];
     [self.app application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:nil];
     
     self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

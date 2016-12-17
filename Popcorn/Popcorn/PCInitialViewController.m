@@ -10,6 +10,7 @@
 #import "PCMainViewController.h"
 
 @interface PCInitialViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *SignUpWithEmailButton;
 
 @end
 
@@ -19,6 +20,8 @@
     [super viewDidLoad];
     
     [self makeNavigationView];
+//    [_SignUpWithEmailButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,10 +41,6 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

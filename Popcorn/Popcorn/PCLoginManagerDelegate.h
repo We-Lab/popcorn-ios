@@ -9,12 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, PCSignUpResult) {
-    PCSignUpSuccess = 1,
-    PCSignUpFailedWithID,
-    PCSignUpFailedWithPassword,
-    PCSignUpFailedWithEmail,
-    PCSignUpFailedWithPhoneNumber,
-    PCSignUpFailed,
+    PCSignUpSuccess = 201,
+    PCSignUpFailed = 400,
+    PCSignUpServerError = 500,
 };
 
 
@@ -23,7 +20,7 @@ typedef NS_ENUM(NSUInteger, PCSignUpResult) {
 @optional
 // 회원가입
 - (void)didSignUpWithFacebook:(BOOL)isSuccess;
-- (void)didSignUpWithID:(PCSignUpResult)result;
+- (void)didSignUpWithID:(PCSignUpResult)statusCode andResponseObject:(NSDictionary *)responseObject;
 
 // 로그인
 - (void)didSignInWithFacebook:(BOOL)isSuccess;

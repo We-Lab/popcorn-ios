@@ -12,13 +12,12 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "PCLoginNaviView.h"
-#import "PCMainViewController.h"
 #import "PCUserInformation.h"
 #import "PCUserInfoValidation.h"
 #import "PCNetworkParamKey.h"
 
-
-
+#import "PCMainViewController.h"
+#import "PCSignInViewController.h"
 
 @interface PCSignUpIDViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -33,11 +32,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *nickTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegment;
-@property (nonatomic) UIDatePicker *datePicker;
-
-@property UITextField *activeField;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *addImageView;
 
 // 회원가입폼에 대한 유효성 검사값 저장 변수
 @property (nonatomic) BOOL isValidID;
@@ -46,26 +40,32 @@
 @property (nonatomic) BOOL isValidEmail;
 @property (nonatomic) BOOL isValidBirth;
 
+//
+@property (nonatomic) UIDatePicker *datePicker;
+@property (weak, nonatomic) UITextField *activeField;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *addImageView;
+
 @end
 
 @implementation PCSignUpIDViewController
 
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 #ifdef DEBUG
-//    [self initTestSetting];
+    [self initTestSetting];
 #endif
     self.loginManager = [[PCLoginManager alloc] init];
     self.loginManager.delegate = self;
     
     [self makeNavigationView];
-    [self enableUserInteractionToBirthdayTextField];
+    [self registNotification];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self registNotification];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -74,24 +74,21 @@
 #endif
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self unregistNotification];
-}
-
 - (void)initTestSetting {
-    self.idTextField.text = @"testuser";
-    self.pwTextField.text = @"testuser1";
-    self.rePWTextField.text = @"testuser1";
-    self.emailTextField.text = @"testemail@test.com";
-    self.birthdayTextField.text = @"2000-01-01";
+    self.idTextField.text = @"giftbot";
+    self.pwTextField.text = @"giftbot1";
+    self.rePWTextField.text = @"giftbot1";
+    self.nickTextField.text = @"giftbot";
+    self.emailTextField.text = @"itperson@naver.com";
+    self.birthdayTextField.text = @"1984-08-04";
     
     self.isValidID = YES;
     self.isValidPW = YES;
     self.isValidEmail = YES;
+    self.isValidNick = YES;
     self.isValidBirth = YES;
 }
+
 
 #pragma mark - makeCustomView
 - (void)makeNavigationView {
@@ -101,23 +98,15 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-- (void)enableUserInteractionToBirthdayTextField {
-    _birthdayTextField.userInteractionEnabled = YES;
-}
-
-// 스테이터스 바 스타일 메소드
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 // 네비게이션 Pop
 - (void)onTouchUpToNextPage:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 #pragma mark - DatePicker for userBirthday
 -(IBAction)showDatePicker {
-    
     self.birthdayTextField.text = nil;
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
@@ -141,20 +130,17 @@
 }
 
 -(void)LabelTitle:(id)sender {
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     dateFormat.dateStyle = NSDateFormatterMediumStyle;
     dateFormat.dateFormat = @"yyyy-MM-dd";
-    NSString *dateString = [NSString stringWithFormat:@"%@",
-                     [dateFormat stringFromDate:_datePicker.date]];
+    NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:_datePicker.date]];
     
     self.birthdayTextField.text = dateString;
 }
 
 - (IBAction)requestSignUp:(UIButton *)button {
     // 수정필요 : 가입 조건 미충족 시 바로 화면에 보여줄 수 있도록 처리 필요
-    
-    if (_isValidID && _isValidPW && _isValidEmail && _isValidBirth) {
+    if (_isValidID && _isValidPW && _isValidEmail && _isValidBirth && _isValidNick) {
         NSString *gender = @"M";
         if (_genderSegment.selectedSegmentIndex == 1)
             gender = @"W";
@@ -163,8 +149,8 @@
                                SignUpPasswordKey:_pwTextField.text,
                                SignUpConfirmPWKey:_rePWTextField.text,
                                SignUpEmailKey:_emailTextField.text,
+                               SignUpNicknameKey:_nickTextField.text,
                                SignUpBirthdayKey:_birthdayTextField.text,
-                               SignUpPhoneNumberKey:@"000-0000-0000",
                                SignUpGenderKey:gender};
         sLog(form);
         [self.loginManager signUpWithID:form];
@@ -196,6 +182,7 @@
     }];
 }
 
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     NSString *text;
@@ -215,13 +202,12 @@
         self.isValidID = NO;
         if (textLength >= 4 && textLength <= 10)
             self.isValidID = [PCUserInfoValidation isValidID:text];
-        NSLog(@"아이디 유효성 검사 : %d", _isValidID);
     }
     else if (textField == _rePWTextField) {
         self.isValidPW = NO;
-        BOOL match = [_rePWTextField.text isEqualToString:_pwTextField.text];
+        BOOL match = [text isEqualToString:_pwTextField.text];
         
-        if (match && textLength >= 6)
+        if (match && textLength >= 8)
             self.isValidPW = [PCUserInfoValidation isValidPW:text];
     }
     else if (textField == _emailTextField){
@@ -252,17 +238,39 @@
 }
 
 #pragma mark - LoginManager Delegate
-- (void)didSignInWithID:(NSString *)token {
-    if (token) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PCMainViewController *mainView = [storyboard instantiateInitialViewController];
-        [self.navigationController pushViewController:mainView animated:YES];
+- (void)didSignUpWithID:(PCSignUpResult)statusCode andResponseObject:(NSDictionary *)responseObject {
+    if (statusCode == PCSignUpSuccess) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"입력하신 Email로 인증코드를 발송하였습니다"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
         
-        // 키체인에 토큰값 저장
-        [[PCUserInformation userInfo] hasUserSignedIn:token];
+        PCSignUpIDViewController *weakSelf = self;
+        UIAlertAction *switchToSignInView;
+        switchToSignInView = [UIAlertAction actionWithTitle:@"확인"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        PCSignInViewController *signInVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SignInViewController"];
+                                                        [weakSelf.navigationController showViewController:signInVC sender:weakSelf];
+                                                    }];
+        [alertController addAction:switchToSignInView];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
-    else {
-        alertLog(@"유저정보가 올바르지 않습니다.");
+    else if (statusCode == PCSignUpServerError) {
+        alertLog(@"서버 오류 발생");
+    }
+    else if (statusCode == PCSignUpFailed) {
+        if (responseObject[@"email"] != nil) {
+            alertLog(@"중복된 Email이 있거나 잘못 입력하셨습니다");
+        }
+        else if (responseObject[@"username"] != nil) {
+            alertLog(@"중복된 ID가 있거나 잘못 입력하셨습니다");
+        }
+        else if (responseObject[@"password1"]) {
+            alertLog(@"패스워드를 다시 입력해주시기 바랍니다");
+        }
+        else {
+            alertLog(@"회원가입 양식에 맞지 않거나 중복된 내용이 존재합니다");
+        }
     }
 }
 
@@ -288,14 +296,12 @@
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    
     self.activeField = nil;
 }
 
 
 #pragma mark - KeyBoard Notification
 -(void) registNotification{
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardDidShowNotification
@@ -307,17 +313,7 @@
                                                object:nil];
 }
 
--(void) unregistNotification{
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardDidHideNotification object:nil];
-}
-
 - (void)keyboardWasShown:(NSNotification*)keyboardNotification{
-    
     NSDictionary* info = [keyboardNotification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
@@ -327,48 +323,38 @@
     mainViewRect.origin.y = (otherHeight/3)*2 - (self.fieldLayoutView.frame.origin.y + self.activeField.frame.origin.y);
     
     if ((otherHeight/3)*2 < (self.fieldLayoutView.frame.origin.y + self.activeField.frame.origin.y)) {
-        
         self.view.frame = mainViewRect;
     }
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)keyboardNotification{
-
     CGRect mainViewRect = self.view.frame;
     mainViewRect.origin.y = 0;
     self.view.frame = mainViewRect;
 }
 
 - (IBAction)resignOnTap:(id)sender {
-
     [self.activeField resignFirstResponder];
 }
 
+
 #pragma mark - Profile Image Picker
 - (IBAction)profileImageSelect:(id)sender {
-    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    
-    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    picker.sourceType = sourceType;
-    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.allowsEditing = YES;
+    picker.delegate = self;
     
     [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
     UIImage *pickedImage = info[UIImagePickerControllerEditedImage];
-    
     if (pickedImage == nil) {
         pickedImage = info[UIImagePickerControllerOriginalImage];
     }
 
-    
     NSData *imageData = UIImageJPEGRepresentation(pickedImage, 1.0);
-    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     [userDefault setObject:imageData forKey:@"ImageData"];
@@ -377,19 +363,22 @@
     self.profileImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     [picker dismissViewControllerAnimated:YES completion:^{}];
-    
     [self.addImageView setHidden:YES];
-    
 }
 
 
-
+#pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc {
     dLog(@" ");
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidHideNotification object:nil];
 }
 
 @end

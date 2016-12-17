@@ -286,115 +286,6 @@
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="195" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="xMv-xW-2zQ">
                                                         <rect key="frame" x="0.0" y="47" width="375" height="420"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecommendMovieCell" rowHeight="215" id="vqN-O2-UvS" customClass="PCTodayRecommendTableViewCell">
-                                                                <rect key="frame" x="0.0" y="1" width="375" height="215"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vqN-O2-UvS" id="eHx-gy-Pwr">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kae-oS-pWd">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
-                                                                            <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="170" id="y12-Qm-jes"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVp-QY-lrW">
-                                                                            <rect key="frame" x="0.0" y="175" width="375" height="35"/>
-                                                                            <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKD-nN-Kd4">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="34"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                    <state key="normal" title="좋아요" image="Rating">
-                                                                                        <color key="titleColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    </state>
-                                                                                    <connections>
-                                                                                        <action selector="clickLikeButton:" destination="2qb-EN-fj3" eventType="touchUpInside" id="7sN-XD-niS"/>
-                                                                                    </connections>
-                                                                                </button>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wju-Bb-Nz9">
-                                                                                    <rect key="frame" x="125" y="0.0" width="125" height="34"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                    <state key="normal" title="평가하기" image="Ranking">
-                                                                                        <color key="titleColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    </state>
-                                                                                </button>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWD-QI-gco">
-                                                                                    <rect key="frame" x="250" y="0.0" width="125" height="34"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                    <state key="normal" title="코멘트" image="Recommend">
-                                                                                        <color key="titleColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    </state>
-                                                                                </button>
-                                                                            </subviews>
-                                                                            <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <constraints>
-                                                                                <constraint firstItem="PKD-nN-Kd4" firstAttribute="top" secondItem="tVp-QY-lrW" secondAttribute="top" id="4SU-Q9-0Tj"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="sWD-QI-gco" secondAttribute="trailing" id="LKn-8i-dGJ"/>
-                                                                                <constraint firstItem="Wju-Bb-Nz9" firstAttribute="leading" secondItem="PKD-nN-Kd4" secondAttribute="trailing" id="Sud-QU-Hgs"/>
-                                                                                <constraint firstItem="sWD-QI-gco" firstAttribute="width" secondItem="PKD-nN-Kd4" secondAttribute="width" id="Wfe-Vq-xpI"/>
-                                                                                <constraint firstItem="Wju-Bb-Nz9" firstAttribute="top" secondItem="tVp-QY-lrW" secondAttribute="top" id="Xf1-ZA-7QO"/>
-                                                                                <constraint firstAttribute="height" constant="35" id="cfL-HC-lAO"/>
-                                                                                <constraint firstItem="sWD-QI-gco" firstAttribute="leading" secondItem="Wju-Bb-Nz9" secondAttribute="trailing" id="iWG-e2-ORT"/>
-                                                                                <constraint firstItem="PKD-nN-Kd4" firstAttribute="leading" secondItem="tVp-QY-lrW" secondAttribute="leading" id="jJa-k9-2ea"/>
-                                                                                <constraint firstItem="Wju-Bb-Nz9" firstAttribute="width" secondItem="PKD-nN-Kd4" secondAttribute="width" id="lae-MG-aEB"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="Wju-Bb-Nz9" secondAttribute="bottom" constant="1" id="pPB-kF-4OD"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="sWD-QI-gco" secondAttribute="bottom" constant="1" id="wnA-ey-KWv"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="PKD-nN-Kd4" secondAttribute="bottom" constant="1" id="xO0-kI-4Dq"/>
-                                                                                <constraint firstItem="sWD-QI-gco" firstAttribute="top" secondItem="tVp-QY-lrW" secondAttribute="top" id="zLb-is-7wh"/>
-                                                                            </constraints>
-                                                                        </view>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xy-wc-mxR">
-                                                                            <rect key="frame" x="13" y="118" width="60" height="18"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="60" id="NS9-44-Vkx"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <size key="shadowOffset" width="0.0" height="1"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNz-Bd-d4H">
-                                                                            <rect key="frame" x="13" y="140.5" width="63.5" height="22.5"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                                            <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <size key="shadowOffset" width="1" height="1"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="kae-oS-pWd" firstAttribute="top" secondItem="eHx-gy-Pwr" secondAttribute="top" id="Bib-NM-obV"/>
-                                                                        <constraint firstItem="JNz-Bd-d4H" firstAttribute="top" secondItem="7xy-wc-mxR" secondAttribute="bottom" constant="5" id="E7A-Fh-RIJ"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="kae-oS-pWd" secondAttribute="trailing" id="G3n-6j-8ho"/>
-                                                                        <constraint firstItem="tVp-QY-lrW" firstAttribute="top" secondItem="kae-oS-pWd" secondAttribute="bottom" constant="5" id="JmG-Vv-1vC"/>
-                                                                        <constraint firstItem="tVp-QY-lrW" firstAttribute="leading" secondItem="eHx-gy-Pwr" secondAttribute="leading" id="KK7-42-hOS"/>
-                                                                        <constraint firstItem="JNz-Bd-d4H" firstAttribute="leading" secondItem="eHx-gy-Pwr" secondAttribute="leadingMargin" constant="5" id="KQN-B7-R3R"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="tVp-QY-lrW" secondAttribute="trailing" id="Mgw-91-vgS"/>
-                                                                        <constraint firstItem="tVp-QY-lrW" firstAttribute="top" secondItem="JNz-Bd-d4H" secondAttribute="bottom" constant="12" id="Ssv-c7-hWr"/>
-                                                                        <constraint firstItem="7xy-wc-mxR" firstAttribute="leading" secondItem="JNz-Bd-d4H" secondAttribute="leading" id="u9M-il-0YC"/>
-                                                                        <constraint firstItem="kae-oS-pWd" firstAttribute="leading" secondItem="eHx-gy-Pwr" secondAttribute="leading" id="yq3-ya-kar"/>
-                                                                    </constraints>
-                                                                </tableViewCellContentView>
-                                                                <connections>
-                                                                    <outlet property="averageRatingLabel" destination="7xy-wc-mxR" id="V1L-R7-IHV"/>
-                                                                    <outlet property="commentButton" destination="sWD-QI-gco" id="N5k-lX-6Vp"/>
-                                                                    <outlet property="likeButton" destination="PKD-nN-Kd4" id="wTy-pU-I2V"/>
-                                                                    <outlet property="menuView" destination="tVp-QY-lrW" id="vHU-XN-HgW"/>
-                                                                    <outlet property="movieImageView" destination="kae-oS-pWd" id="uYM-vM-poH"/>
-                                                                    <outlet property="movieTitleLabel" destination="JNz-Bd-d4H" id="cbw-vd-p0h"/>
-                                                                    <outlet property="ratingButton" destination="Wju-Bb-Nz9" id="8gq-ds-kA3"/>
-                                                                </connections>
-                                                            </tableViewCell>
-                                                        </prototypes>
                                                         <connections>
                                                             <outlet property="dataSource" destination="2qb-EN-fj3" id="Yx1-gN-E1Q"/>
                                                             <outlet property="delegate" destination="2qb-EN-fj3" id="FBh-Q4-DCk"/>
@@ -504,9 +395,6 @@
     <resources>
         <image name="Home" width="20" height="20"/>
         <image name="LikeHeart" width="6" height="6"/>
-        <image name="Ranking" width="20" height="20"/>
-        <image name="Rating" width="20" height="20"/>
-        <image name="Recommend" width="20" height="20"/>
         <image name="titlelogo" width="108" height="20"/>
     </resources>
 </document>
