@@ -198,10 +198,7 @@
         movieRankingNumber.textColor = [UIColor whiteColor];
         movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
-        movieRankingNumber.layer.masksToBounds = NO;
-        movieRankingNumber.layer.shadowOffset = CGSizeMake(0, 1);
-        movieRankingNumber.layer.shadowRadius = 2;
-        movieRankingNumber.layer.shadowOpacity = 0.8;
+        [PCCommonUtility makeTextShadow:movieRankingNumber opacity:0.8];
         [posterImageView addSubview:movieRankingNumber];
         
         
@@ -215,10 +212,7 @@
         scoreLabel.text = @"평점";
         scoreLabel.textColor = [UIColor whiteColor];
         scoreLabel.font = [UIFont systemFontOfSize:17];
-        scoreLabel.layer.masksToBounds = NO;
-        scoreLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        scoreLabel.layer.shadowRadius = 2;
-        scoreLabel.layer.shadowOpacity = 0.8;
+        [PCCommonUtility makeTextShadow:scoreLabel opacity:0.8];
         [movieNumberScoreView addSubview:scoreLabel];
         
         
@@ -281,7 +275,6 @@
         starRatingView.allowsHalfStars = YES;
         starRatingView.accurateHalfStars = YES;
         starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
-        starRatingView.halfStarImage = [UIImage imageNamed:@"HalfStar"]; // optional
         starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
         starRatingView.userInteractionEnabled = NO;
         [movieContentView addSubview:starRatingView];
