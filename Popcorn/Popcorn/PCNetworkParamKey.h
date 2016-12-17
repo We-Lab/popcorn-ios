@@ -12,6 +12,7 @@
 
 @end
 
+
 // 공통
 extern NSString *const memberURLString;
 extern NSString *const movieURLString;

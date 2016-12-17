@@ -43,7 +43,7 @@
 
 
 #pragma mark - Execute DataTask and CompletionHandler
-- (void)resumeDataTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)resumeDataTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(NetworkTaskHandler)completionHandler {
     _dataTask = [_sessionManager dataTaskWithRequest:request
                                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                        BOOL result = NO;
@@ -62,7 +62,7 @@
 
 
 #pragma mark - Configure Request
-- (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString;
     
     switch (rankingType) {
@@ -84,7 +84,7 @@
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
-- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)requestMovieList:(NSString *)inputText withCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSCharacterSet *allowedCharacterSet = [NSCharacterSet URLQueryAllowedCharacterSet];
     NSString *urlString = [movieURLString stringByAppendingString:@"search/?keyword="];
     urlString = [[urlString stringByAppendingString:inputText] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
@@ -97,7 +97,7 @@
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
-- (void)requestBoxOfficeListwithCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)requestBoxOfficeListwithCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
     NSURLRequest *request = [_serializer requestWithMethod:@"GET"
                                                  URLString:urlString
@@ -108,7 +108,7 @@
 }
 
 
-- (void)requestMagazineListWithCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)requestMagazineListWithCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString = [mainURLString stringByAppendingString:@"magazines/"];
     NSURLRequest *request = [_serializer requestWithMethod:@"GET"
                                                  URLString:urlString
@@ -118,9 +118,27 @@
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
+- (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"best-comment/"];
+    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
 
+- (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"movie-recommends/carousel/"];
+    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
 
-- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(MovieNetworkingHandler)completionHandler {
+- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(NetworkTaskHandler)completionHandler {
 //    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
 //    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
 //                                                 URLString:urlString

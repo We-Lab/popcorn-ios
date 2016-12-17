@@ -15,21 +15,16 @@
     
     static PCMovieDetailDataCenter *movieDetailData = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
-        
         movieDetailData = [[self alloc] init];
-        
     });
     
     return movieDetailData;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
-        
         self.movieDetailDictionary = [[NSMutableDictionary alloc]init];
         self.movieDetailBestCommentList = [[NSMutableDictionary alloc]init];
         self.movieDetailBestFamousLineList = [[NSMutableDictionary alloc]init];

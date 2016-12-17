@@ -153,9 +153,9 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
 
 // 선택한 태그 정보 저장 후 이전 화면으로 이동
 - (void)saveSelectedTag {
-//    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+//    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
 //        if (isSuccess) {
-//            [self didReceiveMovieData:movieListData];
+//            [self didReceiveMovieData:resultArray];
 //        }
 //        else {
 //            alertLog(@"영화정보를 가져오는 데 실패하였습니다.");

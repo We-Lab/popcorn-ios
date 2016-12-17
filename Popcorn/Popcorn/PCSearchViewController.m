@@ -61,7 +61,7 @@ static NSArray const *rankingTypeArray;
 
 #pragma mark - Search Movie
 - (void)searchMovie:(NSString *)inputText {
-    MovieNetworkingHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *movieListData){
         if (isSuccess) {
             [self didReceiveMovieData:movieListData];
         }
