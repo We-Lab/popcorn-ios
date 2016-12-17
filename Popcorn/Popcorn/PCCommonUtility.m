@@ -31,4 +31,12 @@
     return newImage;
 }
 
++ (void)makeTextShadow:(UILabel *)label opacity:(CGFloat)opacity{
+
+    label.layer.masksToBounds = NO;
+    label.layer.shadowOffset = CGSizeMake(0, 1);
+    label.layer.shadowRadius = 2;
+    label.layer.shadowOpacity = opacity;
+}
+
 @end

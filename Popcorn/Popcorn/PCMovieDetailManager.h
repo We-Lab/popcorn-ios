@@ -9,9 +9,15 @@
 #import <Foundation/Foundation.h>
 
 static NSString *const movieDataRequestNotification = @"MovieDataRequestNotification";
+typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
+
 
 @interface PCMovieDetailManager : NSObject
 
-- (void)requestMovieDetailData;
+- (NSURLSessionDataTask *)requestMovieDetailData:(DataTaskHandler)handler;
+- (NSURLSessionDataTask *)requestMovieDetailBestCommentData:(DataTaskHandler)handler;
+- (NSURLSessionDataTask *)requestMovieDetailBestFamousLineData:(DataTaskHandler)handler;
+- (NSURLSessionDataTask *)requestMovieDetailCommentData:(DataTaskHandler)handler;
+- (NSURLSessionDataTask *)requestMovieDetailFamousLineData:(DataTaskHandler)handler;
 
 @end

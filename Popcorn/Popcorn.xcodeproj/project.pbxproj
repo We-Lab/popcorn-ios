@@ -74,6 +74,8 @@
 		52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA9321DFC3A9500507936 /* PCRecommendTagButton.m */; };
 		5F04B8191E02A20B0012F50D /* PCMoviePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */; };
 		5F04B81C1E02AFA10012F50D /* PCMovieTrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */; };
+		5F04B8231E03E2730012F50D /* PCBestCommentCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B8221E03E2730012F50D /* PCBestCommentCustomCell.m */; };
+		5F04B8261E03E2A70012F50D /* PCBestFamousLineCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04B8251E03E2A70012F50D /* PCBestFamousLineCustomCell.m */; };
 		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
 		5F37984E1E0056D300DCA40B /* PCCommentWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
@@ -209,6 +211,10 @@
 		5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMoviePhotoCell.m; sourceTree = "<group>"; };
 		5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieTrailerViewController.h; sourceTree = "<group>"; };
 		5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieTrailerViewController.m; sourceTree = "<group>"; };
+		5F04B8211E03E2730012F50D /* PCBestCommentCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCBestCommentCustomCell.h; sourceTree = "<group>"; };
+		5F04B8221E03E2730012F50D /* PCBestCommentCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCBestCommentCustomCell.m; sourceTree = "<group>"; };
+		5F04B8241E03E2A70012F50D /* PCBestFamousLineCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCBestFamousLineCustomCell.h; sourceTree = "<group>"; };
+		5F04B8251E03E2A70012F50D /* PCBestFamousLineCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCBestFamousLineCustomCell.m; sourceTree = "<group>"; };
 		5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieNaviView.h; sourceTree = "<group>"; };
 		5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieNaviView.m; sourceTree = "<group>"; };
 		5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCommentWriteViewController.h; sourceTree = "<group>"; };
@@ -281,22 +287,9 @@
 				5FEDA6F31E011EA100D4BC14 /* PCMovieDetailDataCenter.m */,
 				52AE381B1DED6A2E0016D81E /* PCMovieDetailViewController.h */,
 				52AE381C1DED6A2E0016D81E /* PCMovieDetailViewController.m */,
-				5F04B8171E02A20B0012F50D /* PCMoviePhotoCell.h */,
-				5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */,
-				5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */,
-				5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */,
-				52AE380D1DED682D0016D81E /* PCActorViewController.h */,
-				52AE380E1DED682D0016D81E /* PCActorViewController.m */,
-				52AE38101DED68410016D81E /* PCCommentViewController.h */,
-				52AE38111DED68410016D81E /* PCCommentViewController.m */,
-				5FAA696C1DF9535800528550 /* PCCommentCustomCell.h */,
-				5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */,
-				5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */,
-				5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */,
-				52AE38131DED695C0016D81E /* PCFamousLineViewController.h */,
-				52AE38141DED695C0016D81E /* PCFamousLineViewController.m */,
-				5FC1A71A1DFC54BF007CB48D /* PCFamousLineCustomCell.h */,
-				5FC1A71B1DFC54BF007CB48D /* PCFamousLineCustomCell.m */,
+				5F04B8201E03E2110012F50D /* MovieDetail Sub Class */,
+				5F04B81D1E03E16B0012F50D /* Movie Commnet */,
+				5F04B81F1E03E1BF0012F50D /* Movie FamousLine */,
 				5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */,
 				5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */,
 			);
@@ -519,6 +512,47 @@
 				52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */,
 			);
 			name = UserInformation;
+			sourceTree = "<group>";
+		};
+		5F04B81D1E03E16B0012F50D /* Movie Commnet */ = {
+			isa = PBXGroup;
+			children = (
+				52AE38101DED68410016D81E /* PCCommentViewController.h */,
+				52AE38111DED68410016D81E /* PCCommentViewController.m */,
+				5FAA696C1DF9535800528550 /* PCCommentCustomCell.h */,
+				5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */,
+				5F04B8211E03E2730012F50D /* PCBestCommentCustomCell.h */,
+				5F04B8221E03E2730012F50D /* PCBestCommentCustomCell.m */,
+				5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */,
+				5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */,
+			);
+			name = "Movie Commnet";
+			sourceTree = "<group>";
+		};
+		5F04B81F1E03E1BF0012F50D /* Movie FamousLine */ = {
+			isa = PBXGroup;
+			children = (
+				52AE38131DED695C0016D81E /* PCFamousLineViewController.h */,
+				52AE38141DED695C0016D81E /* PCFamousLineViewController.m */,
+				5FC1A71A1DFC54BF007CB48D /* PCFamousLineCustomCell.h */,
+				5FC1A71B1DFC54BF007CB48D /* PCFamousLineCustomCell.m */,
+				5F04B8241E03E2A70012F50D /* PCBestFamousLineCustomCell.h */,
+				5F04B8251E03E2A70012F50D /* PCBestFamousLineCustomCell.m */,
+			);
+			name = "Movie FamousLine";
+			sourceTree = "<group>";
+		};
+		5F04B8201E03E2110012F50D /* MovieDetail Sub Class */ = {
+			isa = PBXGroup;
+			children = (
+				5F04B8171E02A20B0012F50D /* PCMoviePhotoCell.h */,
+				5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */,
+				5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */,
+				5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */,
+				52AE380D1DED682D0016D81E /* PCActorViewController.h */,
+				52AE380E1DED682D0016D81E /* PCActorViewController.m */,
+			);
+			name = "MovieDetail Sub Class";
 			sourceTree = "<group>";
 		};
 		6DF08A880D9FA324D70C8A75 /* Frameworks */ = {
@@ -868,6 +902,7 @@
 				52F76A3E1E02AD42008E900A /* PCMagazineCollectionViewCell.m in Sources */,
 				5FEDA6F41E011EA100D4BC14 /* PCMovieDetailDataCenter.m in Sources */,
 				5FC1A7471DFFCD02007CB48D /* PCRatingCustomCell.m in Sources */,
+				5F04B8231E03E2730012F50D /* PCBestCommentCustomCell.m in Sources */,
 				52AE383D1DF00AFF0016D81E /* PCNetworkParamKey.m in Sources */,
 				5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */,
 				52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
@@ -894,6 +929,7 @@
 				5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */,
 				52B49CA11DF9AFAD001A97C2 /* PCRankingDetailTableViewCell.m in Sources */,
 				5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */,
+				5F04B8261E03E2A70012F50D /* PCBestFamousLineCustomCell.m in Sources */,
 				52C49A761DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
 				52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */,
 				52C49A191DEAE9F400F47BB2 /* main.m in Sources */,

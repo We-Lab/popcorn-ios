@@ -44,5 +44,6 @@
 
 + (UIAlertController *)alertControllerWithOnlyTitle:(NSString *)title;
 + (UIImage *)resizeImage:(UIImage *)image scaledToSize:(CGSize)newSize andAlpha:(CGFloat)alpha;
++ (void)makeTextShadow:(UILabel *)label opacity:(CGFloat)opacity;
 
 @end
