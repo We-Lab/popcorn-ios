@@ -423,7 +423,7 @@
             cell.bestFamousLineMovieName.text
             = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineMovieName][indexPath.row],
                [self.movieDataCenter creatBestFamousLineActorName][indexPath.row]];
-            cell.bestFamousLineLikeText.text = [self.movieDataCenter creatBestFamousLineUserText][indexPath.row];
+            cell.bestFamousLineText.text = [self.movieDataCenter creatBestFamousLineUserText][indexPath.row];
             cell.bestFamousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.",[self.movieDataCenter creatBestFamousLineLikeCount][indexPath.row]];
             NSString *commentDate =[[self.movieDataCenter creatBestFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
             cell.bestFamousLineWriteDate.text = commentDate;
