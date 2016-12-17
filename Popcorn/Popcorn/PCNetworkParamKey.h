@@ -45,11 +45,26 @@ extern NSString *const MovieDetailGradeKey;
 extern NSString *const MovieDetailStoryKey;
 extern NSString *const MovieDetailDirecterKey;
 extern NSString *const MovieDetailActorsKey;
+extern NSString *const MovieDetailActorKey;
+extern NSString *const MovieDetailActorMovieNameKey;
 extern NSString *const MovieDetailPhotosKey;
 extern NSString *const MovieDetailStarAvergeKey;
 extern NSString *const MovieDetailTrailerKey;
 
+extern NSString *const MovieCommentUserIDKey;
+extern NSString *const MovieCommentUserStarKey;
+extern NSString *const MovieCommentUserTextKey;
+extern NSString *const MovieCommentLikeCountKey;
+extern NSString *const MovieCommentIsLikeKey;
+extern NSString *const MovieCommentWriteDateKey;
 
+extern NSString *const MovieFamousLineUserIDKey;
+extern NSString *const MovieFamousLineActorName;
+extern NSString *const MovieFamousLineMovieName;
+extern NSString *const MovieFamousLineUserTextKey;
+extern NSString *const MovieFamousLineLikeCountKey;
+extern NSString *const MovieFamousLineIsLikeKey;
+extern NSString *const MovieFamousLineWriteDateKey;
 
 
 

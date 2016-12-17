@@ -14,5 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIView *commentStarRatingView;
 @property (weak, nonatomic) IBOutlet UILabel *commentText;
 @property (weak, nonatomic) IBOutlet UILabel *commentLikeText;
-
+@property (weak, nonatomic) IBOutlet UILabel *commentWriteDate;
 @end

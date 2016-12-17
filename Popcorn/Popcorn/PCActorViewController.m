@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.movieDataCenter = [[PCMovieDetailDataCenter alloc] init];
+    self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
     [self creatActorList];
 }
 
@@ -73,7 +73,7 @@
         
         CGFloat baseMargin = [self ratioHeight:15];
         CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = [self ratioHeight:105];
+        CGFloat baseMovieContentHeight = [self ratioHeight:130];
         
         UIView *actorView = [[UIView alloc] init];
         actorView.tag = i;
@@ -91,6 +91,7 @@
         [actorImage sd_setImageWithURL:[_movieDataCenter creatMovieActorImage][i]];
         actorImage.contentMode = UIViewContentModeScaleAspectFill;
         actorImage.clipsToBounds = YES;
+        actorImage.backgroundColor = [UIColor grayColor];
         
         [actorView addSubview:actorImage];
         
@@ -103,6 +104,16 @@
         actorName.textAlignment = NSTextAlignmentCenter;
         
         [actorView addSubview:actorName];
+        
+        UILabel *actorMovieName = [[UILabel alloc] init];
+        
+        actorMovieName.frame = CGRectMake(0, [self ratioHeight:100], actorView.frame.size.width, [self ratioHeight:20]);
+        actorMovieName.font = [UIFont systemFontOfSize:12];
+        actorMovieName.textColor = [UIColor colorWithRed:102.f/255.f green:102.f/255.f blue:102.f/255.f alpha:1];
+        actorMovieName.textAlignment = NSTextAlignmentCenter;
+        actorMovieName.text = [_movieDataCenter creatMovieActorMovieName][i];
+        
+        [actorView addSubview:actorMovieName];
         
         self.actorContentsViewHeight.constant = [self ratioHeight:47] + (baseMovieContentHeight+baseMargin)*([_movieDataCenter creatMovieActorName].count/3+1);
         self.scrollContentsViewHeight.constant = self.directorViewHeight.constant + self.viewMargin.constant + self.actorContentsViewHeight.constant;

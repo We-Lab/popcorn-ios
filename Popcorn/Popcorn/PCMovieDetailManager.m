@@ -12,9 +12,12 @@
 #import "PCNetworkParamKey.h"
 #import "PCMovieDetailDataCenter.h"
 
+static NSString *movieID = @"72";
+
 @interface PCMovieDetailManager ()
 @property (nonatomic) AFURLSessionManager *manager;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
+
 @end
 
 @implementation PCMovieDetailManager
@@ -30,8 +33,6 @@
 
 #pragma mark - MovieDetail Request
 - (NSURLSessionDataTask *)requestMovieDetailData:(DataTaskHandler)handler {
-
-    NSString *movieID = @"72";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
@@ -47,8 +48,6 @@
 #pragma mark - MovieDetail BEST Commnet Request
 - (NSURLSessionDataTask *)requestMovieDetailBestCommentData:(DataTaskHandler)handler {
     
-    NSString *movieID = @"72";
-    
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/comment/top", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
     
@@ -62,8 +61,6 @@
 
 #pragma mark - MovieDetail BEST FamousLine Request
 - (NSURLSessionDataTask *)requestMovieDetailBestFamousLineData:(DataTaskHandler)handler {
-    
-    NSString *movieID = @"72";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/famous/top", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
@@ -79,8 +76,6 @@
 #pragma mark - MovieDetail Commnet Request
 - (NSURLSessionDataTask *)requestMovieDetailCommentData:(DataTaskHandler)handler {
     
-    NSString *movieID = @"72";
-    
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/comment", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
     
@@ -94,8 +89,6 @@
 
 #pragma mark - MovieDetail FamousLine Request
 - (NSURLSessionDataTask *)requestMovieDetailFamousLineData:(DataTaskHandler)handler {
-    
-    NSString *movieID = @"72";
     
     NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/famous", movieID]];
     NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
