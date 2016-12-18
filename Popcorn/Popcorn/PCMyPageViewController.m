@@ -12,15 +12,29 @@
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *myPageMainTableView;
+@property (weak, nonatomic) IBOutlet UIView *tableViewHeaderButtonView;
 @property UIButton *myPageButton;
+@property NSInteger selectButton;
+@property UIView *buttonUnderLine;
 
 @end
 
 @implementation PCMyPageViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.selectButton = 0;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.myPageMainTableView.rowHeight = UITableViewAutomaticDimension;
+    self.myPageMainTableView.estimatedRowHeight = 150;
     
     [self makeTableViewHeader];
 }
@@ -37,66 +51,25 @@
 
 #pragma mark - Make TableView Header
 - (void)makeTableViewHeader{
-
-    UIView *myPageTableHeaderView = [[UIView alloc] init];
     
-    myPageTableHeaderView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self ratioHeight:245]);
-    myPageTableHeaderView.backgroundColor = [UIColor whiteColor];
-    
-    self.myPageMainTableView.tableHeaderView = myPageTableHeaderView;
-    
-    UIImageView *userImageView = [[UIImageView alloc] init];
-    
-    userImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, [self ratioHeight:200]);
-    userImageView.backgroundColor = [UIColor grayColor];
-    
-    [myPageTableHeaderView addSubview:userImageView];
-    
-    UIView *myPageButtonView = [[UIView alloc] init];
-    
-    myPageButtonView.frame = CGRectMake(0, userImageView.frame.size.height, userImageView.frame.size.width, [self ratioHeight:45]);
-    
-    [myPageTableHeaderView addSubview:myPageButtonView];
-    
-    
-    UILabel *userName = [[UILabel alloc] init];
-    
-    userName.frame = CGRectMake(12, userImageView.frame.size.height - [self ratioHeight:32], userImageView.frame.size.width -24, [self ratioHeight:20]);
-    userName.text = @"유저 아이디?";
-    userName.textColor = [UIColor whiteColor];
-    userName.font = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
-    
-    [userImageView addSubview:userName];
+    CGFloat baseMovieContentWidth = self.tableViewHeaderButtonView.frame.size.width/3;
+    CGFloat baseMovieContentHeight = [self ratioHeight:42];
     
     for (NSInteger i = 0; i < 3; i += 1) {
         
-        CGFloat baseMovieContentWidth = myPageButtonView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = myPageButtonView.frame.size.height;
-        
-        UIView *myPageButtonLine = [[UIView alloc] init];
-
-        myPageButtonLine.tag = i;
-        NSInteger row = myPageButtonLine.tag;
-        myPageButtonLine.frame = CGRectMake(baseMovieContentWidth * row,0,
-                                            baseMovieContentWidth,baseMovieContentHeight);
-        
-        [myPageButtonView addSubview:myPageButtonLine];
-        
         self.myPageButton = [[UIButton alloc] init];
         
-        self.myPageButton.frame = CGRectMake(0, 0, myPageButtonLine.frame.size.width, [self ratioHeight:42]);
-        self.myPageButton.backgroundColor = [UIColor whiteColor];
         self.myPageButton.tag = i;
+        NSInteger row = self.myPageButton.tag;
+        
+        self.myPageButton.frame = CGRectMake(baseMovieContentWidth * row, 0, baseMovieContentWidth, baseMovieContentHeight);
+        self.myPageButton.backgroundColor = [UIColor whiteColor];
         
         if (i == 0) {
-            myPageButtonLine.backgroundColor = [UIColor  colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
             [self.myPageButton setTitle:@"평가영화" forState:UIControlStateNormal];
         }else if (i == 1){
-            
             [self.myPageButton setTitle:@"명대사" forState:UIControlStateNormal];
-            
         }else if (i == 2){
-            
             [self.myPageButton setTitle:@"좋아요" forState:UIControlStateNormal];
         }
         
@@ -105,14 +78,21 @@
         
         [self.myPageButton addTarget:self action:@selector(setReloadSection:) forControlEvents:UIControlEventTouchUpInside];
         
-        [myPageButtonLine addSubview:self.myPageButton];
+        [self.tableViewHeaderButtonView addSubview:self.myPageButton];
     }
+    
+    self.buttonUnderLine = [[UIView alloc] init];
+    
+    self.buttonUnderLine.frame = CGRectMake(0, baseMovieContentHeight, baseMovieContentWidth, [self ratioHeight:3]);
+    self.buttonUnderLine.backgroundColor = [UIColor darkGrayColor];
+    
+    [self.tableViewHeaderButtonView addSubview:self.buttonUnderLine];
 }
 
 #pragma mark - TableView Required
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -121,7 +101,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
+    if (self.selectButton == 0) {
         
         UITableViewCell *myCommentCell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
         
@@ -132,7 +112,7 @@
         
         return myCommentCell;
         
-    }else if (indexPath.section == 1) {
+    }else if (self.selectButton == 1) {
         
         UITableViewCell *myFamousLineCell = [tableView dequeueReusableCellWithIdentifier:@"MyFamousLineCell" forIndexPath:indexPath];
         
@@ -143,7 +123,7 @@
         
         return myFamousLineCell;
     
-    }else if (indexPath.section == 2) {
+    }else if (self.selectButton == 2) {
         
         UITableViewCell *myLikeMovieCell = [tableView dequeueReusableCellWithIdentifier:@"MyLikeMovieCell" forIndexPath:indexPath];
         
@@ -160,7 +140,30 @@
 
 - (void)setReloadSection:(UIButton *)sender{
 
-    [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag] withRowAnimation:UITableViewRowAnimationLeft];
+    if (self.selectButton != sender.tag) {
+        
+        if (self.selectButton > sender.tag) {
+            
+            self.selectButton = sender.tag;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+            }];
+            
+            [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+            
+        }else if (self.selectButton < sender.tag) {
+            
+            self.selectButton = sender.tag;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+            }];
+            
+            [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
+        }
+        
+    }
 }
 
 
