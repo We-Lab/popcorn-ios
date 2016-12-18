@@ -13,8 +13,8 @@
 @property NSMutableDictionary *movieDetailDictionary;
 @property NSMutableArray *movieDetailBestCommentList;
 @property NSMutableArray *movieDetailBestFamousLineList;
-@property NSMutableDictionary *movieDetailCommentList;
-@property NSMutableDictionary *movieDetailFamousLineList;
+@property NSMutableArray *movieDetailCommentList;
+@property NSMutableArray *movieDetailFamousLineList;
 @property NSString *movieID;
 
 + (instancetype)sharedMovieDetailData;
@@ -36,6 +36,7 @@
 - (NSArray *)creatMoviePhoto;
 - (NSString *)creatStarAverage;
 - (NSURL *)creatMovieTrailer;
+- (NSString *)creatMovieCommentCount;
 
 - (NSArray *)creatBestCommentUserID;
 - (NSArray *)creatBestCommentUserStar;
@@ -43,11 +44,24 @@
 - (NSArray *)creatBestCommentLikeCount;
 - (NSArray *)creatBestCommentWriteDate;
 
+- (NSArray *)creatCommentUserID;
+- (NSArray *)creatCommentUserStar;
+- (NSArray *)creatCommentUserText;
+- (NSArray *)creatCommentLikeCount;
+- (NSArray *)creatCommentWriteDate;
+
 - (NSArray *)creatBestFamousLineUserID;
 - (NSArray *)creatBestFamousLineActorName;
 - (NSArray *)creatBestFamousLineMovieName;
 - (NSArray *)creatBestFamousLineUserText;
 - (NSArray *)creatBestFamousLineLikeCount;
 - (NSArray *)creatBestFamousLineWriteDate;
+
+- (NSArray *)creatFamousLineUserID;
+- (NSArray *)creatFamousLineActorName;
+- (NSArray *)creatFamousLineMovieName;
+- (NSArray *)creatFamousLineUserText;
+- (NSArray *)creatFamousLineLikeCount;
+- (NSArray *)creatFamousLineWriteDate;
 
 @end

@@ -52,6 +52,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *movieTrailerImage;
 @property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
+@property (weak, nonatomic) IBOutlet UILabel *graphStarAverrge;
+@property (weak, nonatomic) IBOutlet UILabel *graphStarCount;
+@property (weak, nonatomic) IBOutlet UILabel *graphTopScore;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
@@ -102,6 +105,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.userReactionTableView reloadData];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -141,27 +145,22 @@
     }];
     [self.bestFamousLineHandler resume];
     
-//    self.commentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data;
-//        }
-//    }];
-//    
-//    [self.commentHandler resume];
+    self.commentHandler = [self.movieDetailManager requestMovieDetailCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data[@"results"];
+        }
+    }];
+    [self.commentHandler resume];
 
-//    self.famousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data;
-//            [self makeMovieContents];
-//        }
-//    }];
-//    
-//    [self.famousLineHandler resume];
-//    
+    
+    self.famousLineHandler = [self.movieDetailManager requestMovieDetailFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data[@"results"];
+        }
+    }];
+    
+    [self.famousLineHandler resume];
+    
 
 }
 
@@ -264,8 +263,9 @@
     scoreGraph.dataSource = self;
     scoreGraph.delegate = self;
     scoreGraph.enableBezierCurve = YES;
-    scoreGraph.colorBottom = [UIColor whiteColor];
-    scoreGraph.colorLine = [UIColor redColor];
+    scoreGraph.colorTop = [UIColor whiteColor];
+    scoreGraph.colorBottom = [UIColor clearColor];
+    scoreGraph.colorLine = [UIColor whiteColor];
     
     [self.movieScoreGraphView addSubview:scoreGraph];
 
@@ -303,6 +303,9 @@
     self.movieStarScore.value = [[self.movieDataCenter creatStarAverage] floatValue];
     
     [self.movieTrailerImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
+    
+    self.graphStarAverrge.text = [NSString stringWithFormat:@"%.2lf",[[self.movieDataCenter creatStarAverage] floatValue]];
+    self.graphStarCount.text = [NSString stringWithFormat:@"%ld", [[self.movieDataCenter creatMovieCommentCount] integerValue]];
 }
 
 #pragma mark - Make Custom button

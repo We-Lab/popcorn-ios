@@ -28,8 +28,8 @@
         self.movieDetailDictionary = [[NSMutableDictionary alloc]init];
         self.movieDetailBestCommentList = [[NSMutableArray alloc]init];
         self.movieDetailBestFamousLineList = [[NSMutableArray alloc]init];
-        self.movieDetailCommentList = [[NSMutableDictionary alloc]init];
-        self.movieDetailFamousLineList= [[NSMutableDictionary alloc]init];
+        self.movieDetailCommentList = [[NSMutableArray alloc]init];
+        self.movieDetailFamousLineList= [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -206,9 +206,11 @@
 - (NSURL *)creatMovieTrailer{
     return [NSURL URLWithString:[[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:MovieDetailTrailerKey]];
 }
+- (NSString *)creatMovieCommentCount{
+    return [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:@"comment_count"];
+}
 
-
-#pragma mark - Movie Detail Comments
+#pragma mark - Movie Detail BEST Comments
 - (NSArray *)creatBestCommentUserID{
     
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
@@ -295,7 +297,95 @@
     return dataArray;
 }
 
-#pragma mark - Movie Detail Famousline
+#pragma mark - Movie Detail Comments
+- (NSArray *)creatCommentUserID{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieCommentUserIDKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatCommentUserStar{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieCommentUserStarKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatCommentUserText{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieCommentUserTextKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatCommentLikeCount{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieCommentLikeCountKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatCommentWriteDate{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieCommentWriteDateKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+
+
+#pragma mark - Movie Detail BEST Famousline
 - (NSArray *)creatBestFamousLineUserID{
     
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
@@ -399,6 +489,109 @@
     return dataArray;
 }
 
+#pragma mark - Movie Detail Famousline
+- (NSArray *)creatFamousLineUserID{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineUserIDKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatFamousLineActorName{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineActorName];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatFamousLineMovieName{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineMovieName];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatFamousLineUserText{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineUserTextKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatFamousLineLikeCount{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineLikeCountKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatFamousLineWriteDate{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSString *dataText = [dataDic objectForKey:MovieFamousLineWriteDateKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
 @end
 
 
