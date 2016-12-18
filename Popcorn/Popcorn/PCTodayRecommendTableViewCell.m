@@ -24,6 +24,12 @@
         self.movieImageView.clipsToBounds = YES;
         [self addSubview:_movieImageView];
         
+        // Movie Info On Movie Image View
+        self.averageRatingLabel = [[UILabel alloc] init];
+        self.movieTitleLabel = [[UILabel alloc] init];
+        [self.movieImageView addSubview:_averageRatingLabel];
+        [self.movieImageView addSubview:_movieTitleLabel];
+        
         // Create Button Menu
         self.menuView = [[UIView alloc] init];
         self.menuView.backgroundColor = [UIColor whiteColor];
@@ -43,24 +49,42 @@
 }
 
 - (void)layoutSubviews {
-    CGFloat viewHeight = self.frame.size.height / 6 ;
-    CGFloat xOffset = 5;
-    CGFloat padding = 2;
+    CGFloat viewHeight = [self ratioHeight:self.frame.size.height / 6];
+    CGFloat xOffset = [self ratioWidth:5];
+    CGFloat menuPadding = 2;
+    CGFloat cellWidthSize = [self ratioWidth:self.frame.size.width];
     
-    self.movieImageView.frame = CGRectMake(0, 0, self.frame.size.width, viewHeight * 5 - (padding * 2));
-    self.menuView.frame = CGRectMake(0, viewHeight * 5 - padding, self.frame.size.width, viewHeight);
+    self.movieImageView.frame = CGRectMake(0, 0, cellWidthSize, viewHeight * 5 - (menuPadding * 2));
+    self.menuView.frame = CGRectMake(0, viewHeight * 5 - menuPadding, cellWidthSize, viewHeight);
     self.menuView.layer.borderColor = [UIColor grayColor].CGColor;
     self.menuView.layer.borderWidth = 1;
     
-    CGFloat buttonWidth = (self.frame.size.width - 16) / 3;
-    self.likeButton.frame = CGRectMake(xOffset, padding, buttonWidth, _menuView.frame.size.height - (padding * 2));
-    xOffset += buttonWidth + padding;
-    self.ratingButton.frame = CGRectMake(xOffset, padding, buttonWidth, _menuView.frame.size.height - (padding * 2));
-    xOffset += buttonWidth + padding;
-    self.commentButton.frame = CGRectMake(xOffset, padding, buttonWidth, _menuView.frame.size.height - (padding * 2));
+    CGFloat buttonWidth = [self ratioWidth:(self.frame.size.width - 16) / 3];
+    self.likeButton.frame = CGRectMake(xOffset, menuPadding, buttonWidth, _menuView.frame.size.height - (menuPadding * 2));
+    xOffset += buttonWidth + menuPadding;
+    self.ratingButton.frame = CGRectMake(xOffset, menuPadding, buttonWidth, _menuView.frame.size.height - (menuPadding * 2));
+    xOffset += buttonWidth + menuPadding;
+    self.commentButton.frame = CGRectMake(xOffset, menuPadding, buttonWidth, _menuView.frame.size.height - (menuPadding * 2));
+    
+    CGFloat labelPadding = 5;
+    CGSize imageViewSize = _movieImageView.bounds.size;
+    CGFloat movieInfoLabelHeight = [self ratioHeight:25];
+    
+    self.averageRatingLabel.frame = CGRectMake(labelPadding, imageViewSize.height - (movieInfoLabelHeight * 2) - labelPadding, _movieImageView.bounds.size.width, movieInfoLabelHeight);
+    self.movieTitleLabel.frame = CGRectMake(labelPadding, imageViewSize.height - (movieInfoLabelHeight + labelPadding), _movieImageView.bounds.size.width, movieInfoLabelHeight);
 }
 
 - (void)drawRect:(CGRect)rect {
+    self.averageRatingLabel.textColor = [UIColor whiteColor];
+    self.averageRatingLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    self.averageRatingLabel.shadowColor = [UIColor blackColor];
+    self.averageRatingLabel.shadowOffset = CGSizeMake(1, 1);
+    
+    self.movieTitleLabel.textColor = [UIColor whiteColor];
+    self.movieTitleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    self.movieTitleLabel.shadowColor = [UIColor blackColor];
+    self.movieTitleLabel.shadowOffset = CGSizeMake(1, 1);
+    
     UIFont *buttonTextFont = [UIFont systemFontOfSize:13.0f];
     
     [self.likeButton setImage:[UIImage imageNamed:@"Rating"] forState:UIControlStateNormal];
@@ -77,6 +101,14 @@
     [self.commentButton setTitle:@" 코멘트" forState:UIControlStateNormal];
     [self.commentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.commentButton.titleLabel.font = buttonTextFont;
+}
+
+- (CGFloat)ratioWidth:(CGFloat)width {
+    return (width * [UIScreen mainScreen].bounds.size.width) / 375;
+}
+
+- (CGFloat)ratioHeight:(CGFloat)height {
+    return (height * [UIScreen mainScreen].bounds.size.height) / 667;
 }
 
 @end

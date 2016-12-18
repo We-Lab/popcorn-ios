@@ -53,7 +53,7 @@
     _dataTask = [_sessionManager dataTaskWithRequest:request
                                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                        BOOL result = NO;
-                                       if (error || [responseObject firstObject] == nil) {
+                                       if (error) {
                                            aLog(@"에러 발생. %@", error);
                                        }
                                        else {
@@ -92,7 +92,7 @@
             urlString = [movieURLString stringByAppendingString:@"star-rank/"];
             break;
         case LikeRankingDetailList:
-            urlString = [movieURLString stringByAppendingString:@"star-rank/"];
+            urlString = [movieURLString stringByAppendingString:@"like-rank/"];
             break;
     }
     NSURLRequest *request = [_serializer requestWithMethod:@"GET"

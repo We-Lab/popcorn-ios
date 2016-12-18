@@ -14,7 +14,8 @@
 @interface PCRankingDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *rankingTableView;
-@property (nonatomic) NSArray *movieRankingList;
+@property (nonatomic) NSDictionary *rankingDictionaryList;
+@property (nonatomic) NSArray *rankingArrayList;
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
@@ -42,69 +43,56 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self requestRankingList];
 }
 
 - (void)requestRankingList {
     NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
-        if (isSuccess)
-            [self didReceiveRankingList:resultArray];
-        else
+        if (isSuccess) {
+            if (_rankingType == BoxOfficeRankingDetailList) {
+                [self didReceiveRankingArrayList:resultArray];
+            }
+            else {
+                [self didReceiveRankingDictionaryList:(NSDictionary *)resultArray];
+            }
+        }
+        else {
             alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
+        }
     };
     
     [[PCMovieInfoManager movieManager] requestRankingList:_rankingType withCompletionHandler:completionHandler];
-    
-//    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-//    [self.activityIndicator setCenter:self.view.center];
-//    [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-//    
-//    self.activityIndicator.hidden = FALSE;
-//    [self.activityIndicator startAnimating];
-//    [PCCommonUtility createIndicatorViewInTheCenter:self];
 }
 
-- (void)didReceiveRankingList:(NSArray *)rankingList {
-    self.movieRankingList = rankingList;
+- (void)didReceiveRankingDictionaryList:(NSDictionary *)rankingList {
+    self.rankingDictionaryList = rankingList;
     [self.rankingTableView reloadData];
-//    [self.activityIndicator stopAnimating];
-//    self.activityIndicator.hidden = TRUE;
-//    [PCCommonUtility stopIndicatorViewAnimating];
 }
 
-
+- (void)didReceiveRankingArrayList:(NSArray *)rankingList {
+    self.rankingArrayList = rankingList;
+    [self.rankingTableView reloadData];
+}
 
 #pragma mark - Configure TableView
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _movieRankingList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PCRankingDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RankingDetailCell" forIndexPath:indexPath];
     
-    NSDictionary *movieData = _movieRankingList[indexPath.row];
+    NSDictionary *movieData;
     
     if (_rankingType == BoxOfficeRankingDetailList) {
+        movieData = _rankingArrayList[indexPath.row];
         cell.movieTitleLabel.text = movieData[@"movie_title"];
         cell.movieInfoLabel.text = [NSString stringWithFormat:@"개봉일 %@", movieData[@"release_date"]];
         movieData = movieData[@"movie"];
     }
     else {
+        movieData = _rankingDictionaryList[@"results"][indexPath.row];
         cell.movieTitleLabel.text = movieData[@"title_kor"];
         cell.movieInfoLabel.text = [NSString stringWithFormat:@"%@", movieData[@"created_year"]];
     }
     
     [cell.movieImageView sd_setImageWithURL:movieData[@"img_url"] placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
-    
     
     // 평점 텍스트 중간에 별 이미지 삽입
     NSTextAttachment *attachmentStarImage = [[NSTextAttachment alloc] init];
@@ -114,20 +102,30 @@
     // 텍스트 조합
     NSMutableAttributedString *leftString= [[NSMutableAttributedString alloc] initWithString:@"평점 "];
     NSAttributedString *starImageString = [NSAttributedString attributedStringWithAttachment:attachmentStarImage];
-    NSString *starAverageString = [NSString stringWithFormat:@" %@", movieData[@"star_average"]];
-    NSAttributedString *rightString = [[NSAttributedString alloc] initWithString:starAverageString];
+    
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setPositiveFormat:@"0.#"];
+    NSAttributedString *rightString = [[NSAttributedString alloc] initWithString:[fmt stringFromNumber:movieData[@"star_average"]]];
     [leftString appendAttributedString:starImageString];
     [leftString appendAttributedString:rightString];
     
     if (_rankingType == LikeRankingDetailList) {
-        NSAttributedString *addString= [[NSMutableAttributedString alloc] initWithString:@"   좋아요"];
+        NSTextAttachment *attachmentLikeImage = [[NSTextAttachment alloc] init];
+        UIImage *likeImage = [UIImage imageNamed:@"Heart"];
+        attachmentLikeImage.image = [PCCommonUtility resizeImage:likeImage scaledToSize:CGSizeMake(11, 11) andAlpha:1.0];
+        
+        NSAttributedString *addString= [[NSAttributedString alloc] initWithString:@"  좋아요 "];
+        NSAttributedString *likeImageString = [NSAttributedString attributedStringWithAttachment:attachmentLikeImage];
         NSString *likeAverageString = [NSString stringWithFormat:@" %@", movieData[@"likes_count"]];
         NSAttributedString *addLikeNumString = [[NSAttributedString alloc] initWithString:likeAverageString];
+        
         [leftString appendAttributedString:addString];
+        [leftString appendAttributedString:likeImageString];
         [leftString appendAttributedString:addLikeNumString];
     }
     
     cell.movieRatingLabel.attributedText = leftString;
+    
     
     return cell;
 }
@@ -136,8 +134,19 @@
     return 100;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (_rankingType == BoxOfficeRankingDetailList)
+        return _rankingArrayList.count;
+    else
+        return [_rankingDictionaryList[@"results"] count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
 }
 
 
