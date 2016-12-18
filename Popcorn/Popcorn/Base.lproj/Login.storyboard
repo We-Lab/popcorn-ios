@@ -47,9 +47,6 @@
                                 <state key="normal" title="페이스북으로 가입">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <segue destination="rTP-KU-mbS" kind="show" id="fUF-bD-v2H"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="함께 나누는즐거움" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASP-yq-iWO">
                                 <rect key="frame" x="72" y="263.5" width="230" height="140"/>
@@ -366,6 +363,7 @@
                             <constraint firstItem="SSS-oI-PTi" firstAttribute="top" secondItem="CpV-it-FRK" secondAttribute="bottom" constant="80" id="qL6-iR-GbO"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4m-Iw-SFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -616,108 +614,6 @@
             </objects>
             <point key="canvasLocation" x="2840.8000000000002" y="411.544227886057"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cSa-c8-1rO">
-            <objects>
-                <viewController id="rTP-KU-mbS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="F6w-VY-uvj"/>
-                        <viewControllerLayoutGuide type="bottom" id="eka-Io-A4V"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DJC-n6-E3h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0U-Cf-QOy">
-                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="U2J-e0-ty7"/>
-                                </constraints>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="다음으로"/>
-                                <connections>
-                                    <segue destination="5gS-Wt-y56" kind="show" id="O8w-3Z-vwf"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Q0U-Cf-QOy" firstAttribute="leading" secondItem="DJC-n6-E3h" secondAttribute="leading" id="XvS-eP-aaJ"/>
-                            <constraint firstItem="eka-Io-A4V" firstAttribute="top" secondItem="Q0U-Cf-QOy" secondAttribute="bottom" id="Ymo-MS-c0q"/>
-                            <constraint firstAttribute="trailing" secondItem="Q0U-Cf-QOy" secondAttribute="trailing" id="i45-iC-nrj"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vcD-Sy-gE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2841" y="1247"/>
-        </scene>
-        <!--선호장르-->
-        <scene sceneID="sDO-QM-kBM">
-            <objects>
-                <viewController id="5gS-Wt-y56" customClass="PCPreferenceGenreViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NUH-tq-lZV"/>
-                        <viewControllerLayoutGuide type="bottom" id="rAT-EK-SC8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SUp-EG-QSy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SnA-vp-m2S">
-                                <rect key="frame" x="15" y="94" width="165" height="120"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="tuy-Ad-IFe"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YWz-2M-cmr">
-                                <rect key="frame" x="195" y="94" width="165" height="120"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="7Bt-nG-6SZ"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28Q-Zs-2qZ">
-                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="QuI-jR-uuE"/>
-                                </constraints>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="가입하기"/>
-                                <connections>
-                                    <segue destination="8lZ-O7-nDp" kind="show" id="YlM-PU-ssj"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장르이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDU-dY-ali">
-                                <rect key="frame" x="67" y="141" width="62" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rAT-EK-SC8" firstAttribute="top" secondItem="28Q-Zs-2qZ" secondAttribute="bottom" id="7pB-4M-iMa"/>
-                            <constraint firstAttribute="trailing" secondItem="YWz-2M-cmr" secondAttribute="trailing" constant="15" id="ABM-wP-yZO"/>
-                            <constraint firstItem="YWz-2M-cmr" firstAttribute="leading" secondItem="SnA-vp-m2S" secondAttribute="trailing" constant="15" id="OJv-tf-8Mo"/>
-                            <constraint firstAttribute="trailing" secondItem="28Q-Zs-2qZ" secondAttribute="trailing" id="PMn-Kd-Ack"/>
-                            <constraint firstItem="YWz-2M-cmr" firstAttribute="width" secondItem="SnA-vp-m2S" secondAttribute="width" id="SyA-ol-61i"/>
-                            <constraint firstItem="YWz-2M-cmr" firstAttribute="top" secondItem="NUH-tq-lZV" secondAttribute="bottom" constant="30" id="Wym-Tn-vIw"/>
-                            <constraint firstItem="SnA-vp-m2S" firstAttribute="top" secondItem="NUH-tq-lZV" secondAttribute="bottom" constant="30" id="YQe-88-Ogm"/>
-                            <constraint firstItem="28Q-Zs-2qZ" firstAttribute="leading" secondItem="SUp-EG-QSy" secondAttribute="leading" id="jXl-uY-6fs"/>
-                            <constraint firstItem="SnA-vp-m2S" firstAttribute="leading" secondItem="SUp-EG-QSy" secondAttribute="leading" constant="15" id="mIv-IC-dDO"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="선호장르" id="y5a-38-Sd9"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="42U-yG-yV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3857" y="788"/>
-        </scene>
         <!--RequesID View Controller-->
         <scene sceneID="l1P-pm-eAS">
             <objects>
@@ -796,6 +692,7 @@
                             <constraint firstItem="qfy-Hu-Dx6" firstAttribute="top" secondItem="qLG-cd-CKo" secondAttribute="top" id="tCf-19-Wwv"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8T-Ex-Tba" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -833,7 +730,4 @@
         <image name="Profile_placeholder" width="225" height="225"/>
         <image name="profile_plus" width="75" height="75"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="RRv-iK-IX3"/>
-    </inferredMetricsTieBreakers>
 </document>

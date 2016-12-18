@@ -10,22 +10,18 @@
 
 @implementation PCLoginNaviView
 
-- (instancetype)initWithType:(LoginNaviBarType)type ViewController:(UIViewController *)vc target:(id)target action:(SEL)action {
-    
+- (instancetype)initWithType:(LoginNaviBarType)type andViewController:(UIViewController *)viewController {
     self = [super init];
     if (self) {
-        if (vc != nil) {
-            self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 60);
-            [vc.view addSubview:self];
-        }
-        [self createNavibarWithType:type target:(id)target action:(SEL)action];
+        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 60);
+        [viewController.view addSubview:self];
+        [self createNavibarWithType:type];
     }
     return self;
 }
 
-- (void)createNavibarWithType:(LoginNaviBarType)type target:(id)target action:(SEL)action {
+- (void)createNavibarWithType:(LoginNaviBarType)type {
     const NSInteger naviStartPointY = 20 + 5;
-    
     CGSize itemSize = CGSizeMake(20, 20);
     
     switch (type) {
@@ -33,16 +29,12 @@
             break;
             
         case LoginNaviBarTypePreve: {
-            UIButton *preveBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, naviStartPointY , itemSize.width, itemSize.height)];
+            _prevButton = [[UIButton alloc]initWithFrame:CGRectMake(10, naviStartPointY , itemSize.width, itemSize.height)];
             UIImage *preveImage = [UIImage imageNamed:@"LeftDirection"];
-            [preveBtn setImage:preveImage forState:UIControlStateNormal];
+            [_prevButton setImage:preveImage forState:UIControlStateNormal];
             
-            [preveBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:preveBtn];
+            [self addSubview:_prevButton];
         }
-            
-        default:
-            break;
     }
     
     //right btn

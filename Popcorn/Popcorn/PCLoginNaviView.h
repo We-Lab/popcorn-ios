@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum{
-    
+typedef NS_ENUM(NSUInteger, LoginNaviBarType) {
     LoginNaviBarTypeNormal = 0,
     LoginNaviBarTypePreve = 1
-    
-}LoginNaviBarType;
+};
 
 @interface PCLoginNaviView : UIView
 
-- (instancetype)initWithType:(LoginNaviBarType)type ViewController:(UIViewController *)vc target:(id)target action:(SEL)action;
+@property (nonatomic) UIButton *prevButton;
+
+- (instancetype)initWithType:(LoginNaviBarType)type andViewController:(UIViewController *)viewController;
 
 @end

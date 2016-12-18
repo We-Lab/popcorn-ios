@@ -17,6 +17,8 @@
 @property (nonatomic) AFHTTPRequestSerializer *serializer;
 @property (nonatomic) AFHTTPSessionManager *manager;
 
+@property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 
@@ -28,6 +30,8 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _manager = [[AFHTTPSessionManager manager] initWithSessionConfiguration:configuration];
         _serializer = [AFHTTPRequestSerializer serializer];
+        
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     }
     return self;
 }
@@ -60,11 +64,13 @@
                                             }
                                             else {
                                                 [weakSelf.delegate didSignUpWithID:statusCode andResponseObject:nil];
+                                                [self stopActivityIndicatorAnimating];
                                             }
                                         }
                                     });
                                 }];
     [_dataTask resume];
+    [self startActivityIndicatorAnimating];
 }
 
 
@@ -103,12 +109,30 @@
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         if ([weakSelf.delegate respondsToSelector:@selector(didSignInWithID:)]) {
                                             [weakSelf.delegate didSignInWithID:token];
+                                            [self stopActivityIndicatorAnimating];
                                         }
                                     });
     }];
     [_dataTask resume];
+    [self startActivityIndicatorAnimating];
 }
 
+- (void)startActivityIndicatorAnimating {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *currentVC = [window rootViewController];
+    
+    self.activityIndicatorView.center = currentVC.view.center;
+    self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    [currentVC.view addSubview:_activityIndicatorView];
+    
+    self.activityIndicatorView.hidden = NO;
+    [self.activityIndicatorView startAnimating];
+}
+
+- (void)stopActivityIndicatorAnimating {
+    self.activityIndicatorView.hidden = YES;
+    [self.activityIndicatorView stopAnimating];
+}
 
 - (void)requestNewPassword {
     BOOL isSuccess = YES;

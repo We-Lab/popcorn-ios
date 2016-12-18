@@ -8,6 +8,8 @@
 
 #import "PCSearchViewController.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "PCMovieInfoManager.h"
 #import "PCSearchResultTableViewCell.h"
 #import "PCRankingDetailViewController.h"
@@ -92,7 +94,7 @@ static NSArray const *rankingTypeArray;
 - (void)createCustomPlaceholder {
     NSTextAttachment *placeholderImageTextAttachment = [[NSTextAttachment alloc] init];
     UIImage *searchImage = [UIImage imageNamed:@"Search"];
-    placeholderImageTextAttachment.image = [PCCommonUtility resizeImage:searchImage scaledToSize:CGSizeMake(15, 15) andAlpha:0.4f];
+    placeholderImageTextAttachment.image = [PCCommonUtility resizeImage:searchImage scaledToSize:CGSizeMake(15, 15) andAlpha:0.5f];
     placeholderImageTextAttachment.bounds = CGRectMake(-7, -3, 15, 15);
     
     NSMutableAttributedString *placeholderImageString = [[NSAttributedString attributedStringWithAttachment:placeholderImageTextAttachment] mutableCopy];
@@ -150,7 +152,6 @@ static NSArray const *rankingTypeArray;
 }
 
 
-
 # pragma mark - Configure TableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_hasSearched) {
@@ -198,17 +199,20 @@ static NSArray const *rankingTypeArray;
         
         NSArray *genreArray= _movieListData[indexPath.row][@"genre"];
         __block NSString *genreLabelString;
-        [genreArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [genreArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (genreLabelString == nil) {
-                genreLabelString = obj;
+                genreLabelString = obj[@"content"];
             }
             else {
-                NSString *appendString = [NSString stringWithFormat:@"  %@", obj];
+                NSString *appendString = [NSString stringWithFormat:@"  %@", obj[@"content"]];
                 genreLabelString = [genreLabelString stringByAppendingString:appendString];
             }
         }];
         cell.additionalInfoLabel.text = genreLabelString;
         cell.imageView.image = [UIImage imageNamed:@"test1.jpg"];
+        
+        NSURL *imageURL = [NSURL URLWithString:_movieListData[indexPath.row][@"img_url"]];
+        [cell.imageView sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
         
         return cell;
     }

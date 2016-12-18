@@ -97,9 +97,9 @@
 
 #pragma mark - Configure Base View
 - (void)setCustomViewStatus{
-    //self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
-    //self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
-    //self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
+//    self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
+//    self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
+//    self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
 }
 
 #pragma mark - BoxOffice Movie Scroll View
@@ -387,7 +387,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 215;
+    return 212;
 }
 
 - (void)testAction:(UIButton *)button {
@@ -397,11 +397,11 @@
 
 #pragma mark - Ratio
 - (CGFloat)ratioWidth:(NSInteger)num{
-    return (num * self.view.frame.size.width) / [UIScreen mainScreen].bounds.size.width;
+    return (num * self.view.bounds.size.width) / 375;
 }
 
 - (CGFloat)ratioHeight:(NSInteger)num{
-    return (num * self.view.frame.size.height) / [UIScreen mainScreen].bounds.size.height;
+    return (num * self.view.bounds.size.height) / 667;
 }
 
 

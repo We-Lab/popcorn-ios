@@ -125,40 +125,40 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화정보" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62X-5Y-13m">
-                                                    <rect key="frame" x="91" y="57" width="281" height="16"/>
+                                                    <rect key="frame" x="91.5" y="57" width="280.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-bG-8ok">
-                                                    <rect key="frame" x="91" y="13" width="271" height="18"/>
+                                                    <rect key="frame" x="91.5" y="13" width="270.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화평점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2U-rR-1F4">
-                                                    <rect key="frame" x="91" y="36" width="281" height="16"/>
+                                                    <rect key="frame" x="91.5" y="36" width="280.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cHK-wR-Yar">
-                                                    <rect key="frame" x="5" y="5" width="79" height="90"/>
+                                                    <rect key="frame" x="10" y="5" width="71.5" height="90"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Rnc-bG-8ok" firstAttribute="top" secondItem="HTW-JZ-iGo" secondAttribute="topMargin" constant="5" id="B2r-8Y-Ihc"/>
-                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="width" secondItem="HTW-JZ-iGo" secondAttribute="width" multiplier="0.21" id="EVm-wi-3Vh"/>
-                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="leading" secondItem="HTW-JZ-iGo" secondAttribute="leading" constant="5" id="JZB-bX-YOY"/>
+                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="width" secondItem="HTW-JZ-iGo" secondAttribute="width" multiplier="0.19" id="EVm-wi-3Vh"/>
+                                                <constraint firstItem="cHK-wR-Yar" firstAttribute="leading" secondItem="HTW-JZ-iGo" secondAttribute="leading" constant="10" id="JZB-bX-YOY"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Rnc-bG-8ok" secondAttribute="trailing" constant="5" id="JpW-Tx-etk"/>
                                                 <constraint firstItem="T2U-rR-1F4" firstAttribute="top" secondItem="Rnc-bG-8ok" secondAttribute="bottom" constant="5" id="OoP-ah-qiL"/>
-                                                <constraint firstItem="Rnc-bG-8ok" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="S5V-Sd-3lG"/>
+                                                <constraint firstItem="Rnc-bG-8ok" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="10" id="S5V-Sd-3lG"/>
                                                 <constraint firstItem="62X-5Y-13m" firstAttribute="trailing" secondItem="HTW-JZ-iGo" secondAttribute="trailingMargin" constant="5" id="Uf5-Fw-c0g"/>
                                                 <constraint firstItem="62X-5Y-13m" firstAttribute="top" secondItem="T2U-rR-1F4" secondAttribute="bottom" constant="5" id="W2f-hV-x0Y"/>
                                                 <constraint firstAttribute="bottom" secondItem="cHK-wR-Yar" secondAttribute="bottom" constant="5" id="b2C-Bi-4v1"/>
-                                                <constraint firstItem="T2U-rR-1F4" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="hPo-K6-fjz"/>
+                                                <constraint firstItem="T2U-rR-1F4" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="10" id="hPo-K6-fjz"/>
                                                 <constraint firstItem="T2U-rR-1F4" firstAttribute="trailing" secondItem="HTW-JZ-iGo" secondAttribute="trailingMargin" constant="5" id="iVD-e5-pWc"/>
-                                                <constraint firstItem="62X-5Y-13m" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="7" id="nQI-hT-bXJ"/>
+                                                <constraint firstItem="62X-5Y-13m" firstAttribute="leading" secondItem="cHK-wR-Yar" secondAttribute="trailing" constant="10" id="nQI-hT-bXJ"/>
                                                 <constraint firstItem="cHK-wR-Yar" firstAttribute="top" secondItem="HTW-JZ-iGo" secondAttribute="top" constant="5" id="zgo-Mw-kDN"/>
                                             </constraints>
                                         </tableViewCellContentView>

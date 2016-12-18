@@ -92,10 +92,10 @@
 
 #pragma mark - makeCustomView
 - (void)makeNavigationView {
-    // 
-    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
-    sLog([viewNavi class]);
     [self.navigationController setNavigationBarHidden:YES];
+    
+    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve andViewController:self];
+    [viewNavi.prevButton addTarget:self action:@selector(onTouchUpToNextPage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 

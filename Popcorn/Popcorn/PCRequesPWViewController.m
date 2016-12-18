@@ -15,31 +15,31 @@
 
 @implementation PCRequesPWViewController
 
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self makeNavigationView];
 }
 
-#pragma mark - makeCustomView
+
+#pragma mark - Make Custom NavigationBar
 - (void)makeNavigationView {
-    // 커스텀 네비게이션바 생성
-    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve ViewController:self target:self action:@selector(onTouchUpToNextPage:)];
-    
-    sLog([viewNavi class]);
-    
     [self.navigationController setNavigationBarHidden:YES];
+    
+    PCLoginNaviView *viewNavi = [[PCLoginNaviView alloc] initWithType:LoginNaviBarTypePreve andViewController:self];
+    [viewNavi.prevButton addTarget:self action:@selector(onTouchUpToNextPage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-// 스테이터스 바 스타일 메소드
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-// 네비게이션 Pop
 - (void)onTouchUpToNextPage:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)didSendPasswordToEmail:(BOOL)isSuccess {
+    
+}
+
+
+#pragma mark -
 - (void)dealloc {
     dLog(@" ");
 }
@@ -47,10 +47,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)didSendPasswordToEmail:(BOOL)isSuccess {
-    
 }
 
 @end
