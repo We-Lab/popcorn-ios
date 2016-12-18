@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *movieStoryMoreButton;
 @property (weak, nonatomic) IBOutlet UIView *movieActorListView;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
-@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *movieScoreGraphView;
+@property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
 @property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
 
 
@@ -80,7 +80,7 @@
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 
-    self.testArray = @[@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10"];
+    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"100",@"0"];
     
     self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
     self.userReactionTableView.estimatedRowHeight = 150;
@@ -97,7 +97,7 @@
     
     self.userReactionTableViewHeight.constant = reactionTableViewHeight.size.height;
     
-    self.scrollContentViewHeight.constant = 1300 + self.userReactionTableViewHeight.constant;
+    self.scrollContentViewHeight.constant = 1290 + self.userReactionTableViewHeight.constant;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,7 +123,6 @@
     self.bestCommentHandler = [self.movieDetailManager requestMovieDetailBestCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
-            
             if (self.movieDataCenter.movieDetailBestCommentList.count != 0) {
                 [self.userReactionTableView reloadData];
             }
@@ -132,7 +131,6 @@
     [self.bestCommentHandler resume];
     
     self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailBestFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
-        
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
             
@@ -259,12 +257,17 @@
     }
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
+
+    BEMSimpleLineGraphView *scoreGraph = [[BEMSimpleLineGraphView alloc] init];
     
-//    self.movieScoreGraphView.dataSource = self;
-//    self.movieScoreGraphView.delegate = self;
-//    self.movieScoreGraphView.enableBezierCurve = YES;
-//    self.movieScoreGraphView.colorBottom = [UIColor whiteColor];
-//    self.movieScoreGraphView.colorLine = [UIColor redColor];
+    scoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    scoreGraph.dataSource = self;
+    scoreGraph.delegate = self;
+    scoreGraph.enableBezierCurve = YES;
+    scoreGraph.colorBottom = [UIColor whiteColor];
+    scoreGraph.colorLine = [UIColor redColor];
+    
+    [self.movieScoreGraphView addSubview:scoreGraph];
 
 }
 
@@ -504,22 +507,19 @@
 - (void)moveToCommentList {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCCommentViewController *commnetVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentViewController"];
-    
-//    [self.navigationController showViewController:commnetVC sender:self];
     [self.navigationController pushViewController:commnetVC animated:YES];
 }
+
 - (void)moveToFamousLineList {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCFamousLineViewController *famousLineVC = [storyboard instantiateViewControllerWithIdentifier:@"FamousLineViewController"];
-    
-//    [self.navigationController showViewController:famousLineVC sender:self];
     [self.navigationController pushViewController:famousLineVC animated:YES];
 }
 
 #pragma mark - Graph OpenSource Required
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph{
     
-    return self.testArray.count;
+    return (int)self.testArray.count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
