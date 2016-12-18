@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *rankingTableView;
 @property (nonatomic) NSArray *movieRankingList;
 
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 
@@ -53,11 +55,22 @@
     };
     
     [[PCMovieInfoManager movieManager] requestRankingList:_rankingType withCompletionHandler:completionHandler];
+    
+//    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+//    [self.activityIndicator setCenter:self.view.center];
+//    [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+//    
+//    self.activityIndicator.hidden = FALSE;
+//    [self.activityIndicator startAnimating];
+//    [PCCommonUtility createIndicatorViewInTheCenter:self];
 }
 
 - (void)didReceiveRankingList:(NSArray *)rankingList {
     self.movieRankingList = rankingList;
     [self.rankingTableView reloadData];
+//    [self.activityIndicator stopAnimating];
+//    self.activityIndicator.hidden = TRUE;
+//    [PCCommonUtility stopIndicatorViewAnimating];
 }
 
 
@@ -82,16 +95,39 @@
     
     if (_rankingType == BoxOfficeRankingDetailList) {
         cell.movieTitleLabel.text = movieData[@"movie_title"];
-        cell.movieRatingLabel.text = [NSString stringWithFormat:@"평점 %@점", movieData[@"movie"][@"star_average"]];
-        cell.movieInfoLabel.text = movieData[@"release_date"];
-        [cell.movieImageView sd_setImageWithURL:movieData[@"movie"][@"img_url"] placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
+        cell.movieInfoLabel.text = [NSString stringWithFormat:@"개봉일 %@", movieData[@"release_date"]];
+        movieData = movieData[@"movie"];
     }
     else {
         cell.movieTitleLabel.text = movieData[@"title_kor"];
-        cell.movieRatingLabel.text = [NSString stringWithFormat:@"평점 %@점 좋아요 %@개", movieData[@"star_average"], movieData[@"likes_count"]];
         cell.movieInfoLabel.text = [NSString stringWithFormat:@"%@", movieData[@"created_year"]];
-        [cell.movieImageView sd_setImageWithURL:movieData[@"img_url"] placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
     }
+    
+    [cell.movieImageView sd_setImageWithURL:movieData[@"img_url"] placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
+    
+    
+    // 평점 텍스트 중간에 별 이미지 삽입
+    NSTextAttachment *attachmentStarImage = [[NSTextAttachment alloc] init];
+    UIImage *starImage = [UIImage imageNamed:@"FullStar"];
+    attachmentStarImage.image = [PCCommonUtility resizeImage:starImage scaledToSize:CGSizeMake(10, 10) andAlpha:1.0];
+    
+    // 텍스트 조합
+    NSMutableAttributedString *leftString= [[NSMutableAttributedString alloc] initWithString:@"평점 "];
+    NSAttributedString *starImageString = [NSAttributedString attributedStringWithAttachment:attachmentStarImage];
+    NSString *starAverageString = [NSString stringWithFormat:@" %@", movieData[@"star_average"]];
+    NSAttributedString *rightString = [[NSAttributedString alloc] initWithString:starAverageString];
+    [leftString appendAttributedString:starImageString];
+    [leftString appendAttributedString:rightString];
+    
+    if (_rankingType == LikeRankingDetailList) {
+        NSAttributedString *addString= [[NSMutableAttributedString alloc] initWithString:@"   좋아요"];
+        NSString *likeAverageString = [NSString stringWithFormat:@" %@", movieData[@"likes_count"]];
+        NSAttributedString *addLikeNumString = [[NSAttributedString alloc] initWithString:likeAverageString];
+        [leftString appendAttributedString:addString];
+        [leftString appendAttributedString:addLikeNumString];
+    }
+    
+    cell.movieRatingLabel.attributedText = leftString;
     
     return cell;
 }

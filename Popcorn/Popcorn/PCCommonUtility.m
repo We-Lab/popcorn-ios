@@ -8,7 +8,13 @@
 
 #import "PCCommonUtility.h"
 
+static UIActivityIndicatorView *activityIndicator;
+
 @implementation PCCommonUtility
+
++ (void)initialize {
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+}
 
 + (UIAlertController *)alertControllerWithOnlyTitle:(NSString *)title {
     UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:title
@@ -38,5 +44,7 @@
     label.layer.shadowRadius = 2;
     label.layer.shadowOpacity = opacity;
 }
+
+
 
 @end

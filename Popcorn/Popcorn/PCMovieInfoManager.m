@@ -12,13 +12,17 @@
 #import "PCNetworkParamKey.h"
 
 @interface PCMovieInfoManager ()
+
 @property (nonatomic) AFURLSessionManager *sessionManager;
 @property (nonatomic) AFHTTPRequestSerializer *serializer;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
+
+@property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
-@implementation PCMovieInfoManager
 
+@implementation PCMovieInfoManager
 
 #pragma mark - Init
 + (instancetype)movieManager {
@@ -37,6 +41,8 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         _serializer = [AFHTTPRequestSerializer serializer];
+        
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     }
     return self;
 }
@@ -54,10 +60,23 @@
                                            result = YES;
                                        }
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            completionHandler(result, responseObject);
+                                           completionHandler(result, responseObject);
+                                           self.activityIndicatorView.hidden = YES;
+                                           [self.activityIndicatorView stopAnimating];
                                         });
                                    }];
     [_dataTask resume];
+    
+    // UIActivityView
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *currentVC = [window rootViewController];
+    
+    self.activityIndicatorView.center = currentVC.view.center;
+    self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [currentVC.view addSubview:_activityIndicatorView];
+
+    self.activityIndicatorView.hidden = NO;
+    [self.activityIndicatorView startAnimating];
 }
 
 
@@ -70,7 +89,7 @@
             urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
             break;
         case RatingRankingDetailList:
-            urlString = [movieURLString stringByAppendingString:@"like-rank/"];
+            urlString = [movieURLString stringByAppendingString:@"star-rank/"];
             break;
         case LikeRankingDetailList:
             urlString = [movieURLString stringByAppendingString:@"star-rank/"];
