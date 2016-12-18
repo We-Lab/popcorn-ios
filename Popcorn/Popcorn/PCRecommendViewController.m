@@ -17,7 +17,7 @@
 @property (nonatomic) UIImageView *loadingImg;
 @property (nonatomic) BOOL isRefreshAnimating;
 
-@property (nonatomic) NSArray *recommendMovieList;
+@property (nonatomic) NSDictionary *recommendMovieList;
 
 @end
 
@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    self.recommendMovieList = [NSArray array];
+    self.recommendMovieList = @{@"results":@[@1,@2,@3,@4,@5]};
     [self initCustomRefreshControl];
 }
 
@@ -48,13 +48,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning should be change
-    return 10;
+    return [_recommendMovieList[@"results"] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
-    cell.textLabel.text = @"테스트";
     
     return cell;
 }
@@ -75,9 +73,6 @@
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 5;
-}
 
 
 #pragma mark - Configure CustomRefreshControl

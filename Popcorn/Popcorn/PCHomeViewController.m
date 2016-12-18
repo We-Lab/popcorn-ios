@@ -11,16 +11,17 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <HCSStarRatingView.h>
 
-#import "PCBoxOfficeData.h"
+#import "PCMovieDetailDataCenter.h"
 #import "PCMovieDetailViewController.h"
 #import "PCMovieInfoManager.h"
+
 #import "PCMagazineCollectionViewCell.h"
-#import "PCTodayRecommendTableViewCell.h"
-#import "PCMovieDetailDataCenter.h"
+#import "PCMovieInformationView.h"
+#import "PCUserInteractionMenuView.h"
 
-@interface PCHomeViewController () <UIScrollViewDelegate, UITableViewDelegate>
+@interface PCHomeViewController () <UIScrollViewDelegate>
 
-// Base Scroll View
+// Base View
 @property (weak, nonatomic) IBOutlet UIScrollView *baseScrollView;
 
 // Box Office
@@ -43,11 +44,14 @@
 @property (nonatomic) BOOL likeReview;
 
 // Today Recommend Movie
-@property (weak, nonatomic) IBOutlet UITableView *todayRecommendMovieTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewControllHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendTableViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *todayRecommendViewHeight;
-@property (nonatomic) NSArray *todayRecommendList;
+@property (weak, nonatomic) IBOutlet PCMovieInformationView *firstRecommendMovieView;
+@property (weak, nonatomic) IBOutlet PCUserInteractionMenuView *firstRecommendMenuView;
+@property (weak, nonatomic) IBOutlet PCMovieInformationView *secondRecommendMovieView;
+@property (weak, nonatomic) IBOutlet PCUserInteractionMenuView *secondRecommendMenuView;
+@property (nonatomic) NSArray *todayRecommendMovieList;
+
+@property (nonatomic) UITapGestureRecognizer *firstTapGestureRecognizer;
+@property (nonatomic) UITapGestureRecognizer *secondTapGestureRecognizer;
 
 @end
 
@@ -57,6 +61,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createViews];
+    
+}
+
+- (void)testA {
+//    if button ~~
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,17 +100,8 @@
     self.boxOfficeList = [NSArray array];
     self.boxOfficeList = boxOfficeList;
     [self creatMainBoxOffice];
-    [self setCustomViewStatus];
 }
 
-
-
-#pragma mark - Configure Base View
-- (void)setCustomViewStatus{
-//    self.todayRecommendTableViewHeight.constant = [self ratioHeight:210] * self.magazineList.count;
-//    self.viewControllHeight.constant = 1073 + self.todayRecommendTableViewHeight.constant;
-//    self.todayRecommendViewHeight.constant = 47 + self.todayRecommendTableViewHeight.constant;
-}
 
 #pragma mark - BoxOffice Movie Scroll View
 - (void)creatMainBoxOffice{
@@ -126,18 +126,19 @@
     [self creatMovieRankScroll];
 }
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.movieMagazineCollectionView || scrollView == self.todayRecommendMovieTableView) {
+    
+    if (scrollView == self.movieMagazineCollectionView) {
         return;
     }
     else if (scrollView.contentOffset.x < scrollView.frame.size.width) {
-        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width*11-5, 0);
+        scrollView.contentOffset = CGPointMake(scrollView.frame.size.width * 11 - 5, 0);
     }
-    else if (scrollView.contentOffset.x > scrollView.frame.size.width*11-5){
+    else if (scrollView.contentOffset.x > scrollView.frame.size.width * 11 - 5){
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     }
 }
+
 
 
 #pragma mark - Main Movie Scroll Layout
@@ -176,7 +177,7 @@
         
         NSURL *imageURL = [NSURL URLWithString:movieInfo[@"movie"][@"img_url"]];
         [posterImageView sd_setImageWithURL:imageURL
-                          placeholderImage:[UIImage imageNamed:@"test2.jpg"]
+                          placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]
                                    options:SDWebImageHighPriority | SDWebImageRetryFailed ];
         [movieContentView addSubview:posterImageView];
         
@@ -357,6 +358,8 @@
     }
 }
 
+
+
 #pragma mark - Configure Today Recommend Movie TableView
 - (void)requestTodayRecommendMovie {
     NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray) {
@@ -364,52 +367,68 @@
             [self didReceiveTodayRecommendMovieList:resultArray];
     };
     
+    [self configureTodayRecommendView];
     [[PCMovieInfoManager movieManager] requestTodayRecommendMovieWithCompletionHandler:completionHandler];
 }
 
 - (void)didReceiveTodayRecommendMovieList:(NSArray *)resultArray {
-    self.todayRecommendList = resultArray;
-    [self.todayRecommendMovieTableView reloadData];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _todayRecommendList.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PCTodayRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendMovieCell"];
-    if (cell == nil)
-        cell = [[PCTodayRecommendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RecommendMovieCell"];
+    self.todayRecommendMovieList = resultArray;
+    NSDictionary *movieData = resultArray[0];
     
-    NSDictionary *movieData = _todayRecommendList[indexPath.row];
+    [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    self.firstRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
-    [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
-    [cell.likeButton addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
-    cell.movieTitleLabel.text = movieData[@"title_kor"];
-    cell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setPositiveFormat:@"0.#"];
+    NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
+    self.firstRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
     
-    return cell;
+    movieData = resultArray[1];
+    [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    self.secondRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
+    
+    formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
+    self.secondRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 212;
+- (void)configureTodayRecommendView {
+    _firstTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
+    [self.firstRecommendMovieView addGestureRecognizer:_firstTapGestureRecognizer];
+    
+    _secondTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
+    [self.secondRecommendMovieView addGestureRecognizer:_secondTapGestureRecognizer];
 }
 
-- (void)testAction:(UIButton *)button {
-    sLog(button);
+- (void)moveToMovieDetailView:(id)sender {
+    [self performSegueWithIdentifier:@"ToMovieDetailViewSegue" sender:sender];
+}
+
+
+
+#pragma mark - Configure Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ToMovieDetailViewSegue"]) {
+        if (sender == _firstTapGestureRecognizer) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _todayRecommendMovieList[0][@"id"];
+        }
+        else {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _todayRecommendMovieList[1][@"id"];
+        }
+    }
 }
 
 
 #pragma mark - Ratio
-- (CGFloat)ratioWidth:(NSInteger)num{
-    return (num * self.view.bounds.size.width) / 375;
+- (CGFloat)ratioWidth:(NSInteger)width{
+    return (width * self.view.bounds.size.width) / 375;
 }
 
-- (CGFloat)ratioHeight:(NSInteger)num{
-    return (num * self.view.bounds.size.height) / 667;
+- (CGFloat)ratioHeight:(NSInteger)height{
+    return (height * self.view.bounds.size.height) / 667;
 }
 
 
+#pragma mark -
 - (void)dealloc {
     dLog(@" ");
 }

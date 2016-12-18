@@ -92,7 +92,7 @@
         cell.movieInfoLabel.text = [NSString stringWithFormat:@"%@", movieData[@"created_year"]];
     }
     
-    [cell.movieImageView sd_setImageWithURL:movieData[@"img_url"] placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
+    [cell.movieImageView sd_setImageWithURL:movieData[@"img_url"] placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]];
     
     // 평점 텍스트 중간에 별 이미지 삽입
     NSTextAttachment *attachmentStarImage = [[NSTextAttachment alloc] init];

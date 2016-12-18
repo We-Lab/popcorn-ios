@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PCUserInteractionMenuView">
+            <connections>
+                <outlet property="commentButton" destination="jhi-IC-Iuf" id="hVw-Km-2xq"/>
+                <outlet property="likeButton" destination="YOi-6Q-NDx" id="JHT-Yk-Cu9"/>
+                <outlet property="ratingButton" destination="ktr-K6-9q4" id="Sqf-2R-5pr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOi-6Q-NDx">
+                    <rect key="frame" x="4" y="2" width="120" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <state key="normal" title=" 좋아요" image="Rating">
+                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <state key="selected" image="SelectedRating"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktr-K6-9q4">
+                    <rect key="frame" x="129" y="2" width="117" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <state key="normal" title=" 평가하기" image="Ranking">
+                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <state key="selected" image="SelectedRanking"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhi-IC-Iuf">
+                    <rect key="frame" x="251" y="2" width="120" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <state key="normal" title=" 코멘트" image="Recommend">
+                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="YOi-6Q-NDx" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.32" id="7T2-zH-mdt"/>
+                <constraint firstAttribute="bottom" secondItem="ktr-K6-9q4" secondAttribute="bottom" constant="2" id="DmI-j7-hvI"/>
+                <constraint firstAttribute="bottom" secondItem="jhi-IC-Iuf" secondAttribute="bottom" constant="2" id="UJE-3q-RUu"/>
+                <constraint firstAttribute="bottom" secondItem="YOi-6Q-NDx" secondAttribute="bottom" constant="2" id="WeR-XO-VlL"/>
+                <constraint firstItem="jhi-IC-Iuf" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.32" id="XbY-yk-3oa"/>
+                <constraint firstItem="ktr-K6-9q4" firstAttribute="leading" secondItem="YOi-6Q-NDx" secondAttribute="trailing" constant="5" id="coM-HP-UdQ"/>
+                <constraint firstAttribute="trailing" secondItem="jhi-IC-Iuf" secondAttribute="trailing" constant="4" id="ecX-3B-zPy"/>
+                <constraint firstItem="jhi-IC-Iuf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="gaO-Mz-tsj"/>
+                <constraint firstItem="ktr-K6-9q4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="rhW-Qq-BbQ"/>
+                <constraint firstItem="YOi-6Q-NDx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="tFw-pQ-aXx"/>
+                <constraint firstItem="jhi-IC-Iuf" firstAttribute="leading" secondItem="ktr-K6-9q4" secondAttribute="trailing" constant="5" id="v6S-rc-yW2"/>
+                <constraint firstItem="YOi-6Q-NDx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="vUP-yt-dE1"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="6.5" y="-85.5"/>
+        </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xQ4-ht-WUc">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+        </label>
+    </objects>
+    <resources>
+        <image name="Ranking" width="20" height="20"/>
+        <image name="Rating" width="20" height="20"/>
+        <image name="Recommend" width="20" height="20"/>
+        <image name="SelectedRanking" width="20" height="20"/>
+        <image name="SelectedRating" width="20" height="20"/>
+    </resources>
+</document>

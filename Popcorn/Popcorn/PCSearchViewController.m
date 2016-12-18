@@ -179,7 +179,7 @@ static NSArray const *rankingTypeArray;
     if (_hasSearched == NO) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RankingViewCell" forIndexPath:indexPath];
         
-        NSString *imageName = [@"test" stringByAppendingString:[NSString stringWithFormat:@"%ld.jpg", indexPath.row % 4]];
+        NSString *imageName = [@"PosterImage" stringByAppendingString:[NSString stringWithFormat:@"%ld", indexPath.row % 3]];
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         
         cell.textLabel.text = rankingTypeArray[indexPath.row];
@@ -209,10 +209,9 @@ static NSArray const *rankingTypeArray;
             }
         }];
         cell.additionalInfoLabel.text = genreLabelString;
-        cell.imageView.image = [UIImage imageNamed:@"test1.jpg"];
         
         NSURL *imageURL = [NSURL URLWithString:_movieListData[indexPath.row][@"img_url"]];
-        [cell.imageView sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"test1.jpg"]];
+        [cell.imageView sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]];
         
         return cell;
     }
