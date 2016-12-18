@@ -16,6 +16,7 @@
 #import "PCMovieInfoManager.h"
 #import "PCMagazineCollectionViewCell.h"
 #import "PCTodayRecommendTableViewCell.h"
+#import "PCMovieDetailDataCenter.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate, UITableViewDelegate>
 
@@ -170,7 +171,7 @@
         posterImageView.tag = i;
         posterImageView.userInteractionEnabled = YES;
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectAPoster)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectAPoster:)];
         [posterImageView addGestureRecognizer:tapGesture];
         
         NSURL *imageURL = [NSURL URLWithString:movieInfo[@"movie"][@"img_url"]];
@@ -275,9 +276,13 @@
     }
 }
 
-- (void)didSelectAPoster {
+- (void)didSelectAPoster:(UITapGestureRecognizer *)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCMovieDetailViewController *movieDetailVC = [storyboard instantiateInitialViewController];
+    
+    NSInteger gestureIndex = [sender.view tag] - 1;
+    
+    [PCMovieDetailDataCenter sharedMovieDetailData].movieID = self.boxOfficeList[gestureIndex][@"movie"][@"id"];
     
     [self.navigationController showViewController:movieDetailVC sender:self];
 }

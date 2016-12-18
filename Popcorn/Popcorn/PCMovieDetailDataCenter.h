@@ -15,6 +15,7 @@
 @property NSMutableArray *movieDetailBestFamousLineList;
 @property NSMutableDictionary *movieDetailCommentList;
 @property NSMutableDictionary *movieDetailFamousLineList;
+@property NSString *movieID;
 
 + (instancetype)sharedMovieDetailData;
 
