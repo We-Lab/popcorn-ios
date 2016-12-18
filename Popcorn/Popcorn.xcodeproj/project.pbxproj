@@ -261,7 +261,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52AE38051DED4FB50016D81E /* MovieInformation */ = {
+		52AE38051DED4FB50016D81E /* MovieInfoManager */ = {
 			isa = PBXGroup;
 			children = (
 				52AE38061DED4FF40016D81E /* PCMovieInfoManager.h */,
@@ -269,7 +269,7 @@
 				52F76A391E02874F008E900A /* PCBoxOfficeData.h */,
 				52F76A3A1E02874F008E900A /* PCBoxOfficeData.m */,
 			);
-			name = MovieInformation;
+			name = MovieInfoManager;
 			sourceTree = "<group>";
 		};
 		52AE38241DEE95430016D81E /* MovieDetail */ = {
@@ -332,7 +332,7 @@
 				52C49A851DEB0D6300F47BB2 /* Rating */,
 				52C49A871DEB0D7F00F47BB2 /* MyPage */,
 				52AE38241DEE95430016D81E /* MovieDetail */,
-				52AE38051DED4FB50016D81E /* MovieInformation */,
+				52AE38051DED4FB50016D81E /* MovieInfoManager */,
 				52C49A9A1DEB119700F47BB2 /* UserInformation */,
 				52C49A991DEB119500F47BB2 /* Utility */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,

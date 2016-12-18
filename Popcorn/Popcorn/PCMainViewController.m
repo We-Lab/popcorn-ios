@@ -28,6 +28,10 @@
     
 //    initial View
 //    self.selectedIndex = 1;
+    
+//    [[UITabBar appearance] setShadowImage:[UIImage new]];
+//    [self.tabBar setValue:@(YES) forKeyPath:@"_hidesShadow"];
+//    self.navigationController.toolbar.clipsToBounds = YES;
 }
 
 - (void)removeLoginViewControllers {

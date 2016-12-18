@@ -380,10 +380,10 @@
     
     [cell.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
     [cell.likeButton addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.movieTitleLabel.text = movieData[@"title_kor"];
+    cell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
     
     return cell;
-//    recommendMovieCell.movieTitleLabel.text = movieData[@"title_kor"];
-//    recommendMovieCell.averageRatingLabel.text = [NSString stringWithFormat:@"평균 %@점",  movieData[@"star_average"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

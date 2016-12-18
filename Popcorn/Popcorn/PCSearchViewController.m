@@ -168,10 +168,10 @@ static NSArray const *rankingTypeArray;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_hasSearched){
-        return 60;
+        return (60 * [UIScreen mainScreen].bounds.size.height) / 667;
     }
     else {
-        return 130;
+        return (130 * [UIScreen mainScreen].bounds.size.height) / 667;
     }
 }
 
