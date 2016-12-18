@@ -44,7 +44,7 @@
 @property NSMutableArray *actorImageArray;
 @property NSMutableArray *actorMovieNmaeArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
-@property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *movieScoreGraphView;
 @property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userReactionTableViewHeight;
 
@@ -61,6 +61,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
 
 @property NSArray *testArray;
+@property NSArray *testArray2;
 @property NSURLSessionDataTask *detailHandler;
 @property NSURLSessionDataTask *commentHandler;
 @property NSURLSessionDataTask *bestCommentHandler;
@@ -78,7 +79,8 @@
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 
-    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10",@"0"];
+    self.testArray = @[@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10"];
+    self.testArray2 = @[@"",@"0.0",@"0.5",@"1.0",@"1.5",@"2.0",@"2.5",@"3.0",@"3.5",@"4.0",@"4.5",@"5.0",@""];
     
     self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
     self.userReactionTableView.estimatedRowHeight = 150;
@@ -258,15 +260,11 @@
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
     
-    BEMSimpleLineGraphView *movieScoreGraph = [[BEMSimpleLineGraphView alloc] init];
-    movieScoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
-    movieScoreGraph.dataSource = self;
-    movieScoreGraph.delegate = self;
-    movieScoreGraph.enableBezierCurve = YES;
-    movieScoreGraph.colorTop = [UIColor whiteColor];
-    movieScoreGraph.colorBottom = [UIColor colorWithRed:29.f/255.f green:140.f/255.f blue:249.f/255.f alpha:1];
-    movieScoreGraph.displayDotsWhileAnimating = NO;
-    [self.movieScoreGraphView addSubview:movieScoreGraph];
+    self.movieScoreGraphView.dataSource = self;
+    self.movieScoreGraphView.delegate = self;
+    self.movieScoreGraphView.enableBezierCurve = YES;
+    self.movieScoreGraphView.colorBottom = [UIColor whiteColor];
+    self.movieScoreGraphView.colorLine = [UIColor redColor];
 
 }
 
@@ -302,10 +300,6 @@
     self.movieStarScore.value = [[self.movieDataCenter creatStarAverage] floatValue];
     
     [self.movieTrailerImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
-}
-
-- (void)makeBestCommnetContents {
-
 }
 
 #pragma mark - Make Custom button
@@ -421,8 +415,8 @@
             
             cell.bestFamousLineUserID.text = [self.movieDataCenter creatBestFamousLineUserID][indexPath.row];
             cell.bestFamousLineMovieName.text
-            = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineMovieName][indexPath.row],
-               [self.movieDataCenter creatBestFamousLineActorName][indexPath.row]];
+            = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineActorName][indexPath.row],
+               [self.movieDataCenter creatBestFamousLineMovieName][indexPath.row]];
             cell.bestFamousLineText.text = [self.movieDataCenter creatBestFamousLineUserText][indexPath.row];
             cell.bestFamousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.",[self.movieDataCenter creatBestFamousLineLikeCount][indexPath.row]];
             NSString *commentDate =[[self.movieDataCenter creatBestFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
@@ -530,7 +524,12 @@
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
     
-    return [[self.testArray objectAtIndex:index] doubleValue];;
+    return [[self.testArray objectAtIndex:index] doubleValue];
+}
+
+- (nullable NSString *)lineGraph:(nonnull BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index{
+
+    return [self.testArray2 objectAtIndex:index];
 }
 
 #pragma mark - MovieStory More Button Action
