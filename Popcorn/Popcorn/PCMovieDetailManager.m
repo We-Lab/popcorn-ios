@@ -12,7 +12,7 @@
 #import "PCNetworkParamKey.h"
 #import "PCMovieDetailDataCenter.h"
 
-static NSString *movieID = @"72";
+static NSString *movieID = @"70";
 
 @interface PCMovieDetailManager ()
 @property (nonatomic) AFURLSessionManager *manager;

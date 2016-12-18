@@ -96,7 +96,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    
+    if (self.selectButton == 0) {
+        return 3;
+    }else if (self.selectButton == 1) {
+        return 5;
+    }else if (self.selectButton == 2) {
+        return 7;
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
