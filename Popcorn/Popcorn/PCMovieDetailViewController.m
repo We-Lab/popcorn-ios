@@ -34,19 +34,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *ratingButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *movieStoryMoreButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
 @property (weak, nonatomic) IBOutlet UIView *movieActorListView;
-@property NSMutableArray *actorNameArray;
-@property NSMutableArray *actorImageArray;
-@property NSMutableArray *actorMovieNmaeArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *movieScoreGraphView;
 @property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userReactionTableViewHeight;
+
 
 // Movie Content Property
 @property (weak, nonatomic) IBOutlet UIImageView *movieMainImage;
@@ -60,13 +53,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
 
-@property NSArray *testArray;
-@property NSArray *testArray2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryLayerHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userReactionTableViewHeight;
+
 @property NSURLSessionDataTask *detailHandler;
 @property NSURLSessionDataTask *commentHandler;
 @property NSURLSessionDataTask *bestCommentHandler;
 @property NSURLSessionDataTask *famousLineHandler;
 @property NSURLSessionDataTask *bestFamousLineHandler;
+
+@property NSMutableArray *actorNameArray;
+@property NSMutableArray *actorImageArray;
+@property NSMutableArray *actorMovieNmaeArray;
+@property NSArray *testArray;
 
 @end
 
@@ -80,7 +81,6 @@
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 
     self.testArray = @[@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10"];
-    self.testArray2 = @[@"",@"0.0",@"0.5",@"1.0",@"1.5",@"2.0",@"2.5",@"3.0",@"3.5",@"4.0",@"4.5",@"5.0",@""];
     
     self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
     self.userReactionTableView.estimatedRowHeight = 150;
@@ -97,7 +97,7 @@
     
     self.userReactionTableViewHeight.constant = reactionTableViewHeight.size.height;
     
-    self.scrollContentViewHeight.constant = 1252 + self.userReactionTableViewHeight.constant;
+    self.scrollContentViewHeight.constant = 1300 + self.userReactionTableViewHeight.constant;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -260,11 +260,11 @@
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
     
-    self.movieScoreGraphView.dataSource = self;
-    self.movieScoreGraphView.delegate = self;
-    self.movieScoreGraphView.enableBezierCurve = YES;
-    self.movieScoreGraphView.colorBottom = [UIColor whiteColor];
-    self.movieScoreGraphView.colorLine = [UIColor redColor];
+//    self.movieScoreGraphView.dataSource = self;
+//    self.movieScoreGraphView.delegate = self;
+//    self.movieScoreGraphView.enableBezierCurve = YES;
+//    self.movieScoreGraphView.colorBottom = [UIColor whiteColor];
+//    self.movieScoreGraphView.colorLine = [UIColor redColor];
 
 }
 
@@ -296,7 +296,7 @@
         [actorImage sd_setImageWithURL:[self.movieDataCenter creatMovieActorImage][j]];
     }
     
-    self.movieStarAvergeLabel.text = [NSString stringWithFormat:@"평균 %@",[self.movieDataCenter creatStarAverage]];
+    self.movieStarAvergeLabel.text = [NSString stringWithFormat:@"평균 %.2lf",[[self.movieDataCenter creatStarAverage] floatValue]];
     self.movieStarScore.value = [[self.movieDataCenter creatStarAverage] floatValue];
     
     [self.movieTrailerImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
@@ -406,7 +406,7 @@
         
         if (self.movieDataCenter.movieDetailBestFamousLineList.count == 0) {
             
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCommnetCell" forIndexPath:indexPath];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultFamousLineCell" forIndexPath:indexPath];
             
             return cell;
         }else{
@@ -433,10 +433,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     if (section == 1) {
-        return [self ratioHeight:57];
+        return [self ratioHeight:47];
     }
     
-    return [self ratioHeight:40];
+    return [self ratioHeight:32];
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -451,12 +451,12 @@
     [sectionHeaderView addSubview:headerTitle];
     
     if (section == 0) {
-        sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:47]);
+        sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:32]);
         headerTitle.frame = CGRectMake([self ratioWidth:12], [self ratioHeight:12], tableView.frame.size.width - [self ratioWidth:12], [self ratioHeight:20]);
         headerTitle.text = @"코멘트";
         
     }else if(section == 1){
-        sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:62]);
+        sectionHeaderView.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:47]);
         
         UIView *sectionMargin = [[UIView alloc] init];
         sectionMargin.frame = CGRectMake(0, 0, tableView.frame.size.width, [self ratioHeight:15]);
@@ -527,11 +527,6 @@
     return [[self.testArray objectAtIndex:index] doubleValue];
 }
 
-- (nullable NSString *)lineGraph:(nonnull BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index{
-
-    return [self.testArray2 objectAtIndex:index];
-}
-
 #pragma mark - MovieStory More Button Action
 - (IBAction)moreStoryViewButton:(id)sender {
     
@@ -544,15 +539,15 @@
     
     if ([self.movieStoryMoreButton.titleLabel.text isEqualToString:@"더보기"]) {
         
-        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant + (textViewFrame.size.height - 55));
-        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant + (textViewFrame.size.height - 55));
+        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant + (textViewFrame.size.height - 53));
+        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant + (textViewFrame.size.height - 53));
         self.movieStoryTextViewHeight.constant = textViewFrame.size.height;
         
     }else{
     
-        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant - (textViewFrame.size.height - 55));
-        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant - (textViewFrame.size.height - 55));
-        self.movieStoryTextViewHeight.constant = 55;
+        self.scrollContentViewHeight.constant = (_scrollContentViewHeight.constant - (textViewFrame.size.height - 53));
+        self.movieStoryLayerHeight.constant = (_movieStoryLayerHeight.constant - (textViewFrame.size.height - 53));
+        self.movieStoryTextViewHeight.constant = 53;
         
         self.movieStoryTextView.scrollEnabled = NO;
         
