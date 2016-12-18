@@ -35,10 +35,10 @@
 #pragma mark - TableView Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (self.movieDataCenter.movieDetailBestCommentList.count == 0) {
+    if (self.movieDataCenter.movieDetailCommentList.count == 0) {
         return 1;
     }else{
-        return self.movieDataCenter.movieDetailBestCommentList.count;
+        return self.movieDataCenter.movieDetailCommentList.count;
     }
     
     return 0;
@@ -59,11 +59,11 @@
     starRatingView.userInteractionEnabled = NO;
     [cell.commentStarRatingView addSubview:starRatingView];
     
-    cell.commentUserID.text = [self.movieDataCenter creatBestCommentUserID][indexPath.row];
-    starRatingView.value = [[self.movieDataCenter creatBestCommentUserStar][indexPath.row] floatValue];
-    cell.commentText.text = [self.movieDataCenter creatBestCommentUserText][indexPath.row];
-    cell.commentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatBestCommentLikeCount][indexPath.row]];
-    NSString *commentDate =[[self.movieDataCenter creatBestCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
+    cell.commentUserID.text = [self.movieDataCenter creatCommentUserID][indexPath.row];
+    starRatingView.value = [[self.movieDataCenter creatCommentUserStar][indexPath.row] floatValue];
+    cell.commentText.text = [self.movieDataCenter creatCommentUserText][indexPath.row];
+    cell.commentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatCommentLikeCount][indexPath.row]];
+    NSString *commentDate =[[self.movieDataCenter creatCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
     cell.commentWriteDate.text = commentDate;
 
     return  cell;

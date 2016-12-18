@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *movieStoryMoreButton;
 @property (weak, nonatomic) IBOutlet UIView *movieActorListView;
 @property (weak, nonatomic) IBOutlet UICollectionView *moviePhotoCollectionView;
-@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *movieScoreGraphView;
+@property (weak, nonatomic) IBOutlet UIView *movieScoreGraphView;
 @property (weak, nonatomic) IBOutlet UITableView *userReactionTableView;
 
 
@@ -52,6 +52,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *movieTrailerImage;
 @property (weak, nonatomic) IBOutlet UILabel *movieStarAvergeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *movieTrailerButton;
+@property (weak, nonatomic) IBOutlet UILabel *graphStarAverrge;
+@property (weak, nonatomic) IBOutlet UILabel *graphStarCount;
+@property (weak, nonatomic) IBOutlet UILabel *graphTopScore;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
@@ -82,7 +85,7 @@
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 
-    self.testArray = @[@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"10"];
+    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"100",@"0"];
     
     self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
     self.userReactionTableView.estimatedRowHeight = 150;
@@ -99,11 +102,12 @@
     
     self.userReactionTableViewHeight.constant = reactionTableViewHeight.size.height;
     
-    self.scrollContentViewHeight.constant = 1300 + self.userReactionTableViewHeight.constant;
+    self.scrollContentViewHeight.constant = 1290 + self.userReactionTableViewHeight.constant;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.userReactionTableView reloadData];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -136,7 +140,6 @@
     self.bestCommentHandler = [self.movieDetailManager requestMovieDetailBestCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
-            
             if (self.movieDataCenter.movieDetailBestCommentList.count != 0) {
                 [self.userReactionTableView reloadData];
             }
@@ -145,7 +148,6 @@
     [self.bestCommentHandler resume];
     
     self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailBestFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
-        
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
             
@@ -156,27 +158,22 @@
     }];
     [self.bestFamousLineHandler resume];
     
-//    self.commentHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data;
-//        }
-//    }];
-//    
-//    [self.commentHandler resume];
+    self.commentHandler = [self.movieDetailManager requestMovieDetailCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data[@"results"];
+        }
+    }];
+    [self.commentHandler resume];
 
-//    self.famousLineHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data;
-//            [self makeMovieContents];
-//        }
-//    }];
-//    
-//    [self.famousLineHandler resume];
-//    
+    
+    self.famousLineHandler = [self.movieDetailManager requestMovieDetailFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data[@"results"];
+        }
+    }];
+    
+    [self.famousLineHandler resume];
+    
 
 }
 
@@ -272,12 +269,18 @@
     }
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
+
+    BEMSimpleLineGraphView *scoreGraph = [[BEMSimpleLineGraphView alloc] init];
     
-//    self.movieScoreGraphView.dataSource = self;
-//    self.movieScoreGraphView.delegate = self;
-//    self.movieScoreGraphView.enableBezierCurve = YES;
-//    self.movieScoreGraphView.colorBottom = [UIColor whiteColor];
-//    self.movieScoreGraphView.colorLine = [UIColor redColor];
+    scoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    scoreGraph.dataSource = self;
+    scoreGraph.delegate = self;
+    scoreGraph.enableBezierCurve = YES;
+    scoreGraph.colorTop = [UIColor whiteColor];
+    scoreGraph.colorBottom = [UIColor clearColor];
+    scoreGraph.colorLine = [UIColor whiteColor];
+    
+    [self.movieScoreGraphView addSubview:scoreGraph];
 
 }
 
@@ -313,6 +316,9 @@
     self.movieStarScore.value = [[self.movieDataCenter creatStarAverage] floatValue];
     
     [self.movieTrailerImage sd_setImageWithURL:[self.movieDataCenter creatMovieMainImage]];
+    
+    self.graphStarAverrge.text = [NSString stringWithFormat:@"%.2lf",[[self.movieDataCenter creatStarAverage] floatValue]];
+    self.graphStarCount.text = [NSString stringWithFormat:@"%ld", [[self.movieDataCenter creatMovieCommentCount] integerValue]];
 }
 
 #pragma mark - Make Custom button
@@ -517,22 +523,19 @@
 - (void)moveToCommentList {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCCommentViewController *commnetVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentViewController"];
-    
-//    [self.navigationController showViewController:commnetVC sender:self];
     [self.navigationController pushViewController:commnetVC animated:YES];
 }
+
 - (void)moveToFamousLineList {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCFamousLineViewController *famousLineVC = [storyboard instantiateViewControllerWithIdentifier:@"FamousLineViewController"];
-    
-//    [self.navigationController showViewController:famousLineVC sender:self];
     [self.navigationController pushViewController:famousLineVC animated:YES];
 }
 
 #pragma mark - Graph OpenSource Required
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph{
     
-    return self.testArray.count;
+    return (int)self.testArray.count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
