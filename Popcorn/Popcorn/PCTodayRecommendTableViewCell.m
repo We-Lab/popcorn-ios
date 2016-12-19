@@ -76,31 +76,21 @@
 
 - (void)drawRect:(CGRect)rect {
     self.averageRatingLabel.textColor = [UIColor whiteColor];
-    self.averageRatingLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    self.averageRatingLabel.shadowColor = [UIColor blackColor];
-    self.averageRatingLabel.shadowOffset = CGSizeMake(1, 1);
-    
     self.movieTitleLabel.textColor = [UIColor whiteColor];
-    self.movieTitleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-    self.movieTitleLabel.shadowColor = [UIColor blackColor];
-    self.movieTitleLabel.shadowOffset = CGSizeMake(1, 1);
     
-    UIFont *buttonTextFont = [UIFont systemFontOfSize:13.0f];
     
-    [self.likeButton setImage:[UIImage imageNamed:@"Rating"] forState:UIControlStateNormal];
     [self.likeButton setTitle:@" 좋아요" forState:UIControlStateNormal];
     [self.likeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.likeButton.titleLabel.font = buttonTextFont;
+//    self.likeButton.titleLabel.font = buttonTextFont;
     
-    [self.ratingButton setImage:[UIImage imageNamed:@"Ranking"] forState:UIControlStateNormal];
+    
     [self.ratingButton setTitle:@" 평가하기" forState:UIControlStateNormal];
     [self.ratingButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.ratingButton.titleLabel.font = buttonTextFont;
+//    self.ratingButton.titleLabel.font = buttonTextFont;
     
-    [self.commentButton setImage:[UIImage imageNamed:@"Recommend"] forState:UIControlStateNormal];
     [self.commentButton setTitle:@" 코멘트" forState:UIControlStateNormal];
     [self.commentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.commentButton.titleLabel.font = buttonTextFont;
+//    self.commentButton.titleLabel.font = buttonTextFont;
 }
 
 - (CGFloat)ratioWidth:(CGFloat)width {

@@ -73,6 +73,8 @@
 @property NSMutableArray *actorMovieNmaeArray;
 @property NSArray *testArray;
 
+@property UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 
@@ -90,7 +92,7 @@
     self.userReactionTableView.estimatedRowHeight = 150;
 
     [self setCustomViewStatus];
-    
+    [self startActivityIndicatorAnimating];
     [self infoRequest];
 }
 
@@ -115,6 +117,16 @@
 #endif
 }
 
+- (void)startActivityIndicatorAnimating {
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    self.activityIndicatorView.center = self.view.center;
+    self.activityIndicatorView.hidden = NO;
+    [self.view addSubview:_activityIndicatorView];
+    
+    [self.activityIndicatorView startAnimating];
+}
+
 - (void)infoRequest{
     
     // Movie Detail Data
@@ -122,6 +134,7 @@
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary = data;
             [self makeMovieDetailContents];
+            [self.activityIndicatorView stopAnimating];
         }
     }];
     [self.detailHandler resume];

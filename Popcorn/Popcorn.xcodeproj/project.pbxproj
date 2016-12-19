@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		520307811DEB7DC000E2985A /* PCRequesPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520307801DEB7DC000E2985A /* PCRequesPWViewController.m */; };
 		5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5203078A1DEB85ED00E2985A /* PCUserInformation.m */; };
+		523E529E1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523E529D1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib */; };
+		523E52A11E0700B8009A2B9B /* PCUserInteractionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A01E0700B8009A2B9B /* PCUserInteractionMenuView.m */; };
+		523E52A31E07111F009A2B9B /* PCMovieInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523E52A21E07111F009A2B9B /* PCMovieInformationView.xib */; };
+		523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A51E071132009A2B9B /* PCMovieInformationView.m */; };
+		523E52A91E074437009A2B9B /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A81E074437009A2B9B /* PCUserInfoManager.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
-		525923951DF87BBC00BE1506 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923921DF87BBC00BE1506 /* test1.jpg */; };
-		525923961DF87BBC00BE1506 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923931DF87BBC00BE1506 /* test2.jpg */; };
-		525923971DF87BBC00BE1506 /* test0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923941DF87BBC00BE1506 /* test0.jpg */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
-		525923A21DF8A55500BE1506 /* test3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 525923A11DF8A55500BE1506 /* test3.jpg */; };
 		528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 528D7A191DF98EE5007A9D15 /* Assets.xcassets */; };
 		52AE37F81DEC41360016D81E /* PCInitialViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37F71DEC41360016D81E /* PCInitialViewTests.m */; };
 		52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */; };
@@ -65,7 +66,6 @@
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
 		52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */; };
 		52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */; };
-		52F76A3B1E02874F008E900A /* PCBoxOfficeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F76A3A1E02874F008E900A /* PCBoxOfficeData.m */; };
 		52F76A3E1E02AD42008E900A /* PCMagazineCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F76A3D1E02AD42008E900A /* PCMagazineCollectionViewCell.m */; };
 		52F76A411E030A4A008E900A /* PCTodayRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F76A401E030A4A008E900A /* PCTodayRecommendTableViewCell.m */; };
 		52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */; };
@@ -115,15 +115,19 @@
 		520307891DEB85ED00E2985A /* PCUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInformation.h; sourceTree = "<group>"; };
 		5203078A1DEB85ED00E2985A /* PCUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInformation.m; sourceTree = "<group>"; };
 		5203078E1DEC0CBD00E2985A /* Popcorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Popcorn-Prefix.pch"; sourceTree = "<group>"; };
+		523E529D1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCUserInteractionMenuView.xib; sourceTree = "<group>"; };
+		523E529F1E0700B8009A2B9B /* PCUserInteractionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInteractionMenuView.h; sourceTree = "<group>"; };
+		523E52A01E0700B8009A2B9B /* PCUserInteractionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInteractionMenuView.m; sourceTree = "<group>"; };
+		523E52A21E07111F009A2B9B /* PCMovieInformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMovieInformationView.xib; sourceTree = "<group>"; };
+		523E52A41E071132009A2B9B /* PCMovieInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieInformationView.h; sourceTree = "<group>"; };
+		523E52A51E071132009A2B9B /* PCMovieInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieInformationView.m; sourceTree = "<group>"; };
+		523E52A71E074437009A2B9B /* PCUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoManager.h; sourceTree = "<group>"; };
+		523E52A81E074437009A2B9B /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
-		525923921DF87BBC00BE1506 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
-		525923931DF87BBC00BE1506 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
-		525923941DF87BBC00BE1506 /* test0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test0.jpg; sourceTree = "<group>"; };
 		5259239E1DF895DE00BE1506 /* PCSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSearchResultTableViewCell.h; sourceTree = "<group>"; };
 		5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSearchResultTableViewCell.m; sourceTree = "<group>"; };
-		525923A11DF8A55500BE1506 /* test3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test3.jpg; sourceTree = "<group>"; };
 		528D7A191DF98EE5007A9D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52AE37F71DEC41360016D81E /* PCInitialViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCInitialViewTests.m; sourceTree = "<group>"; };
 		52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoValidation.h; sourceTree = "<group>"; };
@@ -190,8 +194,6 @@
 		52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManager.h; sourceTree = "<group>"; };
 		52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginManager.m; sourceTree = "<group>"; };
 		52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginManagerDelegate.h; sourceTree = "<group>"; };
-		52F76A391E02874F008E900A /* PCBoxOfficeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCBoxOfficeData.h; sourceTree = "<group>"; };
-		52F76A3A1E02874F008E900A /* PCBoxOfficeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCBoxOfficeData.m; sourceTree = "<group>"; };
 		52F76A3C1E02AD42008E900A /* PCMagazineCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMagazineCollectionViewCell.h; sourceTree = "<group>"; };
 		52F76A3D1E02AD42008E900A /* PCMagazineCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMagazineCollectionViewCell.m; sourceTree = "<group>"; };
 		52F76A3F1E030A4A008E900A /* PCTodayRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTodayRecommendTableViewCell.h; sourceTree = "<group>"; };
@@ -261,13 +263,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		523E529C1E06FFBD009A2B9B /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				523E529F1E0700B8009A2B9B /* PCUserInteractionMenuView.h */,
+				523E52A01E0700B8009A2B9B /* PCUserInteractionMenuView.m */,
+				523E529D1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib */,
+				523E52A41E071132009A2B9B /* PCMovieInformationView.h */,
+				523E52A51E071132009A2B9B /* PCMovieInformationView.m */,
+				523E52A21E07111F009A2B9B /* PCMovieInformationView.xib */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
+		};
 		52AE38051DED4FB50016D81E /* MovieInfoManager */ = {
 			isa = PBXGroup;
 			children = (
 				52AE38061DED4FF40016D81E /* PCMovieInfoManager.h */,
 				52AE38071DED4FF40016D81E /* PCMovieInfoManager.m */,
-				52F76A391E02874F008E900A /* PCBoxOfficeData.h */,
-				52F76A3A1E02874F008E900A /* PCBoxOfficeData.m */,
 			);
 			name = MovieInfoManager;
 			sourceTree = "<group>";
@@ -294,10 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				52C49A161DEAE9F400F47BB2 /* Popcorn */,
-				525923921DF87BBC00BE1506 /* test1.jpg */,
-				525923931DF87BBC00BE1506 /* test2.jpg */,
-				525923A11DF8A55500BE1506 /* test3.jpg */,
-				525923941DF87BBC00BE1506 /* test0.jpg */,
 				52C49A301DEAE9F400F47BB2 /* PopcornTests */,
 				52C49A3B1DEAE9F400F47BB2 /* PopcornUITests */,
 				52C49A151DEAE9F400F47BB2 /* Products */,
@@ -324,12 +333,14 @@
 				52C49A1A1DEAE9F400F47BB2 /* AppDelegate.h */,
 				52C49A1B1DEAE9F400F47BB2 /* AppDelegate.m */,
 				52C49A671DEB007500F47BB2 /* Storyboard */,
+				523E529C1E06FFBD009A2B9B /* XIB */,
 				52C49A631DEAF35600F47BB2 /* Login */,
 				52C49A971DEB105F00F47BB2 /* Main */,
 				52C49A651DEAF3C200F47BB2 /* Home */,
 				52C49A641DEAF39600F47BB2 /* Search */,
 				52C49A861DEB0D7D00F47BB2 /* Recommend */,
 				52C49A851DEB0D6300F47BB2 /* Rating */,
+				52C49A871DEB0D7F00F47BB2 /* MyPage */,
 				52AE38241DEE95430016D81E /* MovieDetail */,
 				52AE38051DED4FB50016D81E /* MovieInfoManager */,
 				52C49A9A1DEB119700F47BB2 /* UserInformation */,
@@ -379,8 +390,6 @@
 				52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */,
 				52C49A1D1DEAE9F400F47BB2 /* PCInitialViewController.h */,
 				52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */,
-				52C49A4F1DEAEFF400F47BB2 /* PCSignUpIDViewController.h */,
-				52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */,
 				52C49A4A1DEAEE2600F47BB2 /* PCSignInViewController.h */,
 				52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */,
 				5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */,
@@ -388,12 +397,7 @@
 				5203077F1DEB7DC000E2985A /* PCRequesPWViewController.h */,
 				520307801DEB7DC000E2985A /* PCRequesPWViewController.m */,
 				52C49A4F1DEAEFF400F47BB2 /* PCSignUpIDViewController.h */,
-				52C49A871DEB0D7F00F47BB2 /* MyPage */,
 				52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */,
-				520307841DEB849600E2985A /* PCSignUpFacebookViewController.h */,
-				520307851DEB849600E2985A /* PCSignUpFacebookViewController.m */,
-				52C49A591DEAF05100F47BB2 /* PCPreferenceGenreViewController.h */,
-				52C49A5A1DEAF05100F47BB2 /* PCPreferenceGenreViewController.m */,
 				5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */,
 				5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */,
 			);
@@ -502,6 +506,8 @@
 		52C49A9A1DEB119700F47BB2 /* UserInformation */ = {
 			isa = PBXGroup;
 			children = (
+				523E52A71E074437009A2B9B /* PCUserInfoManager.h */,
+				523E52A81E074437009A2B9B /* PCUserInfoManager.m */,
 				520307891DEB85ED00E2985A /* PCUserInformation.h */,
 				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
 				52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */,
@@ -696,19 +702,17 @@
 			files = (
 				52C49A271DEAE9F400F47BB2 /* LaunchScreen.storyboard in Resources */,
 				52C49A711DEB07F400F47BB2 /* Search.storyboard in Resources */,
-				525923961DF87BBC00BE1506 /* test2.jpg in Resources */,
 				52C49A6D1DEB071B00F47BB2 /* MyPage.storyboard in Resources */,
 				52C49A821DEB0B6900F47BB2 /* Home.storyboard in Resources */,
-				525923951DF87BBC00BE1506 /* test1.jpg in Resources */,
-				525923971DF87BBC00BE1506 /* test0.jpg in Resources */,
 				52AE38041DED4F980016D81E /* MovieInfo.storyboard in Resources */,
 				52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */,
 				52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
-				525923A21DF8A55500BE1506 /* test3.jpg in Resources */,
+				523E529E1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib in Resources */,
 				525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
 				528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */,
 				52C49A691DEB00CB00F47BB2 /* Main.storyboard in Resources */,
+				523E52A31E07111F009A2B9B /* PCMovieInformationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,6 +891,7 @@
 				52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */,
 				52AE38121DED68410016D81E /* PCCommentViewController.m in Sources */,
 				525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */,
+				523E52A11E0700B8009A2B9B /* PCUserInteractionMenuView.m in Sources */,
 				52C49AAD1DEB4C3D00F47BB2 /* PCCommonUtility.m in Sources */,
 				52AE380F1DED682D0016D81E /* PCActorViewController.m in Sources */,
 				52C49A601DEAF34600F47BB2 /* PCSearchViewController.m in Sources */,
@@ -899,6 +904,7 @@
 				5FEDA6F41E011EA100D4BC14 /* PCMovieDetailDataCenter.m in Sources */,
 				5FC1A7471DFFCD02007CB48D /* PCRatingCustomCell.m in Sources */,
 				5F04B8231E03E2730012F50D /* PCBestCommentCustomCell.m in Sources */,
+				523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */,
 				52AE383D1DF00AFF0016D81E /* PCNetworkParamKey.m in Sources */,
 				5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */,
 				52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
@@ -911,10 +917,10 @@
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
 				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
 				52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */,
-				52F76A3B1E02874F008E900A /* PCBoxOfficeData.m in Sources */,
 				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
 				52AE383A1DEF3EBD0016D81E /* KeychainItemWrapper.m in Sources */,
 				52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */,
+				523E52A91E074437009A2B9B /* PCUserInfoManager.m in Sources */,
 				5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */,
 				5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */,
 				52F76A411E030A4A008E900A /* PCTodayRecommendTableViewCell.m in Sources */,

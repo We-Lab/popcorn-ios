@@ -36,8 +36,6 @@
             [self addSubview:_prevButton];
         }
     }
-    
-    //right btn
 }
 
 @end
