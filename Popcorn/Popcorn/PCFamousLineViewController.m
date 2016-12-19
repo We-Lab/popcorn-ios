@@ -9,6 +9,7 @@
 #import "PCFamousLineViewController.h"
 #import "PCFamousLineCustomCell.h"
 #import "PCMovieDetailDataCenter.h"
+#import <UIImageView+WebCache.h>
 
 @interface PCFamousLineViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *famousLineListTableView;
@@ -58,6 +59,7 @@
         famousLineCell.famousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatFamousLineLikeCount][indexPath.row]];
         NSString *commentDate =[[self.movieDataCenter creatFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
         famousLineCell.famousLineWriteDate.text = commentDate;
+        [famousLineCell.famousLineActorImage sd_setImageWithURL:[self.movieDataCenter creatFamousLineActorImage][indexPath.row]];
         
         return  famousLineCell;
     }

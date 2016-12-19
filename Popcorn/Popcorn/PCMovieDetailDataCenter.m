@@ -231,26 +231,37 @@
         
         if ([starNum isEqualToString:@"0.0"]) {
             [self.starHistogramArray replaceObjectAtIndex:1 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"0.5"]){
             [self.starHistogramArray replaceObjectAtIndex:2 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"1"]){
             [self.starHistogramArray replaceObjectAtIndex:3 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"1.5"]){
             [self.starHistogramArray replaceObjectAtIndex:4 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"2"]){
             [self.starHistogramArray replaceObjectAtIndex:5 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"2.5"]){
             [self.starHistogramArray replaceObjectAtIndex:6 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"3"]){
             [self.starHistogramArray replaceObjectAtIndex:7 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"3.5"]){
             [self.starHistogramArray replaceObjectAtIndex:8 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"4"]){
             [self.starHistogramArray replaceObjectAtIndex:9 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"4.5"]){
             [self.starHistogramArray replaceObjectAtIndex:10 withObject:starCount];
+            
         }else if ([starNum isEqualToString:@"5"]){
             [self.starHistogramArray replaceObjectAtIndex:11 withObject:starCount];
+            
         }
     }
     
@@ -347,6 +358,25 @@
     
     return dataArray;
 }
+- (NSArray *)creatBestCommentUserImage{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSDictionary *dataAuthor = [dataDic objectForKey:MovieCommentUserIDKey];
+        
+        NSURL *dataID = [dataAuthor objectForKey:@"profile_img"];
+        
+        [dataArray addObject:dataID];
+    }
+    
+    return dataArray;
+}
 
 #pragma mark - Movie Detail Comments
 - (NSArray *)creatCommentUserID{
@@ -432,6 +462,25 @@
         NSString *dataText = [dataDic objectForKey:MovieCommentWriteDateKey];
         
         [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+- (NSArray *)creatCommentUserImage{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSDictionary *dataAuthor = [dataDic objectForKey:MovieCommentUserIDKey];
+        
+        NSURL *dataID = [dataAuthor objectForKey:@"profile_img"];
+        
+        [dataArray addObject:dataID];
     }
     
     return dataArray;
@@ -663,6 +712,24 @@
     
     return dataArray;
 }
+- (NSArray *)creatFamousLineActorImage{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSURL *dataText = [dataDic objectForKey:@"actor_img_url"];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+
 @end
 
 

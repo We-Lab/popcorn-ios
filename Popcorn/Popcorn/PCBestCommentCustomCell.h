@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bestCommentText;
 @property (weak, nonatomic) IBOutlet UILabel *bestCommentLikeText;
 @property (weak, nonatomic) IBOutlet UILabel *bestCommentWriteDate;
+@property (weak, nonatomic) IBOutlet UIImageView *bestCommentUserImage;
 
 @end

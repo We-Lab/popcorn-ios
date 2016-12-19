@@ -264,7 +264,7 @@
                                                         <constraint firstItem="las-aF-XmE" firstAttribute="top" secondItem="ga9-IK-dIV" secondAttribute="top" id="tgH-Im-W3a"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zrh-ah-rn9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zrh-ah-rn9">
                                                     <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -297,6 +297,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="famousLineActorImage" destination="zrh-ah-rn9" id="sWB-OC-QPw"/>
                                             <outlet property="famousLineLikeText" destination="iid-Zf-tEP" id="Msd-tC-4x3"/>
                                             <outlet property="famousLineMovieName" destination="w8b-Di-Af5" id="6kU-Pp-DSr"/>
                                             <outlet property="famousLineText" destination="deV-e0-8g5" id="DwD-0u-wcD"/>
@@ -350,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qQv-RY-ote" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4021.5999999999999" y="555.47226386806597"/>
+            <point key="canvasLocation" x="3810" y="457"/>
         </scene>
         <!--코멘트-->
         <scene sceneID="L8i-Lb-QL8">
@@ -450,7 +451,7 @@
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vlf-Bg-5X9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vlf-Bg-5X9">
                                                     <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -487,6 +488,7 @@
                                             <outlet property="commentStarRatingView" destination="NcN-bD-iaW" id="KFY-Zl-AgY"/>
                                             <outlet property="commentText" destination="rqW-tR-PZT" id="g1Y-yW-DK5"/>
                                             <outlet property="commentUserID" destination="q5T-BV-air" id="Vk2-96-XIn"/>
+                                            <outlet property="commentUserImage" destination="Vlf-Bg-5X9" id="r4U-Wo-vYN"/>
                                             <outlet property="commentWriteDate" destination="hWl-ps-YcW" id="cMI-zJ-Wgr"/>
                                         </connections>
                                     </tableViewCell>
@@ -536,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gI9-GI-oP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3341.5999999999999" y="555.47226386806597"/>
+            <point key="canvasLocation" x="3130" y="457"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="Bhb-QZ-B4u">
@@ -1232,7 +1234,7 @@
                                                                         <constraint firstItem="Lsz-W0-F0Q" firstAttribute="top" secondItem="ezC-dS-SRA" secondAttribute="top" id="zV6-Ag-lIr"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VBc-NY-Y5B">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VBc-NY-Y5B">
                                                                     <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
@@ -1269,6 +1271,7 @@
                                                             <outlet property="bestCommentStarScoreView" destination="oM6-Ik-oeX" id="bB4-5C-2NC"/>
                                                             <outlet property="bestCommentText" destination="Bsp-UJ-7UG" id="cIe-QW-PLS"/>
                                                             <outlet property="bestCommentUserID" destination="doA-fo-eOb" id="cP0-qX-2Mp"/>
+                                                            <outlet property="bestCommentUserImage" destination="VBc-NY-Y5B" id="UyB-PA-cTG"/>
                                                             <outlet property="bestCommentWriteDate" destination="rNP-Lq-zbO" id="GSy-hW-gqC"/>
                                                         </connections>
                                                     </tableViewCell>
@@ -1356,7 +1359,7 @@
                                                                         <constraint firstItem="dao-A7-rqQ" firstAttribute="width" secondItem="Nou-mz-OsM" secondAttribute="width" id="vOC-g0-tCz"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yTB-7f-Mpp">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yTB-7f-Mpp">
                                                                     <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
@@ -1622,8 +1625,8 @@
                                     <constraint firstAttribute="bottom" secondItem="lyf-Cu-WzN" secondAttribute="bottom" id="zS6-Yp-c7n"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="이 작품에 대한 생각을 표현해주세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-Rj-hEU">
-                                <rect key="frame" x="12" y="70" width="351" height="597"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-Rj-hEU">
+                                <rect key="frame" x="12" y="97" width="351" height="570"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -1632,16 +1635,25 @@
                                     <outlet property="delegate" destination="7Ku-yR-jJU" id="eeL-kd-TZB"/>
                                 </connections>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작품에 대한 생각을 표현해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgK-mC-RHq">
+                                <rect key="frame" x="16" y="65" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZgK-mC-RHq" secondAttribute="trailing" id="GEs-5F-DTS"/>
                             <constraint firstAttribute="trailing" secondItem="sXu-Rj-hEU" secondAttribute="trailing" constant="12" id="Ihq-t2-dMY"/>
                             <constraint firstItem="vmt-vw-6yG" firstAttribute="leading" secondItem="PTX-QJ-9BI" secondAttribute="leading" constant="12" id="J5P-Ug-8gK"/>
                             <constraint firstItem="vmt-vw-6yG" firstAttribute="top" secondItem="nOa-xm-TN3" secondAttribute="bottom" id="KTk-Bt-EP3"/>
+                            <constraint firstItem="sXu-Rj-hEU" firstAttribute="top" secondItem="ZgK-mC-RHq" secondAttribute="bottom" constant="15" id="NDc-7N-Dse"/>
                             <constraint firstAttribute="trailing" secondItem="vmt-vw-6yG" secondAttribute="trailing" constant="12" id="Vs7-Oj-ItN"/>
+                            <constraint firstItem="ZgK-mC-RHq" firstAttribute="leading" secondItem="PTX-QJ-9BI" secondAttribute="leadingMargin" id="YdX-KF-a6y"/>
                             <constraint firstItem="sXu-Rj-hEU" firstAttribute="leading" secondItem="PTX-QJ-9BI" secondAttribute="leading" constant="12" id="cHv-5T-i3H"/>
                             <constraint firstItem="CbU-RF-SRw" firstAttribute="top" secondItem="sXu-Rj-hEU" secondAttribute="bottom" id="fBe-O7-Jqu"/>
-                            <constraint firstItem="sXu-Rj-hEU" firstAttribute="top" secondItem="vmt-vw-6yG" secondAttribute="bottom" constant="10" id="oA5-bg-gFd"/>
+                            <constraint firstItem="ZgK-mC-RHq" firstAttribute="top" secondItem="vmt-vw-6yG" secondAttribute="bottom" constant="5" id="jDD-vX-H6l"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="영화제목" id="JZF-g3-brV">
@@ -1662,7 +1674,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmC-c5-tmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3130" y="-1770"/>
+            <point key="canvasLocation" x="3128.8000000000002" y="-1770.7646176911546"/>
         </scene>
     </scenes>
     <resources>

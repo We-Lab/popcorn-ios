@@ -45,12 +45,14 @@
 - (NSArray *)creatBestCommentUserText;
 - (NSArray *)creatBestCommentLikeCount;
 - (NSArray *)creatBestCommentWriteDate;
+- (NSArray *)creatBestCommentUserImage;
 
 - (NSArray *)creatCommentUserID;
 - (NSArray *)creatCommentUserStar;
 - (NSArray *)creatCommentUserText;
 - (NSArray *)creatCommentLikeCount;
 - (NSArray *)creatCommentWriteDate;
+- (NSArray *)creatCommentUserImage;
 
 - (NSArray *)creatBestFamousLineUserID;
 - (NSArray *)creatBestFamousLineActorName;
@@ -66,5 +68,6 @@
 - (NSArray *)creatFamousLineUserText;
 - (NSArray *)creatFamousLineLikeCount;
 - (NSArray *)creatFamousLineWriteDate;
+- (NSArray *)creatFamousLineActorImage;
 
 @end

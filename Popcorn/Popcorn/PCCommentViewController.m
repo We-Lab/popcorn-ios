@@ -10,6 +10,7 @@
 #import "PCCommentCustomCell.h"
 #import <HCSStarRatingView.h>
 #import "PCMovieDetailDataCenter.h"
+#import <UIImageView+WebCache.h>
 
 @interface PCCommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -73,6 +74,7 @@
         cell.commentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatCommentLikeCount][indexPath.row]];
         NSString *commentDate =[[self.movieDataCenter creatCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
         cell.commentWriteDate.text = commentDate;
+        [cell.commentUserImage sd_setImageWithURL:[self.movieDataCenter creatCommentUserImage][indexPath.row]];
         
         return cell;
     }

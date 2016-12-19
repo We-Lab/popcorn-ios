@@ -426,6 +426,7 @@
             cell.bestCommentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatBestCommentLikeCount][indexPath.row]];
             NSString *commentDate =[[self.movieDataCenter creatBestCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
             cell.bestCommentWriteDate.text = commentDate;
+            [cell.bestCommentUserImage sd_setImageWithURL:[self.movieDataCenter creatBestCommentUserImage][indexPath.row]];
 
             return cell;
         }
@@ -451,6 +452,7 @@
             cell.bestFamousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.",[self.movieDataCenter creatBestFamousLineLikeCount][indexPath.row]];
             NSString *commentDate =[[self.movieDataCenter creatBestFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
             cell.bestFamousLineWriteDate.text = commentDate;
+            [cell.bestFamousLineActorImage sd_setImageWithURL:[self.movieDataCenter creatBestFamousLineActorImage][indexPath.row]];
             
             return cell;
             
