@@ -14,10 +14,13 @@ typedef NS_ENUM(NSUInteger, PCSignUpResult) {
     PCSignUpServerError = 500,
 };
 
-
 @protocol PCLoginManagerDelegate <NSObject>
 
 @optional
+// 유저정보 저장
+#warning delegate 추가
+//- (void)didLoadUserInformation:(NSDictionary)
+
 // 회원가입
 - (void)didSignUpWithFacebook:(BOOL)isSuccess;
 - (void)didSignUpWithID:(PCSignUpResult)statusCode andResponseObject:(NSDictionary *)responseObject;

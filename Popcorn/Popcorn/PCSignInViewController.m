@@ -142,7 +142,7 @@
         PCMainViewController *mainView = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:mainView animated:YES];
         
-        [[PCUserInformation userInfo] hasUserSignedIn:token];
+        [[PCUserInformation sharedUserData] hasUserSignedIn:token];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");

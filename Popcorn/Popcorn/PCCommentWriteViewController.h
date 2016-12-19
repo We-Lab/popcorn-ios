@@ -10,4 +10,6 @@
 
 @interface PCCommentWriteViewController : UIViewController
 
+@property (nonatomic) NSString *movieID;
+
 @end

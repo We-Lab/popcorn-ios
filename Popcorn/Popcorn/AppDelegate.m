@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, MainInterfaceView) {
     if ( isUserSignedIn ) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateInitialViewController];
-        [[PCUserInformation userInfo] setUserTokenFromKeyChain];
+#warning 여기에 유저 정보 불러오는 메소드 추가 필요
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  PCUserInfoManager.h
+//  PCUserInteractionManager.h
 //  Popcorn
 //
 //  Created by giftbot on 2016. 12. 19..
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PCUserInfoManager : NSObject
+@interface PCUserInteractionManager : NSObject
 
-+ (instancetype)userManager;
++ (void)saveMovieRating:(NSString *)movieID;
 
 @end

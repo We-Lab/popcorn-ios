@@ -177,7 +177,7 @@
 
 
 - (IBAction)requestSignOut:(id)sender {
-    [[PCUserInformation userInfo] hasUserSignedOut];
+    [[PCUserInformation sharedUserData] hasUserSignedOut];
 }
 
 #pragma mark - Custom Method
