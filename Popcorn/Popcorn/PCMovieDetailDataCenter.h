@@ -15,6 +15,7 @@
 @property NSMutableArray *movieDetailBestFamousLineList;
 @property NSMutableArray *movieDetailCommentList;
 @property NSMutableArray *movieDetailFamousLineList;
+@property NSMutableArray *movieDetailStarHistogramList;
 @property NSString *movieID;
 
 + (instancetype)sharedMovieDetailData;
@@ -37,6 +38,7 @@
 - (NSString *)creatStarAverage;
 - (NSURL *)creatMovieTrailer;
 - (NSString *)creatMovieCommentCount;
+- (NSArray *)creatMovieStarHistogram;
 
 - (NSArray *)creatBestCommentUserID;
 - (NSArray *)creatBestCommentUserStar;

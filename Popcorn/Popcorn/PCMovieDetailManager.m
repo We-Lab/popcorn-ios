@@ -46,6 +46,20 @@
     return [_manager dataTaskWithRequest:request completionHandler:handler];
 }
 
+#pragma mark - MovieDetail Star Graph
+- (NSURLSessionDataTask *)requestMovieDetailStarGraphData:(DataTaskHandler)handler {
+    
+    NSString *movieDetailDataURLString = [movieURLString stringByAppendingString:[NSString stringWithFormat:@"%@/comment/histogram", self.movieID]];
+    NSURL *movieDetailRequestURL = [NSURL URLWithString:movieDetailDataURLString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:movieDetailRequestURL];
+    
+    return [_manager dataTaskWithRequest:request completionHandler:handler];
+}
+
 #pragma mark - MovieDetail BEST Commnet Request
 - (NSURLSessionDataTask *)requestMovieDetailBestCommentData:(DataTaskHandler)handler {
     

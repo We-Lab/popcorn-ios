@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *graphStarAverrge;
 @property (weak, nonatomic) IBOutlet UILabel *graphStarCount;
 @property (weak, nonatomic) IBOutlet UILabel *graphTopScore;
+@property BEMSimpleLineGraphView *starGraph;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *movieStoryTextViewHeight;
@@ -116,6 +117,7 @@
 
 - (void)infoRequest{
     
+    // Movie Detail Data
     self.detailHandler = [self.movieDetailManager requestMovieDetailData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary = data;
@@ -124,6 +126,16 @@
     }];
     [self.detailHandler resume];
     
+    // Movie Star Histogram
+    self.detailHandler = [self.movieDetailManager requestMovieDetailStarGraphData:^(NSURLResponse *reponse, id data, NSError *error) {
+        if (!error) {
+            [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailStarHistogramList = data;
+            [self.starGraph reloadGraph];
+        }
+    }];
+    [self.detailHandler resume];
+    
+    // Movie Best Comment
     self.bestCommentHandler = [self.movieDetailManager requestMovieDetailBestCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestCommentList = data;
@@ -134,6 +146,7 @@
     }];
     [self.bestCommentHandler resume];
     
+    // Movie Best FamousLine
     self.bestFamousLineHandler = [self.movieDetailManager requestMovieDetailBestFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList = data;
@@ -145,6 +158,7 @@
     }];
     [self.bestFamousLineHandler resume];
     
+    // Movie Comment
     self.commentHandler = [self.movieDetailManager requestMovieDetailCommentData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailCommentList = data[@"results"];
@@ -152,13 +166,12 @@
     }];
     [self.commentHandler resume];
 
-    
+    // Movie FamousLine
     self.famousLineHandler = [self.movieDetailManager requestMovieDetailFamousLineData:^(NSURLResponse *reponse, id data, NSError *error) {
         if (!error) {
             [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailFamousLineList = data[@"results"];
         }
     }];
-    
     [self.famousLineHandler resume];
     
 
@@ -257,17 +270,17 @@
     
     self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
 
-    BEMSimpleLineGraphView *scoreGraph = [[BEMSimpleLineGraphView alloc] init];
+    self.starGraph = [[BEMSimpleLineGraphView alloc] init];
     
-    scoreGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
-    scoreGraph.dataSource = self;
-    scoreGraph.delegate = self;
-    scoreGraph.enableBezierCurve = YES;
-    scoreGraph.colorTop = [UIColor whiteColor];
-    scoreGraph.colorBottom = [UIColor clearColor];
-    scoreGraph.colorLine = [UIColor whiteColor];
+    self.starGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    self.starGraph.dataSource = self;
+    self.starGraph.delegate = self;
+    self.starGraph.enableBezierCurve = YES;
+    self.starGraph.colorTop = [UIColor whiteColor];
+    self.starGraph.colorBottom = [UIColor clearColor];
+    self.starGraph.colorLine = [UIColor whiteColor];
     
-    [self.movieScoreGraphView addSubview:scoreGraph];
+    [self.movieScoreGraphView addSubview:self.starGraph];
 
 }
 
@@ -522,12 +535,12 @@
 #pragma mark - Graph OpenSource Required
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph{
     
-    return (int)self.testArray.count;
+    return (int)[self.movieDataCenter creatMovieStarHistogram].count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index{
     
-    return [[self.testArray objectAtIndex:index] doubleValue];
+    return [[[self.movieDataCenter creatMovieStarHistogram] objectAtIndex:index] doubleValue];
 }
 
 #pragma mark - MovieStory More Button Action

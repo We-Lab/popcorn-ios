@@ -9,6 +9,12 @@
 #import "PCMovieDetailDataCenter.h"
 #import "PCNetworkParamKey.h"
 
+@interface PCMovieDetailDataCenter ()
+
+@property NSMutableArray *starHistogramArray;
+
+@end
+
 @implementation PCMovieDetailDataCenter
 
 + (instancetype)sharedMovieDetailData{
@@ -29,7 +35,10 @@
         self.movieDetailBestCommentList = [[NSMutableArray alloc]init];
         self.movieDetailBestFamousLineList = [[NSMutableArray alloc]init];
         self.movieDetailCommentList = [[NSMutableArray alloc]init];
-        self.movieDetailFamousLineList= [[NSMutableArray alloc]init];
+        self.movieDetailFamousLineList = [[NSMutableArray alloc]init];
+        self.movieDetailStarHistogramList = [[NSMutableArray alloc] init];
+        self.starHistogramArray = [[NSMutableArray alloc]
+                                   initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     }
     return self;
 }
@@ -208,6 +217,44 @@
 }
 - (NSString *)creatMovieCommentCount{
     return [[PCMovieDetailDataCenter sharedMovieDetailData].movieDetailDictionary objectForKey:@"comment_count"];
+}
+
+- (NSArray *)creatMovieStarHistogram{
+    
+    for (NSInteger i = 0; i < self.movieDetailStarHistogramList.count; i += 1) {
+        
+        NSString *starNum = [NSString stringWithFormat:@"%@",[self.movieDetailStarHistogramList[i] objectForKey:@"star"]];
+//        NSString *starCount = [NSString stringWithFormat:@"%@",[self.movieDetailStarHistogramList[i] objectForKey:@"count"]];
+        NSObject *starCount = [self.movieDetailStarHistogramList[i] objectForKey:@"count"];
+        
+        if ([starNum isEqualToString:@"0.0"]) {
+            [self.starHistogramArray replaceObjectAtIndex:1 withObject:starCount];
+        }else if ([starNum isEqualToString:@"0.5"]){
+            [self.starHistogramArray replaceObjectAtIndex:2 withObject:starCount];
+        }else if ([starNum isEqualToString:@"1"]){
+            [self.starHistogramArray replaceObjectAtIndex:3 withObject:starCount];
+        }else if ([starNum isEqualToString:@"1.5"]){
+            [self.starHistogramArray replaceObjectAtIndex:4 withObject:starCount];
+        }else if ([starNum isEqualToString:@"2"]){
+            [self.starHistogramArray replaceObjectAtIndex:5 withObject:starCount];
+        }else if ([starNum isEqualToString:@"2.5"]){
+            [self.starHistogramArray replaceObjectAtIndex:6 withObject:starCount];
+        }else if ([starNum isEqualToString:@"3"]){
+            [self.starHistogramArray replaceObjectAtIndex:7 withObject:starCount];
+        }else if ([starNum isEqualToString:@"3.5"]){
+            [self.starHistogramArray replaceObjectAtIndex:8 withObject:starCount];
+        }else if ([starNum isEqualToString:@"4"]){
+            [self.starHistogramArray replaceObjectAtIndex:9 withObject:starCount];
+        }else if ([starNum isEqualToString:@"4.5"]){
+            [self.starHistogramArray replaceObjectAtIndex:10 withObject:starCount];
+        }else if ([starNum isEqualToString:@"5"]){
+            [self.starHistogramArray replaceObjectAtIndex:11 withObject:starCount];
+        }
+    }
+    
+    [self.starHistogramArray replaceObjectAtIndex:12 withObject:@"0"];
+    
+    return self.starHistogramArray;
 }
 
 #pragma mark - Movie Detail BEST Comments

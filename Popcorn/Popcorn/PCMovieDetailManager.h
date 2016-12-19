@@ -15,6 +15,7 @@ typedef void(^DataTaskHandler)(NSURLResponse *, id, NSError *);
 @interface PCMovieDetailManager : NSObject
 
 - (NSURLSessionDataTask *)requestMovieDetailData:(DataTaskHandler)handler;
+- (NSURLSessionDataTask *)requestMovieDetailStarGraphData:(DataTaskHandler)handler;
 - (NSURLSessionDataTask *)requestMovieDetailBestCommentData:(DataTaskHandler)handler;
 - (NSURLSessionDataTask *)requestMovieDetailBestFamousLineData:(DataTaskHandler)handler;
 - (NSURLSessionDataTask *)requestMovieDetailCommentData:(DataTaskHandler)handler;
