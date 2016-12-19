@@ -99,8 +99,8 @@
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Magazine Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Fk-c2-a5c">
                                                                                     <rect key="frame" x="5" y="135" width="244" height="53"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                                    <nil key="textColor"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                    <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
@@ -225,7 +225,7 @@
                                                             <action selector="likeBestReviewAction:" destination="2qb-EN-fj3" eventType="touchUpInside" id="Ci6-Oh-yVx"/>
                                                         </connections>
                                                     </button>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Best Comment" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cch-wP-TFo">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Best Comment" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Cch-wP-TFo">
                                                         <rect key="frame" x="10" y="87" width="355" height="50"/>
                                                         <color key="backgroundColor" red="0.78507815216498633" green="0.9960501390188139" blue="1" alpha="0.52424015410958902" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>

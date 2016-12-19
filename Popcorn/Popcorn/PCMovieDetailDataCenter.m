@@ -37,8 +37,8 @@
         self.movieDetailCommentList = [[NSMutableArray alloc]init];
         self.movieDetailFamousLineList = [[NSMutableArray alloc]init];
         self.movieDetailStarHistogramList = [[NSMutableArray alloc] init];
-        self.starHistogramArray = [[NSMutableArray alloc]
-                                   initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
+//        self.starHistogramArray = [[NSMutableArray alloc]
+//                                   initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     }
     return self;
 }
@@ -221,11 +221,13 @@
 
 - (NSArray *)creatMovieStarHistogram{
     
+    self.starHistogramArray= [NSMutableArray arrayWithArray:@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"]];
+
+    
     for (NSInteger i = 0; i < self.movieDetailStarHistogramList.count; i += 1) {
         
         NSString *starNum = [NSString stringWithFormat:@"%@",[self.movieDetailStarHistogramList[i] objectForKey:@"star"]];
-//        NSString *starCount = [NSString stringWithFormat:@"%@",[self.movieDetailStarHistogramList[i] objectForKey:@"count"]];
-        NSObject *starCount = [self.movieDetailStarHistogramList[i] objectForKey:@"count"];
+        NSString *starCount = [NSString stringWithFormat:@"%@",[self.movieDetailStarHistogramList[i] objectForKey:@"count"]];
         
         if ([starNum isEqualToString:@"0.0"]) {
             [self.starHistogramArray replaceObjectAtIndex:1 withObject:starCount];
@@ -268,9 +270,11 @@
         
         NSDictionary *dataDic = dataList[i];
         
-        NSString *dataText = [dataDic objectForKey:MovieCommentUserIDKey];
+        NSDictionary *dataAuthor = [dataDic objectForKey:MovieCommentUserIDKey];
         
-        [dataArray addObject:dataText];
+        NSString *dataID = [dataAuthor objectForKey:@"nickname"];
+        
+        [dataArray addObject:dataID];
     }
     
     return dataArray;
@@ -355,9 +359,11 @@
         
         NSDictionary *dataDic = dataList[i];
         
-        NSString *dataText = [dataDic objectForKey:MovieCommentUserIDKey];
+        NSDictionary *dataAuthor = [dataDic objectForKey:MovieCommentUserIDKey];
         
-        [dataArray addObject:dataText];
+        NSString *dataID = [dataAuthor objectForKey:@"nickname"];
+        
+        [dataArray addObject:dataID];
     }
     
     return dataArray;
@@ -529,6 +535,24 @@
         NSDictionary *dataDic = dataList[i];
         
         NSString *dataText = [dataDic objectForKey:MovieFamousLineWriteDateKey];
+        
+        [dataArray addObject:dataText];
+    }
+    
+    return dataArray;
+}
+
+- (NSArray *)creatBestFamousLineActorImage{
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *dataList = [PCMovieDetailDataCenter sharedMovieDetailData].movieDetailBestFamousLineList;
+    
+    for (NSInteger i = 0; i < dataList.count; i += 1) {
+        
+        NSDictionary *dataDic = dataList[i];
+        
+        NSURL *dataText = [dataDic objectForKey:@"actor_img_url"];
         
         [dataArray addObject:dataText];
     }

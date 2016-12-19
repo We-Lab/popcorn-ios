@@ -86,8 +86,6 @@
     self.movieDetailManager = [[PCMovieDetailManager alloc] init];
     self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 
-    self.testArray = @[@"0",@"10",@"5",@"20",@"10",@"15",@"13",@"14",@"0",@"7",@"100",@"0"];
-    
     self.userReactionTableView.rowHeight = UITableViewAutomaticDimension;
     self.userReactionTableView.estimatedRowHeight = 150;
 
@@ -319,6 +317,7 @@
         actorName.text = [self.movieDataCenter creatMovieActorName][j];
         
         UILabel *actorMovieName = self.actorMovieNmaeArray[j];
+        
         actorMovieName.text = [self.movieDataCenter creatMovieActorMovieName][j];
     
         UIImageView *actorImage = self.actorImageArray[j];
@@ -427,8 +426,7 @@
             cell.bestCommentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatBestCommentLikeCount][indexPath.row]];
             NSString *commentDate =[[self.movieDataCenter creatBestCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
             cell.bestCommentWriteDate.text = commentDate;
-            
-            
+
             return cell;
         }
         

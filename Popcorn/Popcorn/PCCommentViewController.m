@@ -46,27 +46,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PCCommentCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommnetCell" forIndexPath:indexPath];
-    
-    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
-    starRatingView.frame = CGRectMake(0, 0, 120, cell.commentStarRatingView.frame.size.height);
-    starRatingView.maximumValue = 5;
-    starRatingView.minimumValue = 0;
-    starRatingView.backgroundColor = [UIColor clearColor];
-    starRatingView.allowsHalfStars = YES;
-    starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
-    starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
-    starRatingView.userInteractionEnabled = NO;
-    [cell.commentStarRatingView addSubview:starRatingView];
-    
-    cell.commentUserID.text = [self.movieDataCenter creatCommentUserID][indexPath.row];
-    starRatingView.value = [[self.movieDataCenter creatCommentUserStar][indexPath.row] floatValue];
-    cell.commentText.text = [self.movieDataCenter creatCommentUserText][indexPath.row];
-    cell.commentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatCommentLikeCount][indexPath.row]];
-    NSString *commentDate =[[self.movieDataCenter creatCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
-    cell.commentWriteDate.text = commentDate;
+    if (self.movieDataCenter.movieDetailCommentList.count == 0) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaltCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    }else{
 
-    return  cell;
+        PCCommentCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommnetCell" forIndexPath:indexPath];
+        
+        HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+        starRatingView.frame = CGRectMake(0, 0, 120, cell.commentStarRatingView.frame.size.height);
+        starRatingView.maximumValue = 5;
+        starRatingView.minimumValue = 0;
+        starRatingView.backgroundColor = [UIColor clearColor];
+        starRatingView.allowsHalfStars = YES;
+        starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+        starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+        starRatingView.userInteractionEnabled = NO;
+        [cell.commentStarRatingView addSubview:starRatingView];
+        
+        cell.commentUserID.text = [self.movieDataCenter creatCommentUserID][indexPath.row];
+        starRatingView.value = [[self.movieDataCenter creatCommentUserStar][indexPath.row] floatValue];
+        cell.commentText.text = [self.movieDataCenter creatCommentUserText][indexPath.row];
+        cell.commentLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatCommentLikeCount][indexPath.row]];
+        NSString *commentDate =[[self.movieDataCenter creatCommentWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
+        cell.commentWriteDate.text = commentDate;
+        
+        return cell;
+    }
+
+    return  nil;
 }
 
 

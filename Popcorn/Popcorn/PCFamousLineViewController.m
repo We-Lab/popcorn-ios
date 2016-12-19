@@ -42,16 +42,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PCFamousLineCustomCell *famousLineCell = [tableView dequeueReusableCellWithIdentifier:@"FamousLineCell" forIndexPath:indexPath];
-
-    famousLineCell.famousLineUserID.text = [self.movieDataCenter creatFamousLineUserID][indexPath.row];
-    famousLineCell.famousLineMovieName.text = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineActorName][indexPath.row],[self.movieDataCenter creatBestFamousLineMovieName][indexPath.row]];
-    famousLineCell.famousLineText.text = [self.movieDataCenter creatFamousLineUserText][indexPath.row];
-    famousLineCell.famousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatFamousLineLikeCount][indexPath.row]];
-    NSString *commentDate =[[self.movieDataCenter creatFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
-    famousLineCell.famousLineWriteDate.text = commentDate;
+    if (self.movieDataCenter.movieDetailFamousLineList.count == 0) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaltCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    }else{
     
-    return  famousLineCell;
+        PCFamousLineCustomCell *famousLineCell = [tableView dequeueReusableCellWithIdentifier:@"FamousLineCell" forIndexPath:indexPath];
+        
+        famousLineCell.famousLineUserID.text = [self.movieDataCenter creatFamousLineUserID][indexPath.row];
+        famousLineCell.famousLineMovieName.text = [NSString stringWithFormat:@"%@ | %@",[self.movieDataCenter creatBestFamousLineActorName][indexPath.row],[self.movieDataCenter creatBestFamousLineMovieName][indexPath.row]];
+        famousLineCell.famousLineText.text = [self.movieDataCenter creatFamousLineUserText][indexPath.row];
+        famousLineCell.famousLineLikeText.text = [NSString stringWithFormat:@"%@ 명이 좋아합니다.", [self.movieDataCenter creatFamousLineLikeCount][indexPath.row]];
+        NSString *commentDate =[[self.movieDataCenter creatFamousLineWriteDate][indexPath.row] substringWithRange:NSMakeRange(0, 10)];
+        famousLineCell.famousLineWriteDate.text = commentDate;
+        
+        return  famousLineCell;
+    }
+    
+    
+    return  nil;
 }
 
 - (void)didReceiveMemoryWarning {

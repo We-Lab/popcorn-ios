@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bestFamousLineText;
 @property (weak, nonatomic) IBOutlet UILabel *bestFamousLineLikeText;
 @property (weak, nonatomic) IBOutlet UILabel *bestFamousLineWriteDate;
+@property (weak, nonatomic) IBOutlet UIImageView *bestFamousLineActorImage;
 
 @end

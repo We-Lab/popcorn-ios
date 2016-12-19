@@ -58,6 +58,7 @@
 - (NSArray *)creatBestFamousLineUserText;
 - (NSArray *)creatBestFamousLineLikeCount;
 - (NSArray *)creatBestFamousLineWriteDate;
+- (NSArray *)creatBestFamousLineActorImage;
 
 - (NSArray *)creatFamousLineUserID;
 - (NSArray *)creatFamousLineActorName;

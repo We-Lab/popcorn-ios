@@ -338,7 +338,8 @@
 - (void)didReceiveBestComment:(NSArray *)resultArray {
     NSDictionary *bestComment = resultArray[0];
     
-    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
+//    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
+    self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", bestComment[@"author"][@"nickname"]];
     self.bestCommentTextView.text = bestComment[@"content"];
     self.bestCommentTextViewHeight.constant = _bestCommentTextView.contentSize.height + 10;
     self.bestCommentBaseViewHeight.constant = 200 - 50 + _bestCommentTextViewHeight.constant;
