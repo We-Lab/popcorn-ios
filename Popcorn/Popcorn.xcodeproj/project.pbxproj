@@ -294,6 +294,7 @@
 				5FEDA6F31E011EA100D4BC14 /* PCMovieDetailDataCenter.m */,
 				52AE381B1DED6A2E0016D81E /* PCMovieDetailViewController.h */,
 				52AE381C1DED6A2E0016D81E /* PCMovieDetailViewController.m */,
+				5F7DC3AC1E097A60000B55F1 /* Movie Actor */,
 				5F04B8201E03E2110012F50D /* MovieDetail Sub Class */,
 				5F04B81D1E03E16B0012F50D /* Movie Commnet */,
 				5F04B81F1E03E1BF0012F50D /* Movie FamousLine */,
@@ -551,10 +552,17 @@
 				5F04B8181E02A20B0012F50D /* PCMoviePhotoCell.m */,
 				5F04B81A1E02AFA10012F50D /* PCMovieTrailerViewController.h */,
 				5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */,
+			);
+			name = "MovieDetail Sub Class";
+			sourceTree = "<group>";
+		};
+		5F7DC3AC1E097A60000B55F1 /* Movie Actor */ = {
+			isa = PBXGroup;
+			children = (
 				52AE380D1DED682D0016D81E /* PCActorViewController.h */,
 				52AE380E1DED682D0016D81E /* PCActorViewController.m */,
 			);
-			name = "MovieDetail Sub Class";
+			name = "Movie Actor";
 			sourceTree = "<group>";
 		};
 		6DF08A880D9FA324D70C8A75 /* Frameworks */ = {
@@ -1090,6 +1098,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Popcorn/Popcorn.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/Popcorn-Prefix.pch";
@@ -1107,6 +1116,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Popcorn/Popcorn.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NN7QXHC8A3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/Popcorn-Prefix.pch";

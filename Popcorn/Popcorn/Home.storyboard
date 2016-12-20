@@ -5,7 +5,9 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,9 +43,36 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bop-fx-0xj">
                                                         <rect key="frame" x="0.0" y="32" width="375" height="522"/>
+                                                        <subviews>
+                                                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ku-8e-Jk2">
+                                                                <rect key="frame" x="40" y="0.0" width="295" height="522"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" restorationIdentifier="ContentsView" translatesAutoresizingMaskIntoConstraints="NO" id="GOX-YR-0g7">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="3540" height="522"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="GOX-YR-0g7" firstAttribute="top" secondItem="5ku-8e-Jk2" secondAttribute="top" id="D2g-ZX-Vrm"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="GOX-YR-0g7" secondAttribute="bottom" id="HEt-xb-D84"/>
+                                                                    <constraint firstItem="GOX-YR-0g7" firstAttribute="leading" secondItem="5ku-8e-Jk2" secondAttribute="leading" id="aFt-k6-sld"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="GOX-YR-0g7" secondAttribute="trailing" id="aO4-mc-KJQ"/>
+                                                                    <constraint firstItem="GOX-YR-0g7" firstAttribute="width" secondItem="5ku-8e-Jk2" secondAttribute="width" multiplier="12" id="cXX-Zc-Vqd"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="2qb-EN-fj3" id="CSP-ee-b0P"/>
+                                                                </connections>
+                                                            </scrollView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="522" id="1cM-WG-8Bf"/>
+                                                            <constraint firstItem="5ku-8e-Jk2" firstAttribute="centerX" secondItem="Bop-fx-0xj" secondAttribute="centerX" id="1vj-fZ-LEF"/>
+                                                            <constraint firstItem="GOX-YR-0g7" firstAttribute="height" secondItem="Bop-fx-0xj" secondAttribute="height" id="4YE-u1-0LB"/>
+                                                            <constraint firstItem="5ku-8e-Jk2" firstAttribute="leading" secondItem="Bop-fx-0xj" secondAttribute="leading" constant="40" id="P86-cf-cB4"/>
+                                                            <constraint firstAttribute="trailing" secondItem="5ku-8e-Jk2" secondAttribute="trailing" constant="40" id="eHA-lD-chD"/>
+                                                            <constraint firstAttribute="width" secondItem="Bop-fx-0xj" secondAttribute="height" multiplier="125:174" id="fG7-rS-8eQ"/>
+                                                            <constraint firstAttribute="bottom" secondItem="5ku-8e-Jk2" secondAttribute="bottom" id="pN8-HM-f8R"/>
+                                                            <constraint firstItem="5ku-8e-Jk2" firstAttribute="top" secondItem="Bop-fx-0xj" secondAttribute="top" id="sfF-2x-tpG"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -51,8 +80,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="U19-8g-hiW" secondAttribute="trailing" constant="12" id="2y6-be-9k7"/>
                                                     <constraint firstItem="Bop-fx-0xj" firstAttribute="leading" secondItem="eBl-JB-8Fz" secondAttribute="leading" id="Aj6-ln-TFN"/>
+                                                    <constraint firstAttribute="width" secondItem="eBl-JB-8Fz" secondAttribute="height" multiplier="375:554" id="Nnt-3r-xzg"/>
                                                     <constraint firstItem="U19-8g-hiW" firstAttribute="leading" secondItem="eBl-JB-8Fz" secondAttribute="leading" constant="12" id="U48-I4-4RA"/>
-                                                    <constraint firstAttribute="height" constant="554" id="VWr-RT-jPU"/>
                                                     <constraint firstItem="U19-8g-hiW" firstAttribute="top" secondItem="eBl-JB-8Fz" secondAttribute="top" constant="12" id="b5R-9L-71s"/>
                                                     <constraint firstAttribute="trailing" secondItem="Bop-fx-0xj" secondAttribute="trailing" id="hl1-he-LY5"/>
                                                     <constraint firstItem="Bop-fx-0xj" firstAttribute="top" secondItem="U19-8g-hiW" secondAttribute="bottom" id="iPO-75-7VK"/>
@@ -383,11 +412,13 @@
                         <outlet property="bestCommentTextView" destination="Cch-wP-TFo" id="Y5L-Sj-7EZ"/>
                         <outlet property="bestCommentTextViewHeight" destination="Voc-YR-g6K" id="cE8-47-zuk"/>
                         <outlet property="bestCommentUsernameLabel" destination="17n-Nk-c3L" id="4fg-r9-t39"/>
+                        <outlet property="boxOfficeScrollView" destination="5ku-8e-Jk2" id="hsf-LU-DBp"/>
                         <outlet property="firstRecommendMenuView" destination="cs4-QL-HF6" id="XdZ-qQ-DQJ"/>
                         <outlet property="firstRecommendMovieView" destination="9Ir-qH-Czc" id="uH1-VL-ztb"/>
                         <outlet property="likeHeartView" destination="tiy-SP-WnU" id="D6a-jJ-yPS"/>
                         <outlet property="mainBoxOfficeView" destination="Bop-fx-0xj" id="55Y-7z-Xzz"/>
                         <outlet property="movieMagazineCollectionView" destination="WeE-a6-u8z" id="vgc-Vb-DuZ"/>
+                        <outlet property="scrollContentView" destination="GOX-YR-0g7" id="qhd-cg-PC7"/>
                         <outlet property="secondRecommendMenuView" destination="an3-mD-YEe" id="1wt-lB-8gU"/>
                         <outlet property="secondRecommendMovieView" destination="1hY-xk-zis" id="yzT-Oa-03b"/>
                         <segue destination="TU7-w5-S6F" kind="show" identifier="ToMovieDetailViewSegue" id="rUX-pD-6ms"/>
@@ -407,7 +438,7 @@
                 <viewControllerPlaceholder storyboardName="MovieInfo" id="TU7-w5-S6F" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boz-4m-5HT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="-247"/>
+            <point key="canvasLocation" x="1269" y="-362"/>
         </scene>
         <!--홈-->
         <scene sceneID="aOa-GF-hbm">

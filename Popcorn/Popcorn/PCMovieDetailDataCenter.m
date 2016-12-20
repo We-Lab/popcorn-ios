@@ -37,8 +37,6 @@
         self.movieDetailCommentList = [[NSMutableArray alloc]init];
         self.movieDetailFamousLineList = [[NSMutableArray alloc]init];
         self.movieDetailStarHistogramList = [[NSMutableArray alloc] init];
-//        self.starHistogramArray = [[NSMutableArray alloc]
-//                                   initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     }
     return self;
 }

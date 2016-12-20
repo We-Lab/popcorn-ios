@@ -25,12 +25,27 @@
 
 @implementation PCActorViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
+    NSLog(@"View %lf", self.view.frame.size.width);
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    NSLog(@"View2 %lf", self.view.frame.size.width);
+    NSLog(@"View3 %lf", self.actorListView.frame.size.width);
     [self creatActorList];
 }
+
 
 #pragma mark - Actor List View
 - (void)creatActorList {
@@ -44,7 +59,7 @@
         directerView.tag = j;
         NSInteger row = directerView.tag%3;
         directerView.frame = CGRectMake(baseMovieContentWidth * row,0,
-                                     baseMovieContentWidth,baseMovieContentHeight);
+                                        baseMovieContentWidth,baseMovieContentHeight);
         
         [self.directerListView addSubview:directerView];
         
@@ -68,7 +83,7 @@
         
         [directerView addSubview:directerName];
     }
-
+    
     for (NSInteger i = 0; i < [_movieDataCenter creatMovieActorName].count; i += 1) {
         
         CGFloat baseMargin = [self ratioHeight:15];
@@ -80,7 +95,7 @@
         NSInteger row = actorView.tag%3;
         NSInteger cal = actorView.tag/3;
         actorView.frame = CGRectMake(baseMovieContentWidth * row,(baseMovieContentHeight+baseMargin)*cal,
-                                            baseMovieContentWidth,baseMovieContentHeight);
+                                     baseMovieContentWidth,baseMovieContentHeight);
         
         [self.actorListView addSubview:actorView];
         

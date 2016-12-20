@@ -11,6 +11,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <HCSStarRatingView.h>
 
+//#import "BoxOfficeCustomView.h"
+
 #import "PCMovieDetailDataCenter.h"
 #import "PCMovieDetailViewController.h"
 #import "PCMovieInfoManager.h"
@@ -26,8 +28,8 @@
 
 // Box Office
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
-@property (nonatomic) UIView *movieSlidingContentView;
-@property (nonatomic) UIScrollView *boxOfficeScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *boxOfficeScrollView;
+@property (weak, nonatomic) IBOutlet UIView *scrollContentView;
 @property (nonatomic) NSArray *boxOfficeList;
 
 // Magazine
@@ -61,7 +63,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createViews];
-    
 }
 
 - (void)testA {
@@ -99,33 +100,10 @@
 - (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
     self.boxOfficeList = [NSArray array];
     self.boxOfficeList = boxOfficeList;
-    [self creatMainBoxOffice];
-}
-
-
-#pragma mark - BoxOffice Movie Scroll View
-- (void)creatMainBoxOffice{
-    self.boxOfficeScrollView = [[UIScrollView alloc] init];
-    
-    self.boxOfficeScrollView.frame = CGRectMake([self ratioWidth:40], 0, [self ratioWidth:295], [self ratioHeight:522]);
-    self.boxOfficeScrollView.contentSize = CGSizeMake([self ratioWidth:3540], self.mainBoxOfficeView.frame.size.height);
-    self.boxOfficeScrollView.contentOffset = CGPointMake([self ratioWidth:295], 0);
-    self.boxOfficeScrollView.pagingEnabled = YES;
-    self.boxOfficeScrollView.showsHorizontalScrollIndicator = NO;
-    self.boxOfficeScrollView.delegate = self;
-    self.boxOfficeScrollView.clipsToBounds = NO;
-    self.boxOfficeScrollView.showsVerticalScrollIndicator = NO;
-    self.boxOfficeScrollView.showsHorizontalScrollIndicator = NO;
-    
-    [self.mainBoxOfficeView addSubview:self.boxOfficeScrollView];
-    
-    self.movieSlidingContentView = [[UIView alloc] init];
-    self.movieSlidingContentView.frame = CGRectMake(0, [self ratioHeight:15], [self ratioWidth:3540], [self ratioHeight:507]);
-    [self.boxOfficeScrollView addSubview:self.movieSlidingContentView];
-    
     [self creatMovieRankScroll];
 }
 
+#pragma mark - BoxOffice Movie Scroll View
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (scrollView == self.movieMagazineCollectionView) {
@@ -143,11 +121,14 @@
 
 #pragma mark - Main Movie Scroll Layout
 - (void)creatMovieRankScroll{
+
+    CGFloat baseContentMargin = [self ratioWidth:10];
+    CGFloat baseMovieContentWidth = _boxOfficeScrollView.frame.size.width;
+    CGFloat baseMovieContentHeight = _boxOfficeScrollView.frame.size.height;
+    
+    self.boxOfficeScrollView.contentOffset = CGPointMake(baseMovieContentWidth, 0);
     
     for(NSInteger i = 0; i < 12; i++){
-        CGFloat baseContentMargin = [self ratioWidth:10];
-        CGFloat baseMovieContentWidth = [self ratioWidth:295];
-        CGFloat baseMovieContentHeight = [self ratioHeight:507];
         
         NSDictionary *movieInfo = [NSDictionary dictionary];
         if (i == 0)
@@ -162,11 +143,11 @@
         NSInteger row = movieContentView.tag;
         movieContentView.frame = CGRectMake(baseMovieContentWidth * row,0,
                                             baseMovieContentWidth,baseMovieContentHeight);
-        [self.movieSlidingContentView addSubview:movieContentView];
+        [_scrollContentView addSubview:movieContentView];
         
         
         UIImageView *posterImageView = [[UIImageView alloc] init];
-        posterImageView.frame = CGRectMake(baseContentMargin, 0, [self ratioWidth:275], [self ratioHeight:394]);
+        posterImageView.frame = CGRectMake(baseContentMargin, [self ratioHeight:5], baseMovieContentWidth - (baseContentMargin*2), [self ratioHeight:394]);
         posterImageView.contentMode = UIViewContentModeScaleAspectFill;
         posterImageView.clipsToBounds = YES;
         posterImageView.tag = i;
@@ -184,7 +165,13 @@
         UILabel *movieRankingNumber = [[UILabel alloc] init];
         movieRankingNumber.frame = CGRectMake(posterImageView.frame.size.width-[self ratioWidth:85], posterImageView.frame.size.height-[self ratioWidth:85], [self ratioWidth:85], [self ratioWidth:85]);
         movieRankingNumber.textColor = [UIColor whiteColor];
-        movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
+        
+        if ([[UIScreen mainScreen] bounds].size.width == 320) {
+            movieRankingNumber.font = [UIFont systemFontOfSize:75 weight:UIFontWeightUltraLight];
+        }else{
+            movieRankingNumber.font = [UIFont systemFontOfSize:85 weight:UIFontWeightUltraLight];
+        }
+    
         movieRankingNumber.textAlignment = NSTextAlignmentCenter;
         [PCCommonUtility makeTextShadow:movieRankingNumber opacity:0.8];
         [posterImageView addSubview:movieRankingNumber];
@@ -217,7 +204,13 @@
         
         UILabel *movieTitle = [[UILabel alloc] init];
         movieTitle.frame = CGRectMake(baseContentMargin*2, [self ratioHeight:399], [self ratioWidth:255], [self ratioHeight:35]);
-        movieTitle.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
+        
+        if ([[UIScreen mainScreen] bounds].size.width == 320) {
+            movieTitle.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+        }else{
+            movieTitle.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
+        }
+
         movieTitle.textAlignment = NSTextAlignmentCenter;
         movieTitle.clipsToBounds = YES;
         movieTitle.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
@@ -237,7 +230,13 @@
         UILabel *movieAge = [[UILabel alloc] init];
         movieAge.frame = CGRectMake(0, 0, movieRankSubView.frame.size.width/2-[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieAge.textAlignment = NSTextAlignmentCenter;
-        movieAge.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
+        
+        if ([[UIScreen mainScreen] bounds].size.width == 320) {
+            movieAge.font = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
+        }else{
+            movieAge.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
+        }
+
         movieAge.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
         [movieRankSubView addSubview:movieAge];
         
@@ -251,7 +250,13 @@
         UILabel *movieTicketingPercent = [[UILabel alloc] init];
         movieTicketingPercent.frame = CGRectMake(movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], 0, movieRankSubView.frame.size.width/2+[self ratioWidth:0.5], movieRankSubView.frame.size.height);
         movieTicketingPercent.textAlignment = NSTextAlignmentCenter;
-        movieTicketingPercent.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
+        
+        if ([[UIScreen mainScreen] bounds].size.width == 320) {
+            movieTicketingPercent.font = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
+        }else{
+            movieTicketingPercent.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
+        }
+        
         movieTicketingPercent.textColor = [UIColor colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1];
         [movieRankSubView addSubview:movieTicketingPercent];
         

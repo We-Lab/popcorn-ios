@@ -55,32 +55,6 @@
     CGFloat baseMovieContentWidth = self.tableViewHeaderButtonView.frame.size.width/3;
     CGFloat baseMovieContentHeight = [self ratioHeight:42];
     
-    for (NSInteger i = 0; i < 3; i += 1) {
-        
-        self.myPageButton = [[UIButton alloc] init];
-        
-        self.myPageButton.tag = i;
-        NSInteger row = self.myPageButton.tag;
-        
-        self.myPageButton.frame = CGRectMake(baseMovieContentWidth * row, 0, baseMovieContentWidth, baseMovieContentHeight);
-        self.myPageButton.backgroundColor = [UIColor whiteColor];
-        
-        if (i == 0) {
-            [self.myPageButton setTitle:@"평가영화" forState:UIControlStateNormal];
-        }else if (i == 1){
-            [self.myPageButton setTitle:@"명대사" forState:UIControlStateNormal];
-        }else if (i == 2){
-            [self.myPageButton setTitle:@"좋아요" forState:UIControlStateNormal];
-        }
-        
-        self.myPageButton.titleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-        [self.myPageButton setTitleColor:[UIColor  colorWithRed:51.f/255.f green:51.f/255.f blue:51.f/255.f alpha:1] forState:UIControlStateNormal];
-        
-        [self.myPageButton addTarget:self action:@selector(setReloadSection:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.tableViewHeaderButtonView addSubview:self.myPageButton];
-    }
-    
     self.buttonUnderLine = [[UIView alloc] init];
     
     self.buttonUnderLine.frame = CGRectMake(0, baseMovieContentHeight, baseMovieContentWidth, [self ratioHeight:3]);
@@ -146,9 +120,8 @@
     
     return nil;
 }
-
-- (void)setReloadSection:(UIButton *)sender{
-
+- (IBAction)reloadSection:(UIButton *)sender {
+    
     if (self.selectButton != sender.tag) {
         
         if (self.selectButton > sender.tag) {
@@ -171,10 +144,8 @@
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
         }
-        
     }
 }
-
 
 - (IBAction)requestSignOut:(id)sender {
     [[PCUserInformation userInfo] hasUserSignedOut];

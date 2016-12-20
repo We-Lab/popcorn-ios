@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, MainInterfaceView) {
 //                                          
 //    [[PCMovieInfoManager movieManager] requestBoxOfficeListwithCompletionHandler:completionHandler];
     
-    MainInterfaceView initialView = APPMainInterfaceViewRelease;
+    MainInterfaceView initialView = APPMainInterfaceViewMain;
     switch (initialView) {
         case APPMainInterfaceViewRelease:
             [self selectInitialViewController];

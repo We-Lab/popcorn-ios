@@ -228,6 +228,25 @@
     self.actorMovieNmaeArray = [[NSMutableArray alloc] init];
     self.actorNameArray = [[NSMutableArray alloc] init];
 
+    self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
+
+    self.starGraph = [[BEMSimpleLineGraphView alloc] init];
+    
+    self.starGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
+    self.starGraph.dataSource = self;
+    self.starGraph.delegate = self;
+    self.starGraph.enableBezierCurve = YES;
+    self.starGraph.colorTop = [UIColor whiteColor];
+    self.starGraph.colorBottom = [UIColor clearColor];
+    self.starGraph.colorLine = [UIColor whiteColor];
+    
+    [self.movieScoreGraphView addSubview:self.starGraph];
+
+}
+
+#pragma mark - Set the Movie data
+- (void)makeMovieDetailContents {
+
     for (NSInteger i = 0; i < 3; i += 1) {
         
         CGFloat baseMovieContentWidth = self.movieActorListView.frame.size.width/3;
@@ -279,25 +298,6 @@
         [actorView addSubview:actorMovieName];
     }
     
-    self.movieTrailerButton.imageEdgeInsets = UIEdgeInsetsMake(20, 35, 20, 35);
-
-    self.starGraph = [[BEMSimpleLineGraphView alloc] init];
-    
-    self.starGraph.frame = CGRectMake(0, 0, self.movieScoreGraphView.frame.size.width, self.movieScoreGraphView.frame.size.height);
-    self.starGraph.dataSource = self;
-    self.starGraph.delegate = self;
-    self.starGraph.enableBezierCurve = YES;
-    self.starGraph.colorTop = [UIColor whiteColor];
-    self.starGraph.colorBottom = [UIColor clearColor];
-    self.starGraph.colorLine = [UIColor whiteColor];
-    
-    [self.movieScoreGraphView addSubview:self.starGraph];
-
-}
-
-#pragma mark - Set the Movie data
-- (void)makeMovieDetailContents {
-
     [self.navigationItem setTitle:[self.movieDataCenter creatMovieTitle]];
     
     self.movieTitleLabel.text = [self.movieDataCenter creatMovieTitle];

@@ -45,7 +45,53 @@
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x20-xY-r4P">
                                             <rect key="frame" x="0.0" y="200" width="375" height="45"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0F-OY-hAv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <state key="normal" title="코멘트">
+                                                        <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="reloadSection:" destination="7pH-rQ-QNY" eventType="touchUpInside" id="GHn-dy-LdE"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w12-Q6-uRM">
+                                                    <rect key="frame" x="125" y="0.0" width="125" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <state key="normal" title="명대사">
+                                                        <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="reloadSection:" destination="7pH-rQ-QNY" eventType="touchUpInside" id="Duq-P5-dD2"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zb-JH-b3i">
+                                                    <rect key="frame" x="250" y="0.0" width="125" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <state key="normal" title="좋아요">
+                                                        <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="reloadSection:" destination="7pH-rQ-QNY" eventType="touchUpInside" id="Spl-Ox-8oH"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="W0F-OY-hAv" firstAttribute="leading" secondItem="x20-xY-r4P" secondAttribute="leading" id="KCL-E0-KCA"/>
+                                                <constraint firstItem="w12-Q6-uRM" firstAttribute="width" secondItem="W0F-OY-hAv" secondAttribute="width" id="SkY-Z1-Kh2"/>
+                                                <constraint firstItem="2zb-JH-b3i" firstAttribute="width" secondItem="W0F-OY-hAv" secondAttribute="width" id="TqH-jm-80y"/>
+                                                <constraint firstItem="2zb-JH-b3i" firstAttribute="leading" secondItem="w12-Q6-uRM" secondAttribute="trailing" id="Uau-TM-qbo"/>
+                                                <constraint firstItem="W0F-OY-hAv" firstAttribute="top" secondItem="x20-xY-r4P" secondAttribute="top" id="Uej-e4-TL0"/>
+                                                <constraint firstAttribute="bottom" secondItem="w12-Q6-uRM" secondAttribute="bottom" constant="3" id="Upc-nz-4e5"/>
+                                                <constraint firstItem="2zb-JH-b3i" firstAttribute="top" secondItem="x20-xY-r4P" secondAttribute="top" id="c1J-6F-nLC"/>
+                                                <constraint firstItem="w12-Q6-uRM" firstAttribute="top" secondItem="x20-xY-r4P" secondAttribute="top" id="gCW-2q-pSK"/>
+                                                <constraint firstItem="w12-Q6-uRM" firstAttribute="leading" secondItem="W0F-OY-hAv" secondAttribute="trailing" id="rjU-DZ-8fz"/>
+                                                <constraint firstAttribute="bottom" secondItem="W0F-OY-hAv" secondAttribute="bottom" constant="3" id="sTp-uq-B7N"/>
+                                                <constraint firstAttribute="bottom" secondItem="2zb-JH-b3i" secondAttribute="bottom" constant="3" id="sU7-FD-o9W"/>
+                                                <constraint firstAttribute="trailing" secondItem="2zb-JH-b3i" secondAttribute="trailing" id="wZu-xo-Uh1"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +113,7 @@
                                         <rect key="frame" x="0.0" y="273" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zC-84-UP1" id="8re-8q-OCW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fS-CO-Y4f">
@@ -167,7 +213,7 @@
                                         <rect key="frame" x="0.0" y="454" width="375" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8SK-vU-J1g" id="LbT-xL-2Nq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seL-4C-I7n">
