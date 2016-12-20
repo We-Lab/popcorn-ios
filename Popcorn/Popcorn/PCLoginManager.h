@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PCLoginManagerDelegate.h"
 
+
 @interface PCLoginManager : NSObject
 
 @property (nonatomic, weak) id<PCLoginManagerDelegate> delegate;
@@ -22,6 +23,8 @@
 - (void)signInWithFacebookID:(NSString *)facebookID andToken:(NSString *)token;
 - (void)signInWithID:(NSString *)loginID andPassword:(NSString *)password;
 - (void)requestNewPassword;
+- (void)requestUserInformation:(NSString *)token;
 
 @end
+
 

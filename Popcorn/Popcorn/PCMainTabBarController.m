@@ -6,18 +6,15 @@
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#import "PCMainViewController.h"
+#import "PCMainTabBarController.h"
 
-@interface PCMainViewController ()
+@interface PCMainTabBarController ()
 
 @end
 
-@implementation PCMainViewController
+@implementation PCMainTabBarController
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -34,6 +31,8 @@
 //    self.navigationController.toolbar.clipsToBounds = YES;
 }
 
+
+#pragma mark - removeLoginViewControllers
 - (void)removeLoginViewControllers {
     NSMutableArray *viewControllers = [[self.navigationController viewControllers] mutableCopy];
     NSMutableArray *prevControllers = [@[] mutableCopy];
@@ -49,6 +48,17 @@
     [self.navigationController setViewControllers:viewControllers];
 }
 
+
+
+
+#pragma mark - 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    sLog(@" ");
+}
 
 
 @end

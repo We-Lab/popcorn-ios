@@ -9,7 +9,9 @@
 #import "PCMovieInfoManager.h"
 
 #import <AFNetworking.h>
+
 #import "PCNetworkParamKey.h"
+#import "PCUserInformation.h"
 
 @interface PCMovieInfoManager ()
 
@@ -80,13 +82,45 @@
 }
 
 
+#pragma mark - Pass Request Form (Common Method)
+- (void)passRequestFormWithMethod:(NSString *)method URLString:(NSString *)urlString andHandler:(NetworkTaskHandler)completionHandler {
+    NSURLRequest *request = [_serializer requestWithMethod:method
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
+
+
 #pragma mark - Configure Request
+- (void)requestMagazineListWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"magazines/"];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
+}
+
+
+- (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"best-comment/"];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
+}
+
+- (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"movie-recommends/carousel/"];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
+}
+
+- (void)requestBoxOfficeListwithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    [self requestRankingList:BoxOfficeRankingDetailList withCompletionHandler:completionHandler];
+}
+
 - (void)requestRankingList:(RankingListType)rankingType withCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString;
     
     switch (rankingType) {
         case BoxOfficeRankingDetailList:
-            urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
+            urlString = [mainURLString stringByAppendingString:@"box-office/ios/"];
             break;
         case RatingRankingDetailList:
             urlString = [movieURLString stringByAppendingString:@"star-rank/"];
@@ -95,70 +129,23 @@
             urlString = [movieURLString stringByAppendingString:@"like-rank/"];
             break;
     }
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
     
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
+
 
 - (void)requestMovieList:(NSString *)inputText withCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSCharacterSet *allowedCharacterSet = [NSCharacterSet URLQueryAllowedCharacterSet];
     NSString *urlString = [movieURLString stringByAppendingString:@"search/?keyword="];
     urlString = [[urlString stringByAppendingString:inputText] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
     
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
-
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
-- (void)requestBoxOfficeListwithCompletionHandler:(NetworkTaskHandler)completionHandler {
-    NSString *urlString = [mainURLString stringByAppendingString:@"box-office/ios"];
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
+- (void)requestMovieListWithTags:(NSDictionary *)tags andCompletionHandler:(NetworkTaskHandler)completionHandler {
     
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
-}
-
-
-- (void)requestMagazineListWithCompletionHandler:(NetworkTaskHandler)completionHandler {
-    NSString *urlString = [mainURLString stringByAppendingString:@"magazines/"];
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
-    
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
-}
-
-- (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler {
-    NSString *urlString = [mainURLString stringByAppendingString:@"best-comment/"];
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
-    
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
-}
-
-- (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler {
-    NSString *urlString = [mainURLString stringByAppendingString:@"movie-recommends/carousel/"];
-    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-                                                 URLString:urlString
-                                                parameters:nil
-                                                     error:nil];
-    
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
-}
-
-- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(NetworkTaskHandler)completionHandler {
 //    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
+//    
 //    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
 //                                                 URLString:urlString
 //                                                parameters:nil

@@ -21,6 +21,8 @@
 #import "PCMovieInformationView.h"
 #import "PCUserInteractionMenuView.h"
 
+#import "PCUserInteractionHelper.h"
+
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
 // Base View
@@ -105,7 +107,6 @@
 
 #pragma mark - BoxOffice Movie Scroll View
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     if (scrollView == self.movieMagazineCollectionView) {
         return;
     }
@@ -116,7 +117,6 @@
         scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     }
 }
-
 
 
 #pragma mark - Main Movie Scroll Layout
@@ -379,8 +379,9 @@
 
 - (void)didReceiveTodayRecommendMovieList:(NSArray *)resultArray {
     self.todayRecommendMovieList = resultArray;
-    NSDictionary *movieData = resultArray[0];
     
+    // 1번째 추천 영화
+    NSDictionary *movieData = resultArray[0];
     [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
     self.firstRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
@@ -389,6 +390,7 @@
     NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
     self.firstRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
     
+    // 2번째 추천 영화
     movieData = resultArray[1];
     [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
     self.secondRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
@@ -400,13 +402,24 @@
 - (void)configureTodayRecommendView {
     _firstTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
     [self.firstRecommendMovieView addGestureRecognizer:_firstTapGestureRecognizer];
+    [self.firstRecommendMenuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
     
     _secondTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
     [self.secondRecommendMovieView addGestureRecognizer:_secondTapGestureRecognizer];
+    [self.secondRecommendMenuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)moveToMovieDetailView:(id)sender {
     [self performSegueWithIdentifier:@"ToMovieDetailViewSegue" sender:sender];
+}
+
+- (void)clickLikeButton:(UIButton *)button {
+    if (self.firstRecommendMenuView.likeButton == button) {
+        [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[0][@"id"]];
+    }
+    else {
+        [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[1][@"id"]];
+    }
 }
 
 

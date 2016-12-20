@@ -1576,7 +1576,7 @@
         <!--영화제목-->
         <scene sceneID="QNJ-Eh-9jH">
             <objects>
-                <viewController id="7Ku-yR-jJU" customClass="PCCommentWriteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentWriteStoryboard" id="7Ku-yR-jJU" customClass="PCCommentWriteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nOa-xm-TN3"/>
                         <viewControllerLayoutGuide type="bottom" id="CbU-RF-SRw"/>

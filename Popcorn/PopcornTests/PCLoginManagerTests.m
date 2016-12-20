@@ -45,8 +45,8 @@
     if (token) {
         self.hasToken = YES;
         self.token = token;
-        
-        [_userInfo setUserTokenFromKeyChain];
+#warning 여기도 수정필요
+//        [_userInfo setUserTokenFromKeyChain];
     }
 }
 

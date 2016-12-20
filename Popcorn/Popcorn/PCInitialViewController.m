@@ -7,7 +7,6 @@
 //
 
 #import "PCInitialViewController.h"
-#import "PCMainViewController.h"
 
 @interface PCInitialViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *SignUpWithEmailButton;

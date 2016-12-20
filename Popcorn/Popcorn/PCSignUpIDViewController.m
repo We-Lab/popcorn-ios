@@ -16,7 +16,6 @@
 #import "PCUserInfoValidation.h"
 #import "PCNetworkParamKey.h"
 
-#import "PCMainViewController.h"
 #import "PCSignInViewController.h"
 
 @interface PCSignUpIDViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>

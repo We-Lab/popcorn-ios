@@ -13,7 +13,8 @@
 		523E52A11E0700B8009A2B9B /* PCUserInteractionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A01E0700B8009A2B9B /* PCUserInteractionMenuView.m */; };
 		523E52A31E07111F009A2B9B /* PCMovieInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523E52A21E07111F009A2B9B /* PCMovieInformationView.xib */; };
 		523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A51E071132009A2B9B /* PCMovieInformationView.m */; };
-		523E52A91E074437009A2B9B /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A81E074437009A2B9B /* PCUserInfoManager.m */; };
+		523E52AD1E07D730009A2B9B /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */; };
+		523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
@@ -40,7 +41,7 @@
 		52C49A3D1DEAE9F400F47BB2 /* PopcornUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A3C1DEAE9F400F47BB2 /* PopcornUITests.m */; };
 		52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */; };
 		52C49A511DEAEFF400F47BB2 /* PCSignUpIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */; };
-		52C49A561DEAF00500F47BB2 /* PCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A551DEAF00500F47BB2 /* PCMainViewController.m */; };
+		52C49A561DEAF00500F47BB2 /* PCMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A551DEAF00500F47BB2 /* PCMainTabBarController.m */; };
 		52C49A601DEAF34600F47BB2 /* PCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A5F1DEAF34600F47BB2 /* PCSearchViewController.m */; };
 		52C49A691DEB00CB00F47BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A681DEB00CB00F47BB2 /* Main.storyboard */; };
 		52C49A6A1DEB00CB00F47BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A681DEB00CB00F47BB2 /* Main.storyboard */; };
@@ -121,8 +122,10 @@
 		523E52A21E07111F009A2B9B /* PCMovieInformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMovieInformationView.xib; sourceTree = "<group>"; };
 		523E52A41E071132009A2B9B /* PCMovieInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMovieInformationView.h; sourceTree = "<group>"; };
 		523E52A51E071132009A2B9B /* PCMovieInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMovieInformationView.m; sourceTree = "<group>"; };
-		523E52A71E074437009A2B9B /* PCUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoManager.h; sourceTree = "<group>"; };
-		523E52A81E074437009A2B9B /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
+		523E52AB1E07D730009A2B9B /* PCUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInfoManager.h; sourceTree = "<group>"; };
+		523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
+		523E52B11E07EFA7009A2B9B /* PCUserInteractionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInteractionHelper.h; sourceTree = "<group>"; };
+		523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInteractionHelper.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
@@ -171,8 +174,8 @@
 		52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSignInViewController.m; sourceTree = "<group>"; };
 		52C49A4F1DEAEFF400F47BB2 /* PCSignUpIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSignUpIDViewController.h; sourceTree = "<group>"; };
 		52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSignUpIDViewController.m; sourceTree = "<group>"; };
-		52C49A541DEAF00500F47BB2 /* PCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMainViewController.h; sourceTree = "<group>"; };
-		52C49A551DEAF00500F47BB2 /* PCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMainViewController.m; sourceTree = "<group>"; };
+		52C49A541DEAF00500F47BB2 /* PCMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMainTabBarController.h; sourceTree = "<group>"; };
+		52C49A551DEAF00500F47BB2 /* PCMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMainTabBarController.m; sourceTree = "<group>"; };
 		52C49A5E1DEAF34600F47BB2 /* PCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSearchViewController.h; sourceTree = "<group>"; };
 		52C49A5F1DEAF34600F47BB2 /* PCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSearchViewController.m; sourceTree = "<group>"; };
 		52C49A681DEB00CB00F47BB2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -276,13 +279,29 @@
 			name = XIB;
 			sourceTree = "<group>";
 		};
-		52AE38051DED4FB50016D81E /* MovieInfoManager */ = {
+		523E52AA1E07D707009A2B9B /* UserInteraction */ = {
 			isa = PBXGroup;
 			children = (
+				523E52B11E07EFA7009A2B9B /* PCUserInteractionHelper.h */,
+				523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */,
+				5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */,
+				5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */,
+			);
+			name = UserInteraction;
+			sourceTree = "<group>";
+		};
+		52AE38051DED4FB50016D81E /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */,
+				52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */,
+				52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */,
 				52AE38061DED4FF40016D81E /* PCMovieInfoManager.h */,
 				52AE38071DED4FF40016D81E /* PCMovieInfoManager.m */,
+				523E52AB1E07D730009A2B9B /* PCUserInfoManager.h */,
+				523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */,
 			);
-			name = MovieInfoManager;
+			name = NetworkManager;
 			sourceTree = "<group>";
 		};
 		52AE38241DEE95430016D81E /* MovieDetail */ = {
@@ -297,6 +316,7 @@
 				5F7DC3AC1E097A60000B55F1 /* Movie Actor */,
 				5F04B8201E03E2110012F50D /* MovieDetail Sub Class */,
 				5F04B81D1E03E16B0012F50D /* Movie Commnet */,
+				5F04B8201E03E2110012F50D /* MovieDetail Sub Class */,
 				5F04B81F1E03E1BF0012F50D /* Movie FamousLine */,
 				5F2E14BA1DF01C8C00C06818 /* PCMovieNaviView.h */,
 				5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */,
@@ -329,26 +349,26 @@
 		52C49A161DEAE9F400F47BB2 /* Popcorn */ = {
 			isa = PBXGroup;
 			children = (
-				52AE383E1DF161560016D81E /* Popcorn.entitlements */,
 				5203078E1DEC0CBD00E2985A /* Popcorn-Prefix.pch */,
 				52C49A1A1DEAE9F400F47BB2 /* AppDelegate.h */,
 				52C49A1B1DEAE9F400F47BB2 /* AppDelegate.m */,
 				52C49A671DEB007500F47BB2 /* Storyboard */,
 				523E529C1E06FFBD009A2B9B /* XIB */,
+				52C49A991DEB119500F47BB2 /* Utility */,
+				52AE38051DED4FB50016D81E /* NetworkManager */,
 				52C49A631DEAF35600F47BB2 /* Login */,
-				52C49A971DEB105F00F47BB2 /* Main */,
+				52C49A971DEB105F00F47BB2 /* MainTabBar */,
 				52C49A651DEAF3C200F47BB2 /* Home */,
 				52C49A641DEAF39600F47BB2 /* Search */,
 				52C49A861DEB0D7D00F47BB2 /* Recommend */,
 				52C49A851DEB0D6300F47BB2 /* Rating */,
 				52C49A871DEB0D7F00F47BB2 /* MyPage */,
 				52AE38241DEE95430016D81E /* MovieDetail */,
-				52AE38051DED4FB50016D81E /* MovieInfoManager */,
-				52C49A9A1DEB119700F47BB2 /* UserInformation */,
-				52C49A991DEB119500F47BB2 /* Utility */,
+				523E52AA1E07D707009A2B9B /* UserInteraction */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
 				525923841DF6E4A600BE1506 /* GoogleService-Info.plist */,
 				528D7A191DF98EE5007A9D15 /* Assets.xcassets */,
+				52AE383E1DF161560016D81E /* Popcorn.entitlements */,
 				52C49A171DEAE9F400F47BB2 /* Supporting Files */,
 			);
 			path = Popcorn;
@@ -386,9 +406,8 @@
 		52C49A631DEAF35600F47BB2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				52C49AC11DEB5EE700F47BB2 /* PCLoginManagerDelegate.h */,
-				52C49ABC1DEB5E7200F47BB2 /* PCLoginManager.h */,
-				52C49ABD1DEB5E7200F47BB2 /* PCLoginManager.m */,
+				5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */,
+				5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */,
 				52C49A1D1DEAE9F400F47BB2 /* PCInitialViewController.h */,
 				52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */,
 				52C49A4A1DEAEE2600F47BB2 /* PCSignInViewController.h */,
@@ -399,8 +418,8 @@
 				520307801DEB7DC000E2985A /* PCRequesPWViewController.m */,
 				52C49A4F1DEAEFF400F47BB2 /* PCSignUpIDViewController.h */,
 				52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */,
-				5FED4D201DEC25D5003245EC /* PCLoginNaviView.h */,
-				5FED4D211DEC25D5003245EC /* PCLoginNaviView.m */,
+				52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */,
+				52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -478,17 +497,19 @@
 			children = (
 				52C49A921DEB0DD700F47BB2 /* PCMyPageViewController.h */,
 				52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */,
+				520307891DEB85ED00E2985A /* PCUserInformation.h */,
+				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
 			);
 			name = MyPage;
 			sourceTree = "<group>";
 		};
-		52C49A971DEB105F00F47BB2 /* Main */ = {
+		52C49A971DEB105F00F47BB2 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				52C49A541DEAF00500F47BB2 /* PCMainViewController.h */,
-				52C49A551DEAF00500F47BB2 /* PCMainViewController.m */,
+				52C49A541DEAF00500F47BB2 /* PCMainTabBarController.h */,
+				52C49A551DEAF00500F47BB2 /* PCMainTabBarController.m */,
 			);
-			name = Main;
+			name = MainTabBar;
 			sourceTree = "<group>";
 		};
 		52C49A991DEB119500F47BB2 /* Utility */ = {
@@ -504,19 +525,6 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
-		52C49A9A1DEB119700F47BB2 /* UserInformation */ = {
-			isa = PBXGroup;
-			children = (
-				523E52A71E074437009A2B9B /* PCUserInfoManager.h */,
-				523E52A81E074437009A2B9B /* PCUserInfoManager.m */,
-				520307891DEB85ED00E2985A /* PCUserInformation.h */,
-				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
-				52AE37F91DEC6BDC0016D81E /* PCUserInfoValidation.h */,
-				52AE37FA1DEC6BDC0016D81E /* PCUserInfoValidation.m */,
-			);
-			name = UserInformation;
-			sourceTree = "<group>";
-		};
 		5F04B81D1E03E16B0012F50D /* Movie Commnet */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,8 +534,6 @@
 				5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */,
 				5F04B8211E03E2730012F50D /* PCBestCommentCustomCell.h */,
 				5F04B8221E03E2730012F50D /* PCBestCommentCustomCell.m */,
-				5F37984C1E0056D300DCA40B /* PCCommentWriteViewController.h */,
-				5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */,
 			);
 			name = "Movie Commnet";
 			sourceTree = "<group>";
@@ -928,11 +934,11 @@
 				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
 				52AE383A1DEF3EBD0016D81E /* KeychainItemWrapper.m in Sources */,
 				52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */,
-				523E52A91E074437009A2B9B /* PCUserInfoManager.m in Sources */,
 				5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */,
 				5FED4D221DEC25D5003245EC /* PCLoginNaviView.m in Sources */,
 				52F76A411E030A4A008E900A /* PCTodayRecommendTableViewCell.m in Sources */,
-				52C49A561DEAF00500F47BB2 /* PCMainViewController.m in Sources */,
+				52C49A561DEAF00500F47BB2 /* PCMainTabBarController.m in Sources */,
+				523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */,
 				52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */,
 				5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */,
 				52B49CA11DF9AFAD001A97C2 /* PCRankingDetailTableViewCell.m in Sources */,
@@ -940,6 +946,7 @@
 				5F04B8261E03E2A70012F50D /* PCBestFamousLineCustomCell.m in Sources */,
 				52C49A761DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */,
 				52C49ABE1DEB5E7200F47BB2 /* PCLoginManager.m in Sources */,
+				523E52AD1E07D730009A2B9B /* PCUserInfoManager.m in Sources */,
 				52C49A191DEAE9F400F47BB2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
