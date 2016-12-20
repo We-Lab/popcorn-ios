@@ -33,14 +33,20 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
     PCRecommendCountryTagCategory,
 };
 
+
 @implementation PCRecommendTagViewController
 
 #pragma mark - Init
 + (void)initialize {
-#warning need to confirm genre
-    genreArray = @[@"액션", @"드라마", @"전쟁", @"다큐멘터리", @"코미디", @"공포", @"로맨스", @"애니메이션", @"판타지", @"SF", @"미스터리", @"스릴러"];
-    gradeArray = @[@"12세 등급", @"15세 등급", @"19세 등급", @"전체 관람가능"];
-    countryArray = @[@"한국", @"미국", @"일본", @"영국", @"중국", @"인도", @"독일", @"프랑스", @"홍콩"];
+    
+    //id는 1번부터 시작하며  12번째 인덱스는 빈값이어서 다큐멘터리가 그 자리를 대신함. 다큐멘터리는 원래 13번
+    genreArray = @[@"액션", @"범죄", @"스릴러", @"어드벤처", @"판타지", @"SF", @"애니메이션", @"드라마", @"코미디", @"가족", @"로맨스/멜로", @"다큐멘터리"];
+    
+    //id는 1번부터 시작해서 5번까지 있으나 5번은 공백값
+    gradeArray = @[@"15세 이상", @"전체관람가", @"12세 이상", @"19세 이상"];
+    
+    //1번부터 38번까지 있으나 10개에서 컷
+    countryArray = @[@"한국", @"미국", @"영국", @"독일", @"프랑스", @"일본", @"인도", @"중국", @"홍콩"];
 }
 
 - (void)viewDidLoad {

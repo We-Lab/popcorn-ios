@@ -34,6 +34,7 @@ NSString *const PCUserProfileFavoriteGradeKey = @"favorite_grade";
 NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 
 
+
 @implementation PCUserInformation
 
 #pragma mark - Init
@@ -121,7 +122,7 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 - (UIImage *)getUserProfileImage {
     UIImage *image = [UIImage imageNamed:@"Profile_placeholder"];
     
-    NSString *imagePath = [_userDefaults objectForKey:@"ProfileImagePath"];
+    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
     if (imagePath)
         image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
     

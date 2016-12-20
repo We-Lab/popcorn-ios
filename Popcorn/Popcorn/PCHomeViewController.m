@@ -23,6 +23,7 @@
 
 #import "PCUserInteractionHelper.h"
 #import "PCUserInfoManager.h"
+#import "PCUserInformation.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -74,10 +75,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [[PCUserInfoManager userInfoManager] changeUserFavoriteTags:nil withCompletionHandler:^(BOOL isSuccess) {
-        sLog(@"테스트");
-    }];
     
     #ifndef DEBUG
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -387,7 +384,7 @@
     
     // 1번째 추천 영화
     NSDictionary *movieData = resultArray[0];
-    [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.firstRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
@@ -397,7 +394,7 @@
     
     // 2번째 추천 영화
     movieData = resultArray[1];
-    [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.secondRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
     formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
@@ -421,9 +418,11 @@
 - (void)clickLikeButton:(UIButton *)button {
     if (self.firstRecommendMenuView.likeButton == button) {
         [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[0][@"id"]];
+        sLog(_todayRecommendMovieList[0][@"id"]);
     }
     else {
         [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[1][@"id"]];
+        sLog(_todayRecommendMovieList[1][@"id"]);
     }
 }
 

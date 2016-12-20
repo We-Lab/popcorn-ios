@@ -110,11 +110,18 @@
 
 
 #pragma mark - Related With User Profile
-- (void)changeUserProfile:(NSString *)userProfileKey withCompletionHandler:(UserInfoTaskHandler)completionHandler {
-//    [self passRequestFormWithMethod:@"PATCH" urlString:urlString parameters:params andCompletionHandler:completionHandler];
-//    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
-//    NSDictionary *params = nil;
-//    [self requestChangeUserProfileWithParameters:params andCompletionHandler:completionHandler];
+- (void)changeUserProfile:(NSString *)userProfileKey withNewData:(NSString *)newData andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
+    NSDictionary *params = @{userProfileKey:newData};
+    
+    _serializer = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"PATCH"
+                                                 URLString:urlString
+                                                parameters:params
+                                                     error:nil];
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 
@@ -155,6 +162,20 @@
     
     [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
+
+- (void)deleteAllFavoriteTagsWithCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"delete-favorite/"];
+    
+    _serializer = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }

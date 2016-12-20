@@ -8,14 +8,14 @@
 
 #import "PCMyPageViewController.h"
 
-#import "PCInitialViewController.h"
 #import "PCUserInformation.h"
-
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *myPageMainTableView;
 @property (weak, nonatomic) IBOutlet UIView *tableViewHeaderButtonView;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+
 @property UIButton *myPageButton;
 @property NSInteger selectButton;
 @property UIView *buttonUnderLine;
@@ -38,12 +38,14 @@
     
     self.myPageMainTableView.rowHeight = UITableViewAutomaticDimension;
     self.myPageMainTableView.estimatedRowHeight = 150;
+    self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
     
     [self makeTableViewHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -56,7 +58,7 @@
 #pragma mark - Make TableView Header
 - (void)makeTableViewHeader{
     
-    CGFloat baseMovieContentWidth = self.tableViewHeaderButtonView.frame.size.width/3;
+    CGFloat baseMovieContentWidth = self.view.frame.size.width/3;
     CGFloat baseMovieContentHeight = [self ratioHeight:42];
     
     self.buttonUnderLine = [[UIView alloc] init];
@@ -128,7 +130,7 @@
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
@@ -138,7 +140,7 @@
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
@@ -146,16 +148,7 @@
     }
 }
 
-#pragma mark - Sign Out Action
-- (IBAction)requestSignOut:(id)sender {
-    [[PCUserInformation sharedUserData] hasUserSignedOut];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    PCInitialViewController *initialView = [storyboard instantiateInitialViewController];
-    
-    [self presentViewController:initialView animated:YES completion:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = initialView;
-    }];
-}
+
 
 
 
