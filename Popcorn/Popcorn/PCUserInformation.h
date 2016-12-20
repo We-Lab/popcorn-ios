@@ -8,35 +8,40 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const PCUserProfileUserNameKey;
+extern NSString *const PCUserProfileNickNameKey;
+extern NSString *const PCUserProfileEmailKey;
+extern NSString *const PCUserProfileGenderKey;
+extern NSString *const PCUserProfileBirthdayKey;
+extern NSString *const PCUserProfilePhoneNumberKey;
+
 @interface PCUserInformation : NSObject
 
 @property (nonatomic, readonly) NSString *userToken;
 
-// 유저 정보
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, readonly) NSString *nickname;
-@property (nonatomic, readonly) NSString *email;
-@property (nonatomic, readonly) NSString *gender;
-@property (nonatomic, readonly) NSString *birthday;
-@property (nonatomic, readonly) NSString *phoneNumber;
-@property (nonatomic, readonly) UIImage *profileImage;
-@property (nonatomic, readonly) NSDictionary *favoriteTags;
-
-
-#pragma mark - Init 
 + (instancetype)sharedUserData;
-- (void)setUserInformation:(NSDictionary *)userInformation;
-
 
 #pragma mark - User Sign In / Sign Out
 + (BOOL)isUserSignedIn;
 - (void)hasUserSignedIn:(NSString *)token;
 - (void)hasUserSignedOut;
+- (void)setUserInformationFromServer:(NSDictionary *)userInformation;
+
+// 오토로그인일 때는 미리 저장해둔 데이터로부터 유저정보 세팅
+- (void)setUserInformationFromSavedData;
+
+
+#pragma mark - Get User Information
+- (NSString *)getUserInformation:(NSString *)userProfileKey;
+- (UIImage *)getUserProfileImage;
+- (NSDictionary *)getUserFavoriteTags;
 
 
 #pragma mark - Change User Information
-- (void)changeNickname:(NSString *)nickname;
-- (void)changePhoneNumber:(NSString *)nickname;
-- (void)changeFavoriteTag:(NSDictionary *)favoriteTags;
+- (void)changeUserInformation:(NSString *)userProfileKey;
+- (void)changeProfileImage:(UIImage *)profileImage;
+- (void)changeFavoriteTags:(NSDictionary *)tags;
 
 @end
+
+

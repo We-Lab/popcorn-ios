@@ -7,24 +7,28 @@
 //
 
 #import "PCUserInformation.h"
+
 #import "KeychainItemWrapper.h"
+#import "PCUserInfoManager.h"
 
 @interface PCUserInformation ()
 
+@property (nonatomic) KeychainItemWrapper *keychainItem;
+@property (nonatomic) NSUserDefaults *userDefaults;
 @property (nonatomic, readwrite) NSString *userToken;
-@property (nonatomic) NSDictionary *userInformation;
-
-@property (nonatomic, readwrite, nonnull) NSString *username;
-@property (nonatomic, readwrite, nonnull) NSString *nickname;
-@property (nonatomic, readwrite, nonnull) NSString *email;
-@property (nonatomic, readwrite, nonnull) NSString *gender;
-@property (nonatomic, readwrite, nonnull) NSString *birthday;
-@property (nonatomic, readwrite, nullable) NSString *phoneNumber;
-@property (nonatomic, readwrite, nullable) UIImage *profileImage;
-@property (nonatomic, readwrite, nullable) NSDictionary *favoriteTags;
-
+@property (nonatomic, readwrite) NSMutableDictionary *userInformation;
 
 @end
+
+static NSString *const PCUserInformationAsDictionaryKey = @"UserInformationAsDictionary";
+
+//Extern String
+NSString *const PCUserProfileUserNameKey = @"username";
+NSString *const PCUserProfileNickNameKey = @"nickname";
+NSString *const PCUserProfileEmailKey = @"email";
+NSString *const PCUserProfileGenderKey = @"gender";
+NSString *const PCUserProfileBirthdayKey = @"date_of_birth";
+NSString *const PCUserProfilePhoneNumberKey = @"phone_number";
 
 @implementation PCUserInformation
 
@@ -39,24 +43,20 @@
     return userData;
 }
 
-- (void)setUserInformation:(NSDictionary *)userInformation {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    self.userToken = [keychainItem objectForKey:(id)kSecAttrAccount];
-    
-    self.username     = userInformation[@"username"];
-    self.nickname     = userInformation[@"nickname"];
-    self.email        = userInformation[@"email"];
-    self.gender       = userInformation[@"gender"];
-    self.birthday     = userInformation[@"date_of_birth"];
-    self.phoneNumber  = userInformation[@"phone_number"];
-    self.profileImage = userInformation[@"profile_img"];
-    
-    NSDictionary *favoriteTags = @{@"favoriteGenre":userInformation[@"favorite_genre"],
-                                   @"favoriteGrade":userInformation[@"favorite_grade"],
-                                   @"favoriteCountry":userInformation[@"favorite_making_country"]
-                                   };
-    self.favoriteTags = favoriteTags;
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return self;
 }
+
+- (void)setUserInformationFromSavedData {
+    self.userToken = [_keychainItem objectForKey:(id)kSecAttrAccount];
+    self.userInformation = [[_userDefaults objectForKey:PCUserInformationAsDictionaryKey] mutableCopy];
+}
+
 
 
 #pragma mark - User Sign In / Sign Out
@@ -65,30 +65,84 @@
 }
 
 - (void)hasUserSignedIn:(NSString *)token {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    [keychainItem setObject:token forKey:(id)kSecAttrAccount];
-    self.userToken = token;
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserSignedIn"];
+    NSString *tokenValue = [NSString stringWithFormat:@"Token %@", token];
+    
+    [_userDefaults setBool:YES forKey:@"UserSignedIn"];
+    [self.keychainItem setObject:tokenValue forKey:(id)kSecAttrAccount];
+    self.userToken = tokenValue;
+}
+
+- (void)setUserInformationFromServer:(NSDictionary *)userInformation {
+    
+    // URL에서 profile 이미지를 받아 파일로 저장
+    NSString *urlString = userInformation[@"profile_img"];
+    NSString *imagePath = nil;
+    if (urlString != nil || urlString.length != 0) {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+        imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+        [imageData writeToFile:imagePath atomically:YES];
+    }
+    
+    self.userInformation = [userInformation mutableCopy];
+    [_userDefaults setObject:userInformation forKey:PCUserInformationAsDictionaryKey];
 }
 
 - (void)hasUserSignedOut {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"popcornKey" accessGroup:nil];
-    [keychainItem setObject:nil forKey:(id)kSecAttrAccount];
+    [self.keychainItem setObject:nil forKey:(id)kSecAttrAccount];
+    [_userDefaults setBool:NO forKey:@"UserSignedIn"];
+    [_userDefaults setObject:nil forKey:PCUserInformationAsDictionaryKey];
     self.userToken = nil;
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserSignedIn"];
+    self.userInformation = nil;
+    
+    // 저장된 프로필 이미지 삭제
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+    if (imagePath)
+        [fileManager removeItemAtPath:imagePath error:NULL];
 }
 
+
+- (NSString *)documentsPathForFileName:(NSString *)name {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    
+    return [documentsPath stringByAppendingPathComponent:name];
+}
+
+
+- (NSString *)getUserInformation:(NSString *)userProfileKey {
+    return _userInformation[userProfileKey];
+}
+
+- (UIImage *)getUserProfileImage {
+    UIImage *image = [UIImage imageNamed:@"Profile_placeholder"];
+    
+    NSString *imagePath = [_userDefaults objectForKey:@"ProfileImagePath"];
+    if (imagePath)
+        image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+    
+    return image;
+}
+
+- (NSDictionary *)getUserFavoriteTags {
+    NSDictionary *tags = @{@"genre":_userInformation[@"favorite_genre"],
+                           @"grade":_userInformation[@"favorite_grade"],
+                           @"country":_userInformation[@"favorite_making_country"],
+                           };
+    return tags;
+}
 
 #pragma mark - Change User Information
-- (void)changeNickname:(NSString *)nickname {
+- (void)changeUserInformation:(NSString *)userProfileKey {
+//    self.userInformation
+//    [PCUserInfoManager userInfoManager] changeUserProfile:<#(NSString *)#> withCompletionHandler:<#^(void)completionHandler#>
+}
+
+- (void)changeProfileImage:(UIImage *)profileImage {
     
 }
 
-- (void)changePhoneNumber:(NSString *)nickname {
-    
-}
-
-- (void)changeFavoriteTag:(NSDictionary *)favoriteTags {
+- (void)changeFavoriteTags:(NSDictionary *)tags {
     
 }
 

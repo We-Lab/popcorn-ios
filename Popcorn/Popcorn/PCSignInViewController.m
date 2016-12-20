@@ -11,7 +11,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "PCMainViewController.h"
+#import "PCMainTabBarController.h"
 #import "PCLoginNaviView.h"
 #import "PCUserInformation.h"
 #import "PCUserInfoValidation.h"
@@ -139,13 +139,22 @@
 - (void)didSignInWithID:(NSString *)token {
     if (token) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PCMainViewController *mainView = [storyboard instantiateInitialViewController];
-        [self.navigationController pushViewController:mainView animated:YES];
+        PCMainTabBarController *mainView = [storyboard instantiateInitialViewController];
+        [self.navigationController showViewController:mainView sender:self];
         
         [[PCUserInformation sharedUserData] hasUserSignedIn:token];
     }
     else {
         alertLog(@"유저정보가 올바르지 않습니다.");
+    }
+}
+
+- (void)didReceiveUserInformation:(NSDictionary *)userInformation {
+    if (userInformation) {
+        [[PCUserInformation sharedUserData] setUserInformationFromServer:userInformation];
+    }
+    else {
+        alertLog(@"서버에서 유저정보를 가져오지 못했습니다.");
     }
 }
 

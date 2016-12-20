@@ -20,6 +20,7 @@
 #import "PCUserInteractionMenuView.h"
 
 #import "PCUserInteractionHelper.h"
+#import "PCUserInteractionManager.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 

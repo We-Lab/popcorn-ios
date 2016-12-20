@@ -9,7 +9,7 @@
 #import "PCUserInteractionHelper.h"
 
 #import <HCSStarRatingView.h>
-#import "PCUserInteractionManager.h"
+#import "PCUserInfoManager.h"
 #import "PCCommentWriteViewController.h"
 
 @implementation PCUserInteractionHelper
@@ -53,7 +53,7 @@
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [PCUserInteractionManager saveMovieRating:_movieID];
+        [[PCUserInfoManager userInfoManager] saveMovieRating:_movieID];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
@@ -70,7 +70,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
     PCCommentWriteViewController *commentWriteVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentWriteStoryboard"];
     commentWriteVC.movieID = movieID;
-    [currentNVC pushViewController:commentWriteVC animated:YES];
+    [currentNVC showViewController:commentWriteVC sender:currentNVC];
 }
 
 @end

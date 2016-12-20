@@ -11,16 +11,15 @@
 #import <AFNetworking.h>
 #import "PCNetworkParamKey.h"
 
+
 @interface PCLoginManager ()
 
 @property (nonatomic) NSURLSessionDataTask *dataTask;
 @property (nonatomic) AFHTTPRequestSerializer *serializer;
 @property (nonatomic) AFHTTPSessionManager *manager;
-
 @property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
 
 @end
-
 
 @implementation PCLoginManager
 
@@ -109,13 +108,54 @@
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         if ([weakSelf.delegate respondsToSelector:@selector(didSignInWithID:)]) {
                                             [weakSelf.delegate didSignInWithID:token];
-                                            [self stopActivityIndicatorAnimating];
+                                            [weakSelf requestUserInformation:token];
+                                        }
+                                    });
+    }];
+    [self startActivityIndicatorAnimating];
+    [_dataTask resume];
+}
+
+- (void)requestUserInformation:(NSString *)token {
+    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
+//    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
+//                                                 URLString:urlString
+//                                                parameters:nil
+//                                                     error:nil];
+    
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                        URLString:urlString
+                                                       parameters:nil
+                                                            error:nil];
+    
+    NSString *tokenValue = [NSString stringWithFormat:@"Token %@", token];
+    [request setValue:tokenValue forHTTPHeaderField:@"Authorization"];
+//    [_manager.requestSerializer setValue:tokenValue forHTTPHeaderField:];
+    
+    PCLoginManager *weakSelf = self;
+    self.dataTask = [_manager dataTaskWithRequest:request
+                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                    NSDictionary *userInformation;
+                                    if (error) {
+                                        dLog(@"Error Domain : %@", error.domain);
+                                        dLog(@"Error UserInfo : %@", error.userInfo);
+                                    }
+                                    else {
+                                        userInformation = responseObject;
+                                        if (userInformation) {
+                                            dLog(@"success");
+                                        }
+                                    }
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        if ([weakSelf.delegate respondsToSelector:@selector(didReceiveUserInformation:)]) {
+                                            [weakSelf.delegate didReceiveUserInformation:userInformation];
+                                            [weakSelf stopActivityIndicatorAnimating];
                                         }
                                     });
     }];
     [_dataTask resume];
-    [self startActivityIndicatorAnimating];
 }
+                                        
 
 - (void)startActivityIndicatorAnimating {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
@@ -147,3 +187,5 @@
 }
 
 @end
+
+

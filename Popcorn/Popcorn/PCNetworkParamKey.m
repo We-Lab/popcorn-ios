@@ -13,16 +13,16 @@
 @end
 
 // 공통
-NSString *const memberURLString = @"https://django-test.com/member/";
-NSString *const movieURLString = @"https://django-test.com/movie/";
-NSString *const mainURLString = @"https://django-test.com/main/";
+NSString *const memberURLString = @"https://django-api.com/member/";
+NSString *const movieURLString = @"https://django-api.com/movie/";
+NSString *const mainURLString = @"https://django-api.com/main/";
 NSString *const TokenKey = @"key";
 
-// SignIn
+// Sign In 
 NSString *const SignInIDKey = @"username";
 NSString *const SignInPasswordKey = @"password";
 
-// SignUp
+// Sign Up
 NSString *const SignUpIDKey = @"username";
 NSString *const SignUpPasswordKey = @"password1";
 NSString *const SignUpConfirmPWKey = @"password2";

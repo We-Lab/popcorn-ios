@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PCMainViewController : UITabBarController
+@interface PCMainTabBarController : UITabBarController
 
 @end

@@ -17,9 +17,6 @@ typedef NS_ENUM(NSUInteger, PCSignUpResult) {
 @protocol PCLoginManagerDelegate <NSObject>
 
 @optional
-// 유저정보 저장
-#warning delegate 추가
-//- (void)didLoadUserInformation:(NSDictionary)
 
 // 회원가입
 - (void)didSignUpWithFacebook:(BOOL)isSuccess;
@@ -28,6 +25,7 @@ typedef NS_ENUM(NSUInteger, PCSignUpResult) {
 // 로그인
 - (void)didSignInWithFacebook:(BOOL)isSuccess;
 - (void)didSignInWithID:(NSString *)token;
+- (void)didReceiveUserInformation:(NSDictionary *)userInformation;
 
 // 비밀번호 찾기
 - (void)didSendPasswordToID:(BOOL)isSuccess;

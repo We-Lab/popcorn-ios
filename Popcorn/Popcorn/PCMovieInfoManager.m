@@ -9,7 +9,9 @@
 #import "PCMovieInfoManager.h"
 
 #import <AFNetworking.h>
+
 #import "PCNetworkParamKey.h"
+#import "PCUserInformation.h"
 
 @interface PCMovieInfoManager ()
 
@@ -81,10 +83,10 @@
 
 
 #pragma mark - Pass Request Form (Common Method)
-- (void)passRequestFormWithMethod:(NSString *)method URLString:(NSString *)urlString Parameters:(NSDictionary *)param andHandler:(NetworkTaskHandler)completionHandler {
+- (void)passRequestFormWithMethod:(NSString *)method URLString:(NSString *)urlString andHandler:(NetworkTaskHandler)completionHandler {
     NSURLRequest *request = [_serializer requestWithMethod:method
                                                  URLString:urlString
-                                                parameters:param
+                                                parameters:nil
                                                      error:nil];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
@@ -95,18 +97,18 @@
 #pragma mark - Configure Request
 - (void)requestMagazineListWithCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString = [mainURLString stringByAppendingString:@"magazines/"];
-    [self passRequestFormWithMethod:@"GET" URLString:urlString Parameters:nil andHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
 
 - (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString = [mainURLString stringByAppendingString:@"best-comment/"];
-    [self passRequestFormWithMethod:@"GET" URLString:urlString Parameters:nil andHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
 - (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler {
     NSString *urlString = [mainURLString stringByAppendingString:@"movie-recommends/carousel/"];
-    [self passRequestFormWithMethod:@"GET" URLString:urlString Parameters:nil andHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
 - (void)requestBoxOfficeListwithCompletionHandler:(NetworkTaskHandler)completionHandler {
@@ -128,7 +130,7 @@
             break;
     }
     
-    [self passRequestFormWithMethod:@"GET" URLString:urlString Parameters:nil andHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
 
@@ -137,11 +139,13 @@
     NSString *urlString = [movieURLString stringByAppendingString:@"search/?keyword="];
     urlString = [[urlString stringByAppendingString:inputText] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
     
-    [self passRequestFormWithMethod:@"GET" URLString:urlString Parameters:nil andHandler:completionHandler];
+    [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
-- (void)requestMovieListWithTag:(NSArray *)tagArray andCompletionHandler:(NetworkTaskHandler)completionHandler {
+- (void)requestMovieListWithTags:(NSDictionary *)tags andCompletionHandler:(NetworkTaskHandler)completionHandler {
+    
 //    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
+//    
 //    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
 //                                                 URLString:urlString
 //                                                parameters:nil

@@ -7,7 +7,10 @@
 //
 
 #import "PCMyPageViewController.h"
+
+#import "PCInitialViewController.h"
 #import "PCUserInformation.h"
+
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -21,8 +24,8 @@
 
 @implementation PCMyPageViewController
 
-- (instancetype)init
-{
+#pragma mark - Init
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.selectButton = 0;
@@ -48,6 +51,7 @@
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 #endif
 }
+
 
 #pragma mark - Make TableView Header
 - (void)makeTableViewHeader{
@@ -91,12 +95,10 @@
 
 #pragma mark - TableView Required
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     if (self.selectButton == 0) {
         return 3;
     }else if (self.selectButton == 1) {
@@ -111,11 +113,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (self.selectButton == 0) {
-        
         UITableViewCell *myCommentCell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
         
         if (!myCommentCell) {
-            
             myCommentCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCommentCell"];
         }
         
@@ -140,12 +140,11 @@
             
             myLikeMovieCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyLikeMovieCell"];
         }
-        
         return myLikeMovieCell;
     }
-    
     return nil;
 }
+
 
 - (void)setReloadSection:(UIButton *)sender{
 
@@ -176,9 +175,18 @@
 }
 
 
+#pragma mark - Sign Out Action
 - (IBAction)requestSignOut:(id)sender {
     [[PCUserInformation sharedUserData] hasUserSignedOut];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    PCInitialViewController *initialView = [storyboard instantiateInitialViewController];
+    
+    [self presentViewController:initialView animated:YES completion:^{
+        [UIApplication sharedApplication].keyWindow.rootViewController = initialView;
+    }];
 }
+
+
 
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
@@ -191,6 +199,7 @@
 
 - (void)dealloc {
     dLog(@" ");
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"UserSignedIn"];
 }
 
 - (void)didReceiveMemoryWarning {
