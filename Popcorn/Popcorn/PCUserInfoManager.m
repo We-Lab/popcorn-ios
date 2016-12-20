@@ -16,13 +16,16 @@
 @interface PCUserInfoManager ()
 
 @property (nonatomic) AFURLSessionManager *sessionManager;
-//@property (nonatomic) AFHTTPRequestSerializer *serializer;
-@property (nonatomic) AFJSONRequestSerializer *serializer;
+@property (nonatomic) AFHTTPRequestSerializer *serializer;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
-
+@property (nonatomic) NSURLSessionUploadTask *uploadTask;
 @property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
 
 @end
+
+
+//static NSString *const UserFavoriteGenreKey
+
 
 @implementation PCUserInfoManager
 
@@ -41,8 +44,6 @@
     if (self) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        _serializer = [AFJSONRequestSerializer serializer];
-        
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     }
     return self;
@@ -60,30 +61,94 @@
                                            aLog(@"에러 발생. %@", error);
                                        }
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           if (result)
-                                               completionHandler();
-                                           self.activityIndicatorView.hidden = YES;
-                                           [self.activityIndicatorView stopAnimating];
+                                           completionHandler(result);
+                                           [self stopActivityIndicatorViewAnimating];
                                        });
                                    }];
     [_dataTask resume];
+    [self startActivityIndicatorViewAnimating];
+}
+
+
+#pragma mark - Execute UploadTask and CompletionHandler
+- (void)resumeUploadTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
+    _uploadTask = [_sessionManager uploadTaskWithStreamedRequest:request
+                                                        progress:^(NSProgress * _Nonnull uploadProgress) {
+                                                        }
+                                               completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                                   BOOL result = YES;
+                                                   if (error) {
+                                                       result = NO;
+                                                       aLog(@"에러 발생. %@", error);
+                                                   }
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       completionHandler(result);
+                                                       [self stopActivityIndicatorViewAnimating];
+                                                   });
+                                               }];
+    [_uploadTask resume];
+    [self startActivityIndicatorViewAnimating];
     
-    // UIActivityView
+}
+
+- (void)startActivityIndicatorViewAnimating {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *currentVC = [window rootViewController];
     
     self.activityIndicatorView.center = currentVC.view.center;
     self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [currentVC.view addSubview:_activityIndicatorView];
-
+    
     self.activityIndicatorView.hidden = NO;
     [self.activityIndicatorView startAnimating];
 }
 
+- (void)stopActivityIndicatorViewAnimating {
+    self.activityIndicatorView.hidden = YES;
+    [self.activityIndicatorView stopAnimating];
+}
 
-#pragma mark - Pass Request Form (Common Method)
-- (void)passRequestFormWithMethod:(NSString *)method urlString:(NSString *)urlString parameters:(NSDictionary *)params andCompletionHandler:(UserInfoTaskHandler)completionHandler{
-    NSMutableURLRequest *request = [_serializer requestWithMethod:method
+
+#pragma mark - Related With User Profile
+- (void)changeUserProfile:(NSString *)userProfileKey withCompletionHandler:(UserInfoTaskHandler)completionHandler {
+//    [self passRequestFormWithMethod:@"PATCH" urlString:urlString parameters:params andCompletionHandler:completionHandler];
+//    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
+//    NSDictionary *params = nil;
+//    [self requestChangeUserProfileWithParameters:params andCompletionHandler:completionHandler];
+}
+
+
+- (void)changeUserProfileImage:(UIImage *)profileImage withCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
+    NSData *testImageData = UIImageJPEGRepresentation(profileImage, 0.2);
+    
+    _serializer = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer multipartFormRequestWithMethod:@"PATCH"
+                                                                     URLString:urlString
+                                                                    parameters:nil
+                                                     constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                                                         [formData appendPartWithFileData:testImageData
+                                                                                     name:@"profile_img"
+                                                                                 fileName:@"profile_image.jpg"
+                                                                                 mimeType:@"image/jpg"];
+                                                     }
+                                                                         error:nil
+                                    ];
+    
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
+    [self resumeUploadTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
+
+- (void)changeUserFavoriteTags:(NSDictionary *)tags withCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
+    NSDictionary *params = @{PCUserProfileFavoriteGenreKey:@[@1,@3,@5],
+                             PCUserProfileFavoriteGradeKey:@[@1,@2,@3],
+                             PCUserProfileFavoriteCountryKey:@[@1,@2,@4],
+                             };
+    
+    _serializer = [AFJSONRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"PATCH"
                                                  URLString:urlString
                                                 parameters:params
                                                      error:nil];
@@ -92,21 +157,6 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
-}
-
-
-#pragma mark - Related With User Profile
-- (void)changeUserProfile:(NSString *)userProfileKey withCompletionHandler:(UserInfoTaskHandler)completionHandler {
-    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
-#warning 이부분 수정필요
-    NSDictionary *params = nil;
-    [self passRequestFormWithMethod:@"PATCH" urlString:urlString parameters:params andCompletionHandler:completionHandler];
-    
-}
-
-- (void)changeUserFavoriteTags:(NSDictionary *)tags withCompletionHandler:(UserInfoTaskHandler)completionHandler {
-    NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
-    [self passRequestFormWithMethod:@"PATCH" urlString:urlString parameters:tags andCompletionHandler:completionHandler];
 }
 
 

@@ -76,7 +76,6 @@ static NSArray const *rankingTypeArray;
 }
 
 - (void)didReceiveMovieData:(NSArray *)resultArray {
-    sLog(resultArray);
     self.movieListData = resultArray;
     self.searchResultCount = resultArray.count;
     
@@ -168,7 +167,7 @@ static NSArray const *rankingTypeArray;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_hasSearched){
-        return (60 * [UIScreen mainScreen].bounds.size.height) / 667;
+        return (80 * [UIScreen mainScreen].bounds.size.height) / 667;
     }
     else {
         return (130 * [UIScreen mainScreen].bounds.size.height) / 667;

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^UserInfoTaskHandler) (void);
+typedef void (^UserInfoTaskHandler) (BOOL isSuccess);
 
 @interface PCUserInfoManager : NSObject
 
@@ -16,6 +16,7 @@ typedef void (^UserInfoTaskHandler) (void);
 
 // 유저 프로필
 - (void)changeUserProfile:(NSString *)userProfileKey withCompletionHandler:(UserInfoTaskHandler)completionHandler;
+- (void)changeUserProfileImage:(UIImage *)profileImage withCompletionHandler:(UserInfoTaskHandler)completionHandler;
 - (void)changeUserFavoriteTags:(NSDictionary *)tags withCompletionHandler:(UserInfoTaskHandler)completionHandler;
 
 

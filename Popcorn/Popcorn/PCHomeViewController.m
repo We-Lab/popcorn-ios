@@ -22,6 +22,7 @@
 #import "PCUserInteractionMenuView.h"
 
 #import "PCUserInteractionHelper.h"
+#import "PCUserInfoManager.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -73,6 +74,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[PCUserInfoManager userInfoManager] changeUserFavoriteTags:nil withCompletionHandler:^(BOOL isSuccess) {
+        sLog(@"테스트");
+    }];
     
     #ifndef DEBUG
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
