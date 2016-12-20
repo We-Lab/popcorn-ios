@@ -25,24 +25,13 @@
 
 @implementation PCActorViewController
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"View %lf", self.view.frame.size.width);
+    self.movieDataCenter = [PCMovieDetailDataCenter sharedMovieDetailData];
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    NSLog(@"View2 %lf", self.view.frame.size.width);
-    NSLog(@"View3 %lf", self.actorListView.frame.size.width);
     [self creatActorList];
 }
 
@@ -50,10 +39,11 @@
 #pragma mark - Actor List View
 - (void)creatActorList {
     
+    CGFloat baseMargin = [self ratioHeight:15];
+    CGFloat baseMovieContentWidth = (self.view.frame.size.width - [self ratioWidth:24])/3;
+    CGFloat baseMovieContentHeight = [self ratioHeight:130];
+    
     for (NSInteger j = 0; j < [_movieDataCenter creatMovieDirectorName].count; j += 1) {
-        
-        CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = [self ratioHeight:105];
         
         UIView *directerView = [[UIView alloc] init];
         directerView.tag = j;
@@ -85,10 +75,6 @@
     }
     
     for (NSInteger i = 0; i < [_movieDataCenter creatMovieActorName].count; i += 1) {
-        
-        CGFloat baseMargin = [self ratioHeight:15];
-        CGFloat baseMovieContentWidth = self.actorListView.frame.size.width/3;
-        CGFloat baseMovieContentHeight = [self ratioHeight:130];
         
         UIView *actorView = [[UIView alloc] init];
         actorView.tag = i;
@@ -129,10 +115,9 @@
         actorMovieName.text = [_movieDataCenter creatMovieActorMovieName][i];
         
         [actorView addSubview:actorMovieName];
-        
-        self.actorContentsViewHeight.constant = [self ratioHeight:47] + (baseMovieContentHeight+baseMargin)*([_movieDataCenter creatMovieActorName].count/3+1);
-        self.scrollContentsViewHeight.constant = self.directorViewHeight.constant + self.viewMargin.constant + self.actorContentsViewHeight.constant;
     }
+    self.actorContentsViewHeight.constant = [self ratioHeight:47] + (baseMovieContentHeight+baseMargin)*([_movieDataCenter creatMovieActorName].count/3+1);
+    self.scrollContentsViewHeight.constant = self.directorViewHeight.constant + self.viewMargin.constant + self.actorContentsViewHeight.constant;
 }
 
 #pragma mark - Custom Method
