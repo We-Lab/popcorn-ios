@@ -8,8 +8,8 @@
 
 #import "PCMyPageViewController.h"
 
-#import "PCInitialViewController.h"
-#import "PCUserInformation.h"
+//#import "PCInitialViewController.h"
+//#import "PCUserInformation.h"
 
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -56,7 +56,7 @@
 #pragma mark - Make TableView Header
 - (void)makeTableViewHeader{
     
-    CGFloat baseMovieContentWidth = self.tableViewHeaderButtonView.frame.size.width/3;
+    CGFloat baseMovieContentWidth = self.view.frame.size.width/3;
     CGFloat baseMovieContentHeight = [self ratioHeight:42];
     
     self.buttonUnderLine = [[UIView alloc] init];
@@ -128,7 +128,7 @@
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
@@ -138,7 +138,7 @@
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.tableViewHeaderButtonView.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.tableViewHeaderButtonView.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
@@ -146,16 +146,7 @@
     }
 }
 
-#pragma mark - Sign Out Action
-- (IBAction)requestSignOut:(id)sender {
-    [[PCUserInformation sharedUserData] hasUserSignedOut];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    PCInitialViewController *initialView = [storyboard instantiateInitialViewController];
-    
-    [self presentViewController:initialView animated:YES completion:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = initialView;
-    }];
-}
+
 
 
 
