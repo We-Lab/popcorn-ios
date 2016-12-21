@@ -18,6 +18,9 @@
 @property (nonatomic) CGFloat xOffset;
 @property (nonatomic) CGFloat yOffset;
 
+@property (nonatomic) UILabel *showTagCountLabel;
+@property (nonatomic) NSUInteger tagCount;
+
 @end
 
 static NSArray *genreArray;
@@ -45,8 +48,9 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
     //id는 1번부터 시작해서 5번까지 있으나 5번은 공백값
     gradeArray = @[@"15세 이상", @"전체관람가", @"12세 이상", @"19세 이상"];
     
-    //1번부터 38번까지 있으나 10개에서 컷
+    //1번부터 38번까지 있으나 9개에서 컷
     countryArray = @[@"한국", @"미국", @"영국", @"독일", @"프랑스", @"일본", @"인도", @"중국", @"홍콩"];
+    //한국:6, 미국:1, 영국:2, 독일:3, 프랑스:4, 일본:15 , 인도:8, 중국:14, 홍콩:16
 }
 
 - (void)viewDidLoad {
@@ -68,6 +72,18 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
     [barButton setTitleColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0] forState:UIControlStateNormal];
     [barButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     [barButton addTarget:self action:@selector(saveSelectedTag) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *badgeView = [[UIImageView alloc] initWithFrame:CGRectMake(33, 8, 20, 20)];
+    badgeView.layer.cornerRadius = 11;
+    badgeView.backgroundColor = [UIColor colorWithRed:0.94 green:0.33 blue:0.41 alpha:1.0];
+    [barButton addSubview:badgeView];
+    
+    self.showTagCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(4, 4, 11, 11)];
+    self.showTagCountLabel.textColor = [UIColor whiteColor];
+    self.showTagCountLabel.text = @"0";
+    self.showTagCountLabel.font = [UIFont boldSystemFontOfSize:13.0f];
+    self.showTagCountLabel.textAlignment = NSTextAlignmentCenter;
+    [badgeView addSubview:_showTagCountLabel];
     
     UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:barButton];
     self.navigationItem.rightBarButtonItem = customBarButtonItem;
@@ -149,11 +165,14 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
 - (void)didSelectTagButton:(UIButton *)button {
     if (button.isSelected) {
         [self.userSelectedTag removeObject:button.titleLabel.text];
+        _tagCount -= 1;
     }
     else {
         [self.userSelectedTag addObject:button.titleLabel.text];
+        _tagCount += 1;
     }
     button.selected = !button.selected;
+    _showTagCountLabel.text = [NSString stringWithFormat:@"%ld", _tagCount];
 }
 
 

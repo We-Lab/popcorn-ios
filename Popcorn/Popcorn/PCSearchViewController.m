@@ -65,6 +65,9 @@ static NSArray const *rankingTypeArray;
 - (void)searchMovie:(NSString *)inputText {
     NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess) {
+            if (resultArray[0][@"id"] == nil)
+                resultArray = nil;
+            
             [self didReceiveMovieData:resultArray];
         }
         else {
@@ -84,8 +87,8 @@ static NSArray const *rankingTypeArray;
     }
     else {
         self.viewTitleLabel.text = [NSString stringWithFormat:@"검색 결과 : %lu", _searchResultCount];
-        [self.switchingTableView reloadData];
     }
+    [self.switchingTableView reloadData];
 }
 
 

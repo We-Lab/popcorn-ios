@@ -22,7 +22,7 @@ typedef void (^UserInfoTaskHandler) (BOOL isSuccess);
 
 
 // 영화 관련 
-- (void)saveMovieRating:(NSString *)movieID;
+- (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler;
 
 
 @end

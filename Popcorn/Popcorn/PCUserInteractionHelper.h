@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^InteractionHandler)(void);
+
 @interface PCUserInteractionHelper : NSObject
 
 @property (nonatomic) NSString *movieID;
@@ -15,7 +17,7 @@
 + (instancetype)helperManager;
 
 - (void)changeLikeStateWithMovieID:(NSString *)movieID;
-- (void)showRatingMovieViewWithMovieID:(NSString *)movieID;
+- (void)showRatingMovieViewWithMovieID:(NSString *)movieID andInteractionHandler:(InteractionHandler)handler;
 - (void)showCommentViewWithMovieID:(NSString *)movieID;
 
 

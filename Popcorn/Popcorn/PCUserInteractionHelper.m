@@ -28,7 +28,7 @@
 //    sLog(movieID);
 }
 
-- (void)showRatingMovieViewWithMovieID:(NSString *)movieID {
+- (void)showRatingMovieViewWithMovieID:(NSString *)movieID andInteractionHandler:(InteractionHandler)handler {
     self.movieID = movieID;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
@@ -51,9 +51,15 @@
     starRating.filledStarImage = [UIImage imageNamed:@"FullStar"];
     [starRatingView addSubview:starRating];
     
+#warning 여기서 0.5점 단위로 선택되게 해야함
+    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[PCUserInfoManager userInfoManager] saveMovieRating:_movieID];
+        [[PCUserInfoManager userInfoManager] saveMovieRating:starRating.value withMovieID:_movieID andCompletionHandler:^(BOOL isSuccess) {
+            if (isSuccess) {
+                handler();
+            }
+        }];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];

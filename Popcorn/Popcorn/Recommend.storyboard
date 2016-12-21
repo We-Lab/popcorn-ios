@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="104" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecommendCell" id="AcJ-px-bEK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecommendCell" id="AcJ-px-bEK" customClass="PCRecommendTableViewCell">
                                         <rect key="frame" x="0.0" y="35" width="375" height="203"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AcJ-px-bEK" id="Nmi-LB-tll">
@@ -60,6 +60,10 @@
                                                 <constraint firstItem="Gkc-Ef-uzS" firstAttribute="leading" secondItem="Nmi-LB-tll" secondAttribute="leading" id="wyl-GB-CgV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="menuView" destination="Gkc-Ef-uzS" id="FCx-2z-qqc"/>
+                                            <outlet property="movieView" destination="qip-LK-CpI" id="oSD-fr-rCC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

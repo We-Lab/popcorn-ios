@@ -13,6 +13,7 @@ NSString *const memberURLString = @"https://django-api.com/member/";
 NSString *const movieURLString = @"https://django-api.com/movie/";
 NSString *const mainURLString = @"https://django-api.com/main/";
 NSString *const TokenKey = @"key";
+NSString *const AuthorizationHeaderKey = @"Authorization";
 
 // Sign In 
 NSString *const SignInIDKey = @"username";

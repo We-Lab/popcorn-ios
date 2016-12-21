@@ -142,16 +142,15 @@
     [self passRequestFormWithMethod:@"GET" URLString:urlString andHandler:completionHandler];
 }
 
-- (void)requestMovieListWithTags:(NSDictionary *)tags andCompletionHandler:(NetworkTaskHandler)completionHandler {
+- (void)requestMovieByUserFavoriteWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [mainURLString stringByAppendingString:@"movie-recommends/favorites/ios/"];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                        URLString:urlString
+                                                       parameters:nil
+                                                            error:nil];
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
     
-//    NSString *urlString = [mainURLString stringByAppendingString:@"box_office/"];
-//    
-//    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-//                                                 URLString:urlString
-//                                                parameters:nil
-//                                                     error:nil];
-    
-//    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 @end

@@ -52,13 +52,23 @@
 
 
 #pragma mark - Execute DataTask and CompletionHandler
-- (void)resumeDataTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
+- (void)resumeDataTaskWithRequest:(NSMutableURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
+    
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
+    
     _dataTask = [_sessionManager dataTaskWithRequest:request
                                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                        BOOL result = YES;
+                                       
+                                       NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
                                        if (error) {
                                            result = NO;
-                                           aLog(@"에러 발생. %@", error);
+                                           if (statusCode == 406) {
+                                               sLog(@"이미 코멘트 등록");
+                                           }
+                                           else {
+                                               aLog(@"에러 발생. %@", error);
+                                           }
                                        }
                                        dispatch_async(dispatch_get_main_queue(), ^{
                                            completionHandler(result);
@@ -119,7 +129,6 @@
                                                  URLString:urlString
                                                 parameters:params
                                                      error:nil];
-    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
@@ -142,7 +151,7 @@
                                                                          error:nil
                                     ];
     
-    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
     [self resumeUploadTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
@@ -156,11 +165,10 @@
     
     _serializer = [AFJSONRequestSerializer serializer];
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"PATCH"
-                                                 URLString:urlString
-                                                parameters:params
-                                                     error:nil];
+                                                        URLString:urlString
+                                                       parameters:params
+                                                            error:nil];
     
-    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
@@ -175,15 +183,27 @@
                                                  URLString:urlString
                                                 parameters:nil
                                                      error:nil];
-    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
-    
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 
 #pragma mark - Related With Movie
-- (void)saveMovieRating:(NSString *)movieID {
+- (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *addString = [NSString stringWithFormat:@"%@/comment/", movieID];
+    NSString *urlString = [movieURLString stringByAppendingString:addString];
     
+//    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+//    [fmt setPositiveFormat:@"0.#"];
+//    NSString *formattedString = [fmt stringFromNumber:[NSNumber numberWithFloat:3.5]];
+    
+    NSDictionary *params = @{@"star":@3.5};
+    
+    _serializer = [AFJSONRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
+                                                 URLString:urlString
+                                                parameters:params
+                                                     error:nil];
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
 @end

@@ -67,6 +67,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createViews];
+    
+//    self.navigationController.tabBarItem.badgeValue = @"3";
+    self.tabBarController.tabBar.items[4].badgeValue = @"1";
 }
 
 - (void)testA {

@@ -8,6 +8,11 @@
 
 #import "PCRecommendViewController.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "PCMovieInfoManager.h"
+#import "PCRecommendTableViewCell.h"
+#import "PCUserInteractionHelper.h"
+
 @interface PCRecommendViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *recommendTableView;
 @property (weak, nonatomic) IBOutlet UIButton *toTagViewButton;
@@ -17,7 +22,7 @@
 @property (nonatomic) UIImageView *loadingImg;
 @property (nonatomic) BOOL isRefreshAnimating;
 
-@property (nonatomic) NSDictionary *recommendMovieList;
+@property (nonatomic) NSArray *recommendMovieList;
 
 @end
 
@@ -28,8 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    self.recommendMovieList = @{@"results":@[@1,@2,@3,@4,@5]};
     [self initCustomRefreshControl];
+    [self requestRecommendMovieList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -42,20 +47,75 @@
 #endif
 }
 
+
+#pragma mark - Request Movie Data
+- (void)requestRecommendMovieList {
+    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray) {
+        if (isSuccess) {
+            [self didReceiveFavoriteMovieRecommend:resultArray];
+        }
+        else {
+            alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
+        }
+    };
+    [[PCMovieInfoManager movieManager] requestMovieByUserFavoriteWithCompletionHandler:completionHandler];
+}
+
+- (void)didReceiveFavoriteMovieRecommend:(NSArray *)recommendList {
+    _recommendMovieList = recommendList;
+    [self.recommendTableView reloadData];
+}
+
 #pragma mark - Configure TableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_recommendMovieList[@"results"] count];
+    return _recommendMovieList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
+    PCRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
+    
+    NSDictionary *movieData = _recommendMovieList[indexPath.row];
+    [cell.movieView.movieImageView sd_setImageWithURL:movieData[@"main_image_url"]
+                                     placeholderImage:[UIImage imageNamed:@"MoviePlaceholderExtented"]
+                                              options:SDWebImageCacheMemoryOnly | SDWebImageRetryFailed];
+    cell.movieView.movieTitleLabel.text = movieData[@"title_kor"];
+    
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setPositiveFormat:@"0.#"];
+    NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
+    cell.movieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
+    
+    cell.menuView.likeButton.selected = [movieData[@"is_like"] boolValue];
+    cell.menuView.likeButton.tag = indexPath.row;
+    [cell.menuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    cell.menuView.ratingButton.selected = [movieData[@"is_comment"] boolValue];
+    cell.menuView.ratingButton.tag = indexPath.row;
+    [cell.menuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
+
+- (void)clickLikeButton:(UIButton *)button {
+    NSString *movieID = _recommendMovieList[button.tag][@"id"];
+    [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:movieID];
+}
+
+- (void)clickRatingButton:(UIButton *)button {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    __block PCRecommendTableViewCell *cell = (PCRecommendTableViewCell *)[_recommendTableView cellForRowAtIndexPath:indexPath];
+    
+    NSString *movieID = _recommendMovieList[button.tag][@"id"];
+    [[PCUserInteractionHelper helperManager] showRatingMovieViewWithMovieID:movieID andInteractionHandler:^{
+        cell.menuView.ratingButton.selected = YES;
+    }];
+}
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];
@@ -154,6 +214,8 @@
     static int colorIndex = 0;
     
     self.isRefreshAnimating = YES;
+    
+    [self requestRecommendMovieList];
     
     [UIView animateWithDuration:0.3
                           delay:0
