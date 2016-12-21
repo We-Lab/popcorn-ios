@@ -12,6 +12,7 @@
 #import "PCMovieInfoManager.h"
 #import "PCRecommendTableViewCell.h"
 #import "PCUserInteractionHelper.h"
+#import "PCMovieDetailDataCenter.h"
 
 @interface PCRecommendViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *recommendTableView;
@@ -89,6 +90,8 @@
     cell.movieView.movieTitleLabel.text = movieData[@"title_kor"];
     [PCCommonUtility makeTextShadow:cell.movieView.movieTitleLabel opacity:0.9];
     
+    cell.movieSelectButton.tag = indexPath.row;
+    
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
     [fmt setPositiveFormat:@"0.#"];
     NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
@@ -105,6 +108,11 @@
     [cell.menuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
+}
+
+- (IBAction)selectedMoive:(UIButton *)sender {
+
+    [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _recommendMovieList[sender.tag][@"id"];
 }
 
 - (void)clickLikeButton:(UIButton *)button {

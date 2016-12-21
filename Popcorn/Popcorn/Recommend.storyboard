@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="104" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecommendCell" rowHeight="225" id="AcJ-px-bEK" customClass="PCRecommendTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecommendCell" rowHeight="225" id="AcJ-px-bEK" customClass="PCRecommendTableViewCell">
                                         <rect key="frame" x="0.0" y="35" width="375" height="225"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AcJ-px-bEK" id="Nmi-LB-tll">
@@ -52,19 +52,33 @@
                                                         <constraint firstAttribute="height" constant="35" id="NDs-rQ-yec"/>
                                                     </constraints>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjV-Wk-aWU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="174.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="175" id="Hcq-Ka-7Gc"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="selectedMoive:" destination="BjZ-e6-lgh" eventType="touchUpInside" id="JFQ-lf-qHM"/>
+                                                        <segue destination="amp-SB-vaa" kind="show" id="GDi-ul-h0H"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Gkc-Ef-uzS" secondAttribute="trailing" id="2dg-a6-ga7"/>
+                                                <constraint firstItem="gjV-Wk-aWU" firstAttribute="leading" secondItem="Nmi-LB-tll" secondAttribute="leading" id="526-QN-DHR"/>
+                                                <constraint firstAttribute="trailing" secondItem="gjV-Wk-aWU" secondAttribute="trailing" id="5yy-8r-Dnx"/>
                                                 <constraint firstAttribute="trailing" secondItem="qip-LK-CpI" secondAttribute="trailing" id="Dry-vw-zPK"/>
                                                 <constraint firstItem="qip-LK-CpI" firstAttribute="leading" secondItem="Nmi-LB-tll" secondAttribute="leading" id="Gi8-dD-mcc"/>
                                                 <constraint firstItem="qip-LK-CpI" firstAttribute="top" secondItem="Nmi-LB-tll" secondAttribute="top" id="Jzs-dJ-iUt"/>
                                                 <constraint firstItem="Gkc-Ef-uzS" firstAttribute="top" secondItem="qip-LK-CpI" secondAttribute="bottom" id="Sme-6i-Ntr"/>
+                                                <constraint firstItem="gjV-Wk-aWU" firstAttribute="top" secondItem="Nmi-LB-tll" secondAttribute="top" id="aPT-yB-y8d"/>
                                                 <constraint firstItem="Gkc-Ef-uzS" firstAttribute="leading" secondItem="Nmi-LB-tll" secondAttribute="leading" id="wyl-GB-CgV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="menuView" destination="Gkc-Ef-uzS" id="FCx-2z-qqc"/>
+                                            <outlet property="movieSelectButton" destination="gjV-Wk-aWU" id="Wou-p4-OH6"/>
                                             <outlet property="movieView" destination="qip-LK-CpI" id="oSD-fr-rCC"/>
                                         </connections>
                                     </tableViewCell>
@@ -107,6 +121,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EW4-Fl-jp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="976.79999999999995" y="-91.304347826086968"/>
+        </scene>
+        <!--MovieInfo-->
+        <scene sceneID="s5U-26-6Sa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MovieInfo" id="amp-SB-vaa" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pbO-XN-e3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="976" y="371"/>
         </scene>
         <!--태그 설정-->
         <scene sceneID="MaT-2R-1UG">
