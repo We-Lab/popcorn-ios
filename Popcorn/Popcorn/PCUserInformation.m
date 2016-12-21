@@ -10,6 +10,7 @@
 
 #import "KeychainItemWrapper.h"
 #import "PCUserInfoManager.h"
+#import "PCUserProfileParamKey.h"
 
 @interface PCUserInformation ()
 
@@ -21,19 +22,6 @@
 @end
 
 static NSString *const PCUserInformationAsDictionaryKey = @"UserInformationAsDictionary";
-
-//Extern String
-NSString *const PCUserProfileUserNameKey = @"username";
-NSString *const PCUserProfileNickNameKey = @"nickname";
-NSString *const PCUserProfileEmailKey = @"email";
-NSString *const PCUserProfileGenderKey = @"gender";
-NSString *const PCUserProfileBirthdayKey = @"date_of_birth";
-NSString *const PCUserProfilePhoneNumberKey = @"phone_number";
-NSString *const PCUserProfileFavoriteGenreKey = @"favorite_genre";
-NSString *const PCUserProfileFavoriteGradeKey = @"favorite_grade";
-NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
-
-
 
 @implementation PCUserInformation
 
@@ -80,11 +68,11 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 - (void)setUserInformationFromServer:(NSDictionary *)userInformation {
     
     // URL에서 profile 이미지를 받아 파일로 저장
-    NSString *urlString = userInformation[@"profile_img"];
+    NSString *urlString = userInformation[PCUserProfileImageKey];
     NSString *imagePath = nil;
     if (urlString != nil || urlString.length != 0) {
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+        imagePath = [self documentsPathForFileName:PCUserProfileImageFileNameKey];
         [imageData writeToFile:imagePath atomically:YES];
     }
     
@@ -101,7 +89,7 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
     
     // 저장된 프로필 이미지 삭제
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+    NSString *imagePath = [self documentsPathForFileName:PCUserProfileImageFileNameKey];
     if (imagePath)
         [fileManager removeItemAtPath:imagePath error:NULL];
 }
@@ -115,6 +103,8 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 }
 
 
+
+#pragma mark - Get User Information
 - (NSString *)getUserInformation:(NSString *)userProfileKey {
     return _userInformation[userProfileKey];
 }
@@ -122,7 +112,7 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 - (UIImage *)getUserProfileImage {
     UIImage *image = [UIImage imageNamed:@"Profile_placeholder"];
     
-    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+    NSString *imagePath = [self documentsPathForFileName:PCUserProfileImageFileNameKey];
     if (imagePath)
         image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
     
@@ -130,12 +120,13 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 }
 
 - (NSDictionary *)getUserFavoriteTags {
-    NSDictionary *tags = @{@"genre":_userInformation[@"favorite_genre"],
-                           @"grade":_userInformation[@"favorite_grade"],
-                           @"country":_userInformation[@"favorite_making_country"],
+    NSDictionary *tags = @{PCUserProfileFavoriteGenreKey:_userInformation[PCUserProfileFavoriteGenreKey],
+                           PCUserProfileFavoriteGradeKey:_userInformation[PCUserProfileFavoriteGradeKey],
+                           PCUserProfileFavoriteCountryKey:_userInformation[PCUserProfileFavoriteCountryKey],
                            };
     return tags;
 }
+
 
 #pragma mark - Change User Information
 - (void)changeUserProfile:(NSString *)userProfileKey withString:(NSString *)newString{
@@ -145,15 +136,18 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 
 - (void)changeProfileImage:(UIImage *)profileImage {
     NSData *imageData = UIImageJPEGRepresentation(profileImage, 1.0);
-    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+    NSString *imagePath = [self documentsPathForFileName:PCUserProfileImageFileNameKey];
     [imageData writeToFile:imagePath atomically:YES];
     
 //    [[PCUserInfoManager userInfoManager] requestChangeProfileImageWithData:imageData withToken
 }
 
 - (void)changeFavoriteTags:(NSDictionary *)tags {
+    [self.userInformation setObject:tags[PCUserProfileFavoriteGenreKey] forKey:PCUserProfileFavoriteGenreKey];
+    [self.userInformation setObject:tags[PCUserProfileFavoriteGradeKey] forKey:PCUserProfileFavoriteGradeKey];
+    [self.userInformation setObject:tags[PCUserProfileFavoriteCountryKey] forKey:PCUserProfileFavoriteCountryKey];
     
-    
+    [_userDefaults setObject:_userInformation forKey:PCUserInformationAsDictionaryKey];
 }
 
 

@@ -9,10 +9,12 @@
 #import "PCRecommendViewController.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
+
 #import "PCMovieInfoManager.h"
 #import "PCRecommendTableViewCell.h"
 #import "PCUserInteractionHelper.h"
 #import "PCMovieDetailDataCenter.h"
+#import "PCRecommendTagViewController.h"
 
 @interface PCRecommendViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *recommendTableView;
@@ -35,11 +37,11 @@
     [super viewDidLoad];
 //    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     [self initCustomRefreshControl];
-    [self requestRecommendMovieList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self requestRecommendMovieList];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -149,6 +151,7 @@
     
     UILabel *headerLabel = [[UILabel alloc] init];
     headerLabel.frame = CGRectMake(0, 0, headerView.frame.size.width, headerView.frame.size.height);
+    
     headerLabel.text = @"취향에 맞는 태그를 선택해보세요";
     headerLabel.font = [UIFont boldSystemFontOfSize:14.8f];
     headerLabel.textAlignment = NSTextAlignmentCenter;

@@ -20,6 +20,7 @@
 		523E52BF1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BE1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m */; };
 		523E52C21E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */; };
 		523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */; };
+		523E52C81E0AE137009A2B9B /* PCUserProfileParamKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
@@ -143,6 +144,8 @@
 		523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageFamousTableViewCell.m; sourceTree = "<group>"; };
 		523E52C31E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageLikeTableViewCell.h; sourceTree = "<group>"; };
 		523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageLikeTableViewCell.m; sourceTree = "<group>"; };
+		523E52C61E0AE137009A2B9B /* PCUserProfileParamKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserProfileParamKey.h; sourceTree = "<group>"; };
+		523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserProfileParamKey.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 			children = (
 				52C49AAB1DEB4C3D00F47BB2 /* PCCommonUtility.h */,
 				52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */,
+				523E52C61E0AE137009A2B9B /* PCUserProfileParamKey.h */,
+				523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */,
 				52AE383B1DF00AFF0016D81E /* PCNetworkParamKey.h */,
 				52AE383C1DF00AFF0016D81E /* PCNetworkParamKey.m */,
 				52AE38381DEF3EBD0016D81E /* KeychainItemWrapper.h */,
@@ -985,6 +990,7 @@
 				523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */,
 				52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */,
 				5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */,
+				523E52C81E0AE137009A2B9B /* PCUserProfileParamKey.m in Sources */,
 				523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */,
 				52B49CA11DF9AFAD001A97C2 /* PCRankingDetailTableViewCell.m in Sources */,
 				5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */,

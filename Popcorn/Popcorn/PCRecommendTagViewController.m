@@ -9,11 +9,16 @@
 #import "PCRecommendTagViewController.h"
 
 #import "PCMovieInfoManager.h"
+#import "PCUserInfoManager.h"
+
+#import "PCUserProfileParamKey.h"
 #import "PCRecommendTagButton.h"
+#import "PCUserInformation.h"
+
 
 @interface PCRecommendTagViewController ()
-@property (nonatomic) NSMutableDictionary *tagButtonsDic;
-@property (nonatomic) NSMutableArray *userSelectedTag;
+
+@property (nonatomic) NSMutableDictionary *userSelectedTag;
 
 @property (nonatomic) CGFloat xOffset;
 @property (nonatomic) CGFloat yOffset;
@@ -24,48 +29,47 @@
 @end
 
 static NSArray *genreArray;
+static NSArray *genreCodeArray;
 static NSArray *gradeArray;
+static NSArray *gradeCodeArray;
 static NSArray *countryArray;
+static NSArray *countryCodeArray;
 
 static CGFloat const widthPadding = 20;
 static CGFloat const heightPadding = 10;
-
-typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
-    PCRecommendGenreTagCategory = 0,
-    PCRecommendGradeTagCategory,
-    PCRecommendCountryTagCategory,
-};
 
 
 @implementation PCRecommendTagViewController
 
 #pragma mark - Init
 + (void)initialize {
-    
-    //id는 1번부터 시작하며  12번째 인덱스는 빈값이어서 다큐멘터리가 그 자리를 대신함. 다큐멘터리는 원래 13번
     genreArray = @[@"액션", @"범죄", @"스릴러", @"어드벤처", @"판타지", @"SF", @"애니메이션", @"드라마", @"코미디", @"가족", @"로맨스/멜로", @"다큐멘터리"];
+    genreCodeArray = @[@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @13];
     
-    //id는 1번부터 시작해서 5번까지 있으나 5번은 공백값
-    gradeArray = @[@"15세 이상", @"전체관람가", @"12세 이상", @"19세 이상"];
+    gradeArray = @[@"전체관람가", @"12세 이상", @"15세 이상", @"19세 이상"];
+    gradeCodeArray = @[@2, @3, @1, @4];
     
-    //1번부터 38번까지 있으나 9개에서 컷
     countryArray = @[@"한국", @"미국", @"영국", @"독일", @"프랑스", @"일본", @"인도", @"중국", @"홍콩"];
-    //한국:6, 미국:1, 영국:2, 독일:3, 프랑스:4, 일본:15 , 인도:8, 중국:14, 홍콩:16
+    countryCodeArray = @[@6, @1, @2, @3, @4, @15, @8, @14, @16];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tagButtonsDic = [NSMutableDictionary new];
-    self.userSelectedTag = [NSMutableArray new];
-    [self saveSelectedTagBarButtonItem];
+    sLog( self.parentViewController );
+    [self initUserSelectedTagDictionary];
+    [self createCustomBarButtonItem];
     [self createTagView];
 }
 
-
+- (void)initUserSelectedTagDictionary {
+    self.userSelectedTag = [@{PCUserProfileFavoriteGenreKey:@[],
+                              PCUserProfileFavoriteGradeKey:@[],
+                              PCUserProfileFavoriteCountryKey:@[]} mutableCopy];
+}
 
 #pragma mark - Create View
-- (void)saveSelectedTagBarButtonItem{
+- (void)createCustomBarButtonItem{
     UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
     barButton.frame = CGRectMake(0, 0, 50, 50);
     [barButton setTitle:@"적용" forState:UIControlStateNormal];
@@ -94,17 +98,19 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
     CGRect navigationBarFrame = self.navigationController.navigationBar.frame;
     self.yOffset = navigationBarFrame.origin.y + navigationBarFrame.size.height + heightPadding;
     
-    // 장르 태그
+    // 장르 태그버튼 생성
     [self createTagCategoryLabel:@"장르"];
-    [self createTagButton:PCRecommendGenreTagCategory];
+    [self createTagButton:PCUserProfileFavoriteGenreKey];
     
-    // 관람등급 태그
+    // 관람등급 태그버튼 생성
     [self createTagCategoryLabel:@"관람등급"];
-    [self createTagButton:PCRecommendGradeTagCategory];
+    [self createTagButton:PCUserProfileFavoriteGradeKey];
     
-    // 국가 태그
+    // 국가 태그버튼 생성
     [self createTagCategoryLabel:@"국가"];
-    [self createTagButton:PCRecommendCountryTagCategory];
+    [self createTagButton:PCUserProfileFavoriteCountryKey];
+    
+    _showTagCountLabel.text = [NSString stringWithFormat:@"%ld", _tagCount];
     
 }
 
@@ -120,23 +126,30 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
 }
 
 
-- (void)createTagButton:(RecommendTagCategory)category {
+- (void)createTagButton:(NSString *)category {
+    NSArray *categoryDetailArray;
+    NSArray *codeArray;
+    NSUInteger tagIndex;
+    
+    if ([category isEqualToString:PCUserProfileFavoriteGenreKey]) {
+        categoryDetailArray = genreArray;
+        codeArray = genreCodeArray;
+        tagIndex = 0;
+    }
+    else if ([category isEqualToString:PCUserProfileFavoriteGradeKey]) {
+        categoryDetailArray = gradeArray;
+        codeArray = gradeCodeArray;
+        tagIndex = 20;
+    }
+    else {
+        categoryDetailArray = countryArray;
+        codeArray = countryCodeArray;
+        tagIndex = 40;
+    }
+    
     
     CGSize tagButtonSize = CGSizeMake(100, 30);
-    NSArray *categoryDetailArray = [NSArray array];
-    NSMutableArray *tagStoreArray = [NSMutableArray array];
-    
-    switch (category) {
-        case PCRecommendGenreTagCategory:
-            categoryDetailArray = genreArray;
-            break;
-        case PCRecommendGradeTagCategory:
-            categoryDetailArray = gradeArray;
-            break;
-        case PCRecommendCountryTagCategory:
-            categoryDetailArray = countryArray;
-            break;
-    }
+    _userSelectedTag = [[[PCUserInformation sharedUserData] getUserFavoriteTags] mutableCopy];
     
     for (NSInteger i = 0; i < categoryDetailArray.count; i++) {
         if (i % 3 == 0) {
@@ -146,50 +159,84 @@ typedef NS_ENUM(NSUInteger, RecommendTagCategory) {
         
         PCRecommendTagButton *tagButton = [PCRecommendTagButton buttonWithType:UIButtonTypeCustom];
         tagButton.frame = CGRectMake(_xOffset, _yOffset, tagButtonSize.width, tagButtonSize.height);
-        tagButton.tag = i;
+        
+        tagButton.tag = tagIndex + i;
         [tagButton configureButtonWithTitle:categoryDetailArray[i]];
+        
         [tagButton addTarget:self action:@selector(didSelectTagButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:tagButton];
-        [tagStoreArray addObject:tagButton];
         self.xOffset += tagButtonSize.width + widthPadding;
+        
+        // 유저가 이전에 설정했었던 태그는 선택상태로 만들기
+        for (NSInteger j = 0; j < [_userSelectedTag[category] count]; j++) {
+            if ([_userSelectedTag[category][j] integerValue] == [codeArray[i] integerValue]) {
+                tagButton.selected = YES;
+                _tagCount += 1;
+            }
+        }
     }
-    
-    NSNumber *keyValue = [NSNumber numberWithUnsignedInteger:category];
-    [self.tagButtonsDic setObject:tagStoreArray forKey:keyValue];
     
     self.yOffset += tagButtonSize.height + heightPadding * 2;
 }
 
 
 - (void)didSelectTagButton:(UIButton *)button {
+    NSMutableArray *addTagArray;
+    NSArray *codeArray;
+    NSString *tagKey;
+    NSInteger index;
+    
+    if (button.tag < 20) {
+        codeArray = genreCodeArray;
+        addTagArray = [_userSelectedTag[PCUserProfileFavoriteGenreKey] mutableCopy];
+        tagKey = PCUserProfileFavoriteGenreKey;
+        index = 0;
+    }
+    else if (button.tag < 40) {
+        codeArray = gradeCodeArray;
+        addTagArray = [_userSelectedTag[PCUserProfileFavoriteGradeKey] mutableCopy];
+        tagKey = PCUserProfileFavoriteGradeKey;
+        index = 20;
+    }
+    else {
+        codeArray = countryCodeArray;
+        addTagArray = [_userSelectedTag[PCUserProfileFavoriteCountryKey] mutableCopy];
+        tagKey = PCUserProfileFavoriteCountryKey;
+        index = 40;
+    }
+    
     if (button.isSelected) {
-        [self.userSelectedTag removeObject:button.titleLabel.text];
+        [addTagArray removeObject:codeArray[(button.tag - index)]];
         _tagCount -= 1;
     }
     else {
-        [self.userSelectedTag addObject:button.titleLabel.text];
+        [addTagArray addObject:codeArray[(button.tag - index)]];
         _tagCount += 1;
     }
     button.selected = !button.selected;
     _showTagCountLabel.text = [NSString stringWithFormat:@"%ld", _tagCount];
+    
+    [_userSelectedTag setObject:addTagArray forKey:tagKey];
 }
 
 
-// 선택한 태그 정보 저장 후 이전 화면으로 이동
 - (void)saveSelectedTag {
-//    NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
-//        if (isSuccess) {
-//            [self didReceiveMovieData:resultArray];
-//        }
-//        else {
-//            alertLog(@"영화정보를 가져오는 데 실패하였습니다.");
-//        }
-//    };
-//    
-//    [[PCMovieInfoManager movieManager] requestMovieListWithTag:_userSelectedTag andCompletionHandler:completionHandler];
+    UserInfoTaskHandler completionHandler = ^(BOOL isSuccess) {
+        if (isSuccess) {
+            sLog(@"태그 저장 성공");
+            [[PCUserInformation sharedUserData] changeFavoriteTags:_userSelectedTag];
+        } else {
+            sLog(@"태그 저장 실패");
+        }
+    };
+    
+    [[PCUserInfoManager userInfoManager] changeUserFavoriteTags:_userSelectedTag withCompletionHandler:completionHandler];
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 #pragma mark -
 - (void)dealloc {

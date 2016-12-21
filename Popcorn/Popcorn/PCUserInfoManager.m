@@ -153,15 +153,11 @@
 
 - (void)changeUserFavoriteTags:(NSDictionary *)tags withCompletionHandler:(UserInfoTaskHandler)completionHandler {
     NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
-    NSDictionary *params = @{PCUserProfileFavoriteGenreKey:@[@1,@3,@5],
-                             PCUserProfileFavoriteGradeKey:@[@1,@2,@3],
-                             PCUserProfileFavoriteCountryKey:@[@1,@2,@4],
-                             };
     
     _serializer = [AFJSONRequestSerializer serializer];
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"PATCH"
                                                         URLString:urlString
-                                                       parameters:params
+                                                       parameters:tags
                                                             error:nil];
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

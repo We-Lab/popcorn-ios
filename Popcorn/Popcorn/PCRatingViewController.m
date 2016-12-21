@@ -94,16 +94,25 @@
 }
 
 - (void)saveRatingData:(id)data {
-    for (NSNumber *ratingMovieTag in _ratingList.allKeys) {
-        NSString *movieID = _movieList[[ratingMovieTag integerValue]][@"id"];
+    UserInfoTaskHandler completionHandler = ^(BOOL isSuccess){};
+    
+    NSArray *keyArray = _ratingList.allKeys;
+    for (NSUInteger i = 0; i < _ratingList.count; i++) {
+        NSNumber *ratingMovieTag = _ratingList[keyArray[i]];
+        
         CGFloat ratingValue = [_ratingList[ratingMovieTag] floatValue];
-        [[PCUserInfoManager userInfoManager] saveMovieRating:ratingValue
-                                                 withMovieID:movieID
-                                        andCompletionHandler:^(BOOL isSuccess) {
-                                        }];
+        NSString *movieID = _movieList[[keyArray[i] integerValue]][@"id"];
+        
+        if (i == _ratingList.count - 1) {
+            completionHandler = ^(BOOL isSuccess){
+                [self requestMovieForRating];
+            };
+        }
+        
+        [[PCUserInfoManager userInfoManager] saveMovieRating:ratingValue withMovieID:movieID andCompletionHandler:completionHandler];
     }
     
-    [self requestMovieForRating];
+    self.showRatingCountLabel.text = @"0";
 }
 
 
