@@ -528,12 +528,7 @@
 				523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */,
 				523E52C31E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.h */,
 				523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */,
-				5F3831931E09A67800D5A25C /* PCChangeMyInfoViewController.h */,
-				5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */,
-				5F3831961E0A41CE00D5A25C /* PCChangeInfoTextViewController.h */,
-				5F3831971E0A41CE00D5A25C /* PCChangeInfoTextViewController.m */,
-				5F3831991E0A48BA00D5A25C /* PCChangePasswordViewController.h */,
-				5F38319A1E0A48BA00D5A25C /* PCChangePasswordViewController.m */,
+				5F38319D1E0AAFA500D5A25C /* MyInfo Change */,
 				520307891DEB85ED00E2985A /* PCUserInformation.h */,
 				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
 			);
@@ -597,6 +592,19 @@
 				5F04B81B1E02AFA10012F50D /* PCMovieTrailerViewController.m */,
 			);
 			name = "MovieDetail Sub Class";
+			sourceTree = "<group>";
+		};
+		5F38319D1E0AAFA500D5A25C /* MyInfo Change */ = {
+			isa = PBXGroup;
+			children = (
+				5F3831931E09A67800D5A25C /* PCChangeMyInfoViewController.h */,
+				5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */,
+				5F3831961E0A41CE00D5A25C /* PCChangeInfoTextViewController.h */,
+				5F3831971E0A41CE00D5A25C /* PCChangeInfoTextViewController.m */,
+				5F3831991E0A48BA00D5A25C /* PCChangePasswordViewController.h */,
+				5F38319A1E0A48BA00D5A25C /* PCChangePasswordViewController.m */,
+			);
+			name = "MyInfo Change";
 			sourceTree = "<group>";
 		};
 		5F7DC3AC1E097A60000B55F1 /* Movie Actor */ = {

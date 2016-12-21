@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface PCMyPageFamousTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *myFamousActorImage;
+@property (weak, nonatomic) IBOutlet UILabel *myFamousMovieTitle;
+@property (weak, nonatomic) IBOutlet UILabel *myFamousActorName;
+@property (weak, nonatomic) IBOutlet UILabel *myFamousText;
+@property (weak, nonatomic) IBOutlet UILabel *myFamousLikeText;
+@property (weak, nonatomic) IBOutlet UILabel *myFamousDate;
 
 @end

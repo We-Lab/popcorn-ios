@@ -10,6 +10,12 @@
 
 #import "PCUserInformation.h"
 #import "PCUserInfoManager.h"
+#import <HCSStarRatingView.h>
+#import <UIImageView+WebCache.h>
+
+#import "PCMyPageLikeTableViewCell.h"
+#import "PCMyPageCommentTableViewCell.h"
+#import "PCMyPageFamousTableViewCell.h"
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -94,6 +100,8 @@
     else if (index == 2) {
         self.myLikeList = userData[@"results"];
     }
+    
+    [self.myPageMainTableView reloadData];
 }
 
 
@@ -133,14 +141,85 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *textCell = @[@"MyCommentCell", @"MyFamousLineCell", @"MyLikeMovieCell"];
+//    NSArray *textCell = @[@"MyCommentCell", @"MyFamousLineCell", @"MyLikeMovieCell"];
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:textCell[self.selectButton] forIndexPath:indexPath];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textCell[self.selectButton]];
+//    }
+
+    if (self.selectButton == 0) {
+        PCMyPageCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
+        
+        cell.myCommentTitle.text = _myCommentList[indexPath.row][@"movie_title"];
+        cell.myCommentText.text = _myCommentList[indexPath.row][@"content"];
+        cell.myCommentLikeText.text = [NSString stringWithFormat:@"%@명이 좋아합니다.", _myCommentList[indexPath.row][@"likes_count"]];
+        NSString *commentDate =[_myCommentList[indexPath.row][@"created"] substringWithRange:NSMakeRange(0, 10)];
+        cell.myCommentDate.text = commentDate;
+        
+        HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+        starRatingView.frame = CGRectMake(0, 0, 120, cell.myCommentStarScoreView.frame.size.height);
+        starRatingView.maximumValue = 5;
+        starRatingView.minimumValue = 0;
+        starRatingView.backgroundColor = [UIColor clearColor];
+        starRatingView.allowsHalfStars = YES;
+        starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+        starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+        starRatingView.userInteractionEnabled = NO;
+        
+        starRatingView.value = [_myCommentList[indexPath.row][@"star"] floatValue];
+        [cell.myCommentStarScoreView addSubview:starRatingView];
+        
+        return cell;
+        
+    }else if (self.selectButton == 1){
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:textCell[self.selectButton] forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textCell[self.selectButton]];
+        PCMyPageFamousTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyFamousLineCell" forIndexPath:indexPath];
+        
+        [cell.myFamousActorImage sd_setImageWithURL:_myFamousList[indexPath.row][@"actor_img_url"]];
+        cell.myFamousMovieTitle.text = _myFamousList[indexPath.row][@"movie_title"];
+        cell.myFamousActorName.text = [NSString stringWithFormat:@"%@ | %@",_myFamousList[indexPath.row][@"actor_kor_name"],_myFamousList[indexPath.row][@"actor_character_name"]];
+        cell.myFamousText.text = _myFamousList[indexPath.row][@"content"];
+        cell.myFamousLikeText.text = [NSString stringWithFormat:@"%@명이 좋아합니다.",_myFamousList[indexPath.row][@"likes_count"]];
+        
+        NSString *commentDate =[_myFamousList[indexPath.row][@"created"] substringWithRange:NSMakeRange(0, 10)];
+        cell.myFamousDate.text = commentDate;
+        
+        return cell;
+        
+    }else if (self.selectButton == 2){
+        
+        PCMyPageLikeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyLikeMovieCell" forIndexPath:indexPath];
+        
+        [cell.myLikeMoviePoster sd_setImageWithURL:_myLikeList[indexPath.row][@"movie"][@"img_url"]];
+        cell.myLikeMovieTitle.text = _myLikeList[indexPath.row][@"movie"][@"title_kor"];
+        cell.myLikeMovieInfo.text = [NSString stringWithFormat:@"%@",_myLikeList[indexPath.row][@"movie"][@"created_year"]];
+        cell.myLikeMovieGrade.text = _myLikeList[indexPath.row][@"movie"][@"grade"][@"content"];
+        
+        HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] init];
+        starRatingView.frame = CGRectMake(0, 0, 120, cell.myLikeMovieStarView.frame.size.height);
+        starRatingView.maximumValue = 5;
+        starRatingView.minimumValue = 0;
+        starRatingView.backgroundColor = [UIColor clearColor];
+        starRatingView.allowsHalfStars = YES;
+        starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
+        starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
+        starRatingView.userInteractionEnabled = NO;
+        
+        starRatingView.value = [_myLikeList[indexPath.row][@"movie"][@"star_average"] floatValue];
+        [cell.myLikeMovieStarView addSubview:starRatingView];
+        
+        return cell;
     }
-    return cell;
+    
+    
+    
+    
+    return nil;
 }
+
+
+
 
 - (IBAction)reloadSection:(UIButton *)sender {
 
