@@ -27,7 +27,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f54-Cf-cAx">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f54-Cf-cAx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -416,6 +416,7 @@
                     <connections>
                         <outlet property="myPageMainTableView" destination="k4H-hj-pT0" id="ZSU-tR-C2t"/>
                         <outlet property="tableViewHeaderButtonView" destination="x20-xY-r4P" id="nLP-GP-U2E"/>
+                        <outlet property="userProfileImageView" destination="f54-Cf-cAx" id="0jg-S3-l94"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru3-Pd-tku" userLabel="First Responder" sceneMemberID="firstResponder"/>

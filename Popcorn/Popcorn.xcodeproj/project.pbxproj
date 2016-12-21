@@ -15,6 +15,8 @@
 		523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A51E071132009A2B9B /* PCMovieInformationView.m */; };
 		523E52AD1E07D730009A2B9B /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */; };
 		523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */; };
+		523E52B91E09B498009A2B9B /* twice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 523E52B81E09B498009A2B9B /* twice.jpg */; };
+		523E52BC1E0A47F9009A2B9B /* PCRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
@@ -129,6 +131,9 @@
 		523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
 		523E52B11E07EFA7009A2B9B /* PCUserInteractionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInteractionHelper.h; sourceTree = "<group>"; };
 		523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInteractionHelper.m; sourceTree = "<group>"; };
+		523E52B81E09B498009A2B9B /* twice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twice.jpg; sourceTree = "<group>"; };
+		523E52BA1E0A47F9009A2B9B /* PCRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTableViewCell.h; sourceTree = "<group>"; };
+		523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTableViewCell.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
@@ -375,6 +380,7 @@
 				523E52AA1E07D707009A2B9B /* UserInteraction */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
 				525923841DF6E4A600BE1506 /* GoogleService-Info.plist */,
+				523E52B81E09B498009A2B9B /* twice.jpg */,
 				528D7A191DF98EE5007A9D15 /* Assets.xcassets */,
 				52AE383E1DF161560016D81E /* Popcorn.entitlements */,
 				52C49A171DEAE9F400F47BB2 /* Supporting Files */,
@@ -492,6 +498,8 @@
 			children = (
 				52C49A881DEB0DB300F47BB2 /* PCRecommendViewController.h */,
 				52C49A891DEB0DB300F47BB2 /* PCRecommendViewController.m */,
+				523E52BA1E0A47F9009A2B9B /* PCRecommendTableViewCell.h */,
+				523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */,
 				52FFA92E1DFC374100507936 /* PCRecommendTagViewController.h */,
 				52FFA92F1DFC374100507936 /* PCRecommendTagViewController.m */,
 				52FFA9311DFC3A9500507936 /* PCRecommendTagButton.h */,
@@ -736,6 +744,7 @@
 				52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */,
 				52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
 				523E529E1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib in Resources */,
+				523E52B91E09B498009A2B9B /* twice.jpg in Resources */,
 				525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
 				528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */,
@@ -944,6 +953,7 @@
 				52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */,
 				5F04B81C1E02AFA10012F50D /* PCMovieTrailerViewController.m in Sources */,
 				5F37984E1E0056D300DCA40B /* PCCommentWriteViewController.m in Sources */,
+				523E52BC1E0A47F9009A2B9B /* PCRecommendTableViewCell.m in Sources */,
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
 				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
 				52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */,

@@ -22,6 +22,8 @@
 #import "PCUserInteractionMenuView.h"
 
 #import "PCUserInteractionHelper.h"
+#import "PCUserInfoManager.h"
+#import "PCUserInformation.h"
 
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
@@ -64,6 +66,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createViews];
+    
+//    self.navigationController.tabBarItem.badgeValue = @"3";
+    self.tabBarController.tabBar.items[4].badgeValue = @"1";
 }
 
 - (void)testA {
@@ -415,9 +420,11 @@
 - (void)clickLikeButton:(UIButton *)button {
     if (self.firstRecommendMenuView.likeButton == button) {
         [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[0][@"id"]];
+        sLog(_todayRecommendMovieList[0][@"id"]);
     }
     else {
         [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[1][@"id"]];
+        sLog(_todayRecommendMovieList[1][@"id"]);
     }
 }
 

@@ -29,6 +29,11 @@ NSString *const PCUserProfileEmailKey = @"email";
 NSString *const PCUserProfileGenderKey = @"gender";
 NSString *const PCUserProfileBirthdayKey = @"date_of_birth";
 NSString *const PCUserProfilePhoneNumberKey = @"phone_number";
+NSString *const PCUserProfileFavoriteGenreKey = @"favorite_genre";
+NSString *const PCUserProfileFavoriteGradeKey = @"favorite_grade";
+NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
+
+
 
 @implementation PCUserInformation
 
@@ -117,7 +122,7 @@ NSString *const PCUserProfilePhoneNumberKey = @"phone_number";
 - (UIImage *)getUserProfileImage {
     UIImage *image = [UIImage imageNamed:@"Profile_placeholder"];
     
-    NSString *imagePath = [_userDefaults objectForKey:@"ProfileImagePath"];
+    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
     if (imagePath)
         image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
     
@@ -133,16 +138,21 @@ NSString *const PCUserProfilePhoneNumberKey = @"phone_number";
 }
 
 #pragma mark - Change User Information
-- (void)changeUserInformation:(NSString *)userProfileKey {
-//    self.userInformation
+- (void)changeUserProfile:(NSString *)userProfileKey withString:(NSString *)newString{
+//    self.userInformation setObject:newString forKey:<#(nonnull id<NSCopying>)#>
 //    [PCUserInfoManager userInfoManager] changeUserProfile:<#(NSString *)#> withCompletionHandler:<#^(void)completionHandler#>
 }
 
 - (void)changeProfileImage:(UIImage *)profileImage {
+    NSData *imageData = UIImageJPEGRepresentation(profileImage, 1.0);
+    NSString *imagePath = [self documentsPathForFileName:@"ProfileImage.jpg"];
+    [imageData writeToFile:imagePath atomically:YES];
     
+//    [[PCUserInfoManager userInfoManager] requestChangeProfileImageWithData:imageData withToken
 }
 
 - (void)changeFavoriteTags:(NSDictionary *)tags {
+    
     
 }
 

@@ -65,6 +65,9 @@ static NSArray const *rankingTypeArray;
 - (void)searchMovie:(NSString *)inputText {
     NetworkTaskHandler completionHandler = ^(BOOL isSuccess, NSArray *resultArray){
         if (isSuccess) {
+            if (resultArray[0][@"id"] == nil)
+                resultArray = nil;
+            
             [self didReceiveMovieData:resultArray];
         }
         else {
@@ -76,7 +79,6 @@ static NSArray const *rankingTypeArray;
 }
 
 - (void)didReceiveMovieData:(NSArray *)resultArray {
-    sLog(resultArray);
     self.movieListData = resultArray;
     self.searchResultCount = resultArray.count;
     
@@ -85,8 +87,8 @@ static NSArray const *rankingTypeArray;
     }
     else {
         self.viewTitleLabel.text = [NSString stringWithFormat:@"검색 결과 : %lu", _searchResultCount];
-        [self.switchingTableView reloadData];
     }
+    [self.switchingTableView reloadData];
 }
 
 
@@ -168,7 +170,7 @@ static NSArray const *rankingTypeArray;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_hasSearched){
-        return (60 * [UIScreen mainScreen].bounds.size.height) / 667;
+        return (80 * [UIScreen mainScreen].bounds.size.height) / 667;
     }
     else {
         return (130 * [UIScreen mainScreen].bounds.size.height) / 667;

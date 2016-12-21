@@ -8,14 +8,14 @@
 
 #import "PCMyPageViewController.h"
 
-//#import "PCInitialViewController.h"
-//#import "PCUserInformation.h"
-
+#import "PCUserInformation.h"
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *myPageMainTableView;
 @property (weak, nonatomic) IBOutlet UIView *tableViewHeaderButtonView;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+
 @property UIButton *myPageButton;
 @property NSInteger selectButton;
 @property UIView *buttonUnderLine;
@@ -38,12 +38,14 @@
     
     self.myPageMainTableView.rowHeight = UITableViewAutomaticDimension;
     self.myPageMainTableView.estimatedRowHeight = 150;
+    self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
     
     [self makeTableViewHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];

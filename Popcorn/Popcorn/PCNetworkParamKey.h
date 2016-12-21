@@ -6,17 +6,13 @@
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface PCNetworkParamKey : NSObject
-
-@end
 
 // 공통
 extern NSString *const memberURLString;
 extern NSString *const movieURLString;
 extern NSString *const mainURLString;
 extern NSString *const TokenKey;
+extern NSString *const AuthorizationHeaderKey;
 
 // Sign In
 extern NSString *const SignInIDKey;
@@ -31,6 +27,7 @@ extern NSString *const SignUpNicknameKey;
 extern NSString *const SignUpBirthdayKey;
 extern NSString *const SignUpGenderKey;
 extern NSString *const SignUpPhoneNumberKey;
+
 
 // Movie
 extern NSString *const MovieDetailMainImageKey;

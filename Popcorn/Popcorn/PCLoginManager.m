@@ -118,19 +118,13 @@
 
 - (void)requestUserInformation:(NSString *)token {
     NSString *urlString = [memberURLString stringByAppendingString:@"user/"];
-//    NSURLRequest *request = [_serializer requestWithMethod:@"GET"
-//                                                 URLString:urlString
-//                                                parameters:nil
-//                                                     error:nil];
     
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"
                                                         URLString:urlString
                                                        parameters:nil
                                                             error:nil];
-    
     NSString *tokenValue = [NSString stringWithFormat:@"Token %@", token];
     [request setValue:tokenValue forHTTPHeaderField:@"Authorization"];
-//    [_manager.requestSerializer setValue:tokenValue forHTTPHeaderField:];
     
     PCLoginManager *weakSelf = self;
     self.dataTask = [_manager dataTaskWithRequest:request

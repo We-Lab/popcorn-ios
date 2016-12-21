@@ -8,15 +8,12 @@
 
 #import "PCNetworkParamKey.h"
 
-@implementation PCNetworkParamKey
-
-@end
-
 // 공통
 NSString *const memberURLString = @"https://django-api.com/member/";
 NSString *const movieURLString = @"https://django-api.com/movie/";
 NSString *const mainURLString = @"https://django-api.com/main/";
 NSString *const TokenKey = @"key";
+NSString *const AuthorizationHeaderKey = @"Authorization";
 
 // Sign In 
 NSString *const SignInIDKey = @"username";
@@ -31,6 +28,7 @@ NSString *const SignUpNicknameKey = @"nickname";
 NSString *const SignUpBirthdayKey = @"date_of_birth";
 NSString *const SignUpGenderKey = @"gender";
 NSString *const SignUpPhoneNumberKey = @"phone_number";
+
 
 // Movie
 NSString *const MovieDetailMainImageKey = @"main_image_url";
@@ -64,9 +62,6 @@ NSString *const MovieFamousLineUserTextKey = @"content";
 NSString *const MovieFamousLineLikeCountKey = @"likes_count";
 NSString *const MovieFamousLineIsLikeKey = @"is_like";
 NSString *const MovieFamousLineWriteDateKey = @"created";
-
-
-
 
 
 
