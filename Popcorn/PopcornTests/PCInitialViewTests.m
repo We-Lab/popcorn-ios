@@ -10,13 +10,13 @@
 
 #import "AppDelegate.h"
 #import "PCInitialViewController.h"
-#import "PCMainViewController.h"
 #import "PCUserInformation.h"
+#import "PCMainTabBarController.h"
 
 @interface PCInitialViewTests : XCTestCase
 @property AppDelegate *app;
 @property UIStoryboard *storyboard;
-@property PCMainViewController *main;
+@property PCMainTabBarController *main;
 @property PCInitialViewController *login;
 @property PCUserInformation *userInfo;
 @end

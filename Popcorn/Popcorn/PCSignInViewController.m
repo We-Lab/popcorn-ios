@@ -28,8 +28,9 @@
 
 @end
 
-@implementation PCSignInViewController 
+@implementation PCSignInViewController
 
+#pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -39,6 +40,9 @@
     self.loginManager = [[PCLoginManager alloc] init];
     self.loginManager.delegate = self;
     [self makeNavigationView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboardWhenTouchOutSideOfTextField)];
+    [self.view addGestureRecognizer:tap];
     
 }
 
@@ -58,6 +62,8 @@
     self.isValidID = YES;
     self.isValidPW = YES;
 }
+
+
 
 #pragma mark - makeCustomView
 - (void)makeNavigationView {
@@ -212,6 +218,14 @@
 }
 
 
+
+- (void)hideKeyboardWhenTouchOutSideOfTextField {
+    [_idTextField endEditing:YES];
+    [_pwTextField endEditing:YES];
+}
+
+
+#pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

@@ -49,9 +49,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[PCUserInfoManager userInfoManager] saveMovieRating:starRating.value withMovieID:_movieID andCompletionHandler:^(BOOL isSuccess) {
-            if (isSuccess) {
-                handler();
-            }
+            handler();
         }];
     }];
     [alertController addAction:cancelAction];
