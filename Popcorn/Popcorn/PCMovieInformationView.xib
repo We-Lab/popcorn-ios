@@ -24,39 +24,37 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Q3-op-v1s">
-                    <rect key="frame" x="8" y="147" width="359" height="25"/>
+                    <rect key="frame" x="12" y="138" width="351" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="4Id-rb-rYr"/>
+                        <constraint firstAttribute="height" constant="30" id="4Id-rb-rYr"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <size key="shadowOffset" width="1" height="1"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점 0.0점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EF-sa-Bu9">
-                    <rect key="frame" x="8" y="120" width="359" height="25"/>
+                    <rect key="frame" x="12" y="113" width="351" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="gJX-oX-D8G"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <size key="shadowOffset" width="1" height="1"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8Q3-op-v1s" secondAttribute="bottom" constant="8" id="6WV-hC-YXI"/>
-                <constraint firstItem="8Q3-op-v1s" firstAttribute="top" secondItem="9EF-sa-Bu9" secondAttribute="bottom" constant="2" id="HbD-ME-OGy"/>
+                <constraint firstAttribute="bottom" secondItem="8Q3-op-v1s" secondAttribute="bottom" constant="12" id="6WV-hC-YXI"/>
+                <constraint firstItem="8Q3-op-v1s" firstAttribute="top" secondItem="9EF-sa-Bu9" secondAttribute="bottom" id="HbD-ME-OGy"/>
                 <constraint firstAttribute="trailing" secondItem="8V2-en-Gho" secondAttribute="trailing" id="K3N-8y-wAs"/>
-                <constraint firstAttribute="trailing" secondItem="8Q3-op-v1s" secondAttribute="trailing" constant="8" id="PQB-i1-g9I"/>
+                <constraint firstAttribute="trailing" secondItem="8Q3-op-v1s" secondAttribute="trailing" constant="12" id="PQB-i1-g9I"/>
                 <constraint firstAttribute="bottom" secondItem="8V2-en-Gho" secondAttribute="bottom" id="WhF-k1-jtQ"/>
-                <constraint firstItem="9EF-sa-Bu9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cT9-am-QuF"/>
-                <constraint firstItem="8Q3-op-v1s" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cY5-GX-e9G"/>
+                <constraint firstItem="9EF-sa-Bu9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="cT9-am-QuF"/>
+                <constraint firstItem="8Q3-op-v1s" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="cY5-GX-e9G"/>
                 <constraint firstItem="8V2-en-Gho" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i6h-pY-84N"/>
-                <constraint firstAttribute="trailing" secondItem="9EF-sa-Bu9" secondAttribute="trailing" constant="8" id="ofT-Xh-ay2"/>
+                <constraint firstAttribute="trailing" secondItem="9EF-sa-Bu9" secondAttribute="trailing" constant="12" id="ofT-Xh-ay2"/>
                 <constraint firstItem="8V2-en-Gho" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zdh-y3-kLY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

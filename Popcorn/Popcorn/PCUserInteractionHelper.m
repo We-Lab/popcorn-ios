@@ -42,16 +42,13 @@
     HCSStarRatingView *starRating = [[HCSStarRatingView alloc] init];
     starRating.frame = CGRectMake(25, 10, 200, 30);
     starRating.maximumValue = 5;
-    starRating.minimumValue = 0;
+    starRating.minimumValue = 1;
     starRating.value = 0;
     starRating.backgroundColor = [UIColor clearColor];
     starRating.allowsHalfStars = YES;
-    starRating.accurateHalfStars = YES;
     starRating.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
     starRating.filledStarImage = [UIImage imageNamed:@"FullStar"];
     [starRatingView addSubview:starRating];
-    
-#warning 여기서 0.5점 단위로 선택되게 해야함
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

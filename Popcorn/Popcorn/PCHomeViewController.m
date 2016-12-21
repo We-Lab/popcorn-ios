@@ -388,19 +388,23 @@
     NSDictionary *movieData = resultArray[0];
     [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.firstRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
+    [PCCommonUtility makeTextShadow:self.firstRecommendMovieView.movieTitleLabel opacity:0.9];
     
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
     [fmt setPositiveFormat:@"0.#"];
     NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
     self.firstRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
+    [PCCommonUtility makeTextShadow:self.firstRecommendMovieView.movieRatingLabel opacity:0.9];
     
     // 2번째 추천 영화
     movieData = resultArray[1];
     [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.secondRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
+    [PCCommonUtility makeTextShadow:self.secondRecommendMovieView.movieTitleLabel opacity:0.9];
     
     formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
     self.secondRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
+    [PCCommonUtility makeTextShadow:self.secondRecommendMovieView.movieRatingLabel opacity:0.9];
 }
 
 - (void)configureTodayRecommendView {

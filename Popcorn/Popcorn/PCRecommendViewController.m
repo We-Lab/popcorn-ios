@@ -71,6 +71,10 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 225;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _recommendMovieList.count;
 }
@@ -83,11 +87,13 @@
                                      placeholderImage:[UIImage imageNamed:@"MoviePlaceholderExtented"]
                                               options:SDWebImageCacheMemoryOnly | SDWebImageRetryFailed];
     cell.movieView.movieTitleLabel.text = movieData[@"title_kor"];
+    [PCCommonUtility makeTextShadow:cell.movieView.movieTitleLabel opacity:0.9];
     
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
     [fmt setPositiveFormat:@"0.#"];
     NSString *formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
     cell.movieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
+    [PCCommonUtility makeTextShadow:cell.movieView.movieRatingLabel opacity:0.9];
     
     cell.menuView.likeButton.selected = [movieData[@"is_like"] boolValue];
     cell.menuView.likeButton.tag = indexPath.row;
