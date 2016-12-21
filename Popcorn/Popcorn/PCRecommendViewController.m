@@ -79,10 +79,9 @@
     return _recommendMovieList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PCRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
-    
+- (void)tableView:(UITableView *)tableView willDisplayCell:(PCRecommendTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *movieData = _recommendMovieList[indexPath.row];
+    
     [cell.movieView.movieImageView sd_setImageWithURL:movieData[@"main_image_url"]
                                      placeholderImage:[UIImage imageNamed:@"MoviePlaceholderExtented"]
                                               options:SDWebImageCacheMemoryOnly | SDWebImageRetryFailed];
@@ -96,11 +95,15 @@
     [PCCommonUtility makeTextShadow:cell.movieView.movieRatingLabel opacity:0.9];
     
     cell.menuView.likeButton.selected = [movieData[@"is_like"] boolValue];
+    cell.menuView.ratingButton.selected = [movieData[@"is_comment"] boolValue];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PCRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
+    
     cell.menuView.likeButton.tag = indexPath.row;
     [cell.menuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    cell.menuView.ratingButton.selected = [movieData[@"is_comment"] boolValue];
     cell.menuView.ratingButton.tag = indexPath.row;
     [cell.menuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
     

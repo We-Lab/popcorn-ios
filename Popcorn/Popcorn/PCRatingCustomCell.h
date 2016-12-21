@@ -10,6 +10,7 @@
 
 @interface PCRatingCustomCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *movieImageView;
 @property (weak, nonatomic) IBOutlet UILabel *ratingMovieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *ratingMovieInfo;
 @property (weak, nonatomic) IBOutlet UIView *ratingMovieStarLayoutView;

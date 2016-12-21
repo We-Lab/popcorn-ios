@@ -192,11 +192,8 @@
     NSString *addString = [NSString stringWithFormat:@"%@/comment/", movieID];
     NSString *urlString = [movieURLString stringByAppendingString:addString];
     
-//    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
-//    [fmt setPositiveFormat:@"0.#"];
-//    NSString *formattedString = [fmt stringFromNumber:[NSNumber numberWithFloat:3.5]];
-    
-    NSDictionary *params = @{@"star":@3.5};
+    NSString *ratingString = [NSString stringWithFormat:@"%.1f", ratingValue];
+    NSDictionary *params = @{@"star":ratingString};
     
     _serializer = [AFJSONRequestSerializer serializer];
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
