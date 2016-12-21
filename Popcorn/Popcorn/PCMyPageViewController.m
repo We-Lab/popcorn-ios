@@ -52,7 +52,7 @@
     self.myPageMainTableView.rowHeight = UITableViewAutomaticDimension;
     self.myPageMainTableView.estimatedRowHeight = 150;
     self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
-    
+    self.myPageUserID.text = [[PCUserInformation sharedUserData].userInformation objectForKey:PCUserProfileNickNameKey];
     [self makeTableViewHeader];
     
 }
