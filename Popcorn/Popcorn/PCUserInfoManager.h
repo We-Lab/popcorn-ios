@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^UserInfoTaskHandler) (BOOL isSuccess);
-typedef void (^LoadUserInfoTaskHandler) (BOOL isSuccess, NSArray *resultArray);
+typedef void (^LoadUserInfoTaskHandler) (BOOL isSuccess, NSDictionary *resultDictionary);
 
 @interface PCUserInfoManager : NSObject
 
