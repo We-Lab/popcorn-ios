@@ -11,7 +11,7 @@
         <!--검색-->
         <scene sceneID="rPV-ul-ps0">
             <objects>
-                <viewController storyboardIdentifier="Search" title="검색" id="jCx-sf-m4Y" customClass="PCSearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Search" title="검색" automaticallyAdjustsScrollViewInsets="NO" id="jCx-sf-m4Y" customClass="PCSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="01U-Pb-TiO"/>
                         <viewControllerLayoutGuide type="bottom" id="nbE-wI-BnF"/>
@@ -42,7 +42,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y3i-gV-xEQ">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RankingViewCell" id="fjf-eO-uJY">
@@ -153,7 +153,7 @@
                             <constraint firstItem="gE1-qm-ZdL" firstAttribute="leading" secondItem="yLj-IJ-PiY" secondAttribute="leading" constant="12" id="qWb-Rp-fuL"/>
                             <constraint firstItem="y3i-gV-xEQ" firstAttribute="leading" secondItem="yLj-IJ-PiY" secondAttribute="leading" id="sMl-dF-A72"/>
                             <constraint firstItem="HTQ-hF-0fE" firstAttribute="top" secondItem="gE1-qm-ZdL" secondAttribute="bottom" constant="15" id="tum-w8-PQn"/>
-                            <constraint firstAttribute="bottom" secondItem="y3i-gV-xEQ" secondAttribute="bottom" id="twv-os-eXd"/>
+                            <constraint firstItem="nbE-wI-BnF" firstAttribute="top" secondItem="y3i-gV-xEQ" secondAttribute="bottom" id="uME-eW-Ykl"/>
                             <constraint firstAttribute="trailing" secondItem="y3i-gV-xEQ" secondAttribute="trailing" id="zYi-f4-d8u"/>
                         </constraints>
                         <connections>

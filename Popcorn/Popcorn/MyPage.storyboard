@@ -39,7 +39,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="AL9-PS-QtK"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -415,6 +415,7 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="myPageMainTableView" destination="k4H-hj-pT0" id="ZSU-tR-C2t"/>
+                        <outlet property="myPageUserID" destination="7pi-hh-0Oz" id="GcD-gL-Cp4"/>
                         <outlet property="tableViewHeaderButtonView" destination="x20-xY-r4P" id="nLP-GP-U2E"/>
                         <outlet property="userProfileImageView" destination="f54-Cf-cAx" id="0jg-S3-l94"/>
                     </connections>

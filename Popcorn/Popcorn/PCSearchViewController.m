@@ -218,6 +218,28 @@ static NSArray const *rankingTypeArray;
         NSURL *imageURL = [NSURL URLWithString:_movieListData[indexPath.row][@"img_url"]];
         [cell.searchMoviePoster sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]];
         
+        // 평점 텍스트 중간에 별 이미지 삽입
+        NSTextAttachment *attachmentStarImage = [[NSTextAttachment alloc] init];
+        UIImage *starImage = [UIImage imageNamed:@"FullStar"];
+        attachmentStarImage.image = [PCCommonUtility resizeImage:starImage scaledToSize:CGSizeMake(10, 10) andAlpha:1.0];
+        
+        // 텍스트 조합
+        NSMutableAttributedString *leftString= [[NSMutableAttributedString alloc] initWithString:@"평점 "];
+        NSAttributedString *starImageString = [NSAttributedString attributedStringWithAttachment:attachmentStarImage];
+        
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+        [fmt setPositiveFormat:@"0.#"];
+        NSAttributedString *rightString =
+        [[NSAttributedString alloc] initWithString:[fmt stringFromNumber:_movieListData[indexPath.row][@"star_average"]]];
+        [leftString appendAttributedString:starImageString];
+        [leftString appendAttributedString:rightString];
+        
+        NSTextAttachment *attachmentLikeImage = [[NSTextAttachment alloc] init];
+        UIImage *likeImage = [UIImage imageNamed:@"Heart"];
+        attachmentLikeImage.image = [PCCommonUtility resizeImage:likeImage scaledToSize:CGSizeMake(11, 11) andAlpha:1.0];
+        
+        cell.searchMovieScore.attributedText = leftString;
+        
         return cell;
     }
 }

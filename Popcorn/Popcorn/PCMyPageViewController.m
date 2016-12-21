@@ -19,6 +19,7 @@
 @property UIButton *myPageButton;
 @property NSInteger selectButton;
 @property UIView *buttonUnderLine;
+@property (weak, nonatomic) IBOutlet UILabel *myPageUserID;
 
 @end
 
@@ -62,11 +63,11 @@
     CGFloat baseMovieContentHeight = [self ratioHeight:42];
     
     self.buttonUnderLine = [[UIView alloc] init];
-    
     self.buttonUnderLine.frame = CGRectMake(0, baseMovieContentHeight, baseMovieContentWidth, [self ratioHeight:3]);
     self.buttonUnderLine.backgroundColor = [UIColor darkGrayColor];
-    
     [self.tableViewHeaderButtonView addSubview:self.buttonUnderLine];
+    
+    [PCCommonUtility makeTextShadow:self.myPageUserID opacity:0.8];
 }
 
 #pragma mark - TableView Required
