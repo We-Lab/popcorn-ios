@@ -9,6 +9,7 @@
 #import "PCMyPageViewController.h"
 
 #import "PCUserInformation.h"
+#import "PCUserInfoManager.h"
 
 @interface PCMyPageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -16,10 +17,15 @@
 @property (weak, nonatomic) IBOutlet UIView *tableViewHeaderButtonView;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 
-@property UIButton *myPageButton;
-@property NSInteger selectButton;
-@property UIView *buttonUnderLine;
 @property (weak, nonatomic) IBOutlet UILabel *myPageUserID;
+
+@property (nonatomic) UIButton *myPageButton;
+@property (nonatomic) NSInteger selectButton;
+@property (nonatomic) UIView *buttonUnderLine;
+
+@property (nonatomic) NSArray *myCommentList;
+@property (nonatomic) NSArray *myFamousList;
+@property (nonatomic) NSArray *myLikeList;
 
 @end
 
@@ -42,17 +48,52 @@
     self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
     
     [self makeTableViewHeader];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self requestUserInteractionData];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:NSStringFromClass([self class])];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 #endif
+}
+
+- (void)requestUserInteractionData {
+    [[PCUserInfoManager userInfoManager] requestUserCommentListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+        if (isSuccess)
+            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:0];
+        else
+            alertLog(@"코멘트 정보를 가져오는 데 실패하였습니다.");
+    }];
+    [[PCUserInfoManager userInfoManager] requestUserFamousListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+        if (isSuccess)
+            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:1];
+        else
+            alertLog(@"명대사 정보를 가져오는 데 실패하였습니다.");
+    }];
+    [[PCUserInfoManager userInfoManager] requestUserLikeMovieListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+        if (isSuccess)
+            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:2];
+        else
+            alertLog(@"좋아요 정보를 가져오는 데 실패하였습니다.");
+    }];
+}
+
+- (void)didReceiveUserInteractionData:(NSDictionary *)userData andIndex:(NSUInteger)index {
+    if (index == 0) {
+        self.myCommentList = userData[@"results"];
+    }
+    else if (index == 1) {
+        self.myFamousList = userData[@"results"];
+    }
+    else if (index == 2) {
+        self.myLikeList = userData[@"results"];
+    }
 }
 
 
@@ -77,57 +118,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.selectButton == 0) {
-        return 3;
-    }else if (self.selectButton == 1) {
-        return 5;
-    }else if (self.selectButton == 2) {
-        return 7;
+        return _myCommentList.count;
     }
+    else if (self.selectButton == 1) {
+        return _myFamousList.count;
+    }
+    else if (self.selectButton == 2) {
+        return _myLikeList.count;
+    }
+    
+    [_myPageMainTableView reloadData];
     
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *textCell = @[@"MyCommentCell", @"MyFamousLineCell", @"MyLikeMovieCell"];
     
-    if (self.selectButton == 0) {
-        UITableViewCell *myCommentCell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
-        
-        if (!myCommentCell) {
-            myCommentCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCommentCell"];
-        }
-        
-        return myCommentCell;
-        
-    }else if (self.selectButton == 1) {
-        
-        UITableViewCell *myFamousLineCell = [tableView dequeueReusableCellWithIdentifier:@"MyFamousLineCell" forIndexPath:indexPath];
-        
-        if (!myFamousLineCell) {
-            
-            myFamousLineCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyFamousLineCell"];
-        }
-        
-        return myFamousLineCell;
-    
-    }else if (self.selectButton == 2) {
-        
-        UITableViewCell *myLikeMovieCell = [tableView dequeueReusableCellWithIdentifier:@"MyLikeMovieCell" forIndexPath:indexPath];
-        
-        if (!myLikeMovieCell) {
-            
-            myLikeMovieCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyLikeMovieCell"];
-        }
-        return myLikeMovieCell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:textCell[self.selectButton] forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textCell[self.selectButton]];
     }
-    return nil;
+    return cell;
 }
 
 - (IBAction)reloadSection:(UIButton *)sender {
 
     if (self.selectButton != sender.tag) {
-        
         if (self.selectButton > sender.tag) {
-            
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
@@ -136,10 +154,9 @@
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
             
-        }else if (self.selectButton < sender.tag) {
-            
+        }
+        else if (self.selectButton < sender.tag) {
             self.selectButton = sender.tag;
-            
             [UIView animateWithDuration:0.3 animations:^{
                 self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
@@ -148,8 +165,6 @@
         }
     }
 }
-
-
 
 
 

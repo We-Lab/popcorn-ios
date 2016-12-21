@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^UserInfoTaskHandler) (BOOL isSuccess);
+typedef void (^LoadUserInfoTaskHandler) (BOOL isSuccess, NSArray *resultArray);
 
 @interface PCUserInfoManager : NSObject
 
@@ -24,5 +25,10 @@ typedef void (^UserInfoTaskHandler) (BOOL isSuccess);
 // 영화 관련 
 - (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler;
 
+
+// MyPage
+- (void)requestUserCommentListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler;
+- (void)requestUserFamousListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler;
+- (void)requestUserLikeMovieListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler;
 
 @end
