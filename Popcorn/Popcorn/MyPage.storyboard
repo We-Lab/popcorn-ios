@@ -439,7 +439,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InfoCell" textLabel="sMV-8I-OOa" style="IBUITableViewCellStyleDefault" id="gB9-hg-Sys">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gB9-hg-Sys" id="ADl-bZ-6dv">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -481,10 +481,10 @@
             </objects>
             <point key="canvasLocation" x="2118" y="-9"/>
         </scene>
-        <!--View Controller-->
+        <!--Change Info Text View Controller-->
         <scene sceneID="fea-vk-lzB">
             <objects>
-                <viewController id="E62-Cj-VpF" sceneMemberID="viewController">
+                <viewController id="E62-Cj-VpF" customClass="PCChangeInfoTextViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oqf-FB-vlp"/>
                         <viewControllerLayoutGuide type="bottom" id="WAn-u5-1De"/>
@@ -500,7 +500,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkW-cE-Ac1">
-                                <rect key="frame" x="30" y="209" width="315" height="35"/>
+                                <rect key="frame" x="30" y="204" width="315" height="35"/>
                                 <color key="backgroundColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="RCq-iU-fl8"/>
@@ -520,22 +520,26 @@
                         <constraints>
                             <constraint firstItem="dkW-cE-Ac1" firstAttribute="width" secondItem="kHx-8s-lLI" secondAttribute="width" id="1P3-Rr-RVw"/>
                             <constraint firstItem="dkW-cE-Ac1" firstAttribute="centerX" secondItem="A8y-U7-gxt" secondAttribute="centerX" id="93h-7p-VE6"/>
-                            <constraint firstItem="dkW-cE-Ac1" firstAttribute="top" secondItem="kHx-8s-lLI" secondAttribute="bottom" constant="15" id="eKS-En-NWI"/>
+                            <constraint firstItem="dkW-cE-Ac1" firstAttribute="top" secondItem="kHx-8s-lLI" secondAttribute="bottom" constant="10" id="eKS-En-NWI"/>
                             <constraint firstItem="kHx-8s-lLI" firstAttribute="centerX" secondItem="A8y-U7-gxt" secondAttribute="centerX" id="fJh-GD-TXY"/>
                             <constraint firstItem="kHx-8s-lLI" firstAttribute="leading" secondItem="A8y-U7-gxt" secondAttribute="leading" constant="30" id="hbZ-7X-Bdv"/>
                             <constraint firstItem="kHx-8s-lLI" firstAttribute="top" secondItem="oqf-FB-vlp" secondAttribute="bottom" constant="100" id="hdk-cI-Ffl"/>
                             <constraint firstAttribute="trailing" secondItem="kHx-8s-lLI" secondAttribute="trailing" constant="30" id="j9P-Ln-zQN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="changeButton" destination="dkW-cE-Ac1" id="WXY-ym-mOi"/>
+                        <outlet property="changeTextField" destination="kHx-8s-lLI" id="hi0-OE-hRg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIY-A6-2aO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3230" y="-9"/>
         </scene>
-        <!--View Controller-->
+        <!--Change Password View Controller-->
         <scene sceneID="Zan-nx-yUV">
             <objects>
-                <viewController id="Njs-oC-Jt8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Njs-oC-Jt8" customClass="PCChangePasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GSk-EW-Uhx"/>
                         <viewControllerLayoutGuide type="bottom" id="pgs-hs-hPv"/>
@@ -544,26 +548,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8nA-qX-DyA">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="새 비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8nA-qX-DyA">
                                 <rect key="frame" x="30" y="120" width="315" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KX5-JZ-fw8">
-                                <rect key="frame" x="30" y="160" width="315" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="새 비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KX5-JZ-fw8">
+                                <rect key="frame" x="30" y="155" width="315" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eT-SH-KDb">
-                                <rect key="frame" x="30" y="205" width="315" height="35"/>
+                                <rect key="frame" x="30" y="195" width="315" height="35"/>
                                 <color key="backgroundColor" red="0.11372549019607843" green="0.5490196078431373" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="8ar-6t-pl2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="확인">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -578,10 +582,10 @@
                             <constraint firstItem="8nA-qX-DyA" firstAttribute="centerX" secondItem="otZ-tb-93o" secondAttribute="centerX" id="4ga-xG-Q5g"/>
                             <constraint firstItem="8nA-qX-DyA" firstAttribute="leading" secondItem="otZ-tb-93o" secondAttribute="leading" constant="30" id="9zh-wM-4i7"/>
                             <constraint firstAttribute="trailing" secondItem="8nA-qX-DyA" secondAttribute="trailing" constant="30" id="Ayr-IU-v8U"/>
-                            <constraint firstItem="KX5-JZ-fw8" firstAttribute="top" secondItem="8nA-qX-DyA" secondAttribute="bottom" constant="10" id="Ktw-9E-XJ6"/>
+                            <constraint firstItem="KX5-JZ-fw8" firstAttribute="top" secondItem="8nA-qX-DyA" secondAttribute="bottom" constant="5" id="Ktw-9E-XJ6"/>
                             <constraint firstItem="KX5-JZ-fw8" firstAttribute="width" secondItem="8nA-qX-DyA" secondAttribute="width" id="Pmt-i8-17g"/>
                             <constraint firstItem="3eT-SH-KDb" firstAttribute="centerX" secondItem="otZ-tb-93o" secondAttribute="centerX" id="cgt-64-1JA"/>
-                            <constraint firstItem="3eT-SH-KDb" firstAttribute="top" secondItem="KX5-JZ-fw8" secondAttribute="bottom" constant="15" id="pgX-c7-MfG"/>
+                            <constraint firstItem="3eT-SH-KDb" firstAttribute="top" secondItem="KX5-JZ-fw8" secondAttribute="bottom" constant="10" id="pgX-c7-MfG"/>
                             <constraint firstItem="3eT-SH-KDb" firstAttribute="width" secondItem="8nA-qX-DyA" secondAttribute="width" id="uxB-SU-K22"/>
                             <constraint firstItem="KX5-JZ-fw8" firstAttribute="centerX" secondItem="otZ-tb-93o" secondAttribute="centerX" id="w5v-uB-rCd"/>
                             <constraint firstItem="8nA-qX-DyA" firstAttribute="top" secondItem="GSk-EW-Uhx" secondAttribute="bottom" constant="100" id="zPO-Zq-sgR"/>
@@ -590,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OM5-RB-olu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4063" y="-3"/>
+            <point key="canvasLocation" x="4020" y="-9"/>
         </scene>
         <!--마이페이지-->
         <scene sceneID="PWd-11-OXT">

@@ -40,10 +40,9 @@
 
 // Best Comment
 @property (weak, nonatomic) IBOutlet UILabel *bestCommentUsernameLabel;
-@property (weak, nonatomic) IBOutlet UITextView *bestCommentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *bestCommentTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bestCommentMovieTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *likeHeartView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bestCommentTextViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bestCommentBaseViewHeight;
 @property (nonatomic) BOOL likeReview;
 
@@ -345,9 +344,9 @@
     
 //    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
     self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", bestComment[@"author"][@"nickname"]];
-    self.bestCommentTextView.text = bestComment[@"content"];
-    self.bestCommentTextViewHeight.constant = _bestCommentTextView.contentSize.height + 10;
-    self.bestCommentBaseViewHeight.constant = 200 - 50 + _bestCommentTextViewHeight.constant;
+    self.bestCommentTextLabel.text = bestComment[@"content"];
+//    self.bestCommentTextViewHeight.constant = _bestCommentTextView.contentSize.height + 10;
+//    self.bestCommentBaseViewHeight.constant = 200 - 50 + _bestCommentTextViewHeight.constant;
     
     NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", bestComment[@"movie_title"]];
     self.bestCommentMovieTitleLabel.text = movieTitle;
@@ -382,7 +381,7 @@
     
     // 1번째 추천 영화
     NSDictionary *movieData = resultArray[0];
-    [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    [self.firstRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.firstRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
@@ -392,7 +391,7 @@
     
     // 2번째 추천 영화
     movieData = resultArray[1];
-    [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"img_url"]]];
+    [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
     self.secondRecommendMovieView.movieTitleLabel.text = movieData[@"title_kor"];
     
     formattedString = [fmt stringFromNumber:movieData[@"star_average"]];

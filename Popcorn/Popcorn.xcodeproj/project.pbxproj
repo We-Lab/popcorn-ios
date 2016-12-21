@@ -78,6 +78,8 @@
 		5F2E14BC1DF01C8C00C06818 /* PCMovieNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E14BB1DF01C8C00C06818 /* PCMovieNaviView.m */; };
 		5F37984E1E0056D300DCA40B /* PCCommentWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */; };
 		5F3831951E09A67800D5A25C /* PCChangeMyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */; };
+		5F3831981E0A41CE00D5A25C /* PCChangeInfoTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3831971E0A41CE00D5A25C /* PCChangeInfoTextViewController.m */; };
+		5F38319B1E0A48BA00D5A25C /* PCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F38319A1E0A48BA00D5A25C /* PCChangePasswordViewController.m */; };
 		5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */; };
 		5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FAA696D1DF9535800528550 /* PCCommentCustomCell.m */; };
 		5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC1A71B1DFC54BF007CB48D /* PCFamousLineCustomCell.m */; };
@@ -221,6 +223,10 @@
 		5F37984D1E0056D300DCA40B /* PCCommentWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCommentWriteViewController.m; sourceTree = "<group>"; };
 		5F3831931E09A67800D5A25C /* PCChangeMyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCChangeMyInfoViewController.h; sourceTree = "<group>"; };
 		5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCChangeMyInfoViewController.m; sourceTree = "<group>"; };
+		5F3831961E0A41CE00D5A25C /* PCChangeInfoTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCChangeInfoTextViewController.h; sourceTree = "<group>"; };
+		5F3831971E0A41CE00D5A25C /* PCChangeInfoTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCChangeInfoTextViewController.m; sourceTree = "<group>"; };
+		5F3831991E0A48BA00D5A25C /* PCChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCChangePasswordViewController.h; sourceTree = "<group>"; };
+		5F38319A1E0A48BA00D5A25C /* PCChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCChangePasswordViewController.m; sourceTree = "<group>"; };
 		5F52E6881DEDC2B4002BD19A /* PCRequesIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRequesIDViewController.h; sourceTree = "<group>"; };
 		5F52E6891DEDC2B4002BD19A /* PCRequesIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRequesIDViewController.m; sourceTree = "<group>"; };
 		5FAA696C1DF9535800528550 /* PCCommentCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCommentCustomCell.h; sourceTree = "<group>"; };
@@ -501,6 +507,10 @@
 				52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */,
 				5F3831931E09A67800D5A25C /* PCChangeMyInfoViewController.h */,
 				5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */,
+				5F3831961E0A41CE00D5A25C /* PCChangeInfoTextViewController.h */,
+				5F3831971E0A41CE00D5A25C /* PCChangeInfoTextViewController.m */,
+				5F3831991E0A48BA00D5A25C /* PCChangePasswordViewController.h */,
+				5F38319A1E0A48BA00D5A25C /* PCChangePasswordViewController.m */,
 				520307891DEB85ED00E2985A /* PCUserInformation.h */,
 				5203078A1DEB85ED00E2985A /* PCUserInformation.m */,
 			);
@@ -925,6 +935,7 @@
 				523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */,
 				52AE383D1DF00AFF0016D81E /* PCNetworkParamKey.m in Sources */,
 				5F3831951E09A67800D5A25C /* PCChangeMyInfoViewController.m in Sources */,
+				5F38319B1E0A48BA00D5A25C /* PCChangePasswordViewController.m in Sources */,
 				5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */,
 				52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */,
 				5F04B8191E02A20B0012F50D /* PCMoviePhotoCell.m in Sources */,
@@ -937,6 +948,7 @@
 				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
 				52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */,
 				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
+				5F3831981E0A41CE00D5A25C /* PCChangeInfoTextViewController.m in Sources */,
 				52AE383A1DEF3EBD0016D81E /* KeychainItemWrapper.m in Sources */,
 				52AE37FB1DEC6BDC0016D81E /* PCUserInfoValidation.m in Sources */,
 				5203078B1DEB85ED00E2985A /* PCUserInformation.m in Sources */,

@@ -11,13 +11,10 @@
 #import "PCInitialViewController.h"
 #import "PCUserInformation.h"
 
-typedef NS_ENUM(NSUInteger, ChangeInfoType) {
-    ChangePassword,
-    ChangePhoneNumber,
-    ChangeNickname,
-};
+#import "PCChangeInfoTextViewController.h"
 
 @interface PCChangeMyInfoViewController () <UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
 
 @end
 
@@ -72,15 +69,20 @@ typedef NS_ENUM(NSUInteger, ChangeInfoType) {
         if (indexPath.row == 0) {
             [self profileImageSelect];
         }else if (indexPath.row == 1){
-
+            NSDictionary *temp = @{@"type":@"ChangeNick"};
+            [self moveToMovieDetailView:temp];
         }else if (indexPath.row == 2){
-
+            NSDictionary *temp = @{@"type":@"ChangePhoneNumber"};
+            [self moveToMovieDetailView:temp];
         }
         
         
     }else if (indexPath.section == 1) {
     
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
+            NSDictionary *temp = @{@"type":@"ChangePassword"};
+            [self moveToMovieDetailView:temp];
+        }else if (indexPath.row == 1) {
             [self requestSignOut];
         }
     }
@@ -101,12 +103,24 @@ typedef NS_ENUM(NSUInteger, ChangeInfoType) {
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"ToMoveChangeInfoSegue"]) {
-        if (sender.tag == 100) {
-            NSLog(@"닉네임 변경");
-        }else {
-            NSLog(@"번호변경");
+        
+        if ([[sender objectForKey:@"type"] isEqualToString:@"ChangeNick"]) {
+            
+            PCChangeInfoTextViewController *vc = (PCChangeInfoTextViewController *)segue.destinationViewController;
+            vc.type = ChangeNickname;
+            
+        }else if ([[sender objectForKey:@"type"] isEqualToString:@"ChangePhoneNumber"]) {
+            
+            PCChangeInfoTextViewController *vc = (PCChangeInfoTextViewController *)segue.destinationViewController;
+            vc.type = ChangePhoneNumber;
+            
+        }else if ([[sender objectForKey:@"type"] isEqualToString:@"ChangePassword"]) {
+            
+            PCChangeInfoTextViewController *vc = (PCChangeInfoTextViewController *)segue.destinationViewController;
+            vc.type = ChangePassword;
         }
     }
 }
