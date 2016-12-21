@@ -10,4 +10,8 @@
 
 @interface PCSearchResultTableViewCell : UITableViewCell
 @property (nonatomic) UILabel *additionalInfoLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *searchMoviePoster;
+@property (weak, nonatomic) IBOutlet UILabel *searchMovieTitle;
+@property (weak, nonatomic) IBOutlet UILabel *searchMovieScore;
+@property (weak, nonatomic) IBOutlet UILabel *searchMovieInfo;
 @end

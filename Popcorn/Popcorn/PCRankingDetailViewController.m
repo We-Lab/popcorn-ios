@@ -10,6 +10,7 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PCRankingDetailTableViewCell.h"
+#import "PCMovieDetailDataCenter.h"
 
 @interface PCRankingDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -18,7 +19,6 @@
 @property (nonatomic) NSArray *rankingArrayList;
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
-
 @end
 
 
@@ -149,6 +149,19 @@
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_rankingType == BoxOfficeRankingDetailList) {
+        [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _rankingArrayList[indexPath.row][@"movie"][@"id"];
+    }else{
+        [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _rankingDictionaryList[@"results"][indexPath.row][@"id"];
+    }
+}
+
+#pragma mark - Configure Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
 
 #pragma mark -
 - (void)dealloc {

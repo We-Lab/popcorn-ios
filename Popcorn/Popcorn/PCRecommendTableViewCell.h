@@ -13,5 +13,6 @@
 @interface PCRecommendTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet PCMovieInformationView *movieView;
 @property (weak, nonatomic) IBOutlet PCUserInteractionMenuView *menuView;
+@property (weak, nonatomic) IBOutlet UIButton *movieSelectButton;
 
 @end

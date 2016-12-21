@@ -13,6 +13,7 @@
 #import "PCMovieInfoManager.h"
 #import "PCSearchResultTableViewCell.h"
 #import "PCRankingDetailViewController.h"
+#import "PCMovieDetailDataCenter.h"
 
 @interface PCSearchViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
@@ -192,13 +193,12 @@ static NSArray const *rankingTypeArray;
         return cell;
     }
     else {
-        PCSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell"];
+        PCSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
         if (cell == nil)
-            cell = [[PCSearchResultTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"SearchResultCell"];
+            cell = [[PCSearchResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SearchResultCell"];
         
         NSString *titleString = _movieListData[indexPath.row][@"title_kor"];
         NSString *yearString = _movieListData[indexPath.row][@"created_year"];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, yearString];
         
         NSArray *genreArray= _movieListData[indexPath.row][@"genre"];
         __block NSString *genreLabelString;
@@ -210,11 +210,13 @@ static NSArray const *rankingTypeArray;
                 NSString *appendString = [NSString stringWithFormat:@"  %@", obj[@"content"]];
                 genreLabelString = [genreLabelString stringByAppendingString:appendString];
             }
-        }];
-        cell.additionalInfoLabel.text = genreLabelString;
+        }
+         ];
         
+        cell.searchMovieInfo.text = genreLabelString;
+        cell.searchMovieTitle.text = [NSString stringWithFormat:@"%@ (%@)",titleString,yearString];
         NSURL *imageURL = [NSURL URLWithString:_movieListData[indexPath.row][@"img_url"]];
-        [cell.imageView sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]];
+        [cell.searchMoviePoster sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]];
         
         return cell;
     }
@@ -229,11 +231,17 @@ static NSArray const *rankingTypeArray;
     return indexPath;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _movieListData[indexPath.row][@"id"];
+}
 
 # pragma mark - Configure Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    PCRankingDetailViewController *rankingDetailVC = segue.destinationViewController;
-    rankingDetailVC.rankingType = _selectedRow;
+    
+    if ([segue.identifier isEqualToString:@"ToRankDetailSegue"]) {
+        PCRankingDetailViewController *rankingDetailVC = segue.destinationViewController;
+        rankingDetailVC.rankingType = _selectedRow;
+    }
 }
 
 
