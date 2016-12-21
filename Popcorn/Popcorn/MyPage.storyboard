@@ -109,7 +109,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyCommentCell" rowHeight="181" id="0zC-84-UP1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyCommentCell" rowHeight="181" id="0zC-84-UP1" customClass="PCMyPageCommentTableViewCell">
                                         <rect key="frame" x="0.0" y="273" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zC-84-UP1" id="8re-8q-OCW">
@@ -209,7 +209,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyFamousLineCell" rowHeight="190" id="8SK-vU-J1g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyFamousLineCell" rowHeight="190" id="8SK-vU-J1g" customClass="PCMyPageFamousTableViewCell">
                                         <rect key="frame" x="0.0" y="454" width="375" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8SK-vU-J1g" id="LbT-xL-2Nq">
@@ -311,7 +311,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyLikeMovieCell" rowHeight="124" id="pKC-CI-fz2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyLikeMovieCell" rowHeight="124" id="pKC-CI-fz2" customClass="PCMyPageLikeTableViewCell">
                                         <rect key="frame" x="0.0" y="644" width="375" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pKC-CI-fz2" id="u66-eF-Xuw">

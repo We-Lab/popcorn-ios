@@ -53,7 +53,6 @@
 
 #pragma mark - Execute DataTask and CompletionHandler
 - (void)resumeDataTaskWithRequest:(NSMutableURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
-    
     [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
     
     _dataTask = [_sessionManager dataTaskWithRequest:request
@@ -63,12 +62,8 @@
                                        NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
                                        if (error) {
                                            result = NO;
-                                           if (statusCode == 406) {
-                                               sLog(@"이미 코멘트 등록");
-                                           }
-                                           else {
-                                               aLog(@"에러 발생. %@", error);
-                                           }
+                                           aLog(@"%ld", statusCode);
+                                           aLog(@"에러 발생. %@", error);
                                        }
                                        dispatch_async(dispatch_get_main_queue(), ^{
                                            completionHandler(result);
@@ -201,6 +196,55 @@
                                                 parameters:params
                                                      error:nil];
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
+
+#pragma mark - User Interaction Data
+- (void)commonGetMethodRequestWithUrlString:(NSString *)urlString andCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+    _serializer = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    [self resumeLoadUserInfoDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
+- (void)requestUserCommentWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"my-comments/"];
+    [self commonGetMethodRequestWithUrlString:urlString andCompletionHandler:completionHandler];
+}
+
+- (void)requestUserFamousListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"my-famous/"];
+    [self commonGetMethodRequestWithUrlString:urlString andCompletionHandler:completionHandler];
+}
+
+- (void)requestUserLikeMovieListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+    NSString *urlString = [memberURLString stringByAppendingString:@"my-like-movie/"];
+    [self commonGetMethodRequestWithUrlString:urlString andCompletionHandler:completionHandler];
+}
+
+
+- (void)resumeLoadUserInfoDataTaskWithRequest:(NSMutableURLRequest *)request andCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
+    
+    _dataTask = [_sessionManager dataTaskWithRequest:request
+                                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                       BOOL result = YES;
+                                       
+                                       NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+                                       if (error) {
+                                           result = NO;
+                                           aLog(@"%ld", statusCode);
+                                           aLog(@"에러 발생. %@", error);
+                                       }
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           completionHandler(result, responseObject);
+                                           [self stopActivityIndicatorViewAnimating];
+                                       });
+                                   }];
+    [_dataTask resume];
+    [self startActivityIndicatorViewAnimating];
 }
 
 @end

@@ -17,6 +17,9 @@
 		523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */; };
 		523E52B91E09B498009A2B9B /* twice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 523E52B81E09B498009A2B9B /* twice.jpg */; };
 		523E52BC1E0A47F9009A2B9B /* PCRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */; };
+		523E52BF1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BE1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m */; };
+		523E52C21E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */; };
+		523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
@@ -134,6 +137,12 @@
 		523E52B81E09B498009A2B9B /* twice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twice.jpg; sourceTree = "<group>"; };
 		523E52BA1E0A47F9009A2B9B /* PCRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTableViewCell.h; sourceTree = "<group>"; };
 		523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTableViewCell.m; sourceTree = "<group>"; };
+		523E52BD1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageCommentTableViewCell.h; sourceTree = "<group>"; };
+		523E52BE1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageCommentTableViewCell.m; sourceTree = "<group>"; };
+		523E52C01E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageFamousTableViewCell.h; sourceTree = "<group>"; };
+		523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageFamousTableViewCell.m; sourceTree = "<group>"; };
+		523E52C31E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageLikeTableViewCell.h; sourceTree = "<group>"; };
+		523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageLikeTableViewCell.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
@@ -513,6 +522,12 @@
 			children = (
 				52C49A921DEB0DD700F47BB2 /* PCMyPageViewController.h */,
 				52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */,
+				523E52BD1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.h */,
+				523E52BE1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m */,
+				523E52C01E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.h */,
+				523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */,
+				523E52C31E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.h */,
+				523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */,
 				5F3831931E09A67800D5A25C /* PCChangeMyInfoViewController.h */,
 				5F3831941E09A67800D5A25C /* PCChangeMyInfoViewController.m */,
 				5F3831961E0A41CE00D5A25C /* PCChangeInfoTextViewController.h */,
@@ -936,6 +951,7 @@
 				520307811DEB7DC000E2985A /* PCRequesPWViewController.m in Sources */,
 				52C49A1F1DEAE9F400F47BB2 /* PCInitialViewController.m in Sources */,
 				5FEDA6F11E0112B800D4BC14 /* PCMovieDetailManager.m in Sources */,
+				523E52C21E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m in Sources */,
 				52C49A8A1DEB0DB300F47BB2 /* PCRecommendViewController.m in Sources */,
 				52F76A3E1E02AD42008E900A /* PCMagazineCollectionViewCell.m in Sources */,
 				5FEDA6F41E011EA100D4BC14 /* PCMovieDetailDataCenter.m in Sources */,
@@ -957,6 +973,7 @@
 				52AE38081DED4FF40016D81E /* PCMovieInfoManager.m in Sources */,
 				52FFA9331DFC3A9500507936 /* PCRecommendTagButton.m in Sources */,
 				52FFA9301DFC374100507936 /* PCRecommendTagViewController.m in Sources */,
+				523E52BF1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m in Sources */,
 				5F52E68A1DEDC2B4002BD19A /* PCRequesIDViewController.m in Sources */,
 				5F3831981E0A41CE00D5A25C /* PCChangeInfoTextViewController.m in Sources */,
 				52AE383A1DEF3EBD0016D81E /* KeychainItemWrapper.m in Sources */,
@@ -968,6 +985,7 @@
 				523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */,
 				52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */,
 				5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */,
+				523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */,
 				52B49CA11DF9AFAD001A97C2 /* PCRankingDetailTableViewCell.m in Sources */,
 				5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */,
 				5F04B8261E03E2A70012F50D /* PCBestFamousLineCustomCell.m in Sources */,
