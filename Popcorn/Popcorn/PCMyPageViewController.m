@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *myPageUserID;
+@property (weak, nonatomic) IBOutlet UILabel *myPageUserPhoneNumber;
 
 @property (nonatomic) UIButton *myPageButton;
 @property (nonatomic) NSInteger selectButton;
@@ -51,14 +52,17 @@
     
     self.myPageMainTableView.rowHeight = UITableViewAutomaticDimension;
     self.myPageMainTableView.estimatedRowHeight = 150;
-    self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
-    self.myPageUserID.text = [[PCUserInformation sharedUserData].userInformation objectForKey:PCUserProfileNickNameKey];
+    
     [self makeTableViewHeader];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.userProfileImageView.image = [[PCUserInformation sharedUserData] getUserProfileImage];
+    self.myPageUserID.text = [[PCUserInformation sharedUserData].userInformation objectForKey:PCUserProfileNickNameKey];
+    self.myPageUserPhoneNumber.text = [[PCUserInformation sharedUserData].userInformation objectForKey:PCUserProfileNickNameKey];
     
     [self requestUserInteractionData];
     
@@ -109,14 +113,12 @@
 - (void)makeTableViewHeader{
     
     CGFloat baseMovieContentWidth = self.view.frame.size.width/3;
-    CGFloat baseMovieContentHeight = [self ratioHeight:42];
+    CGFloat baseMovieContentHeight = [self ratioHeight:37];
     
     self.buttonUnderLine = [[UIView alloc] init];
     self.buttonUnderLine.frame = CGRectMake(0, baseMovieContentHeight, baseMovieContentWidth, [self ratioHeight:3]);
     self.buttonUnderLine.backgroundColor = [UIColor darkGrayColor];
     [self.tableViewHeaderButtonView addSubview:self.buttonUnderLine];
-    
-    [PCCommonUtility makeTextShadow:self.myPageUserID opacity:0.8];
 }
 
 #pragma mark - TableView Required
@@ -141,12 +143,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSArray *textCell = @[@"MyCommentCell", @"MyFamousLineCell", @"MyLikeMovieCell"];
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:textCell[self.selectButton] forIndexPath:indexPath];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textCell[self.selectButton]];
-//    }
 
     if (self.selectButton == 0) {
         PCMyPageCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCommentCell" forIndexPath:indexPath];
@@ -228,7 +224,7 @@
             self.selectButton = sender.tag;
             
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:37], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
@@ -237,7 +233,7 @@
         else if (self.selectButton < sender.tag) {
             self.selectButton = sender.tag;
             [UIView animateWithDuration:0.3 animations:^{
-                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:42], self.view.frame.size.width/3, [self ratioHeight:3]);
+                self.buttonUnderLine.frame = CGRectMake((self.view.frame.size.width/3 * sender.tag), [self ratioHeight:37], self.view.frame.size.width/3, [self ratioHeight:3]);
             }];
             
             [self.myPageMainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];

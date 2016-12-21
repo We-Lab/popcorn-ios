@@ -9,7 +9,7 @@
 #import "PCChangeMyInfoViewController.h"
 
 #import "PCInitialViewController.h"
-#import "PCUserInformation.h"
+#import "PCUserInformation.m"
 
 #import "PCChangeInfoTextViewController.h"
 
@@ -95,6 +95,22 @@
     picker.delegate = self;
     
     [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+
+    UIImage *image = nil;
+    
+    if (info[UIImagePickerControllerEditedImage]) {
+        image = info[UIImagePickerControllerEditedImage];
+    } else {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+    
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+
+                               }];
 }
 
 #pragma mark - Configure Segue

@@ -21,7 +21,7 @@
 @end
 
 static NSString *const PCUserInformationAsDictionaryKey = @"UserInformationAsDictionary";
-
+static NSString *const ImageListUpdatedNotification = @"ImageListUpdated";
 //Extern String
 NSString *const PCUserProfileUserNameKey = @"username";
 NSString *const PCUserProfileNickNameKey = @"nickname";
@@ -139,7 +139,7 @@ NSString *const PCUserProfileFavoriteCountryKey = @"favorite_making_country";
 
 #pragma mark - Change User Information
 - (void)changeUserProfile:(NSString *)userProfileKey withString:(NSString *)newString{
-//    self.userInformation setObject:newString forKey:<#(nonnull id<NSCopying>)#>
+    [self.userInformation setObject:newString forKey:userProfileKey];
 //    [PCUserInfoManager userInfoManager] changeUserProfile:<#(NSString *)#> withCompletionHandler:<#^(void)completionHandler#>
 }
 
