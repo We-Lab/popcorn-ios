@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PCMyPageLikeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *myLikeMoviePoster;
+@property (weak, nonatomic) IBOutlet UILabel *myLikeMovieTitle;
+@property (weak, nonatomic) IBOutlet UILabel *myLikeMovieInfo;
+@property (weak, nonatomic) IBOutlet UILabel *myLikeMovieGrade;
+@property (weak, nonatomic) IBOutlet UIView *myLikeMovieStarView;
 
 @end

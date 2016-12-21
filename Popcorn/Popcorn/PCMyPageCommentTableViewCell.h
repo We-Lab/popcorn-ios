@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PCMyPageCommentTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *myCommentTitle;
+@property (weak, nonatomic) IBOutlet UIView *myCommentStarScoreView;
+@property (weak, nonatomic) IBOutlet UILabel *myCommentText;
+@property (weak, nonatomic) IBOutlet UILabel *myCommentLikeText;
+@property (weak, nonatomic) IBOutlet UILabel *myCommentDate;
 
 @end
