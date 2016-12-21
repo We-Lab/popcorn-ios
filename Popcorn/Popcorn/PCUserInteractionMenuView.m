@@ -7,6 +7,7 @@
 //
 
 #import "PCUserInteractionMenuView.h"
+#import "PCUserInteractionHelper.h"
 
 @implementation PCUserInteractionMenuView
 

@@ -41,7 +41,6 @@
     starRating.value = 0;
     starRating.backgroundColor = [UIColor clearColor];
     starRating.allowsHalfStars = YES;
-    starRating.accurateHalfStars = YES;
     starRating.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
     starRating.filledStarImage = [UIImage imageNamed:@"FullStar"];
     [starRating addTarget:self action:@selector(didChangeValue:) forControlEvents:UIControlEventValueChanged];

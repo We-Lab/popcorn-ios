@@ -110,6 +110,9 @@
     cell.menuView.ratingButton.tag = indexPath.row;
     [cell.menuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    cell.menuView.commentButton.tag = indexPath.row;
+    [cell.menuView.commentButton addTarget:self action:@selector(clickCommentButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
@@ -133,6 +136,11 @@
     }];
 }
 
+- (void)clickCommentButton:(UIButton *)button{
+    
+    NSString *movieID = _recommendMovieList[button.tag][@"id"];
+    [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:movieID];
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];

@@ -396,6 +396,9 @@
     self.firstRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
     [PCCommonUtility makeTextShadow:self.firstRecommendMovieView.movieRatingLabel opacity:0.9];
     
+    self.firstRecommendMenuView.likeButton.selected = [_todayRecommendMovieList[0][@"is_like"] boolValue];
+    self.firstRecommendMenuView.ratingButton.selected = [_todayRecommendMovieList[0][@"is_comment"] boolValue];
+    
     // 2번째 추천 영화
     movieData = resultArray[1];
     [self.secondRecommendMovieView.movieImageView sd_setImageWithURL:[NSURL URLWithString:movieData[@"main_image_url"]]];
@@ -405,16 +408,24 @@
     formattedString = [fmt stringFromNumber:movieData[@"star_average"]];
     self.secondRecommendMovieView.movieRatingLabel.text = [NSString stringWithFormat:@"평균 %@점", formattedString];
     [PCCommonUtility makeTextShadow:self.secondRecommendMovieView.movieRatingLabel opacity:0.9];
+    
+    self.secondRecommendMenuView.likeButton.selected = [_todayRecommendMovieList[1][@"is_like"] boolValue];
+    self.secondRecommendMenuView.ratingButton.selected = [_todayRecommendMovieList[1][@"is_comment"] boolValue];
+    
 }
 
 - (void)configureTodayRecommendView {
     _firstTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
     [self.firstRecommendMovieView addGestureRecognizer:_firstTapGestureRecognizer];
     [self.firstRecommendMenuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.firstRecommendMenuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.firstRecommendMenuView.commentButton addTarget:self action:@selector(clickCommentButton:) forControlEvents:UIControlEventTouchUpInside];
     
     _secondTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToMovieDetailView:)];
     [self.secondRecommendMovieView addGestureRecognizer:_secondTapGestureRecognizer];
     [self.secondRecommendMenuView.likeButton addTarget:self action:@selector(clickLikeButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.secondRecommendMenuView.ratingButton addTarget:self action:@selector(clickRatingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.secondRecommendMenuView.commentButton addTarget:self action:@selector(clickCommentButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)moveToMovieDetailView:(id)sender {
@@ -432,6 +443,27 @@
     }
 }
 
+- (void)clickRatingButton:(UIButton *)button{
+    if (self.firstRecommendMenuView.ratingButton == button) {
+        [[PCUserInteractionHelper helperManager] showRatingMovieViewWithMovieID:_todayRecommendMovieList[0][@"id"] andInteractionHandler:^{
+            self.firstRecommendMenuView.ratingButton.selected = YES;
+        }];
+    }
+    else {
+        [[PCUserInteractionHelper helperManager] showRatingMovieViewWithMovieID:_todayRecommendMovieList[1][@"id"] andInteractionHandler:^{
+            self.secondRecommendMenuView.ratingButton.selected = YES;
+        }];
+    }
+}
+
+- (void)clickCommentButton:(UIButton *)button{
+    if (self.firstRecommendMenuView.commentButton == button) {
+        [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:_todayRecommendMovieList[0][@"id"]];
+    }
+    else {
+        [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:_todayRecommendMovieList[1][@"id"]];
+    }
+}
 
 
 #pragma mark - Configure Segue

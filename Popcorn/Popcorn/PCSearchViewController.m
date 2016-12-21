@@ -185,9 +185,11 @@ static NSArray const *rankingTypeArray;
         
         NSString *imageName = [@"PosterImage" stringByAppendingString:[NSString stringWithFormat:@"%ld", indexPath.row % 3]];
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-        
+        cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.backgroundView.clipsToBounds = YES;
         cell.textLabel.text = rankingTypeArray[indexPath.row];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:26];
+        cell.textLabel.font = [UIFont systemFontOfSize:25 weight:UIFontWeightSemibold];
+        [PCCommonUtility makeTextShadow:cell.textLabel opacity:0.8];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         return cell;
