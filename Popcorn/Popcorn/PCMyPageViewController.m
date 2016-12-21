@@ -64,21 +64,21 @@
 }
 
 - (void)requestUserInteractionData {
-    [[PCUserInfoManager userInfoManager] requestUserCommentListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+    [[PCUserInfoManager userInfoManager] requestUserCommentListWithCompletionHandler:^(BOOL isSuccess, NSDictionary *resultDictionary) {
         if (isSuccess)
-            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:0];
+            [self didReceiveUserInteractionData:resultDictionary andIndex:0];
         else
             alertLog(@"코멘트 정보를 가져오는 데 실패하였습니다.");
     }];
-    [[PCUserInfoManager userInfoManager] requestUserFamousListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+    [[PCUserInfoManager userInfoManager] requestUserFamousListWithCompletionHandler:^(BOOL isSuccess, NSDictionary *resultDictionary) {
         if (isSuccess)
-            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:1];
+            [self didReceiveUserInteractionData:resultDictionary andIndex:1];
         else
             alertLog(@"명대사 정보를 가져오는 데 실패하였습니다.");
     }];
-    [[PCUserInfoManager userInfoManager] requestUserLikeMovieListWithCompletionHandler:^(BOOL isSuccess, NSArray *resultArray) {
+    [[PCUserInfoManager userInfoManager] requestUserLikeMovieListWithCompletionHandler:^(BOOL isSuccess, NSDictionary *resultDictionary) {
         if (isSuccess)
-            [self didReceiveUserInteractionData:(NSDictionary *)resultArray andIndex:2];
+            [self didReceiveUserInteractionData:resultDictionary andIndex:2];
         else
             alertLog(@"좋아요 정보를 가져오는 데 실패하였습니다.");
     }];

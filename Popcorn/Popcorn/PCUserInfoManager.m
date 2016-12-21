@@ -209,7 +209,7 @@
     [self resumeLoadUserInfoDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
-- (void)requestUserCommentWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
+- (void)requestUserCommentListWithCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
     NSString *urlString = [memberURLString stringByAppendingString:@"my-comments/"];
     [self commonGetMethodRequestWithUrlString:urlString andCompletionHandler:completionHandler];
 }
