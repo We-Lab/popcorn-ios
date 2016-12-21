@@ -11,10 +11,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "PCMovieInfoManager.h"
+#import "PCUserInfoManager.h"
+
 #import "PCRecommendTableViewCell.h"
 #import "PCUserInteractionHelper.h"
 #import "PCMovieDetailDataCenter.h"
-#import "PCRecommendTagViewController.h"
 
 @interface PCRecommendViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *recommendTableView;
@@ -37,11 +38,11 @@
     [super viewDidLoad];
 //    [_toTagViewButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     [self initCustomRefreshControl];
+    [self requestRecommendMovieList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self requestRecommendMovieList];
     
 #ifndef DEBUG
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -103,6 +104,7 @@
     cell.menuView.ratingButton.selected = [movieData[@"is_comment"] boolValue];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PCRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
     
@@ -118,14 +120,17 @@
     return cell;
 }
 
-- (IBAction)selectedMoive:(UIButton *)sender {
 
+- (IBAction)selectedMoive:(UIButton *)sender {
     [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _recommendMovieList[sender.tag][@"id"];
 }
 
+
 - (void)clickLikeButton:(UIButton *)button {
     NSString *movieID = _recommendMovieList[button.tag][@"id"];
-    [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:movieID];
+    [[PCUserInfoManager userInfoManager] saveMovieLike:movieID andCompletionHandler:^(BOOL isSuccess) {
+        button.selected = !button.selected;
+    }];
 }
 
 - (void)clickRatingButton:(UIButton *)button {

@@ -16,7 +16,6 @@ typedef void (^InteractionHandler)(void);
 
 + (instancetype)helperManager;
 
-- (void)changeLikeStateWithMovieID:(NSString *)movieID;
 - (void)showRatingMovieViewWithMovieID:(NSString *)movieID andInteractionHandler:(InteractionHandler)handler;
 - (void)showCommentViewWithMovieID:(NSString *)movieID;
 

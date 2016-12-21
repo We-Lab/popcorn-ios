@@ -56,7 +56,6 @@ static CGFloat const heightPadding = 10;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    sLog( self.parentViewController );
     [self initUserSelectedTagDictionary];
     [self createCustomBarButtonItem];
     [self createTagView];

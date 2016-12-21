@@ -76,7 +76,9 @@
 
 
 #pragma mark - Execute UploadTask and CompletionHandler
-- (void)resumeUploadTaskWithRequest:(NSURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
+- (void)resumeUploadTaskWithRequest:(NSMutableURLRequest *)request andCompletionHandler:(UserInfoTaskHandler)completionHandler{
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
+    
     _uploadTask = [_sessionManager uploadTaskWithStreamedRequest:request
                                                         progress:^(NSProgress * _Nonnull uploadProgress) {
                                                         }
@@ -146,7 +148,6 @@
                                                                          error:nil
                                     ];
     
-    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:AuthorizationHeaderKey];
     [self resumeUploadTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
@@ -178,7 +179,20 @@
 }
 
 
-#pragma mark - Related With Movie
+#pragma mark - Post Data , Like Movie / Rating / Comment
+- (void)saveMovieLike:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *addString = [NSString stringWithFormat:@"%@/movie-like/", movieID];
+    NSString *urlString = [movieURLString stringByAppendingString:addString];
+    
+    _serializer = [AFHTTPRequestSerializer serializer];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
+                                                 URLString:urlString
+                                                parameters:nil
+                                                     error:nil];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
 - (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
     NSString *addString = [NSString stringWithFormat:@"%@/comment/", movieID];
     NSString *urlString = [movieURLString stringByAppendingString:addString];
@@ -195,7 +209,8 @@
 }
 
 
-#pragma mark - User Interaction Data
+
+#pragma mark - User Profile Comment / Famous Line / Like Data
 - (void)commonGetMethodRequestWithUrlString:(NSString *)urlString andCompletionHandler:(LoadUserInfoTaskHandler)completionHandler {
     _serializer = [AFHTTPRequestSerializer serializer];
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"

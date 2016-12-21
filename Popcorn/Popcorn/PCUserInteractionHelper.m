@@ -24,10 +24,6 @@
     return manager;
 }
 
-- (void)changeLikeStateWithMovieID:(NSString *)movieID {
-//    sLog(movieID);
-}
-
 - (void)showRatingMovieViewWithMovieID:(NSString *)movieID andInteractionHandler:(InteractionHandler)handler {
     self.movieID = movieID;
     

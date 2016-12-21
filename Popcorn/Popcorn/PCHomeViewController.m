@@ -434,11 +434,19 @@
 
 - (void)clickLikeButton:(UIButton *)button {
     if (self.firstRecommendMenuView.likeButton == button) {
-        [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[0][@"id"]];
+        [[PCUserInfoManager userInfoManager] saveMovieLike:_todayRecommendMovieList[0][@"id"] andCompletionHandler:^(BOOL isSuccess) {
+//            if (isSuccess) {
+                button.selected = !button.selected;
+//            }
+        }];
         sLog(_todayRecommendMovieList[0][@"id"]);
     }
     else {
-        [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:_todayRecommendMovieList[1][@"id"]];
+        [[PCUserInfoManager userInfoManager] saveMovieLike:_todayRecommendMovieList[1][@"id"] andCompletionHandler:^(BOOL isSuccess) {
+//            if (isSuccess) {
+                button.selected = !button.selected;
+//            }
+        }];
         sLog(_todayRecommendMovieList[1][@"id"]);
     }
 }

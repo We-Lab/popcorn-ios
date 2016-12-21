@@ -8,10 +8,12 @@
 
 #import "PCMyPageViewController.h"
 
-#import "PCUserInformation.h"
-#import "PCUserInfoManager.h"
 #import <HCSStarRatingView.h>
 #import <UIImageView+WebCache.h>
+
+#import "PCUserProfileParamKey.h"
+#import "PCUserInformation.h"
+#import "PCUserInfoManager.h"
 
 #import "PCMyPageLikeTableViewCell.h"
 #import "PCMyPageCommentTableViewCell.h"
@@ -125,19 +127,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSUInteger count;
     if (self.selectButton == 0) {
-        return _myCommentList.count;
+         count = _myCommentList.count;
     }
     else if (self.selectButton == 1) {
-        return _myFamousList.count;
+        count = _myFamousList.count;
     }
-    else if (self.selectButton == 2) {
-        return _myLikeList.count;
+    else {
+        count = _myLikeList.count;
     }
     
-    [_myPageMainTableView reloadData];
-    
-    return 0;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -163,6 +164,7 @@
         starRatingView.minimumValue = 0;
         starRatingView.backgroundColor = [UIColor clearColor];
         starRatingView.allowsHalfStars = YES;
+        starRatingView.accurateHalfStars = YES;
         starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
         starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
         starRatingView.userInteractionEnabled = NO;
@@ -171,8 +173,8 @@
         [cell.myCommentStarScoreView addSubview:starRatingView];
         
         return cell;
-        
-    }else if (self.selectButton == 1){
+    }
+    else if (self.selectButton == 1){
     
         PCMyPageFamousTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyFamousLineCell" forIndexPath:indexPath];
         
@@ -186,9 +188,8 @@
         cell.myFamousDate.text = commentDate;
         
         return cell;
-        
-    }else if (self.selectButton == 2){
-        
+    }
+    else if (self.selectButton == 2){
         PCMyPageLikeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyLikeMovieCell" forIndexPath:indexPath];
         
         [cell.myLikeMoviePoster sd_setImageWithURL:_myLikeList[indexPath.row][@"movie"][@"img_url"]];
@@ -202,6 +203,7 @@
         starRatingView.minimumValue = 0;
         starRatingView.backgroundColor = [UIColor clearColor];
         starRatingView.allowsHalfStars = YES;
+        starRatingView.accurateHalfStars = YES;
         starRatingView.emptyStarImage = [UIImage imageNamed:@"EmptyStar"];
         starRatingView.filledStarImage = [UIImage imageNamed:@"FullStar"];
         starRatingView.userInteractionEnabled = NO;
@@ -212,17 +214,11 @@
         return cell;
     }
     
-    
-    
-    
     return nil;
 }
 
 
-
-
 - (IBAction)reloadSection:(UIButton *)sender {
-
     if (self.selectButton != sender.tag) {
         if (self.selectButton > sender.tag) {
             self.selectButton = sender.tag;
@@ -258,7 +254,6 @@
 
 - (void)dealloc {
     dLog(@" ");
-    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"UserSignedIn"];
 }
 
 - (void)didReceiveMemoryWarning {
