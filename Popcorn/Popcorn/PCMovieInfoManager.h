@@ -29,8 +29,11 @@ typedef NS_ENUM(NSUInteger, RankingListType) {
 - (void)requestBestCommentWithCompletionHandler:(NetworkTaskHandler)completionHandler;
 - (void)requestTodayRecommendMovieWithCompletionHandler:(NetworkTaskHandler)completionHandler;
 
-//Recommend
+// Recommend
 - (void)requestMovieByUserFavoriteWithCompletionHandler:(NetworkTaskHandler)completionHandler;
+
+// Rating
+- (void)requestMovieListForFastRatingWithCompletionHandler:(NetworkTaskHandler)completionHandler;
 
 
 

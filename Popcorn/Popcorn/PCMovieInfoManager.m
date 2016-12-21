@@ -153,4 +153,16 @@
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
 
+
+- (void)requestMovieListForFastRatingWithCompletionHandler:(NetworkTaskHandler)completionHandler {
+    NSString *urlString = [movieURLString stringByAppendingString:@"fast-like/"];
+    NSMutableURLRequest *request = [_serializer requestWithMethod:@"GET"
+                                                        URLString:urlString
+                                                       parameters:nil
+                                                            error:nil];
+    [request setValue:[PCUserInformation sharedUserData].userToken forHTTPHeaderField:@"Authorization"];
+    
+    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+}
+
 @end
