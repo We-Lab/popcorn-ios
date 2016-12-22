@@ -18,6 +18,8 @@
 @property NSMutableArray *movieDetailStarHistogramList;
 @property NSString *movieID;
 
+@property NSString *commetedMovieID;
+
 + (instancetype)sharedMovieDetailData;
 
 - (NSString *)creatMovieTitle;
