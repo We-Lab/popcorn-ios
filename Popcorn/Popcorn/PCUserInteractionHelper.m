@@ -38,7 +38,7 @@
     HCSStarRatingView *starRating = [[HCSStarRatingView alloc] init];
     starRating.frame = CGRectMake(25, 10, 200, 30);
     starRating.maximumValue = 5;
-    starRating.minimumValue = 1;
+    starRating.minimumValue = 0.5;
     starRating.value = 0;
     starRating.backgroundColor = [UIColor clearColor];
     starRating.allowsHalfStars = YES;
