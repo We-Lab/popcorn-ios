@@ -9,7 +9,8 @@
 #import "PCChangeMyInfoViewController.h"
 
 #import "PCInitialViewController.h"
-//#import "PCUserInformation.m"
+#import "PCUserInfoManager.h"
+#import "PCUserInformation.h"
 #import "PCChangeInfoTextViewController.h"
 #import "KeychainItemWrapper.h"
 
@@ -108,7 +109,9 @@
     
     [picker dismissViewControllerAnimated:YES
                                completion:^{
-
+                                   [[PCUserInfoManager userInfoManager] changeUserProfileImage:image withCompletionHandler:^(BOOL isSuccess) {
+                                       [[PCUserInformation sharedUserData] changeProfileImage:image];
+                                   }];
                                }];
 }
 
