@@ -8,15 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const PCUserProfileUserNameKey;
-extern NSString *const PCUserProfileNickNameKey;
-extern NSString *const PCUserProfileEmailKey;
-extern NSString *const PCUserProfileGenderKey;
-extern NSString *const PCUserProfileBirthdayKey;
-extern NSString *const PCUserProfilePhoneNumberKey;
-extern NSString *const PCUserProfileFavoriteGenreKey;
-extern NSString *const PCUserProfileFavoriteGradeKey;
-extern NSString *const PCUserProfileFavoriteCountryKey;
 
 @interface PCUserInformation : NSObject
 
@@ -29,9 +20,9 @@ extern NSString *const PCUserProfileFavoriteCountryKey;
 + (BOOL)isUserSignedIn;
 - (void)hasUserSignedIn:(NSString *)token;
 - (void)hasUserSignedOut;
-- (void)setUserInformationFromServer:(NSDictionary *)userInformation;
 
-// 오토로그인일 때는 미리 저장해둔 데이터로부터 유저정보 세팅
+// 일반로그인 : 서버에서 정보 불러와서 세팅, 자동로그인 : 저장해둔 데이터로부터 유저정보 세팅
+- (void)setUserInformationFromServer:(NSDictionary *)userInformation;
 - (void)setUserInformationFromSavedData;
 
 

@@ -5,10 +5,10 @@
 //  Created by chaving on 2016. 12. 21..
 //  Copyright © 2016년 giftbot. All rights reserved.
 //
-#import "PCUserInformation.h"
 
 #import "PCChangeInfoTextViewController.h"
-#import "PCChangeMyInfoViewController.h"
+
+#import "PCUserInformation.h"
 #import "PCChangePasswordViewController.h"
 
 @interface PCChangeInfoTextViewController ()
@@ -44,11 +44,11 @@
 }
 
 - (void)changeTheNick{
-    [[PCUserInformation sharedUserData] changeUserProfile:PCUserProfileNickNameKey withString:_changeTextField.text];
+    [[PCUserInformation sharedUserData] changeUserProfile:@"nickname" withString:_changeTextField.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)changeThePhoneNum{
-    [[PCUserInformation sharedUserData] changeUserProfile:PCUserProfilePhoneNumberKey withString:_changeTextField.text];
+    [[PCUserInformation sharedUserData] changeUserProfile:@"phone_number" withString:_changeTextField.text];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

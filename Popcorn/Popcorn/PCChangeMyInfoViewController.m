@@ -9,12 +9,11 @@
 #import "PCChangeMyInfoViewController.h"
 
 #import "PCInitialViewController.h"
-#import "PCUserInformation.m"
-
+//#import "PCUserInformation.m"
 #import "PCChangeInfoTextViewController.h"
+#import "KeychainItemWrapper.h"
 
 @interface PCChangeMyInfoViewController () <UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-
 
 @end
 
@@ -143,7 +142,11 @@
 
 #pragma mark - Sign Out Action
 - (void)requestSignOut{
-    [[PCUserInformation sharedUserData] hasUserSignedOut];
+//    [[PCUserInformation sharedUserData] hasUserSignedOut];
+
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserSignedIn"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"UserInformationAsDictionary"];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     PCInitialViewController *initialView = [storyboard instantiateInitialViewController];
     
@@ -151,7 +154,6 @@
         [UIApplication sharedApplication].keyWindow.rootViewController = initialView;
     }];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

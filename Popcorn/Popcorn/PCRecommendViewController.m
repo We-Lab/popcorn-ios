@@ -9,7 +9,10 @@
 #import "PCRecommendViewController.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
+
 #import "PCMovieInfoManager.h"
+#import "PCUserInfoManager.h"
+
 #import "PCRecommendTableViewCell.h"
 #import "PCUserInteractionHelper.h"
 #import "PCMovieDetailDataCenter.h"
@@ -101,6 +104,7 @@
     cell.menuView.ratingButton.selected = [movieData[@"is_comment"] boolValue];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PCRecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendCell" forIndexPath:indexPath];
     
@@ -116,14 +120,17 @@
     return cell;
 }
 
-- (IBAction)selectedMoive:(UIButton *)sender {
 
+- (IBAction)selectedMoive:(UIButton *)sender {
     [PCMovieDetailDataCenter sharedMovieDetailData].movieID = _recommendMovieList[sender.tag][@"id"];
 }
 
+
 - (void)clickLikeButton:(UIButton *)button {
     NSString *movieID = _recommendMovieList[button.tag][@"id"];
-    [[PCUserInteractionHelper helperManager] changeLikeStateWithMovieID:movieID];
+    [[PCUserInfoManager userInfoManager] saveMovieLike:movieID andCompletionHandler:^(BOOL isSuccess) {
+        button.selected = !button.selected;
+    }];
 }
 
 - (void)clickRatingButton:(UIButton *)button {
@@ -149,6 +156,7 @@
     
     UILabel *headerLabel = [[UILabel alloc] init];
     headerLabel.frame = CGRectMake(0, 0, headerView.frame.size.width, headerView.frame.size.height);
+    
     headerLabel.text = @"취향에 맞는 태그를 선택해보세요";
     headerLabel.font = [UIFont boldSystemFontOfSize:14.8f];
     headerLabel.textAlignment = NSTextAlignmentCenter;

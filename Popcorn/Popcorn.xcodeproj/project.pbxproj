@@ -15,11 +15,11 @@
 		523E52A61E071132009A2B9B /* PCMovieInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52A51E071132009A2B9B /* PCMovieInformationView.m */; };
 		523E52AD1E07D730009A2B9B /* PCUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */; };
 		523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */; };
-		523E52B91E09B498009A2B9B /* twice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 523E52B81E09B498009A2B9B /* twice.jpg */; };
 		523E52BC1E0A47F9009A2B9B /* PCRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */; };
 		523E52BF1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52BE1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.m */; };
 		523E52C21E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */; };
 		523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */; };
+		523E52C81E0AE137009A2B9B /* PCUserProfileParamKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */; };
 		525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 525923841DF6E4A600BE1506 /* GoogleService-Info.plist */; };
 		5259238E1DF843BD00BE1506 /* PCRankingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */; };
 		525923A01DF895DE00BE1506 /* PCSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5259239F1DF895DE00BE1506 /* PCSearchResultTableViewCell.m */; };
@@ -43,30 +43,23 @@
 		52C49A1F1DEAE9F400F47BB2 /* PCInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A1E1DEAE9F400F47BB2 /* PCInitialViewController.m */; };
 		52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A201DEAE9F400F47BB2 /* Login.storyboard */; };
 		52C49A271DEAE9F400F47BB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A251DEAE9F400F47BB2 /* LaunchScreen.storyboard */; };
-		52C49A3D1DEAE9F400F47BB2 /* PopcornUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A3C1DEAE9F400F47BB2 /* PopcornUITests.m */; };
 		52C49A4C1DEAEE2600F47BB2 /* PCSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */; };
 		52C49A511DEAEFF400F47BB2 /* PCSignUpIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A501DEAEFF400F47BB2 /* PCSignUpIDViewController.m */; };
 		52C49A561DEAF00500F47BB2 /* PCMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A551DEAF00500F47BB2 /* PCMainTabBarController.m */; };
 		52C49A601DEAF34600F47BB2 /* PCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A5F1DEAF34600F47BB2 /* PCSearchViewController.m */; };
 		52C49A691DEB00CB00F47BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A681DEB00CB00F47BB2 /* Main.storyboard */; };
 		52C49A6A1DEB00CB00F47BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A681DEB00CB00F47BB2 /* Main.storyboard */; };
-		52C49A6B1DEB00CB00F47BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A681DEB00CB00F47BB2 /* Main.storyboard */; };
 		52C49A6D1DEB071B00F47BB2 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A6C1DEB071B00F47BB2 /* MyPage.storyboard */; };
 		52C49A6E1DEB071B00F47BB2 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A6C1DEB071B00F47BB2 /* MyPage.storyboard */; };
-		52C49A6F1DEB071B00F47BB2 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A6C1DEB071B00F47BB2 /* MyPage.storyboard */; };
 		52C49A711DEB07F400F47BB2 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A701DEB07F400F47BB2 /* Search.storyboard */; };
 		52C49A721DEB07F400F47BB2 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A701DEB07F400F47BB2 /* Search.storyboard */; };
-		52C49A731DEB07F400F47BB2 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A701DEB07F400F47BB2 /* Search.storyboard */; };
 		52C49A761DEB0A3100F47BB2 /* PCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A751DEB0A3100F47BB2 /* PCHomeViewController.m */; };
 		52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A791DEB0A7000F47BB2 /* Recommend.storyboard */; };
 		52C49A7B1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A791DEB0A7000F47BB2 /* Recommend.storyboard */; };
-		52C49A7C1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A791DEB0A7000F47BB2 /* Recommend.storyboard */; };
 		52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A7D1DEB0ADE00F47BB2 /* Rating.storyboard */; };
 		52C49A7F1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A7D1DEB0ADE00F47BB2 /* Rating.storyboard */; };
-		52C49A801DEB0ADE00F47BB2 /* Rating.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A7D1DEB0ADE00F47BB2 /* Rating.storyboard */; };
 		52C49A821DEB0B6900F47BB2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A811DEB0B6900F47BB2 /* Home.storyboard */; };
 		52C49A831DEB0B6900F47BB2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A811DEB0B6900F47BB2 /* Home.storyboard */; };
-		52C49A841DEB0B6900F47BB2 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C49A811DEB0B6900F47BB2 /* Home.storyboard */; };
 		52C49A8A1DEB0DB300F47BB2 /* PCRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A891DEB0DB300F47BB2 /* PCRecommendViewController.m */; };
 		52C49A8F1DEB0DC600F47BB2 /* PCRatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A8E1DEB0DC600F47BB2 /* PCRatingViewController.m */; };
 		52C49A941DEB0DD700F47BB2 /* PCMyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C49A931DEB0DD700F47BB2 /* PCMyPageViewController.m */; };
@@ -93,19 +86,11 @@
 		5FEDA6F11E0112B800D4BC14 /* PCMovieDetailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEDA6F01E0112B800D4BC14 /* PCMovieDetailManager.m */; };
 		5FEDA6F41E011EA100D4BC14 /* PCMovieDetailDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEDA6F31E011EA100D4BC14 /* PCMovieDetailDataCenter.m */; };
 		943B807E419605DAC7849433 /* libPods-PopcornTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02826153364AF57B51116414 /* libPods-PopcornTests.a */; };
-		98CC32351F13E6388637A76B /* libPods-PopcornUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DEA65F478663554E72071A /* libPods-PopcornUITests.a */; };
 		B7565659535F2AD40BEAB922 /* libPods-Popcorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A430D54FE41098F8509D29A /* libPods-Popcorn.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		52C49A2E1DEAE9F400F47BB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52C49A0C1DEAE9F400F47BB2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52C49A131DEAE9F400F47BB2;
-			remoteInfo = Popcorn;
-		};
-		52C49A391DEAE9F400F47BB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52C49A0C1DEAE9F400F47BB2 /* Project object */;
 			proxyType = 1;
@@ -134,7 +119,6 @@
 		523E52AC1E07D730009A2B9B /* PCUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInfoManager.m; sourceTree = "<group>"; };
 		523E52B11E07EFA7009A2B9B /* PCUserInteractionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserInteractionHelper.h; sourceTree = "<group>"; };
 		523E52B21E07EFA7009A2B9B /* PCUserInteractionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserInteractionHelper.m; sourceTree = "<group>"; };
-		523E52B81E09B498009A2B9B /* twice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twice.jpg; sourceTree = "<group>"; };
 		523E52BA1E0A47F9009A2B9B /* PCRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRecommendTableViewCell.h; sourceTree = "<group>"; };
 		523E52BB1E0A47F9009A2B9B /* PCRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRecommendTableViewCell.m; sourceTree = "<group>"; };
 		523E52BD1E0AA497009A2B9B /* PCMyPageCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -143,6 +127,8 @@
 		523E52C11E0AA4A8009A2B9B /* PCMyPageFamousTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageFamousTableViewCell.m; sourceTree = "<group>"; };
 		523E52C31E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMyPageLikeTableViewCell.h; sourceTree = "<group>"; };
 		523E52C41E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMyPageLikeTableViewCell.m; sourceTree = "<group>"; };
+		523E52C61E0AE137009A2B9B /* PCUserProfileParamKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUserProfileParamKey.h; sourceTree = "<group>"; };
+		523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUserProfileParamKey.m; sourceTree = "<group>"; };
 		525923841DF6E4A600BE1506 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5259238C1DF843BD00BE1506 /* PCRankingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRankingDetailViewController.h; sourceTree = "<group>"; };
 		5259238D1DF843BD00BE1506 /* PCRankingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRankingDetailViewController.m; sourceTree = "<group>"; };
@@ -184,9 +170,6 @@
 		52C49A281DEAE9F400F47BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C49A2D1DEAE9F400F47BB2 /* PopcornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopcornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C49A331DEAE9F400F47BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52C49A381DEAE9F400F47BB2 /* PopcornUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopcornUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		52C49A3C1DEAE9F400F47BB2 /* PopcornUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopcornUITests.m; sourceTree = "<group>"; };
-		52C49A3E1DEAE9F400F47BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C49A4A1DEAEE2600F47BB2 /* PCSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSignInViewController.h; sourceTree = "<group>"; };
 		52C49A4B1DEAEE2600F47BB2 /* PCSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSignInViewController.m; sourceTree = "<group>"; };
 		52C49A4F1DEAEFF400F47BB2 /* PCSignUpIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSignUpIDViewController.h; sourceTree = "<group>"; };
@@ -278,14 +261,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52C49A351DEAE9F400F47BB2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98CC32351F13E6388637A76B /* libPods-PopcornUITests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -351,7 +326,6 @@
 			children = (
 				52C49A161DEAE9F400F47BB2 /* Popcorn */,
 				52C49A301DEAE9F400F47BB2 /* PopcornTests */,
-				52C49A3B1DEAE9F400F47BB2 /* PopcornUITests */,
 				52C49A151DEAE9F400F47BB2 /* Products */,
 				BE43E7C7CFE879C79D344F7A /* Pods */,
 				6DF08A880D9FA324D70C8A75 /* Frameworks */,
@@ -363,7 +337,6 @@
 			children = (
 				52C49A141DEAE9F400F47BB2 /* Popcorn.app */,
 				52C49A2D1DEAE9F400F47BB2 /* PopcornTests.xctest */,
-				52C49A381DEAE9F400F47BB2 /* PopcornUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,7 +362,6 @@
 				523E52AA1E07D707009A2B9B /* UserInteraction */,
 				52C49A281DEAE9F400F47BB2 /* Info.plist */,
 				525923841DF6E4A600BE1506 /* GoogleService-Info.plist */,
-				523E52B81E09B498009A2B9B /* twice.jpg */,
 				528D7A191DF98EE5007A9D15 /* Assets.xcassets */,
 				52AE383E1DF161560016D81E /* Popcorn.entitlements */,
 				52C49A171DEAE9F400F47BB2 /* Supporting Files */,
@@ -415,15 +387,6 @@
 				52C49A331DEAE9F400F47BB2 /* Info.plist */,
 			);
 			path = PopcornTests;
-			sourceTree = "<group>";
-		};
-		52C49A3B1DEAE9F400F47BB2 /* PopcornUITests */ = {
-			isa = PBXGroup;
-			children = (
-				52C49A3C1DEAE9F400F47BB2 /* PopcornUITests.m */,
-				52C49A3E1DEAE9F400F47BB2 /* Info.plist */,
-			);
-			path = PopcornUITests;
 			sourceTree = "<group>";
 		};
 		52C49A631DEAF35600F47BB2 /* Login */ = {
@@ -549,6 +512,8 @@
 			children = (
 				52C49AAB1DEB4C3D00F47BB2 /* PCCommonUtility.h */,
 				52C49AAC1DEB4C3D00F47BB2 /* PCCommonUtility.m */,
+				523E52C61E0AE137009A2B9B /* PCUserProfileParamKey.h */,
+				523E52C71E0AE137009A2B9B /* PCUserProfileParamKey.m */,
 				52AE383B1DF00AFF0016D81E /* PCNetworkParamKey.h */,
 				52AE383C1DF00AFF0016D81E /* PCNetworkParamKey.m */,
 				52AE38381DEF3EBD0016D81E /* KeychainItemWrapper.h */,
@@ -683,27 +648,6 @@
 			productReference = 52C49A2D1DEAE9F400F47BB2 /* PopcornTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		52C49A371DEAE9F400F47BB2 /* PopcornUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52C49A471DEAE9F400F47BB2 /* Build configuration list for PBXNativeTarget "PopcornUITests" */;
-			buildPhases = (
-				E4F4DDE65297302FC0F4A45E /* [CP] Check Pods Manifest.lock */,
-				52C49A341DEAE9F400F47BB2 /* Sources */,
-				52C49A351DEAE9F400F47BB2 /* Frameworks */,
-				52C49A361DEAE9F400F47BB2 /* Resources */,
-				A5FC8368246E8621F578D17A /* [CP] Embed Pods Frameworks */,
-				DCEE1554431D7CCFB407501D /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52C49A3A1DEAE9F400F47BB2 /* PBXTargetDependency */,
-			);
-			name = PopcornUITests;
-			productName = PopcornUITests;
-			productReference = 52C49A381DEAE9F400F47BB2 /* PopcornUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -727,11 +671,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 52C49A131DEAE9F400F47BB2;
 					};
-					52C49A371DEAE9F400F47BB2 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 52C49A131DEAE9F400F47BB2;
-					};
 				};
 			};
 			buildConfigurationList = 52C49A0F1DEAE9F400F47BB2 /* Build configuration list for PBXProject "Popcorn" */;
@@ -749,7 +688,6 @@
 			targets = (
 				52C49A131DEAE9F400F47BB2 /* Popcorn */,
 				52C49A2C1DEAE9F400F47BB2 /* PopcornTests */,
-				52C49A371DEAE9F400F47BB2 /* PopcornUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -767,7 +705,6 @@
 				52C49A221DEAE9F400F47BB2 /* Login.storyboard in Resources */,
 				52C49A7E1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
 				523E529E1E06FFF3009A2B9B /* PCUserInteractionMenuView.xib in Resources */,
-				523E52B91E09B498009A2B9B /* twice.jpg in Resources */,
 				525923851DF6E4A600BE1506 /* GoogleService-Info.plist in Resources */,
 				52C49A7A1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
 				528D7A1A1DF98EE5007A9D15 /* Assets.xcassets in Resources */,
@@ -786,19 +723,6 @@
 				52C49A831DEB0B6900F47BB2 /* Home.storyboard in Resources */,
 				52C49A6E1DEB071B00F47BB2 /* MyPage.storyboard in Resources */,
 				52C49A7F1DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52C49A361DEAE9F400F47BB2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52C49A6B1DEB00CB00F47BB2 /* Main.storyboard in Resources */,
-				52C49A7C1DEB0A7000F47BB2 /* Recommend.storyboard in Resources */,
-				52C49A731DEB07F400F47BB2 /* Search.storyboard in Resources */,
-				52C49A841DEB0B6900F47BB2 /* Home.storyboard in Resources */,
-				52C49A6F1DEB071B00F47BB2 /* MyPage.storyboard in Resources */,
-				52C49A801DEB0ADE00F47BB2 /* Rating.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,21 +789,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PopcornTests/Pods-PopcornTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A5FC8368246E8621F578D17A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B0190C3AE0383F0553C0BA56 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -908,36 +817,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Popcorn/Pods-Popcorn-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DCEE1554431D7CCFB407501D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PopcornUITests/Pods-PopcornUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4F4DDE65297302FC0F4A45E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -993,6 +872,7 @@
 				523E52B31E07EFA7009A2B9B /* PCUserInteractionHelper.m in Sources */,
 				52AE381D1DED6A2E0016D81E /* PCMovieDetailViewController.m in Sources */,
 				5FC1A71C1DFC54BF007CB48D /* PCFamousLineCustomCell.m in Sources */,
+				523E52C81E0AE137009A2B9B /* PCUserProfileParamKey.m in Sources */,
 				523E52C51E0AA4B4009A2B9B /* PCMyPageLikeTableViewCell.m in Sources */,
 				52B49CA11DF9AFAD001A97C2 /* PCRankingDetailTableViewCell.m in Sources */,
 				5FAA696E1DF9535800528550 /* PCCommentCustomCell.m in Sources */,
@@ -1015,14 +895,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52C49A341DEAE9F400F47BB2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52C49A3D1DEAE9F400F47BB2 /* PopcornUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1030,11 +902,6 @@
 			isa = PBXTargetDependency;
 			target = 52C49A131DEAE9F400F47BB2 /* Popcorn */;
 			targetProxy = 52C49A2E1DEAE9F400F47BB2 /* PBXContainerItemProxy */;
-		};
-		52C49A3A1DEAE9F400F47BB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52C49A131DEAE9F400F47BB2 /* Popcorn */;
-			targetProxy = 52C49A391DEAE9F400F47BB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1224,34 +1091,6 @@
 			};
 			name = Release;
 		};
-		52C49A481DEAE9F400F47BB2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC9D111A91DC18BE1D12BC22 /* Pods-PopcornUITests.debug.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = NN7QXHC8A3;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				INFOPLIST_FILE = PopcornUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.PopcornUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Popcorn;
-			};
-			name = Debug;
-		};
-		52C49A491DEAE9F400F47BB2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DD651688FC312371C63282E /* Pods-PopcornUITests.release.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = NN7QXHC8A3;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				INFOPLIST_FILE = PopcornUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.PopcornUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Popcorn;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1278,15 +1117,6 @@
 			buildConfigurations = (
 				52C49A451DEAE9F400F47BB2 /* Debug */,
 				52C49A461DEAE9F400F47BB2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52C49A471DEAE9F400F47BB2 /* Build configuration list for PBXNativeTarget "PopcornUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52C49A481DEAE9F400F47BB2 /* Debug */,
-				52C49A491DEAE9F400F47BB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

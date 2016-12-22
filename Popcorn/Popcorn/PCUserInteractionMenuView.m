@@ -29,13 +29,13 @@
         xibView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview: xibView];
         
-        [self.likeButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.likeButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
 
-- (void)clickButton:(UIButton *)button {
-    button.selected = !button.selected;
-}
+//- (void)clickButton:(UIButton *)button {
+//    button.selected = !button.selected;
+//}
 
 @end

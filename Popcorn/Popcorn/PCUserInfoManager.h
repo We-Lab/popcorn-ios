@@ -22,7 +22,8 @@ typedef void (^LoadUserInfoTaskHandler) (BOOL isSuccess, NSDictionary *resultDic
 - (void)deleteAllFavoriteTagsWithCompletionHandler:(UserInfoTaskHandler)completionHandler;
 
 
-// 영화 관련 
+// 영화 관련
+- (void)saveMovieLike:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler;
 - (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler;
 
 

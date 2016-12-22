@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setCustomViewStatus];
 }
 
@@ -48,21 +47,22 @@
 }
 
 - (void)didChangeValue:(HCSStarRatingView *)sender {
-    
     self.scoreLabel.text = [NSString stringWithFormat:@"%.1f 점", sender.value];
 }
 
 - (IBAction)cancelCommentWrite:(id)sender {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)dealloc {
+    dLog(@" ");
+}
 
 
 @end

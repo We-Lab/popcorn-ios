@@ -10,6 +10,7 @@
 #import "PCUserInfoValidation.h"
 
 @interface PCUserInfoValidationTests : XCTestCase
+
 //@property PCUserInfoValidation validation;
 @property NSString *userID;
 @property NSString *userPW;
