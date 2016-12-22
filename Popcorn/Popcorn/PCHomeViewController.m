@@ -25,6 +25,7 @@
 #import "PCUserInfoManager.h"
 #import "PCUserInformation.h"
 
+
 @interface PCHomeViewController () <UIScrollViewDelegate>
 
 // Base View
@@ -71,12 +72,8 @@
     self.tabBarController.tabBar.items[4].badgeValue = @"1";
 }
 
-- (void)testA {
-//    if button ~~
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     #ifndef DEBUG
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];

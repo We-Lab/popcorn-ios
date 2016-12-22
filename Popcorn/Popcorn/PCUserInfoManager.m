@@ -180,18 +180,24 @@
 
 
 #pragma mark - Post Data , Like Movie / Rating / Comment
-- (void)saveMovieLike:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
-    NSString *addString = [NSString stringWithFormat:@"%@/movie-like/", movieID];
-    NSString *urlString = [movieURLString stringByAppendingString:addString];
-    
-    _serializer = [AFHTTPRequestSerializer serializer];
+- (void)commonPostMethodRequestWithUrlString:(NSString *)urlString parameters:(NSDictionary *)params andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    _serializer = [AFJSONRequestSerializer serializer];
     NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
                                                  URLString:urlString
-                                                parameters:nil
+                                                parameters:params
                                                      error:nil];
     
     [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
 }
+
+
+- (void)saveMovieLike:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *addString = [NSString stringWithFormat:@"%@/movie-like/", movieID];
+    NSString *urlString = [movieURLString stringByAppendingString:addString];
+    
+    [self commonPostMethodRequestWithUrlString:urlString parameters:nil andCompletionHandler:completionHandler];
+}
+
 
 - (void)saveMovieRating:(CGFloat)ratingValue withMovieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
     NSString *addString = [NSString stringWithFormat:@"%@/comment/", movieID];
@@ -200,14 +206,19 @@
     NSString *ratingString = [NSString stringWithFormat:@"%.1f", ratingValue];
     NSDictionary *params = @{@"star":ratingString};
     
-    _serializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [_serializer requestWithMethod:@"POST"
-                                                 URLString:urlString
-                                                parameters:params
-                                                     error:nil];
-    [self resumeDataTaskWithRequest:request andCompletionHandler:completionHandler];
+    [self commonPostMethodRequestWithUrlString:urlString parameters:params andCompletionHandler:completionHandler];
 }
 
+
+- (void)saveMovieRating:(CGFloat)ratingValue withComment:(NSString *)comment movieID:(NSString *)movieID andCompletionHandler:(UserInfoTaskHandler)completionHandler {
+    NSString *addString = [NSString stringWithFormat:@"%@/comment/", movieID];
+    NSString *urlString = [movieURLString stringByAppendingString:addString];
+    
+    NSString *ratingString = [NSString stringWithFormat:@"%.1f", ratingValue];
+    NSDictionary *params = @{ @"star":ratingString,  @"content":comment };
+    
+    [self commonPostMethodRequestWithUrlString:urlString parameters:params andCompletionHandler:completionHandler];
+}
 
 
 #pragma mark - User Profile Comment / Famous Line / Like Data

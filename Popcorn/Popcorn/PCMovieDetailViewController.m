@@ -614,6 +614,12 @@
 }
 
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ToWriteCommentSegue"]) {
+        sLog([segue.destinationViewController class]);
+    }
+}
+
 #pragma mark - Custom Method
 - (CGFloat)ratioWidth:(NSInteger)num{
     return (num * self.view.frame.size.width) / 375;

@@ -144,9 +144,12 @@
 }
 
 - (void)clickCommentButton:(UIButton *)button{
-    
     NSString *movieID = _recommendMovieList[button.tag][@"id"];
     [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:movieID];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    PCRecommendTableViewCell *cell = (PCRecommendTableViewCell *)[_recommendTableView cellForRowAtIndexPath:indexPath];
+    cell.menuView.ratingButton.selected = YES;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

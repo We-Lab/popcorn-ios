@@ -7,13 +7,20 @@
 //
 
 #import "PCCommentWriteViewController.h"
+
 #import <HCSStarRatingView.h>
+#import "PCUserInfoManager.h"
+#import "PCMovieDetailDataCenter.h"
 
 @interface PCCommentWriteViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *commentWriteStarRatingView;
 @property (weak, nonatomic) IBOutlet UITextView *commentWriteTextView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveCommentButton;
+
+
+@property (nonatomic) CGFloat ratingValue;
 
 @end
 
@@ -47,12 +54,21 @@
 }
 
 - (void)didChangeValue:(HCSStarRatingView *)sender {
+    self.ratingValue = sender.value;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.1f 점", sender.value];
 }
 
 - (IBAction)cancelCommentWrite:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)saveUserCommentAndRating:(UIButton *)button {
+    [[PCUserInfoManager userInfoManager] saveMovieRating:_ratingValue withComment:_commentWriteTextView.text movieID:_movieID andCompletionHandler:^(BOOL isSuccess) {
+        [PCMovieDetailDataCenter sharedMovieDetailData].commetedMovieID = _movieID;
+    } ];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark -
 - (void)didReceiveMemoryWarning {
