@@ -61,13 +61,13 @@
 }
 
 - (void)showCommentViewWithMovieID:(NSString *)movieID {
-    UITabBarController *mainTabBar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    UINavigationController *currentNVC = mainTabBar.selectedViewController;
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
-    PCCommentWriteViewController *commentWriteVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentWriteStoryboard"];
-    commentWriteVC.movieID = movieID;
-    [currentNVC showViewController:commentWriteVC sender:currentNVC];
+//    UITabBarController *mainTabBar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//    UINavigationController *currentNVC = mainTabBar.selectedViewController;
+//    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
+//    PCCommentWriteViewController *commentWriteVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentWriteStoryboard"];
+//    commentWriteVC.movieID = movieID;
+//    [currentNVC showViewController:commentWriteVC sender:currentNVC];
 }
 
 @end

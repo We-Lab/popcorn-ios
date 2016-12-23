@@ -98,9 +98,7 @@
     
     NSArray *keyArray = _ratingList.allKeys;
     for (NSUInteger i = 0; i < _ratingList.count; i++) {
-        NSNumber *ratingMovieTag = _ratingList[keyArray[i]];
-        
-        CGFloat ratingValue = [_ratingList[ratingMovieTag] floatValue];
+        CGFloat ratingValue = [_ratingList[keyArray[i]] floatValue];
         NSString *movieID = _movieList[[keyArray[i] integerValue]][@"id"];
         
         if (i == _ratingList.count - 1) {
@@ -194,6 +192,8 @@
     self.showRatingCountLabel.text = [NSString stringWithFormat:@"%lu", [_ratingList count]];
 }
 
+
+#pragma mark -
 - (void)dealloc {
     dLog(@" ");
 }
@@ -202,15 +202,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

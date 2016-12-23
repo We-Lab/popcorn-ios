@@ -20,6 +20,7 @@
 #import "PCMagazineCollectionViewCell.h"
 #import "PCMovieInformationView.h"
 #import "PCUserInteractionMenuView.h"
+#import "PCCommentWriteViewController.h"
 
 #import "PCUserInteractionHelper.h"
 #import "PCUserInfoManager.h"
@@ -462,12 +463,18 @@
 }
 
 - (void)clickCommentButton:(UIButton *)button{
+    NSString *movieID;
     if (self.firstRecommendMenuView.commentButton == button) {
-        [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:_todayRecommendMovieList[0][@"id"]];
+        movieID = _todayRecommendMovieList[0][@"id"];
+
     }
     else {
-        [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:_todayRecommendMovieList[1][@"id"]];
+        movieID = _todayRecommendMovieList[1][@"id"];
     }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
+    PCCommentWriteViewController *commentWriteVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentWriteStoryboard"];
+    commentWriteVC.movieID = movieID;
+    [self showViewController:commentWriteVC sender:self];
 }
 
 

@@ -16,6 +16,7 @@
 #import "PCRecommendTableViewCell.h"
 #import "PCUserInteractionHelper.h"
 #import "PCMovieDetailDataCenter.h"
+#import "PCCommentWriteViewController.h"
 
 @interface PCRecommendViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *recommendTableView;
@@ -87,7 +88,7 @@
     NSDictionary *movieData = _recommendMovieList[indexPath.row];
     
     [cell.movieView.movieImageView sd_setImageWithURL:movieData[@"main_image_url"]
-                                     placeholderImage:[UIImage imageNamed:@"MoviePlaceholderExtented"]
+                                     placeholderImage:nil//[UIImage imageNamed:@"MoviePlaceholderExtented"]
                                               options:SDWebImageCacheMemoryOnly | SDWebImageRetryFailed];
     cell.movieView.movieTitleLabel.text = movieData[@"title_kor"];
     [PCCommonUtility makeTextShadow:cell.movieView.movieTitleLabel opacity:0.9];
@@ -145,7 +146,12 @@
 
 - (void)clickCommentButton:(UIButton *)button{
     NSString *movieID = _recommendMovieList[button.tag][@"id"];
-    [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:movieID];
+//    [[PCUserInteractionHelper helperManager] showCommentViewWithMovieID:movieID];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MovieInfo" bundle:nil];
+    PCCommentWriteViewController *commentWriteVC = [storyboard instantiateViewControllerWithIdentifier:@"CommentWriteStoryboard"];
+    commentWriteVC.movieID = movieID;
+    [self showViewController:commentWriteVC sender:self];
+
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     PCRecommendTableViewCell *cell = (PCRecommendTableViewCell *)[_recommendTableView cellForRowAtIndexPath:indexPath];
