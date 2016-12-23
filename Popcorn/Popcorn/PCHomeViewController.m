@@ -36,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
 @property (weak, nonatomic) IBOutlet UIScrollView *boxOfficeScrollView;
 @property (weak, nonatomic) IBOutlet UIView *scrollContentView;
-@property (nonatomic) NSArray *boxOfficeList;
+@property (nonatomic) NSMutableArray *boxOfficeList;
 
 // Magazine
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
@@ -102,8 +102,22 @@
 }
 
 - (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
-    self.boxOfficeList = [NSArray array];
-    self.boxOfficeList = boxOfficeList;
+    self.boxOfficeList = [NSMutableArray arrayWithCapacity:10];
+    
+    for (NSUInteger i = 0; i < 10; i++) {
+        [self.boxOfficeList addObject:[NSNull null]];
+    }
+    
+    for (NSUInteger i = 0; i < 10; i++) {
+        NSUInteger rank = [boxOfficeList[i][@"rank"] integerValue];
+        for (NSUInteger j = 1; j < 11; j++) {
+            if (rank == j) {
+                self.boxOfficeList[rank-1] = boxOfficeList[i];
+                break;
+            }
+        }
+    }
+    
     [self creatMovieRankScroll];
 }
 
@@ -133,12 +147,15 @@
     for(NSInteger i = 0; i < 12; i++){
         
         NSDictionary *movieInfo = [NSDictionary dictionary];
-        if (i == 0)
+        if (i == 0) {
             movieInfo = _boxOfficeList[9];
-        else if (i == 11)
+        }
+        else if (i == 11) {
             movieInfo = _boxOfficeList[0];
-        else
+        }
+        else {
             movieInfo = _boxOfficeList[i-1];
+        }
         
         UIView *movieContentView = [[UIView alloc] init];
         movieContentView.tag = i;
@@ -160,7 +177,7 @@
         
         NSURL *imageURL = [NSURL URLWithString:movieInfo[@"movie"][@"img_url"]];
         [posterImageView sd_setImageWithURL:imageURL
-                          placeholderImage:[UIImage imageNamed:@"MoviePlaceholder"]
+                          placeholderImage:nil
                                    options:SDWebImageHighPriority | SDWebImageRetryFailed ];
         [movieContentView addSubview:posterImageView];
         
@@ -348,9 +365,7 @@
 //    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
     self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", bestComment[@"author"][@"nickname"]];
     self.bestCommentTextLabel.text = bestComment[@"content"];
-//    self.bestCommentTextViewHeight.constant = _bestCommentTextView.contentSize.height + 10;
-//    self.bestCommentBaseViewHeight.constant = 200 - 50 + _bestCommentTextViewHeight.constant;
-    
+
     NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", bestComment[@"movie_title"]];
     self.bestCommentMovieTitleLabel.text = movieTitle;
 }
