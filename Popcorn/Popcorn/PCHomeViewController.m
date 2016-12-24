@@ -36,7 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIView *mainBoxOfficeView;
 @property (weak, nonatomic) IBOutlet UIScrollView *boxOfficeScrollView;
 @property (weak, nonatomic) IBOutlet UIView *scrollContentView;
-@property (nonatomic) NSMutableArray *boxOfficeList;
+//@property (nonatomic) NSMutableArray *boxOfficeList;
+@property (nonatomic) NSArray *boxOfficeList;
 
 // Magazine
 @property (weak, nonatomic) IBOutlet UICollectionView *movieMagazineCollectionView;
@@ -102,22 +103,23 @@
 }
 
 - (void)didReceiveBoxOfficeList:(NSArray *)boxOfficeList {
-    self.boxOfficeList = [NSMutableArray arrayWithCapacity:10];
-    
-    for (NSUInteger i = 0; i < 10; i++) {
-        [self.boxOfficeList addObject:[NSNull null]];
-    }
-    
-    for (NSUInteger i = 0; i < 10; i++) {
-        NSUInteger rank = [boxOfficeList[i][@"rank"] integerValue];
-        for (NSUInteger j = 1; j < 11; j++) {
-            if (rank == j) {
-                self.boxOfficeList[rank-1] = boxOfficeList[i];
-                break;
-            }
-        }
-    }
-    
+//    self.boxOfficeList = [NSMutableArray arrayWithCapacity:10];
+//    
+//    for (NSUInteger i = 0; i < 10; i++) {
+//        [self.boxOfficeList addObject:[NSNull null]];
+//    }
+//    
+//    for (NSUInteger i = 0; i < 10; i++) {
+//        NSUInteger rank = [boxOfficeList[i][@"rank"] integerValue];
+//        for (NSUInteger j = 1; j < 11; j++) {
+//            if (rank == j) {
+//                self.boxOfficeList[rank-1] = boxOfficeList[i];
+//                break;
+//            }
+//        }
+//    }
+//    self.boxOfficeList = [boxOfficeList mutableCopy];
+    self.boxOfficeList = boxOfficeList;
     [self creatMovieRankScroll];
 }
 
@@ -363,10 +365,15 @@
     NSDictionary *bestComment = resultArray[0];
     
 //    self.bestCommentUsernameLabel.text = [bestComment[@"author"] stringByAppendingString:@" 님의 감상평"];
-    self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", bestComment[@"author"][@"nickname"]];
-    self.bestCommentTextLabel.text = bestComment[@"content"];
+//    self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", bestComment[@"author"][@"nickname"]];
+//    self.bestCommentTextLabel.text = bestComment[@"content"];
+//
+//    NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", bestComment[@"movie_title"]];
+//    self.bestCommentMovieTitleLabel.text = movieTitle;
+    self.bestCommentUsernameLabel.text = [NSString stringWithFormat:@"%@", @"itperson"];
+    self.bestCommentTextLabel.text = @"내용도 감동적이고 이만하면 좋은데요? 같이 본 사람들도 내용 좋았다고 그러고... ㅎㅎ";
 
-    NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", bestComment[@"movie_title"]];
+    NSString *movieTitle = [NSString stringWithFormat:@"< %@ > 베스트 감상평", @"당신, 거기 있어줄래요"];
     self.bestCommentMovieTitleLabel.text = movieTitle;
 }
 

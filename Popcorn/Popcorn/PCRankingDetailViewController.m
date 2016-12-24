@@ -16,7 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *rankingTableView;
 @property (nonatomic) NSDictionary *rankingDictionaryList;
-@property (nonatomic) NSMutableArray *rankingArrayList;
+//@property (nonatomic) NSMutableArray *rankingArrayList;
+@property (nonatomic) NSArray *rankingArrayList;
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @end
@@ -70,21 +71,24 @@
 }
 
 - (void)didReceiveRankingArrayList:(NSArray *)rankingList {
-    self.rankingArrayList = [NSMutableArray arrayWithCapacity:10];
+//    self.rankingArrayList = [NSMutableArray arrayWithCapacity:10];
+//    
+//    for (NSUInteger i = 0; i < 10; i++) {
+//        [self.rankingArrayList addObject:[NSNull null]];
+//    }
+//    
+//    for (NSUInteger i = 0; i < 10; i++) {
+//        NSUInteger rank = [rankingList[i][@"rank"] integerValue];
+//        for (NSUInteger j = 1; j < 11; j++) {
+//            if (rank == j) {
+//                self.rankingArrayList[rank - 1] = rankingList[i];
+//                break;
+//            }
+//        }
+//    }
     
-    for (NSUInteger i = 0; i < 10; i++) {
-        [self.rankingArrayList addObject:[NSNull null]];
-    }
-    
-    for (NSUInteger i = 0; i < 10; i++) {
-        NSUInteger rank = [rankingList[i][@"rank"] integerValue];
-        for (NSUInteger j = 1; j < 11; j++) {
-            if (rank == j) {
-                self.rankingArrayList[rank - 1] = rankingList[i];
-                break;
-            }
-        }
-    }
+//    self.rankingArrayList = [rankingList mutableCopy];
+    self.rankingArrayList = rankingList;
 
     [self.rankingTableView reloadData];
 }
