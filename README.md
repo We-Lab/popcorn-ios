@@ -18,4 +18,5 @@
 <br/>
 이미지 클릭시 영상으로 이동됩니다.
 <br/>
+
 [<img src="https://github.com/We-Lab/popcorn-ios/blob/develop/popcorn.png">](https://vimeo.com/196867141)
