@@ -17,4 +17,4 @@
 
 <br/>
 
-<img src="https://github.com/We-Lab/popcorn-ios/blob/develop/popcorn.png">
+[<img src="https://github.com/We-Lab/popcorn-ios/blob/develop/popcorn.png">](https://vimeo.com/196867141)
